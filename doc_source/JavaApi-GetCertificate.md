@@ -33,10 +33,9 @@ public class GetCertificate {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
+      try {
          credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
@@ -51,7 +50,7 @@ public class GetCertificate {
          .withEndpointConfiguration(endpoint)
          .withCredentials(new AWSStaticCredentialsProvider(credentials))
          .build();
-
+         
       // Create a request object.
       GetCertificateRequest req = new GetCertificateRequest();
 
@@ -63,29 +62,22 @@ public class GetCertificate {
       // Set the certificate authority ARN.
       req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
             "certificate-authority/12345678-1234-1234-1234-123456789012");
+            
+      
 
       // Retrieve the certificate and certificate chain.
       GetCertificateResult result = null;
       try {
          result = client.getCertificate(req);
-      }
-      catch (RequestInProgressException ex) {
+      } catch (RequestInProgressException ex) {
          throw ex;
-      }
-      catch (RequestFailedException ex)
-      {
+      } catch (RequestFailedException ex) {
          throw ex;
-      }
-      catch (ResourceNotFoundException ex)
-      {
+      } catch (ResourceNotFoundException ex) {
          throw ex;
-      }
-      catch (InvalidArnException ex)
-      {
+      } catch (InvalidArnException ex) {
          throw ex;
-      }
-      catch (InvalidStateException ex)
-      {
+      } catch (InvalidStateException ex) {
          throw ex;
       }
 

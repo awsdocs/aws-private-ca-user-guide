@@ -34,8 +34,7 @@ public class DescribeCertificateAuthorityAuditReport {
       AWSCredentials credentials = null;
       try{
          credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
+      }  catch (Exception e) {
          throw new AmazonClientException("Cannot load your credentials from file.", e);
       }
 
@@ -61,18 +60,16 @@ public class DescribeCertificateAuthorityAuditReport {
 
       // Set the audit report ID.
       req.withAuditReportId("11111111-2222-3333-4444-555555555555");
+      
+      
 
       // Create a result object.
       DescribeCertificateAuthorityAuditReportResult result = null;
       try {
          result = client.describeCertificateAuthorityAuditReport(req);
-      }
-      catch(ResourceNotFoundException  ex)
-      {
+      } catch(ResourceNotFoundException  ex) {
          throw ex;
-      }
-      catch(InvalidArgsException ex)
-      {
+      } catch(InvalidArgsException ex) {
          throw ex;
       }
 

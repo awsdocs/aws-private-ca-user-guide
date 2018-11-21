@@ -34,8 +34,7 @@ public class GetCertificateAuthorityCsr {
       AWSCredentials credentials = null;
       try{
          credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
@@ -50,6 +49,8 @@ public class GetCertificateAuthorityCsr {
          .withEndpointConfiguration(endpoint)
          .withCredentials(new AWSStaticCredentialsProvider(credentials))
          .build();
+         
+      
 
       // Create the request object and set the CA ARN.
       GetCertificateAuthorityCsrRequest req = new GetCertificateAuthorityCsrRequest();
@@ -60,21 +61,14 @@ public class GetCertificateAuthorityCsr {
       GetCertificateAuthorityCsrResult result = null;
       try {
          result = client.getCertificateAuthorityCsr(req);
-      }
-      catch (RequestInProgressException ex)
+      } catch (RequestInProgressException ex) {
+         throw ex;
+      }  catch (ResourceNotFoundException ex)
       {
          throw ex;
-      }
-      catch (ResourceNotFoundException ex)
-      {
+      } catch (InvalidArnException ex) {
          throw ex;
-      }
-      catch (InvalidArnException ex)
-      {
-         throw ex;
-      }
-      catch (RequestFailedException ex)
-      {
+      } catch (RequestFailedException ex) {
          throw ex;
       }
 
