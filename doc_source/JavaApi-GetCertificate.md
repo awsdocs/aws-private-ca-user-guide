@@ -63,7 +63,18 @@ public class GetCertificate {
       req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
             "certificate-authority/12345678-1234-1234-1234-123456789012");
             
-      
+      // Create waiter to wait on successful creation of the certificate file.
+      Waiter<GetCertificateRequest> waiter = client.waiters().certificateIssued();
+      try {
+         waiter.run(new WaiterParameters<>(req));
+      } catch(WaiterUnrecoverableException e) {
+      //Explicit short circuit when the recourse transitions into
+      //an undesired state.
+      } catch(WaiterTimedOutException e) {
+      //Failed to transition into desired state even after polling.
+      } catch(AWSACMPCAException e) {
+      //Unexpected service exception.
+      }
 
       // Retrieve the certificate and certificate chain.
       GetCertificateResult result = null;

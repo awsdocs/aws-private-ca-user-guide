@@ -50,7 +50,18 @@ public class GetCertificateAuthorityCsr {
          .withCredentials(new AWSStaticCredentialsProvider(credentials))
          .build();
          
-      
+      // Create waiter to wait on successful creation of the CSR file.
+      Waiter<GetCertificateAuthorityCsrRequest> waiter = client.waiters().certificateAuthorityCSRCreated();
+      try {
+         waiter.run(new WaiterParameters<>(req));
+      } catch(WaiterUnrecoverableException e) {
+      //Explicit short circuit when the recourse transitions into
+      //an undesired state.
+      } catch(WaiterTimedOutException e) {
+      //Failed to transition into desired state even after polling.
+      } catch(PrivateCAException e) {
+      //Unexpected service exception.
+      }
 
       // Create the request object and set the CA ARN.
       GetCertificateAuthorityCsrRequest req = new GetCertificateAuthorityCsrRequest();

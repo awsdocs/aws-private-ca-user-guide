@@ -4,6 +4,8 @@ You can use the AWS Certificate Manager Private Certificate Authority API to pro
 
 In addition to the HTTP API, you can use the AWS SDKs and command line tools to interact with ACM PCA\. This is recommended over the HTTP API\. For ore information, see [Tools for Amazon Web Services](https://aws.amazon.com/tools/)\. The following topics show you how to use the [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/) to program the PCA API\. 
 
+The [GetCertificateAuthorityCsr](JavaApi-GetCertificateAuthorityCsr.md), [GetCertificate](JavaApi-GetCertificate.md), and [DescribeCertificateAuthorityCsr](JavaApi-DescribeCertificateAuthorityAuditReport.md) commands support waiters, which allow you to control the progression of your code based on the presence or state of certain resources\. For more information, see the respective pages below, as well as [Waiters in the AWS SDK for Java](https://aws.amazon.com/blogs/developer/waiters-in-the-aws-sdk-for-java/) in the AWS blog\.
+
 **Topics**
 + [CreateCertificateAuthority](JavaApi-CreatePrivateCertificateAuthority.md)
 + [CreateCertificateAuthorityAuditReport](JavaApi-CreateCertificateAuthorityAuditReport.md)

@@ -6,7 +6,7 @@ You can use a private certificate authority \(CA\) to issue and revoke private c
 
 **To create a CA \(console\)**
 
-1. <a name="PcaSignIn"></a>Sign in to your AWS account and open the ACM PCA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\. The introductory page will appear if your console opens to a region in which you do not have a CA\. Choose **Get started** beneath **Private certificate authority**\. Choose **Get started** again\. If the console opens to a region in which you already have one or more CAs, the introductory page will not be shown\. Choose **Private CAs** and then choose **Create CA**\. 
+1. <a name="PcaSignIn"></a>Sign in to your AWS account and open the ACM PCA console at **[https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)**\. The introductory page will appear if your console opens to a region in which you do not have a CA\. Choose **Get started** beneath **Private certificate authority**\. Choose **Get started** again\. If the console opens to a region in which you already have one or more CAs, the introductory page will not be shown\. Choose **Private CAs** and then choose **Create CA**\. 
 
 1. <a name="PcaCreateCaType"></a>Choose the type of the private certificate authority that you want to create\. Currently, you must choose **Subordinate**\. Choose **Next**\. 
 
@@ -62,12 +62,14 @@ You can use a private certificate authority \(CA\) to issue and revoke private c
       + Add a **Custom CRL Name** to hide the name of your S3 bucket from public view\. 
       + Type the number of days your CRL will remain valid\. For online CRLs, a validity period of two \(2\) to seven \(7\) days is common\. ACM PCA tries to regenerate the CRL at the midpoint of the specified period\. 
 
+1. Add tags to your CA\. Tags are words or phrases that act as metadata for identifying and organizing AWS resources\. Every AWS tag consists of a **key** and **value** pair of your choice\. For a list ofACM PCA tag parameters and instructions on how to add tags to CAs after creation, see [Add Tags](PcaCaTagging.md)\.
+
 1. Choose **Next**\. If everything looks correct, choose **Confirm and create**\. 
 
 1. If you want to continue getting and importing a certificate signing request \(CSR\), leave the **Success** dialog box open and follow the instructions at [Step 2: Get a Certificate Signing Request \(CSR\)](PcaGetCsr.md)\. Otherwise choose **You can also finish this later**\. 
 
 **To create a CA \(AWS CLI\)**  
-Use the [create\-certificate\-authority](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/create-certificate-authority.html) command to create a private CA\. You must specify the CA configuration, the revocation configuration, the CA type, and an optional idempotency token\. The CA configuration specifies the following:
+Use the `[create\-certificate\-authority](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/create-certificate-authority.html)` command to create a private CA\. You must specify the CA configuration, the revocation configuration, the CA type\. You can optionally add an idempotency token or tags\. The CA configuration specifies the following:
 + The name of the algorithm
 + The key size to be used to create the CA private key
 + The type of signing algorithm that the CA uses to sign
@@ -113,7 +115,8 @@ aws acm-pca create-certificate-authority \
 	--certificate-authority-configuration file://C:\ca_config.txt \
 	--revocation-configuration file://C:\revoke_config.txt \
 	--certificate-authority-type "SUBORDINATE" \
-	--idempotency-token 98256344
+	--idempotency-token 98256344 \
+	--tags  Key=Name,Value=MyPCA
 ```
 
 If successful, this command outputs the ARN \(Amazon Resource Name\) of the CA\.

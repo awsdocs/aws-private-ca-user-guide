@@ -8,6 +8,7 @@ You are not charged for a private CA after it has been deleted\. However, if a d
 **Topics**
 + [Restoring a Private CA \(Console\)](#RestoreCAConsole)
 + [Restoring a Private CA \(AWS CLI\)](#RestoreCli)
++ [Restoring a Private CA \(ACM PCA API\)](#RestoreAPI)
 
 ## Restoring a Private CA \(Console\)<a name="RestoreCAConsole"></a>
 
@@ -66,3 +67,7 @@ To be restorable, the private CA's status at the time of deletion must be `DISAB
    certificate-authority/12345678-1234-1234-1234-123456789012 \
    --status ACTIVE
    ```
+
+## Restoring a Private CA \(ACM PCA API\)<a name="RestoreAPI"></a>
+
+Send a [RestoreCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RestoreCertificateAuthority.html) request, specifying the ARN of the CA to restore\.

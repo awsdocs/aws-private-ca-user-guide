@@ -61,7 +61,18 @@ public class DescribeCertificateAuthorityAuditReport {
       // Set the audit report ID.
       req.withAuditReportId("11111111-2222-3333-4444-555555555555");
       
-      
+      // Create waiter to wait on successful creation of the audit repor filet.
+      Waiter<DescribeCertificateAuthorityAuditReportRequest> waiter = client.waiters().auditReportCreated();
+      try {
+         waiter.run(new WaiterParameters<>(req));
+      } catch(WaiterUnrecoverableException e) {
+      //Explicit short circuit when the recourse transitions into
+      //an undesired state.
+      } catch(WaiterTimedOutException e) {
+      //Failed to transition into desired state even after polling.
+      } catch(AWSACMPCAException e) {
+      //Unexpected service exception.
+      }
 
       // Create a result object.
       DescribeCertificateAuthorityAuditReportResult result = null;

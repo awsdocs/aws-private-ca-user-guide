@@ -1,6 +1,6 @@
 # Create an Audit Report for Your Private CA<a name="PcaAuditReport"></a>
 
-You can create an audit report to list all of the certificates that your private CA has issued or revoked\. The report is saved in a new or existing S3 bucket that you specify on input\. The file is named in the following manner\. 
+You can create an audit report to list all of the certificates that your private CA has issued or revoked\. The report is saved in a new or existing S3 bucket that you specify on input\. The file is named in the following manner\.
 
 ```
 bucket-name/audit-report/CA-ARN/file-ARN.[json|csv]
@@ -34,6 +34,7 @@ You can generate a new report every 30 minutes and download it from your bucket\
 You can create a report from the console or the AWS CLI\.
 + [Creating a report \(console\)](#AuditReportConsole)
 + [Creating a report \(AWS CLI\)](#AuditReportCLI)
++ [Creating a report \(ACM API\)\(](#AuditReportAPI)
 
 **To create an audit report \(console\)**
 
@@ -78,7 +79,7 @@ You can create a report from the console or the AWS CLI\.
 1. Choose **Generate audit report**\.
 
 **To create an audit report \(AWS CLI\)**  
-Use the [create\-certificate\-authority\-audit\-report](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/create-certificate-authority-audit-report.html) command to create the audit report\. You must attach the following policy to the bucket\. 
+Use the `[create\-certificate\-authority\-audit\-report](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/create-certificate-authority-audit-report.html)` command to create the audit report\. You must attach the following policy to the bucket\. 
 
 ```
 {
@@ -111,3 +112,6 @@ certificate-authority/12345678-1234-1234-1234-123456789012 \
 --s3-bucket-name >your-bucket-name \
 --audit-report-response-format JSON
 ```
+
+**To create an audit report \(ACM PCA API\)**
++ Send a [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) request, specifying the response format \(JSON or CSV\), the ARN of the CA you're auditing, and the name of the S3 bucket that will contain the audit report\.

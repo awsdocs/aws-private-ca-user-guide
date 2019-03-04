@@ -25,7 +25,7 @@ ACM PCA is integrated with ACM\. You can use the ACM console, AWS CLI, or ACM AP
 
 ## API Rate Limits<a name="PcaLimits-api"></a>
 
-The following limits apply to the ACM PCA API for each region and account\. ACM PCA throttles API requests at different limits depending on the API operation\. Throttling means that ACM PCA rejects an otherwise valid request because the request exceeds the operation's limit for the number of requests per second\. When a request is throttled, ACM PCA returns a [https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html](https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html) error\. The following table lists each API operation and the limit at which ACM PCA throttles requests for that operaiton\.
+The following limits apply to the ACM PCA API for each region and account\. ACM PCA throttles API requests at different limits depending on the API operation\. Throttling means that ACM PCA rejects an otherwise valid request because the request exceeds the operation's limit for the number of requests per second\. When a request is throttled, ACM PCA returns a [https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html](https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html) error\. The following table lists each API operation and the limit at which ACM PCA throttles requests for that operation\.
 
 
 **Requests per second limit for each ACM PCA API operation**  

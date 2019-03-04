@@ -54,10 +54,11 @@ Revoked Certificates:
 + [Creating the CRL When You Create a CA](#CreateCRLCreatePCA)
 + [Updating a CRL Configuration \(Console\)](#CreateCRLUpdatePCAconsole)
 + [Updating a CRL Configuration \(AWS CLI\)](#CreateCRLUpdatePCAcli)
++ [Updating a CRL Configuration \(ACM PCA API\)](#CreateCRLUpdatePCAAPI)
 
 ## Creating the CRL When You Create a CA<a name="CreateCRLCreatePCA"></a>
 
-You can use the integrated ACM console to configure the parameters for a CRL when you create a private CA\. For more information, see step 5 in [Creating a CA \(Console\)](PcaCreateCa.md#CreateCaConsole)\. You can also use the AWS CLI, but you must specify a file that contains your revocation configuration\. For more information, see [Creating a CA \(AWS CLI\)](PcaCreateCa.md#CreateCaCli)\. You can also use the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) API\. 
+You can use the integrated ACM console to configure the parameters for a CRL when you create a private CA\. For more information, see step 5 in [Creating a CA \(Console\)](PcaCreateCa.md#CreateCaConsole)\. You can also use the AWS CLI or ACM PCA API, but you must specify a file that contains your revocation configuration\. For more information, see [Creating a CA \(AWS CLI\)](PcaCreateCa.md#CreateCaCli)\. You can also use the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) API\. 
 
 ## Updating a CRL Configuration \(Console\)<a name="CreateCRLUpdatePCAconsole"></a>
 
@@ -109,3 +110,10 @@ certificate-authority/12345678-1234-1234-1234-1232456789012 \
 --revocation-configuration file://C:\revoke_config.txt \
 --status "ACTIVE"
 ```
+
+## Updating a CRL Configuration \(ACM PCA API\)<a name="CreateCRLUpdatePCAAPI"></a>
+
+You can use the ACM PCA API to update the CRL configuration of an existing private CA\.
+
+**Updating a CRL Configuration\(ACM PCA API\)**  
+Send an [UpdateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html) request, specifying the ARN of the private CA that issued the certificate to be revoked, and the path of the revocation configuration file for your private CA\.

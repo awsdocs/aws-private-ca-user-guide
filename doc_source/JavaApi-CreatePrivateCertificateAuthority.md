@@ -17,20 +17,24 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.services.acmpca.AWSACMPCA;
 import com.amazonaws.services.acmpca.AWSACMPCAClientBuilder;
 
-import com.amazonaws.services.acmpca.model.CreateCertificateAuthorityRequest;
-import com.amazonaws.services.acmpca.model.CreateCertificateAuthorityResult;
 import com.amazonaws.services.acmpca.model.ASN1Subject;
-import com.amazonaws.services.acmpca.model.KeyAlgorithm;
-import com.amazonaws.services.acmpca.model.SigningAlgorithm;
 import com.amazonaws.services.acmpca.model.CertificateAuthorityConfiguration;
 import com.amazonaws.services.acmpca.model.CertificateAuthorityType;
+import com.amazonaws.services.acmpca.model.CreateCertificateAuthorityResult;
+import com.amazonaws.services.acmpca.model.CreateCertificateAuthorityRequest;
 import com.amazonaws.services.acmpca.model.CrlConfiguration;
+import com.amazonaws.services.acmpca.model.KeyAlgorithm;
+import com.amazonaws.services.acmpca.model.SigningAlgorithm;
+import com.amazonaws.services.acmpca.model.Tag;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.services.apigateway.model.LimitExceededException;
 import com.amazonaws.services.acmpca.model.InvalidArgsException;
-import com.amazonaws.services.acmpca.model.RevocationConfiguration;
 import com.amazonaws.services.acmpca.model.InvalidPolicyException;
+import com.amazonaws.services.acmpca.model.RevocationConfiguration;
 
 
 public class CreateCertificateAuthority {
@@ -39,34 +43,37 @@ public class CreateCertificateAuthority {
 
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
-      AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from file.", e);
-      }
-
-      // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
-      EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
-
-      // Create a client that you can use to make requests.
-      AWSACMPCA client = AWSACMPCAClientBuilder.standard()
-         .withEndpointConfiguration(endpoint)
-         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-         .build();
-
-      // Define the CA subject.
+	   AWSCredentials credentials = null;
+       try {
+           credentials = new ProfileCredentialsProvider("default").getCredentials();
+       } catch (Exception e) {
+           throw new AmazonClientException(
+                   "Cannot load the credentials from the credential profiles file. " +
+                   "Please make sure that your credentials file is at the correct " +
+                   "location (C:\\Users\\joneps\\.aws\\credentials), and is in valid format.",
+                   e);
+       }
+       
+    // Define the endpoint for your sample.
+       String endpointProtocol = "acm-pca.us-west-2.amazonaws.com";
+       String endpointRegion = "us-west-2";
+       EndpointConfiguration endpoint =
+             new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+       
+    // Create a client that you can use to make requests.
+       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
+          .withEndpointConfiguration(endpoint)
+          .withCredentials(new AWSStaticCredentialsProvider(credentials))
+          .build();
+    
+    // Define a CA subject.
       ASN1Subject subject = new ASN1Subject();
-      subject.setOrganization("Example Company");
-      subject.setOrganizationalUnit("Corporate");
+      subject.setOrganization("Amazon");
+      subject.setOrganizationalUnit("AWS");
       subject.setCountry("US");
       subject.setState("Washington");
       subject.setLocality("Seattle");
-      subject.setCommonName("www.example.com");
+      subject.setCommonName("www.amazon.com");
 
       // Define the CA configuration.
       CertificateAuthorityConfiguration configCA = new CertificateAuthorityConfiguration();
@@ -83,13 +90,33 @@ public class CreateCertificateAuthority {
 
       RevocationConfiguration revokeConfig = new RevocationConfiguration();
       revokeConfig.setCrlConfiguration(crlConfigure);
-
+      
+      // Define a certificate authority type
+      CertificateAuthorityType CAtype = CertificateAuthorityType.SUBORDINATE;
+      
+      // Create a tag - method 1
+      Tag tag1 = new Tag();
+      tag1.withKey("PrivateCA");
+      tag1.withValue("Sample");
+      
+      // Create a tag - method 2
+      Tag tag2 = new Tag()
+    		  .withKey("Purpose")
+    		  .withValue("WebServices");
+      
+      // Add the tags to a collection.
+      ArrayList<Tag> tags = new ArrayList<Tag>();
+      tags.add(tag1);
+      tags.add(tag2);
+      
       // Create the request object.
       CreateCertificateAuthorityRequest req = new CreateCertificateAuthorityRequest();
       req.withCertificateAuthorityConfiguration(configCA);
       req.withRevocationConfiguration(revokeConfig);
       req.withIdempotencyToken("123987");
-      req.withCertificateAuthorityType(CertificateAuthorityType.SUBORDINATE);
+      req.withCertificateAuthorityType(CAtype);
+      req.withTags(tags);
+      
 
       // Create the private CA.
       CreateCertificateAuthorityResult result = null;

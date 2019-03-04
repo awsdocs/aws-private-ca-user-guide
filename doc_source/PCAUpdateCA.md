@@ -20,10 +20,11 @@ If the CA certificate for your private CA expires, ACM PCA sets the status to `E
 
 **Topics**
 
-You can update a certificate from the AWS Management Console or AWS CLI\.
+You can update a certificate from the AWS Management Console, or AWS CLI, or ACM PCA API\.
 + [Updating certificate revocation \(console\)](#UpdateCrlConsole)
 + [Updating certificate status \(console\)](#UpdateStatusConsole)
 + [Updating a private CA \(AWS CLI\)](#UpdateCli)
++ [Updating a private CA \(ACM PCA API\)](#UpdateAPI)
 
 **To update certificate revocation \(console\)**
 
@@ -77,3 +78,6 @@ certificate-authority/12345678-1234-1234-1234-1232456789012 \
 --revocation-configuration file://C:\revoke_config.txt \
 --status "ACTIVE"
 ```
+
+**To update your private CA \(ACM PCA API\)**  
+Send an [UpdateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html) request, specifying the ARN of the private CA that issued the certificate to be revoked, and the path of the revocation configuration file for your private CA\.

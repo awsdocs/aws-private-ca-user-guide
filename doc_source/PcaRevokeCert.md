@@ -1,13 +1,13 @@
 # Revoke a Private Certificate<a name="PcaRevokeCert"></a>
 
-You can use theAWS CLI or API to revoke an issued certificate\. The certificate will be included in the certificate revocation list \(CRL\), if it exists, of the private issuing CA\. Revoked certificates are always recorded in the audit report\. 
+You can use the AWS CLI or ACM PCA API to revoke an issued certificate\. The certificate will be included in the certificate revocation list \(CRL\), if it exists, of the private issuing CA\. Revoked certificates are always recorded in the audit report\. 
 
 **Topics**
-+ [Revoked certificates in a CRL](#PcaRevokeCrl)
-+ [Revoked certificates in an audit report](#PcaRevokeAuditReport)
-+ [Using the AWS CLI to revoke a certificate](#PcaRevokeCli)
++ [Revoked Certificates in a CRL](#PcaRevokeCrl)
++ [Revoked Certificates in an Audit Report](#PcaRevokeAuditReport)
++ [Using the AWS CLI to Revoke a Certificate](#PcaRevokeCli)
 
-## Revoked certificates in a CRL<a name="PcaRevokeCrl"></a>
+## Revoked Certificates in a CRL<a name="PcaRevokeCrl"></a>
 
 The following example shows a revoked certificate in a certificate revocation list \(CRL\)\. A CRL is typically updated approximately 30 minutes after a certificate is revoked\. For more information about creating and configuring CRLs, see [Create a Certificate Revocation List \(CRL\)](PcaUsingCrl.md)\. 
 
@@ -48,7 +48,7 @@ Revoked Certificates:
          0e:81:b2:76
 ```
 
-## Revoked certificates in an audit report<a name="PcaRevokeAuditReport"></a>
+## Revoked Certificates in an Audit Report<a name="PcaRevokeAuditReport"></a>
 
 All certificates, including revoked certificates, are included in the audit report for a private CA\. The following example shows an audit report with one issued and one revoked certificate\. For more information, see [Create an Audit Report for Your Private CA](PcaAuditReport.md)\. 
 
@@ -75,9 +75,9 @@ All certificates, including revoked certificates, are included in the audit repo
 }]
 ```
 
-## Using the AWS CLI to revoke a certificate<a name="PcaRevokeCli"></a>
+## Using the AWS CLI to Revoke a Certificate<a name="PcaRevokeCli"></a>
 
-Use the [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) command to revoke a private certificate\. You can also use the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) function\. The serial number must be in hexadecimal format\. You can retrieve the serial number by calling the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command\. The `revoke-certificate` command does not return a response\. 
+Use the `[revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html)` command to revoke a private certificate\. You can also use the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) command\. The serial number must be in hexadecimal format\. You can retrieve the serial number by calling the `[get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html)` command\. The `revoke-certificate` command does not return a response\. 
 
 ```
 aws acm-pca revoke-certificate \

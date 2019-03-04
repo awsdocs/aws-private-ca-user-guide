@@ -14,10 +14,10 @@ You can use the ACM PCA API the AWS CLI to issue a certificate\. Private certifi
 + Import your private certificates into ACM and IAM\.
 
 **Topics**
-+ [Creating a certificate signing request \(CSR\)](#IssueCertCreateCsr)
++ [Creating a Certificate Signing Request \(CSR\)](#IssueCertCreateCsr)
 + [Issuing a Certificate \(AWS CLI\)](#IssueCertCli)
 
-## Creating a certificate signing request \(CSR\)<a name="IssueCertCreateCsr"></a>
+## Creating a Certificate Signing Request \(CSR\)<a name="IssueCertCreateCsr"></a>
 
 Before you can issue a private certificate, you must have a certificate signing request \(CSR\)\. If you are using the ACM PCA API and AWS CLI, you can use the following OpenSSL command to create one\. The command asks for a passphrase for the private key and for details about your organization\. 
 
@@ -59,7 +59,7 @@ An optional company name []:
 You can use the [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) command to request a private certificate\. This command requires the Amazon Resource Name \(ARN\) of the private CA that you want to use to issue the certificate\. It also requires the CSR for the certificate that you want to issue\. You can also use the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\. 
 
 **Note**  
-If you use the ACM PCA API and AWS CLI to issue a private certificate, you cannot use the ACM console, CLI, or API to view or export it\. You already have the private key because you needed one to create the CSR \(see the previous discussion\)\. You can use the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command to retrieve the certificate details\. You can also create an [audit report](PcaAuditReport.md) to make sure that your certificate was issued\. 
+If you use the ACM PCA API or AWS CLI to issue a private certificate, you cannot use the ACM console, CLI, or API to view or export it\. You already have the private key because you needed one to create the CSR \(see the previous discussion\)\. You can use the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command to retrieve the certificate details\. You can also create an [audit report](PcaAuditReport.md) to make sure that your certificate was issued\. 
 
 ```
 aws acm-pca issue-certificate \

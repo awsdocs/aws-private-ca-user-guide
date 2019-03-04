@@ -21,6 +21,7 @@ You are not charged for a private CA after it has been deleted\. However, if a d
 You can delete a private CA from the AWS Management Console or AWS CLI:
 + [Deleting a private CA \(console\)](#DeleteCAConsole)
 + [Deleting a private CA \(AWS CLI\)](#DeleteCACli)
++ [Deleting a private CA \(ACM PCA API\)](#DeleteCAAPI)
 
 **To delete a private CA \(console\)**
 
@@ -49,3 +50,6 @@ aws acm-pca delete-certificate-authority \
 certificate-authority/12345678-1234-1234-1234-123456789012 \
 --permanent-deletion-time-in-days 16
 ```
+
+**To delete a private CA \(ACM PCA API\)**
++ Send an [DeleteCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthority.html) request, specifying the ARN of the private CA to be deleted and the number of days during which the private CA can be restored \(between 7 and 30 days\)\.
