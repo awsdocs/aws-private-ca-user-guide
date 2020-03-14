@@ -1,8 +1,8 @@
 # CreateCertificateAuthorityAuditReport<a name="JavaApi-CreateCertificateAuthorityAuditReport"></a>
 
-The following Java sample shows how to use the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) function\.
+The following Java sample shows how to use the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
 
-The function creates an audit report that lists every time a certificate is issued or revoked\. The report is saved in the S3 bucket that you specify on input\. You can generate a new report once every 30 minutes\. 
+The operation creates an audit report that lists every time a certificate is issued or revoked\. The report is saved in the Amazon S3 bucket that you specify on input\. You can generate a new report once every 30 minutes\. 
 
 ```
 package com.amazonaws.samples;
@@ -106,7 +106,7 @@ public class CreateCertificateAuthorityAuditReport {
 }
 ```
 
-Your output should be similar to the following\.
+Your output should be similar to the following:
 
 ```
 58904752-7de3-4bdf-ba89-6953e48c3cc7

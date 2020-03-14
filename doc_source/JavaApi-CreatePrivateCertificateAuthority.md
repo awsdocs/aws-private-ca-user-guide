@@ -1,8 +1,20 @@
 # CreateCertificateAuthority<a name="JavaApi-CreatePrivateCertificateAuthority"></a>
 
-The following Java sample shows how to use the [CreateCerticateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) function\.
+The following Java sample shows how to use the [CreateCerticateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
 
-The function creates a private subordinate certificate authority \(CA\)\. You must specify the CA configuration, the revocation configuration, the CA type, and an optional idempotency token\. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses to sign, and X\.500 subject information\. The CRL configuration specifies the CRL expiration period in days \(the validity period of the CRL\), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA\. If successful, this function returns the Amazon Resource Name \(ARN\) of the CA\. 
+The operation creates a private subordinate certificate authority \(CA\)\. You must specify the CA configuration, the revocation configuration, the CA type, and an optional idempotency token\.
+
+The CA configuration specifies the following:
++ The name of the algorithm and key size to be used to create the CA private key
++ The type of signing algorithm that the CA uses to sign
++ X\.500 subject information
+
+The CRL configuration specifies the following:
++ The CRL expiration period in days \(the validity period of the CRL\)
++ The Amazon S3 bucket that will contain the CRL
++ A CNAME alias for the S3 bucket that is included in certificates issued by the CA
+
+If successful, this function returns the Amazon Resource Name \(ARN\) of the CA\. 
 
 ```
 package com.amazonaws.samples;
@@ -31,7 +43,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import com.amazonaws.AmazonClientException;
-import com.amazonaws.services.apigateway.model.LimitExceededException;
+import com.amazonaws.services.acmpca.model.LimitExceededException;
 import com.amazonaws.services.acmpca.model.InvalidArgsException;
 import com.amazonaws.services.acmpca.model.InvalidPolicyException;
 import com.amazonaws.services.acmpca.model.RevocationConfiguration;
@@ -144,7 +156,7 @@ public class CreateCertificateAuthority {
 }
 ```
 
-Your output should be similar to the following\.
+Your output should be similar to the following:
 
 ```
 arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012

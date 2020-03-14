@@ -1,6 +1,6 @@
 # Creating a Certificate Authority<a name="CT-CreateCA"></a>
 
-The following CloudTrail example shows the results of a call to the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) function\.
+The following CloudTrail example shows the results of a call to the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
 
 ```
 {

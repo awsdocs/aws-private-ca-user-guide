@@ -1,8 +1,8 @@
 # ListTags<a name="JavaApi-ListTags"></a>
 
-The following Java sample shows how to use the [ListTags](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListTags.html) function\.
+The following Java sample shows how to use the [ListTags](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListTags.html) operation\.
 
-This function lists the tags, if any, that are associated with your private CA\. Tags are labels that you can use to identify and organize your CAs\. Each tag consists of a key and an optional value\. Call the [TagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html) function to add one or more tags to your CA\. Call the [UntagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html) function to remove tags\. 
+This operation lists the tags, if any, that are associated with your private CA\. Tags are labels that you can use to identify and organize your CAs\. Each tag consists of a key and an optional value\. Call the [TagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html) operation to add one or more tags to your CA\. Call the [UntagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html) operation to remove tags\. 
 
 ```
 package com.amazonaws.samples;
@@ -74,7 +74,7 @@ public class ListTags {
 }
 ```
 
-Your output should be similar to the following if you have any tags to list\.
+If you have any tags to list, your output should be similar to the following:
 
 ```
 {Tags: [{Key: Admin,Value: Alice}, {Key: Purpose,Value: WebServices}],}

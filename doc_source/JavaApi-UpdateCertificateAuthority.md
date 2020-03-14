@@ -1,8 +1,8 @@
 # UpdateCertificateAuthority<a name="JavaApi-UpdateCertificateAuthority"></a>
 
-The following Java sample shows how to use the [UpdateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html) function\.
+The following Java sample shows how to use the [UpdateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html) operation\.
 
-The function updates the status or configuration of a private certificate authority \(CA\)\. Your private CA must be in the `ACTIVE` or `DISABLED` state before you can update it\. You can disable a private CA that is in the `ACTIVE` state or make a CA that is in the `DISABLED` state active again\.
+The operation updates the status or configuration of a private certificate authority \(CA\)\. Your private CA must be in the `ACTIVE` or `DISABLED` state before you can update it\. You can disable a private CA that is in the `ACTIVE` state or make a CA that is in the `DISABLED` state active again\.
 
 ```
 package com.amazonaws.samples;
@@ -76,6 +76,7 @@ public class UpdateCertificateAuthority {
       // setCrlConfiguration method.
       RevocationConfiguration revokeConfig = new RevocationConfiguration();
       revokeConfig.setCrlConfiguration(crlConfigure);
+      req.setRevocationConfiguration(revokeConfig);
 
       // Set the status.
       req.withStatus(CertificateAuthorityStatus.ACTIVE);

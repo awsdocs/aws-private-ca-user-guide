@@ -1,6 +1,6 @@
 # Using CloudTrail<a name="PcaCtIntro"></a>
 
-You can use CloudTrail to record API calls that are made by AWS Certificate Manager Private Certificate Authority\. For more information, see the following topics\.
+You can use AWS CloudTrail to record API calls that are made by AWS Certificate Manager Private Certificate Authority\. For more information, see the following topics\.
 
 **Topics**
 + [Creating a CA](CT-CreateCA.md)
@@ -17,5 +17,5 @@ You can use CloudTrail to record API calls that are made by AWS Certificate Mana
 + [Listing Tags](CT-ListTags.md)
 + [Revoking a Certificate](CT-RevokeCertificate.md)
 + [Tagging PCAs](CT-TagPCA.md)
-+ [Updating a CA](CT-UpdateCA.md)
 + [Removing Tags](CT-UntagPCA.md)
++ [Updating a CA](CT-UpdateCA.md)

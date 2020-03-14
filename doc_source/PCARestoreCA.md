@@ -1,6 +1,6 @@
-# Restore Your Private CA<a name="PCARestoreCA"></a>
+# Restoring Your Private CA<a name="PCARestoreCA"></a>
 
-You can restore a private CA that has been deleted as long as the CA remains within the restoration period that you specified upon deletion\. The period identifies the number of days, from 7 to 30, that the private CA remains restorable\. At the end of that period, the private CA is permanently deleted\. For more information, see [Delete Your Private CA](PCADeleteCA.md)\. You cannot restore a private CA that has been permanently deleted\. 
+You can restore a private CA that has been deleted as long as the CA remains within the restoration period that you specified upon deletion\. The period identifies the number of days, from 7 to 30, that the private CA remains restorable\. At the end of that period, the private CA is permanently deleted\. For more information, see [Deleting Your Private CA](PCADeleteCA.md)\. You cannot restore a private CA that has been permanently deleted\. 
 
 **Note**  
 You are not charged for a private CA after it has been deleted\. However, if a deleted CA is restored, you are charged for the time between deletion and restoration\. For more information, see [Pricing](PcaPricing.md)\.
@@ -8,7 +8,6 @@ You are not charged for a private CA after it has been deleted\. However, if a d
 **Topics**
 + [Restoring a Private CA \(Console\)](#RestoreCAConsole)
 + [Restoring a Private CA \(AWS CLI\)](#RestoreCli)
-+ [Restoring a Private CA \(ACM PCA API\)](#RestoreAPI)
 
 ## Restoring a Private CA \(Console\)<a name="RestoreCAConsole"></a>
 
@@ -16,7 +15,7 @@ You can use the AWS Management Console to restore a private CA\.
 
 **To restore a private CA \(console\)**
 
-1. Sign in to your AWS account and open the ACM PCA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\. 
+1. Sign in to your AWS account and open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\. 
 
 1. Choose **Private CAs**\.
 
@@ -26,7 +25,7 @@ You can use the AWS Management Console to restore a private CA\.
 
 1. In the dialog box, choose **Restore** again\.
 
-1. If successful, the status of the private CA is set to its pre\-deletion state\. Choose **Enable** on the **Actions** menu to change its status to `ACTIVE`\. If the private CA was in the `PENDING_CERTIFICATE` state at the time of deletion, you must [import a CA certificate](PcaImportCaCert.md) into the private CA before you can activate it\.
+1. If successful, the status of the private CA is set to its pre\-deletion state\. Choose **Enable** on the **Actions** menu to change its status to `ACTIVE`\. If the private CA was in the `PENDING_CERTIFICATE` state at the time of deletion, you must import a CA certificate into the private CA before you can activate it\.
 
 ## Restoring a Private CA \(AWS CLI\)<a name="RestoreCli"></a>
 
@@ -67,7 +66,3 @@ To be restorable, the private CA's status at the time of deletion must be `DISAB
    certificate-authority/12345678-1234-1234-1234-123456789012 \
    --status ACTIVE
    ```
-
-## Restoring a Private CA \(ACM PCA API\)<a name="RestoreAPI"></a>
-
-Send a [RestoreCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RestoreCertificateAuthority.html) request, specifying the ARN of the CA to restore\.

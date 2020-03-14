@@ -1,6 +1,6 @@
 # Tagging Private Certificate Authorities<a name="CT-TagPCA"></a>
 
-The following CloudTrail example shows the results of a call to the [TagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html) function\.
+The following CloudTrail example shows the results of a call to the [TagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html) operation\.
 
 ```
 {

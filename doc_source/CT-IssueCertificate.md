@@ -1,6 +1,6 @@
 # Issuing a Certificate<a name="CT-IssueCertificate"></a>
 
-The following CloudTrail example shows the results of a call to the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) function\.
+The following CloudTrail example shows the results of a call to the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\.
 
 ```
 {

@@ -1,6 +1,6 @@
-# Create a Certificate Revocation List \(CRL\)<a name="PcaUsingCrl"></a>
+# Creating a Certificate Revocation List \(CRL\)<a name="PcaUsingCrl"></a>
 
-ACM PCA can create a certificate revocation list \(CRL\) for you when you create a new private CA or update an existing CA\. The CRL is written to an Amazon S3 bucket that you specify\. Note that ACM PCA does not support Amazon S3 server\-side encryption \(SSE\) for CRLs and audit reports\. Each CRL is a DER encoded file\. You can download the file and use OpenSSL to view it\. 
+ACM Private CA can create a certificate revocation list \(CRL\) for you when you create a new private CA or update an existing CA\. The CRL is written to an Amazon S3 bucket that you specify\. Note that ACM Private CA does not support Amazon S3 server\-side encryption \(SSE\) for CRLs and audit reports\. Each CRL is a DER encoded file\. To download the file and use OpenSSL to view it, use a command like to the following:
 
 ```
 openssl crl -inform DER -in path-to-crl-file -text -noout
@@ -50,70 +50,4 @@ Revoked Certificates:
          5a:2c:88:85
 ```
 
-**Topics**
-+ [Creating the CRL When You Create a CA](#CreateCRLCreatePCA)
-+ [Updating a CRL Configuration \(Console\)](#CreateCRLUpdatePCAconsole)
-+ [Updating a CRL Configuration \(AWS CLI\)](#CreateCRLUpdatePCAcli)
-+ [Updating a CRL Configuration \(ACM PCA API\)](#CreateCRLUpdatePCAAPI)
-
-## Creating the CRL When You Create a CA<a name="CreateCRLCreatePCA"></a>
-
-You can use the integrated ACM console to configure the parameters for a CRL when you create a private CA\. For more information, see step 5 in [Creating a CA \(Console\)](PcaCreateCa.md#CreateCaConsole)\. You can also use the AWS CLI or ACM PCA API, but you must specify a file that contains your revocation configuration\. For more information, see [Creating a CA \(AWS CLI\)](PcaCreateCa.md#CreateCaCli)\. You can also use the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) API\. 
-
-## Updating a CRL Configuration \(Console\)<a name="CreateCRLUpdatePCAconsole"></a>
-
-You can use the ACM console to update the CRL configuration for an existing private CA\.
-
-**To update a CRL configuration \(console\)**
-
-1. Sign in to your AWS account and open the ACM PCA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\. Choose **Private CAs**\. 
-
-1. Choose your CA from the list\.
-
-1. On the **Actions** menu, choose **Update CA revocation**\.
-
-1. Choose **Enable CRL distribution**
-
-1. To create a new S3 bucket for your CRL entries, choose **Yes** for the **Create a new S3 bucket** option and type a unique bucket name\. Otherwise, choose **No** and choose an existing bucket from the list\. 
-
-1. Choose **Advanced** if you want to specify more about your CRL\.
-
-1. Add an optional **Custom CRL Name** to hide the name of your S3 bucket from public view\. 
-
-1. Type the number of days your CRL will remain valid\. For online CRLs, a validity period of 7 days is common\. ACM PCA tries to regenerate the CRL at 1/2 of the specified period\. 
-
-1. Choose **Update**\.
-
-## Updating a CRL Configuration \(AWS CLI\)<a name="CreateCRLUpdatePCAcli"></a>
-
-You can use the AWS CLI to update the CRL configuration for an existing private CA\.
-
-**To update a CRL configuration \(AWS CLI\)**  
-Use the [update\-certificate\-authority](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/update-certificate-authority.html) command to update a CRL configuration\. You can modify the following example file to use this command\. 
-
-```
-C:\revoke_config.txt
-
-{
-  "CrlConfiguration": 
-    {"Enabled": true,
-     "ExpirationInDays": 7,
-     "CustomCname": "some_name.crl",
-     "S3BucketName": "your-bucket-name"}
-}
-```
-
-```
-aws acm-pca update-certificate-authority \
---certificate-authority-arn arn:aws:acm-pca:region:account:\
-certificate-authority/12345678-1234-1234-1234-1232456789012 \
---revocation-configuration file://C:\revoke_config.txt \
---status "ACTIVE"
-```
-
-## Updating a CRL Configuration \(ACM PCA API\)<a name="CreateCRLUpdatePCAAPI"></a>
-
-You can use the ACM PCA API to update the CRL configuration of an existing private CA\.
-
-**Updating a CRL Configuration\(ACM PCA API\)**  
-Send an [UpdateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html) request, specifying the ARN of the private CA that issued the certificate to be revoked, and the path of the revocation configuration file for your private CA\.
+When you have associated a CRL with a CA, ACM Private CA includes the CRL Distribution Points extension in certificates issued by the CA\. This extension provides the URL to the CRL so that client devices can check certificate revocation status\.

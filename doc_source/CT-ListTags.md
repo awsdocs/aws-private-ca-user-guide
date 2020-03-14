@@ -1,6 +1,6 @@
 # Listing Tags<a name="CT-ListTags"></a>
 
-The following CloudTrail example shows the results of a call to the [ListTags](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListTags.html) function\.
+The following CloudTrail example shows the results of a call to the [ListTags](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListTags.html) operation\.
 
 ```
 {

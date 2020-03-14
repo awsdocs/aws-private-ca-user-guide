@@ -1,6 +1,6 @@
 # Updating a Certificate Authority<a name="CT-UpdateCA"></a>
 
-The following CloudTrail example shows the results of a call to the [UpdateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html) function\.
+The following CloudTrail example shows the results of a call to the [UpdateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html) operation\.
 
 ```
 {

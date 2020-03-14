@@ -1,8 +1,8 @@
 # GetCertificateAuthorityCsr<a name="JavaApi-GetCertificateAuthorityCsr"></a>
 
-The following Java sample shows how to use the [GetCertificateAuthorityCsr](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCsr.html) function\.
+The following Java sample shows how to use the [GetCertificateAuthorityCsr](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCsr.html) operation\.
 
-This function retrieves the certificate signing request \(CSR\) for your private certificate authority \(CA\)\. The CSR is created when you call the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) function\. Take the CSR to your on\-premises X\.509 infrastructure and sign it by using your root or a subordinate CA\. Then import the signed certificate back into ACM PCA by calling the [ImportCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html) action\. The CSR is returned as a base64 PEM–encoded string\. 
+This operation retrieves the certificate signing request \(CSR\) for your private certificate authority \(CA\)\. The CSR is created when you call the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) operation\. Take the CSR to your on\-premises X\.509 infrastructure and sign it using your root or a subordinate CA\. Then import the signed certificate back into ACM PCA by calling the [ImportCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html) operation\. The CSR is returned as a base64 PEM\-encoded string\. 
 
 ```
 package com.amazonaws.samples;
@@ -91,7 +91,7 @@ public class GetCertificateAuthorityCsr {
 }
 ```
 
-Your output should be similar to the following for the certificate authority \(CA\) that you specify\. The certificate signing request \(CSR\) is base64\-encoded in PEM format\. Save it to a local file, take it to your on\-premises X\.509 infrastructure and sign it by using your root or a subordinate CA\. 
+Your output should be similar to the following for the certificate authority \(CA\) that you specify\. The certificate signing request \(CSR\) is base64\-encoded in PEM format\. Save it to a local file, take it to your on\-premises X\.509 infrastructure, and sign it by using your root or a subordinate CA\. 
 
 ```
 -----BEGIN CERTIFICATE REQUEST----- base64-encoded request -----END CERTIFICATE REQUEST-----

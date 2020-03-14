@@ -1,8 +1,8 @@
 # IssueCertificate<a name="JavaApi-IssueCertificate"></a>
 
-The following Java sample shows how to use the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) function\.
+The following Java sample shows how to use the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\.
 
-This function uses your private certificate authority \(CA\) to issue a private certificate\. This action returns the Amazon Resource Name \(ARN\) of the certificate\. You can retrieve the certificate by calling the [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) and specifying the ARN\.
+This operation uses your private certificate authority \(CA\) to issue an end\-entity certificate\. This operation returns the Amazon Resource Name \(ARN\) of the certificate\. You can retrieve the certificate by calling the [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) and specifying the ARN\.
 
 ```
 package com.amazonaws.samples;
@@ -130,7 +130,7 @@ public class IssueCertificate {
 }
 ```
 
-Your output should be similar to the following\.
+Your output should be similar to the following:
 
 ```
 arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/2669d5cacb539c0830998c23babab8dc

@@ -3,7 +3,7 @@
 The following Java sample shows how to use the [DescribeCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthority.html) operation\.
 
 The operation lists information about your private certificate authority \(CA\)\. You must specify the ARN \(Amazon Resource Name\) of the private CA\. The output contains the status of your CA\. This can be any of the following: 
-+ `CREATING` – ACM PCA is creating your private certificate authority\.
++ `CREATING` – ACM Private CA is creating your private certificate authority\.
 + `PENDING_CERTIFICATE` – The certificate is pending\. You must use your on\-premises root or subordinate CA to sign your private CA CSR and then import it into PCA\. 
 + `ACTIVE` – Your private CA is active\.
 + `DISABLED` – Your private CA has been disabled\.

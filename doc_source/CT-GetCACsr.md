@@ -1,6 +1,6 @@
 # Retrieving the Certificate Authority Signing Request<a name="CT-GetCACsr"></a>
 
-The following CloudTrail example shows the results of a call to the [GetCertificateAuthorityCsr](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCsr.html) function\.
+The following CloudTrail example shows the results of a call to the [GetCertificateAuthorityCsr](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCsr.html) operation\.
 
 ```
 {

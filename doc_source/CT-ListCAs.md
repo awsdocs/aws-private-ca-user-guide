@@ -1,6 +1,6 @@
 # Listing Certificate Authorities<a name="CT-ListCAs"></a>
 
-The following CloudTrail example shows the results of a call to the [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html) function\.
+The following CloudTrail example shows the results of a call to the [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html) operation\.
 
 ```
 {
