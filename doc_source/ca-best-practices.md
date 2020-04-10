@@ -37,13 +37,3 @@ It is a best practice to periodically update the private key for your private CA
 ## Delete an Unused CA<a name="delete-unused-ca"></a>
 
 You can permanently delete a private CA\. You might want to do so if you no longer need the CA or if you want to replace it with a CA that has a newer private key\. To safely delete a CA, we recommend that you follow the process outlined in [Deleting Your Private CA](PCADeleteCA.md)\.
-
-## Redundancy and Disaster Recovery<a name="disaster-recovery"></a>
-
-Creating and distributing two roots/hierarchies for DR
-
-Consider redundancy and DR when planning your CA hierarchy\. ACM Private CA is available in multiple regions \[link to region availability\], which allows you to create redundant CAs in multiple regions\. The ACM Private CA service operates with a [service level agreement](https://aws.amazon.com/certificate-manager/private-certificate-authority/sla/) \(SLA\) of 99\.9% availability\. There are at least two approaches you can consider for redundancy and disaster recovery\. You can configure redundancy at the Root CA or at the highest subordinate CA\. Each approach has pros and cons\. 
-
-1. You can create two root CAs in two different AWS Regions for redundancy and disaster recovery\. With this configuration, each root CA operates independently in an AWS Region, protecting you in the event of a single\-region disaster\. Creating redundant root CAs does, however, increase operational complexity — you will need to distribute both root CA certificates to the trust stores of browsers and operating systems in your environment\. 
-
-1. You can also create two redundant subordinate CAs that chain to the same root CA\. The benefit of this approach is that you need to distribute only a single root CA certificate to the trust stores in your environment\. The limitation is that you don’t have a redundant root CA in the event of a disaster that affects the AWS Region in which your root CA exists\.

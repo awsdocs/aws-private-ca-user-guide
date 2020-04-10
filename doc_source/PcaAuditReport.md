@@ -2,7 +2,9 @@
 
 You can create an audit report to list all of the certificates that your private CA has issued or revoked\. The report is saved in a new or existing S3 bucket that you specify on input\. 
 
-The audit report file has the following path and filename\. \(`CA_ID` is the unique identifier of an issuing CA and `UUID` is the unique identifier of an audit report\.\)
+For information about adding encryption protection to your audit reports, see [Encrypting Your Audit Reports ](#audit-report-encryption)\.
+
+The audit report file has the following path and file name\. \(`CA_ID` is the unique identifier of an issuing CA and `UUID` is the unique identifier of an audit report\.\)
 
 ```
 bucket-name/audit-report/CA-ID/UUID.[json|csv]
@@ -122,3 +124,96 @@ certificate-authority/12345678-1234-1234-1234-123456789012 \
 --s3-bucket-name >your-bucket-name \
 --audit-report-response-format JSON
 ```
+
+## Encrypting Your Audit Reports<a name="audit-report-encryption"></a>
+
+You can optionally configure encryption on the Amazon S3 bucket containing your audit reports\. ACM Private CA supports two encryption modes for assets in S3:
++ Automatic server\-side encryption with Amazon S3\-managed AES\-256 keys\.
++ Customer\-managed encryption using AWS Key Management Service and customer master keys \(CMKs\) configured to your specifications\.
+
+**Note**  
+ACM Private CA does not support using default CMKs generated automatically by S3\.
+
+The following procedures describe how to set up each of the encryption options\.
+
+**To configure automatic encryption**  
+Complete the following steps to enable S3 server\-side encryption\.
+
+1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
+
+1. In the **Buckets** table, choose the bucket that will hold your ACM Private CA assets\.
+
+1. On the page for your bucket, choose the **Properties** tab\.
+
+1. Choose the **Default encryption** card\.
+
+1. Choose **AES\-256**\.
+
+1. Optionally view the bucket permissions policy, then choose **Save**\.
+
+**To configure custom encryption**  
+Complete the following steps to enable encryption using a custom CMK\.
+
+1. \(Optional\) If you do not have an AWS KMS CMK already, create one using the following AWS CLI [create\-key](https://docs.aws.amazon.com/cli/latest/reference/kms/create-key.html) command:
+
+   ```
+   aws kms create-key
+   ```
+
+   The output contains the key ID and Amazon Resource Name \(ARN\) of the CMK\. The following is example output:
+
+   ```
+   {
+       "KeyMetadata": {
+           "KeyId": "6f815f63-e628-448c-8251-e40cb0d29f59",
+           "Description": "",
+           "Enabled": true,
+           "KeyUsage": "ENCRYPT_DECRYPT",
+           "KeyState": "Enabled",
+           "CreationDate": 1478910250.94,
+           "Arn": "arn:aws:kms:us-west-2:123456789012:key/6f815f63-e628-448c-8251-e40cb0d29f59",
+           "AWSAccountId": "123456789012"
+       }
+   }
+   ```
+
+1. By default, all AWS KMS CMKs are private; only the resource owner can use it to encrypt and decrypt data\. However, the resource owner can grant permissions to access the CMK to other users and resources\. Using the following steps, you give the ACM Private CA service principal permission to use the CMK\. This service principal must be in the same region as where the CMK is stored\.
+
+   1. First, save the default policy for your CMK as `policy.json` using the following [get\-key\-policy](https://docs.aws.amazon.com/cli/latest/reference/kms/get-key-policy.html) command:
+
+      ```
+      aws kms get-key-policy --key-id key-id --policy-name default --output text > ./policy.json
+      ```
+
+   1. Open the `policy.json` file in a text editor and add the following statement:
+
+      ```
+      {
+         "Sid":"Allow ACM-PCA use of the key",
+         "Effect":"Allow",
+         "Principal":{
+            "Service":"acm-pca.amazonaws.com"
+         },
+         "Action":[
+            "kms:GenerateDataKey",
+            "kms:Decrypt"
+         ],
+         "Resource":"*",
+         "Condition":{
+            "StringLike":{
+               "kms:EncryptionContext:aws:s3:arn":[
+                  "arn:aws:s3:::bucket_name/acm-pca-permission-test-key",
+                  "arn:aws:s3:::bucket_name/acm-pca-permission-test-key-private",
+                  "arn:aws:s3:::bucket_name/audit-report/*",
+                  "arn:aws:s3:::bucket_name/crl/*"
+               ]
+            }
+         }
+      }
+      ```
+
+   1. Finally, add the updated policy using the following [put\-key\-policy](https://docs.aws.amazon.com/cli/latest/reference/kms/put-key-policy.html) command:
+
+      ```
+      aws kms put-key-policy --key-id key-id --policy-name default --policy file://policy.json
+      ```

@@ -5,10 +5,10 @@ Using ACM Private CA, you can create an entirely AWS\-hosted private certificate
 You can access ACM Private CA using the AWS Management Console, the AWS CLI, and the ACM Private CA API\. The following topics show you how to use the console and the CLI\. To learn more about the API, see the [AWS Certificate Manager Private Certificate Authority API Reference](https://docs.aws.amazon.com/acm-pca/latest/APIReference/)\. For Java examples that show you how to use the API, see [Using the ACM Private CA API \(Java Examples\)](PcaApiIntro.md)\. 
 
 **Topics**
++ [Setting Up ACM Private CA](PcaGettingStarted.md)
 + [Creating a Private CA](PcaCreateCa.md)
 + [Creating and Installing the Certificate for a Private CA](PCACertInstall.md)
 + [Updating Your Private CA](PCAUpdateCA.md)
 + [Deleting Your Private CA](PCADeleteCA.md)
 + [Restoring Your Private CA](PCARestoreCA.md)
-+ [Creating an Audit Report for Your Private CA](PcaAuditReport.md)
 + [Assigning Certificate Renewal Permissions to ACM](PcaPermissions.md)

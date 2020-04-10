@@ -1,4 +1,4 @@
-# Configure Access to ACM Private CA<a name="PcaAuthAccess"></a>
+# Identity and Access Management for AWS Certificate Manager Private Certificate Authority<a name="security-iam"></a>
 
  Access to ACM Private CA requires credentials that AWS can use to authenticate your requests\. The following topics provide details on how you can use [AWS Identity and Access Management \(IAM\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) to help secure your private certificate authorities \(CAs\) by controlling who can access them\. 
 
@@ -107,15 +107,15 @@ The following sample [customer\-managed policy](https://docs.aws.amazon.com/IAM/
 
    ```
    {
-      "Version":"2012-10-17",
-      "Statement":[
-         {
-            "Effect":"Allow",
-            "Action":"acm-pca:CreateCertificateAuthorityAuditReport",
-            "Resource":"*"
-         }
-      ]
-   }
+          "Version":"2012-10-17",
+          "Statement":[
+             {
+                "Effect":"Allow",
+                "Action":"acm-pca:CreateCertificateAuthorityAuditReport",
+                "Resource":"*"
+             }
+          ]
+       }
    ```
 
 1. Choose **Review policy**\.
@@ -147,15 +147,15 @@ Inline policies are policies that you create and manage and embed directly into 
 
 ```
 {
-   "Version":"2012-10-17",
-   "Statement":[
-      {
-         "Effect":"Allow",
-         "Action":"acm-pca:ListCertificateAuthorities",
-         "Resource":"*"
-      }
-   ]
-}
+       "Version":"2012-10-17",
+       "Statement":[
+          {
+             "Effect":"Allow",
+             "Action":"acm-pca:ListCertificateAuthorities",
+             "Resource":"*"
+          }
+       ]
+    }
 ```
 
 ### Retrieving a Private CA Certificate<a name="policy-retrieve-pca"></a>
@@ -164,13 +164,13 @@ Inline policies are policies that you create and manage and embed directly into 
 
 ```
 {
-   "Version":"2012-10-17",
-   "Statement":{
-      "Effect":"Allow",
-      "Action":"acm-pca:GetCertificateAuthorityCertificate",
-      "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/12345678-1234-1234-1234-123456789012"
-   }
-}
+       "Version":"2012-10-17",
+       "Statement":{
+          "Effect":"Allow",
+          "Action":"acm-pca:GetCertificateAuthorityCertificate",
+          "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/12345678-1234-1234-1234-123456789012"
+       }
+    }
 ```
 
 ### Importing a Private CA Certificate<a name="policy-import-pca-cert"></a>
@@ -179,13 +179,13 @@ The following policy allows a user to import a private CA certificate\.
 
 ```
 {
-   "Version":"2012-10-17",
-   "Statement":{
-      "Effect":"Allow",
-      "Action":"acm-pca:ImportCertificateAuthorityCertificate",
-      "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate/12345678-1234-1234-1234-123456789012"
-   }
-}
+       "Version":"2012-10-17",
+       "Statement":{
+          "Effect":"Allow",
+          "Action":"acm-pca:ImportCertificateAuthorityCertificate",
+          "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate/12345678-1234-1234-1234-123456789012"
+       }
+    }
 ```
 
 ### Deleting a Private CA<a name="policy-delete-pca"></a>
@@ -194,13 +194,13 @@ The following policy allows a user to delete a specific private CA\.
 
 ```
 {
-   "Version":"2012-10-17",
-   "Statement":{
-      "Effect":"Allow",
-      "Action":"acm-pca:DeleteCertificateAuthority",
-      "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate/12345678-1234-1234-1234-123456789012"
-   }
-}
+       "Version":"2012-10-17",
+       "Statement":{
+          "Effect":"Allow",
+          "Action":"acm-pca:DeleteCertificateAuthority",
+          "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate/12345678-1234-1234-1234-123456789012"
+       }
+    }
 ```
 
 ### Read\-Only Access to ACM Private CA<a name="policy-pca-read-only"></a>
@@ -209,21 +209,21 @@ The following policy allows a user to delete a specific private CA\.
 
 ```
 {
-   "Version":"2012-10-17",
-   "Statement":{
-      "Effect":"Allow",
-      "Action":[
-         "acm-pca:DescribeCertificateAuthority",
-         "acm-pca:DescribeCertificateAuthorityAuditReport",
-         "acm-pca:ListCertificateAuthorities",
-         "acm-pca:ListTags",
-         "acm-pca:GetCertificateAuthorityCertificate",
-         "acm-pca:GetCertificateAuthorityCsr",
-         "acm-pca:GetCertificate"
-      ],
-      "Resource":"*"
-   }
-}
+       "Version":"2012-10-17",
+       "Statement":{
+          "Effect":"Allow",
+          "Action":[
+             "acm-pca:DescribeCertificateAuthority",
+             "acm-pca:DescribeCertificateAuthorityAuditReport",
+             "acm-pca:ListCertificateAuthorities",
+             "acm-pca:ListTags",
+             "acm-pca:GetCertificateAuthorityCertificate",
+             "acm-pca:GetCertificateAuthorityCsr",
+             "acm-pca:GetCertificate"
+          ],
+          "Resource":"*"
+       }
+    }
 ```
 
 ### Full Access to ACM Private CA<a name="policy-pca-full-access"></a>
@@ -232,17 +232,17 @@ The following policy allows a user to delete a specific private CA\.
 
 ```
 {
-   "Version":"2012-10-17",
-   "Statement":[
-      {
-         "Effect":"Allow",
-         "Action":[
-            "acm-pca:*"
-         ],
-         "Resource":"*"
-      }
-   ]
-}
+       "Version":"2012-10-17",
+       "Statement":[
+          {
+             "Effect":"Allow",
+             "Action":[
+                "acm-pca:*"
+             ],
+             "Resource":"*"
+          }
+       ]
+    }
 ```
 
 ### Administrator Access to All AWS Resources<a name="policy-aws-administrator"></a>
@@ -251,13 +251,13 @@ The following policy allows a user to delete a specific private CA\.
 
 ```
 {
-   "Version":"2012-10-17",
-   "Statement":[
-      {
-         "Effect":"Allow",
-         "Action":"*",
-         "Resource":"*"
-      }
-   ]
-}
+       "Version":"2012-10-17",
+       "Statement":[
+          {
+             "Effect":"Allow",
+             "Action":"*",
+             "Resource":"*"
+          }
+       ]
+    }
 ```

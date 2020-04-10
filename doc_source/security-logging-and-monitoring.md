@@ -1,0 +1,1 @@
+# Logging and Monitoring for AWS Certificate Manager Private Certificate Authority<a name="security-logging-and-monitoring"></a>
