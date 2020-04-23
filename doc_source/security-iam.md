@@ -26,7 +26,7 @@ You can access AWS as any of the following types of identities:
 
 ## Understanding Resources, Ownership, and Permissions Policies<a name="understand-resource-ownership"></a>
 
-In ACM Private CA, the primary resource that you work with is a *private certificate authority \(PCA\)*\. Every private CA you own or control is identified by an Amazon Resource Name \(ARN\), which has the following form\. 
+In ACM Private CA, the primary resource that you work with is a *private certificate authority \(PCA\)*\. Every private CA that you own or control is identified by an Amazon Resource Name \(ARN\), which has the following form\. 
 
 ```
 arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/12345678-abcd-1234-abcd-1234567890ab
@@ -44,12 +44,12 @@ A *permissions policy* describes who has access to what\. The following discussi
 **Note**  
 This documentation discusses using IAM in the context of ACM Private CA\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)\. For information about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)\. 
 
-When you set up access control and writing permissions policies that you can attach to an IAM identity \(identity\-based policies\), use the following table as a reference\. The first column in the table lists each ACM Private CA API operation\. You specify actions in a policy's `Action` element\. The remaining columns provide the additional information\. If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, you can open the table in a new window\. To close the window, choose the close button \(**X**\) in the lower\-right corner\.
+When you set up access control and permissions policies that you plan to attach to an IAM identity \(identity\-based policies\), use the following table as a reference\. The first column in the table lists each ACM Private CA API operation\. You specify actions in a policy's `Action` element\. The remaining columns provide the additional information\.
 
 
 **ACM Private CA API Operations and Permissions**  
 
-| ACM Private CA API Actions | Required Permissions | Resources | 
+| ACM Private CA API Operations | Required Permissions | Resources | 
 | --- | --- | --- | 
 |  [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)  |  `acm-pca:CreateCertificateAuthority`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)  |  `acm-pca:CreateCertificateAuthorityAuditReport`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
@@ -91,7 +91,7 @@ As a best practice, don't use your AWS account root user to interact with AWS, i
 
 Another best practice is to create a customer managed IAM policy that you can assign to users\. Customer managed policies are standalone identity\-based policies that you create and which you can attach to multiple users, groups, or roles in your AWS account\. Such a policy restricts users to performing only the ACM Private CA actions that you specify\. 
 
-The following sample [customer\-managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#create-managed-policy-console) allows a user to create a CA audit report\. This is a sample only\. You can choose any ACM Private CA operations you want\. For more examples, see [Inline Policies](#auth-InlinePolicies)\. 
+The following example [customer\-managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#create-managed-policy-console) allows a user to create a CA audit report\. This is an example only\. You can choose any ACM Private CA operations that you want\. For more examples, see [Inline Policies](#auth-InlinePolicies)\. 
 
 **To create a customer managed policy**
 
@@ -205,7 +205,7 @@ The following policy allows a user to delete a specific private CA\.
 
 ### Read\-Only Access to ACM Private CA<a name="policy-pca-read-only"></a>
 
- The following policy allows a user to describe and list private certificate authorities and to retrieve the private CA Certificate and certificate chain\. 
+ The following policy allows a user to describe and list private certificate authorities and to retrieve the private CA certificate and certificate chain\. 
 
 ```
 {
