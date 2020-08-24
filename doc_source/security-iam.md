@@ -26,7 +26,7 @@ You can access AWS as any of the following types of identities:
 
 ## Understanding Resources, Ownership, and Permissions Policies<a name="understand-resource-ownership"></a>
 
-In ACM Private CA, the primary resource that you work with is a *certificate authority \(CA\)*\. Every private CA that you own or control is identified by an Amazon Resource Name \(ARN\), which has the following form\. 
+In ACM Private CA, the primary resource that you work with is a *private certificate authority \(PCA\)*\. Every private CA that you own or control is identified by an Amazon Resource Name \(ARN\), which has the following form\. 
 
 ```
 arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/12345678-abcd-1234-abcd-1234567890ab
