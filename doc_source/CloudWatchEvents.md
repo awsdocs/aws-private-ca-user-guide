@@ -1,15 +1,15 @@
 # Using CloudWatch Events<a name="CloudWatchEvents"></a>
 
-Amazon CloudWatch Events enables you to automate your AWS services and respond automatically to system events such as application availability issues or resource changes\. Events from AWS services are delivered to CloudWatch Events in near real\-time\. You can write simple rules to indicate which events are of interest to you, and the automated actions to take when an event matches a rule\. For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/)\. 
+You can use [Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/) to automate your AWS services and respond automatically to system events such as application availability issues or resource changes\. Events from AWS services are delivered to CloudWatch Events in near\-real time\. You can write simple rules to indicate which events are of interest to you and the automated actions to take when an event matches a rule\. For more information, see [Creating a CloudWatch Events Rule That Triggers on an Event](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html)\. 
 
 CloudWatch Events are turned into actions using Amazon EventBridge\. With EventBridge, you can use events to trigger targets including AWS Lambda functions, AWS Batch jobs, Amazon SNS topics, and many others\. For more information, see [What Is Amazon EventBridge?](https://docs.aws.amazon.com/eventbridge/latest/userguide/what-is-amazon-eventbridge.html)
 
 ## Success or Failure when Creating a Private CA<a name="cwe-issue-CA"></a>
 
-These events are triggered by the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) action\.
+These events are triggered by the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
 
 **Success**  
-On success, the action returns the ARN of the new CA\.
+On success, the operation returns the ARN of the new CA\.
 
 ```
 {
@@ -30,7 +30,7 @@ On success, the action returns the ARN of the new CA\.
 ```
 
 **Failure**  
-On failure, the action returns an ARN for the CA\. With the ARN, you can call [DescribeCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthority.html) to determine the status of the CA\.
+On failure, the operation returns an ARN for the CA\. Using the ARN, you can call [DescribeCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthority.html) to determine the status of the CA\.
 
 ```
 {
@@ -52,10 +52,10 @@ On failure, the action returns an ARN for the CA\. With the ARN, you can call [D
 
 ## Success or Failure When Issuing a Certificate<a name="cwe-issue-cert"></a>
 
-These events are triggered by the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) action\.
+These events are triggered by the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\.
 
 **Success**  
-On success, the action returns the ARNs of the CA and of the new certificate\.
+On success, the operation returns the ARNs of the CA and of the new certificate\.
 
 ```
 {
@@ -77,7 +77,7 @@ On success, the action returns the ARNs of the CA and of the new certificate\.
 ```
 
 **Failure**  
-On failure, the action returns a certificate ARN and the ARN of the CA\. With the certificate ARN, you can call [GetCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_GetCertificate.html) to view the reason for the failure\.
+On failure, the operation returns a certificate ARN and the ARN of the CA\. With the certificate ARN, you can call [GetCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_GetCertificate.html) to view the reason for the failure\.
 
 ```
 {
@@ -100,12 +100,12 @@ On failure, the action returns a certificate ARN and the ARN of the CA\. With th
 
 ## Success When Revoking a Certificate<a name="cwe-revocation"></a>
 
-This event is triggered by the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) action\.
+This event is triggered by the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) operation\.
 
 No event is sent if the revocation fails or if the certificate has already been revoked\.
 
 ****Success****  
-On success, the action returns the ARNs of the CA and of the revoked certificate\.
+On success, the operation returns the ARNs of the CA and of the revoked certificate\.
 
 ```
 {
@@ -129,10 +129,10 @@ On success, the action returns the ARNs of the CA and of the revoked certificate
 
 ## Success or Failure When Generating a CRL<a name="cwe-CRL"></a>
 
-These events are triggered by the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) action, which should result in the creation of a CRL\.
+These events are triggered by the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) operation, which should result in the creation of a certificate revocation list \(CRL\)\.
 
 **Success**  
-On success, the action returns the ARN of the CA associated with the CRL\.
+On success, the operation returns the ARN of the CA associated with the CRL\.
 
 ```
 {
@@ -220,10 +220,10 @@ To troubleshoot this error, check your [CloudWatch metrics](https://docs.aws.ama
 
 ## Success or Failure When Creating a CA Audit Report<a name="cwe-audit"></a>
 
-These events are triggered by the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) action\.
+These events are triggered by the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
 
 **Success**  
-On success, the action returns the ARN of the CA and the ID of the audit report\.
+On success, the operation returns the ARN of the CA and the ID of the audit report\.
 
 ```
 {

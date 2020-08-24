@@ -5,4 +5,4 @@ ACM Private CA gives you complete, cloud\-based control over your organization's
 **Topics**
 + [Designing a CA Hierarchy](ca-hierarchy.md)
 + [Managing the Private CA Lifecycle](ca-lifecycle.md)
-+ [ACM Private CA Best Practices](ca-best-practices.md)
++ [Resilience in AWS Certificate Manager Private Certificate Authority](disaster-recovery-resilience.md)

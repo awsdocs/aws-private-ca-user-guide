@@ -1,37 +1,35 @@
 # Issuing a Private End\-Entity Certificate<a name="PcaIssueCert"></a>
 
-You can create private end\-entity certificates from either AWS Certificate Manager \(ACM\) or ACM Private CA\. The capabilities of both are compared in the following table\.
+With a private CA in place, you can request private end\-entity certificates from either AWS Certificate Manager \(ACM\) or ACM Private CA\. The capabilities of both services are compared in the following table\.
 
 
 ****  
 
 | Capability | ACM | ACM Private CA | 
 | --- | --- | --- | 
-| Create private CA certificates | Not supported | ✓ \(using [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)\) | 
-| Import private CA certificates | ✓ | ✓ | 
-| Create end\-entity certificates | ✓ \(using [RequestCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_RequestCertificate.html) \+ [GetCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_GetCertificate.html)\) | ✓ \(using [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)\) | 
-| Console support | ✓ | ✓ \(CA certificates only\) | 
+| Issue end\-entity certificates | ✓ \(using [RequestCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_RequestCertificate.html) \+ [GetCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_GetCertificate.html) or the console\) | ✓ \(using [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)\) | 
+| Association with internet\-facing AWS services | ✓ | Not supported | 
+| Console support | ✓ | Not supported | 
 | API support | ✓ | ✓ | 
 | CLI support | ✓ | ✓ | 
-| User\-configurable templates | Not supported | ✓ | 
 
-Thus the ACM Private CA API and the AWS CLI can issue any certificate type\. The ACM Private CA console can issue CA certificates\. And the ACM service can issue end\-entity certificates using its console, API, or the AWS CLI\. For more information about using ACM, see [Request a Private Certificate](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html)\.
+When ACM Private CA creates a certificate, it follows a template that specifies the certificate type and path length\. If no template ARN is supplied to the API or CLI statement creating the certificate, the [EndEntityCertificate/V1](UsingTemplates.md#EndEntityCertificate-V1) template is applied by default\. For more information about available certificate templates, see [Understanding Certificate Templates](UsingTemplates.md)\.
 
-When ACM Private CA creates a certificate, it applies a user\-definable template that specifies the certificate type and path length\. If no template ARN is supplied to the API or CLI statement creating the certificate, the end\-entity template is applied by default\. For more information about available certificate templates, see [Using Templates](UsingTemplates.md)\.
+While ACM certificates are designed around public trust, ACM Private CA serves the needs of your private PKI\. Consequently, you can configure certificates using the ACM Private CA API and CLI in ways not permitted by ACM\. These include the following:
++ Creating a certificate with any subject name\.
++ Using any of the [supported private key algorithms and key lengths](https://docs.aws.amazon.com/acm-pca/latest/userguide/supported-algorithms.html)\.
++ Using any of the [supported signing algorithms ](https://docs.aws.amazon.com/acm-pca/latest/userguide/supported-algorithms.html)\.
++ Specifying any validity period for your private [CA](PcaCreateCa.html) and private [certificates](PcaIssueCert.html)\.
 
-Private certificates that you issue from the ACM Private CA API or AWS CLI are not subject to the same restrictions as private certificates that ACM issues\. You can use ACM Private CA to do the following:
-+ Create a certificate with any subject name\.
-+ Use any of the supported private key algorithms and key lengths\.
-+ Use any of the signing algorithms that are currently supported\.
-+ Specify any validity period for your private CA and private certificates\.
-+ Import your private certificates into ACM and IAM\.
+After creating a private certificate using ACM Private CA, you can[import](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html) it into ACM and use it with a supported AWS service\.
 
 ## Issuing a Certificate \(AWS CLI\)<a name="IssueCertCli"></a>
 
-You can use the [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) command to request a private certificate\. This command requires the Amazon Resource Name \(ARN\) of the private CA that you want to use to issue the certificate\. It also requires the certificate signing request \(CSR\) for the certificate that you want to issue\. You can also use the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\. 
+You can use the ACM Private CA CLI command [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) or the API action [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) to request an end\-entity certificate\. This command requires the Amazon Resource Name \(ARN\) of the private CA that you want to use to issue the certificate\.
 
-**Note**  
-You use the ACM Private CA API or AWS CLI to issue a private certificate\. But if you do, you cannot use the ACM console, CLI, or API to view or export it\. You already have the private key because you needed one to create the CSR \(see the previous discussion\)\. You can use the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command to retrieve the certificate details\. You can also create an [audit report](PcaAuditReport.md) to make sure that your certificate was issued\. 
+If you use the ACM Private CA API or AWS CLI to issue a private certificate, the certificate in unmanaged, meaning that you cannot use the ACM console, ACM CLI, or ACM API to view or export it, and the certificate is not automatically renewed\. However, you can use the PCA [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command to retrieve the certificate details, and if you own the CA, you can create an [audit report](PcaAuditReport.md)\.
+
+The following command specifies no template, so an end\-entity certificate is issued by default\.
 
 ```
 aws acm-pca issue-certificate \
@@ -43,7 +41,7 @@ certificate-authority/12345678-1234-1234-1234-123456789012 \
 --idempotency-token 1234
 ```
 
-This command outputs the ARN of the issued certificate\.
+The ARN of the issued certificate is returned:
 
 ```
 {

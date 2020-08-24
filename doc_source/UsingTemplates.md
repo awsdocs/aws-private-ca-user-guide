@@ -1,9 +1,11 @@
-# Using Templates<a name="UsingTemplates"></a>
+# Understanding Certificate Templates<a name="UsingTemplates"></a>
 
-ACM Private CA uses templates to create both CA certificates and end\-entity certificates that identify users, hosts, resources, and devices\. When you create a certificate in the console, a template is applied automatically\. The template that is applied is based on the type of certificate that you have chosen and the path\-length that you specify\. If you use the CLI or API to create a certificate, you manually provide the ARN of the template that you want to apply\. \(The `EndEntityCertificate` template is applied if you provide no ARN\.\)
+ACM Private CA uses templates to create both CA certificates and end\-entity certificates that identify users, hosts, resources, and devices\. When you create a certificate in the console, a template is applied automatically\. Template options are based on the type of certificate that you have chosen and the path\-length that you specify\. If you use the CLI or API to create a certificate, you manually provide the ARN of the template that you want to apply\. \(The `EndEntityCertificate/V1` template is applied if you provide no ARN\.\)
+
+**Note**  
+Cross\-account certificate issuers are constrained by a [resource\-based policy](pca-resource-sharing.md#pca-rbp) and have access only to the `EndEntityCertificate/V1` template\.
 
 The following links provide information about creating a certificate with ACM Private CA\. 
-+ Using the console: [Issue a Private Certificate](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaIssueCert.html)\.
 + Using the command line: [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html)\.
 + Using the API: [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)\.
 
@@ -224,7 +226,7 @@ This template is identical to the `OCSPSigningCertificate` template with one dif
 
 ## RootCACertificate/V1 Definition<a name="RootCACertificate-V1"></a>
 
-This template is used to issue self\-signed root CA certificates\. CA certificates include a critical basic constraints extension with the CA field set to `TRUE` to designate that the certificate can be used to issue CA certificates\. This template does not specify a path length because the path length constrains the maximum length of the CA chain \(CA certification depth\)\. A constrained chain length could inhibit future expansion of the hierarchy\. Extended key usage is excluded to prevent use of the CA certificate as a TLS client or server certificate\.
+This template is used to issue self\-signed root CA certificates\. CA certificates include a critical basic constraints extension with the CA field set to `TRUE` to designate that the certificate can be used to issue CA certificates\. This template does not specify a path length because the path length constrains the maximum length of the CA chain \(CA certification depth\)\. A constrained chain length could inhibit future expansion of the hierarchy\. Extended key usage is excluded to prevent use of the CA certificate as a TLS client or server certificate\. No CRL information is specified because a self\-signed certificate cannot be revoked\.
 
 
 ****  
@@ -232,13 +234,11 @@ This template is used to issue self\-signed root CA certificates\. CA certificat
 |  Parameter  | Value | 
 | --- | --- | 
 |  X509v3 subject alternative name  |  \[Copy from CSR\]  | 
-|  X509v3 basic constraints  |  Critical, `CA:TRUE`, pathlen: 0   | 
+|  X509v3 basic constraints  |  Critical, `CA:TRUE`  | 
 |  X509v3 authority key identifier  |  \[AKI\]  | 
 |  X509v3 subject key identifier  |  \[SKI\]  | 
 | X509v3 key usage | Critical, digital signature, keyCertSign, CRL sign | 
-| X509v3 CRL distribution points\*  | \[CRL distribution point\] | 
-
-\*CRL distribution points are included in certificates issued with this template only if the CA is configured with CRL generation enabled\.
+| X509v3 CRL distribution points | N/A | 
 
 ## SubordinateCACertificate\_PathLen0/V1 Definition<a name="SubordinateCACertificate_PathLen0-V1"></a>
 

@@ -11,7 +11,7 @@ ACM Private CA supports three scenarios for installing a CA certificate :
 
 ## If You Are Installing a Root CA Certificate<a name="InstallRoot"></a>
 
-**To create and install a certificate for your private root CA**
+**To create and install a certificate for your private root CA using the console**
 
 1. If you previously created a root CA and chose **Get started** from the **Success** window, you were sent directly to the **Install root CA certificate** wizard\. If you chose to postpone certificate installation, you can open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home) and begin installation by selecting a root CA with status **Pending Certificate** or **Active**, choosing **Actions**, and finally choosing **Install CA Certificate**\. This opens the **Install root CA certificate** wizard\.
 
@@ -24,6 +24,36 @@ ACM Private CA supports three scenarios for installing a CA certificate :
 1. On the **Review, generate, and install root CA certificate** page, confirm that the configuration is correct and choose **Confirm and install**\. ACM Private CA exports a CSR for your CA, issues a self\-signed root CA certificate using your CA and a root CA template, and then imports the self\-signed root CA certificate\.
 
    You should be returned to the **Private CAs** list page, displaying the status of the installation \(success or failure\) at the top\. If the installation was successful, the newly completed root CA displays a status of **Active** in the list\.
+
+**To create and install a certificate for your private root CA using the AWS CLI**
+
+1. Create the root certificate\.
+
+   ```
+   aws acm-pca issue-certificate \
+   --certificate-authority-arn arn:aws:acm-pca:ap-southeast-1:012345678901:certificate-authority/01234567-89ab-cdef-0123-456789abcdef \
+   --csr file://ca.csr \
+   --signing-algorithm SHA256WITHRSA \
+   --template-arn arn:aws:acm-pca:::template/RootCACertificate/V1 \
+   --validity Value=365,Type=DAYS
+   ```
+
+1. Retrieve the root certificate\.
+
+   ```
+   aws acm-pca get-certificate \
+   --certificate-authority-arn arn:aws:acm-pca:ap-southeast-1:012345678901:certificate-authority/01234567-89ab-cdef-0123-456789abcdef \
+   --certificate-arn arn:aws:acm-pca:ap-southeast-1:012345678901:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/0123456789abcdef0123456789abcdef \
+   --output text > cert.pem
+   ```
+
+1. Import the root certificate to install it on the CA\.
+
+   ```
+   aws acm-pca import-certificate-authority-certificate \
+   --certificate-authority-arn arn:aws:acm-pca:ap-southeast-1:012345678901:certificate-authority/01234567-89ab-cdef-0123-456789abcdef \
+   --certificate file://cert.pem
+   ```
 
 ## If You Are Installing a Subordinate CA Certificate Hosted by ACM Private CA<a name="InstallSubordinateInternal"></a>
 
@@ -48,7 +78,7 @@ ACM Private CA supports three scenarios for installing a CA certificate :
 The expiration date of the subordinate CA certificate cannot be later than the expiration date of the parent CA certificate\.
    + **Signature algorithm** — This specifies the signing algorithm to use when the subordinate CA issues new certificates\.
    + **Path length** — This specifies the number of trust layers that the subordinate CA may add when signing new certificates\. A path length of zero \(the default\) means that only end\-entity certificates and not CA certificates may be created\. A path length of one or more means that the subordinate CA may issue certificates to create additional CAs subordinate to it\.
-   + **Template ARN** — The ARN of the configuration template for this CA certificate\. The template changes if you change the specified **Path length**\. If you create a certificate using the CLI [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) command or API [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) action, you must specify the ARN manually\. For information about available CA certificate templates, see [Using Templates](UsingTemplates.md)\.
+   + **Template ARN** — The ARN of the configuration template for this CA certificate\. The template changes if you change the specified **Path length**\. If you create a certificate using the CLI [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) command or API [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) action, you must specify the ARN manually\. For information about available CA certificate templates, see [Understanding Certificate Templates](UsingTemplates.md)\.
 
    Choose **Next**\.
 

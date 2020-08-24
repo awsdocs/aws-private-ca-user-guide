@@ -23,6 +23,11 @@ When a high\-level certificate authority needs to be replaced
 When a certificate revocation list \(CRL\) or Online Certificate Status Protocol \(OCSP\) responder needs to be configured
 Root and other high\-level CAs require highly secure operational processes and access\-control protocols\.
 
+**Topics**
++ [Validating End\-Entity Certificates](#end-entity-validation)
++ [Planning the Structure of a CA Hierarchy](#ca-layers)
++ [Setting Length Constraints on the Certification Path](#length-constraints)
+
 ## Validating End\-Entity Certificates<a name="end-entity-validation"></a>
 
 End\-entity certificates derive their trust from a certification path leading back through the subordinate CAs to a root CA\. When a web browser or other client is presented with an end\-entity certificate, it attempts to construct a chain of trust\. For example, it may check to see that the certificate's *issuer distinguished name* and *subject distinguished name* match with the corresponding fields of the issuing CA certificate\. Matching would continue at each successive level up the hierarchy until the client reaches a trusted root that is contained in its trust store\. 
@@ -111,4 +116,8 @@ ACM Private CA provides templates for issuing root, subordinate, and end\-entity
 
 The `IssueCertificate` API will return an error if you attempt to create a CA with a path length greater than or equal to the path length of its issuing CA certificate\.
 
-For more information about certificate templates, see [Using Templates](UsingTemplates.md)\.
+For more information about certificate templates, see [Understanding Certificate Templates](UsingTemplates.md)\.
+
+### Automating CA Hierarchy Setup with AWS CloudFormation<a name="using-cloudformation"></a>
+
+Once you have settled on a design for your CA hierarchy, you can test it and put it into production using a AWS CloudFormation template\. For an example of such a template, see [Declaring a Private CA Hierarchy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-acmpca-certificateauthority.html#aws-resource-acmpca-certificateauthority--examples) in the *AWS CloudFormation User Guide*\.

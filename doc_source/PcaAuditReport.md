@@ -56,7 +56,7 @@ You can create a report from the console or the AWS CLI\.
 
 1. Choose your private CA from the list\.
 
-1. On the **Actions** menu, choose **Generate audit report**\.
+1. From the **Actions** menu, choose **Generate audit report**\.
 
 1. For **Create a new S3 bucket**, choose **Yes** and type a unique bucket name or choose **No** and choose an existing bucket from the list\. 
 

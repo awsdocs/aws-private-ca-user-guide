@@ -1,15 +1,24 @@
 # Revoking a Private Certificate<a name="PcaRevokeCert"></a>
 
-You can use the AWS CLI or ACM Private CA API to revoke an issued certificate\. The certificate will be included in the certificate revocation list \(CRL\), if it exists, of the private issuing CA\. Revoked certificates are always recorded in the audit report\. 
+You can use the AWS CLI or ACM Private CA API to revoke a certificate\. The certificate will be included in the certificate revocation list \(CRL\), if it exists, of the issuing private CA\. Revoked certificates are always recorded in the audit report\. 
 
-**Topics**
-+ [Revoked Certificates in a CRL](#PcaRevokeCrl)
-+ [Revoked Certificates in an Audit Report](#PcaRevokeAuditReport)
-+ [Using the AWS CLI to Revoke a Certificate](#PcaRevokeCli)
+**Note**  
+Cross\-account certificate issuers cannot revoke the certificates that they issue\. The CA owner must perform revocation\. 
+
+**To revoke a certificate**  
+Use the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) API action or [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) command to revoke a private PKI certificate\. The serial number must be in hexadecimal format\. You can retrieve the serial number by calling the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command\. The `revoke-certificate` command does not return a response\. 
+
+```
+aws acm-pca revoke-certificate \
+--certificate-authority-arn arn:aws:acm-pca:region:account:\
+certificate-authority/12345678-1234-1234-1234-123456789012 \ 
+--certificate-serial 67:07:44:76:83:a9:b7:f4:05:56:27:ff:d5:5c:eb:cc \ 
+--revocation-reason "KEY_COMPROMISE"
+```
 
 ## Revoked Certificates in a CRL<a name="PcaRevokeCrl"></a>
 
-The following example shows a revoked certificate in a certificate revocation list \(CRL\)\. A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason the CRL update fails, ACM PCA attempts makes further attempts every 15 minutes\. With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [](PcaCreateCa.md#PcaCreateCRL)\. 
+The following example shows a revoked certificate in a certificate revocation list \(CRL\)\. A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason the CRL update fails, ACM PCA attempts makes further attempts every 15 minutes\. With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [Creating a Private CA ](PcaCreateCa.md)\. 
 
 ```
 Certificate Revocation List (CRL):
@@ -73,16 +82,4 @@ All certificates, including revoked certificates, are included in the audit repo
   "notAfter": "2019-01-17T21:10:49+0000",
   "issuedAt": "2018-01-22T21:10:49+0000"
 }]
-```
-
-## Using the AWS CLI to Revoke a Certificate<a name="PcaRevokeCli"></a>
-
-Use the [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) command to revoke a private certificate\. You can also use the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) command\. The serial number must be in hexadecimal format\. You can retrieve the serial number by calling the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command\. The `revoke-certificate` command does not return a response\. 
-
-```
-aws acm-pca revoke-certificate \
---certificate-authority-arn arn:aws:acm-pca:region:account:\
-certificate-authority/12345678-1234-1234-1234-123456789012 \ 
---certificate-serial 67:07:44:76:83:a9:b7:f4:05:56:27:ff:d5:5c:eb:cc \ 
---revocation-reason "KEY_COMPROMISE"
 ```

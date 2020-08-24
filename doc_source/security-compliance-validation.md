@@ -7,7 +7,9 @@ For a list of AWS services in scope of specific compliance programs, see [AWS Se
 You can download third\-party audit reports using AWS Artifact\. For more information, see [Downloading Reports in AWS Artifact](https://docs.aws.amazon.com/artifact/latest/ug/downloading-documents.html)\.
 
 Your compliance responsibility when using ACM Private CA is determined by the sensitivity of your data, your company's compliance objectives, and applicable laws and regulations\. AWS provides the following resources to help with compliance:
-+ [Encrypting Your Audit Reports](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuditReport.html#audit-report-encryption) and [Encrypting Your CRLs](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption) — For organizations that are required to encrypt their Amazon S3 buckets, these topics show how to encrypt the buckets that are used to store CA audit reports and certificate revocation lists \(CRLs\)\.
++ For organizations that are required to encrypt their Amazon S3 buckets, the following topics describe how to configure encryption to accommodate ACM Private CA assets:
+  + [Encrypting Your Audit Reports](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuditReport.html#audit-report-encryption)
+  + [Encrypting Your CRLs](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption)
 + [Security and Compliance Quick Start Guides](http://aws.amazon.com/quickstart/?awsf.quickstart-homepage-filter=categories%23security-identity-compliance) — These deployment guides discuss architectural considerations and provide steps for deploying security\- and compliance\-focused baseline environments on AWS\.
 + [Architecting for HIPAA Security and Compliance Whitepaper ](https://d0.awsstatic.com/whitepapers/compliance/AWS_HIPAA_Compliance_Whitepaper.pdf) — This whitepaper describes how companies can use AWS to create HIPAA\-compliant applications\.
 + [AWS Compliance Resources](http://aws.amazon.com/compliance/resources/) — This collection of workbooks and guides might apply to your industry and location\.

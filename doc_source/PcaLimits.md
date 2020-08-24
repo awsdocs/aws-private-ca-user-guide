@@ -3,10 +3,10 @@
 AWS Certificate Manager Private Certificate Authority assigns quotas to your allowed number of certificates and certificate authorities as well as the API rate\.
 
 **Topics**
-+ [Quotas on Certificates](#PcaLimits-certificates)
++ [Quotas on CAs and Certificates](#PcaLimits-certificates)
 + [Quotas on API Requests](#PcaLimits-api)
 
-## Quotas on Certificates<a name="PcaLimits-certificates"></a>
+## Quotas on CAs and Certificates<a name="PcaLimits-certificates"></a>
 
 The following ACM Private CA certificate quotas apply to each Region and each account\. To request higher quotas, create a case at the [AWS Support Center](https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-acm-pca)\.
 
@@ -15,11 +15,11 @@ The following ACM Private CA certificate quotas apply to each Region and each ac
 
 | Item | Default Quota | 
 | --- | --- | 
-| Number of private certificate authorities \(CAs\) | 10\* | 
+| Number of private certificate authorities \(CAs\) | 200\* | 
 | Number of private certificates per private CA \(lifetime\) | 1,000,000\* | 
 | Number of unexpired revoked private certificates per CA\*\* | 1,000,000 | 
 
-\* You can request a quota increase for these items\. Visit the [AWS Support Center](https://console.aws.amazon.com/support/), choose **Create case**, and choose **Service limit increase**\.
+\* You can request a quota increase for this item\. Visit the [AWS Support Center](https://console.aws.amazon.com/support/), choose **Create case**, and choose **Service limit increase**\.
 
 \*\* This quota reflects the number of unexpired certificates that can be included in the Certificate Revocation List \(CRL\), based on the maximum CRL size that can be processed by clients consuming CRLs\. **This quota cannot be increased\.**
 
@@ -47,7 +47,7 @@ If you encounter a [https://docs.aws.amazon.com/acm-pca/latest/APIReference/Comm
 | [DeletePermission](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html) | 1 | 
 | [DescribeCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthority.html) | 20 | 
 | [DescribeCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthorityAuditReport.html) | 20 | 
-| [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) | 75 | 
+| [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) | 75\* | 
 | [GetCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html) | 20 | 
 | [GetCertificateAuthorityCsr](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCsr.html) | 10 | 
 | [ImportCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html) | 10 | 

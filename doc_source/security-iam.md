@@ -26,7 +26,7 @@ You can access AWS as any of the following types of identities:
 
 ## Understanding Resources, Ownership, and Permissions Policies<a name="understand-resource-ownership"></a>
 
-In ACM Private CA, the primary resource that you work with is a *private certificate authority \(PCA\)*\. Every private CA you own or control is identified by an Amazon Resource Name \(ARN\), which has the following form\. 
+In ACM Private CA, the primary resource that you work with is a *certificate authority \(CA\)*\. Every private CA that you own or control is identified by an Amazon Resource Name \(ARN\), which has the following form\. 
 
 ```
 arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/12345678-abcd-1234-abcd-1234567890ab
@@ -44,28 +44,31 @@ A *permissions policy* describes who has access to what\. The following discussi
 **Note**  
 This documentation discusses using IAM in the context of ACM Private CA\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)\. For information about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)\. 
 
-When you set up access control and writing permissions policies that you can attach to an IAM identity \(identity\-based policies\), use the following table as a reference\. The first column in the table lists each ACM Private CA API operation\. You specify actions in a policy's `Action` element\. The remaining columns provide the additional information\. If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, you can open the table in a new window\. To close the window, choose the close button \(**X**\) in the lower\-right corner\.
+When you set up access control and permissions policies that you plan to attach to an IAM identity \(identity\-based policies\), use the following table as a reference\. The first column in the table lists each ACM Private CA API operation\. You specify actions in a policy's `Action` element\. The remaining columns provide the additional information\.
 
 
 **ACM Private CA API Operations and Permissions**  
 
-| ACM Private CA API Actions | Required Permissions | Resources | 
+| ACM Private CA API Operations | Required Permissions | Resources | 
 | --- | --- | --- | 
 |  [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)  |  `acm-pca:CreateCertificateAuthority`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)  |  `acm-pca:CreateCertificateAuthorityAuditReport`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 | [CreatePermission](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html) | acm\-pca:CreatePermission | arn:aws:acm\-pca:AWS\_Region:AWS\_Account:certificate\-authority/certificate\_ID | 
 |  [DeleteCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthority.html)  |  `acm-pca:DeleteCertificateAuthority`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 | [DeletePermission](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html) | acm\-pca:DeletePermission | arn:aws:acm\-pca:AWS\_Region:AWS\_Account:certificate\-authority/certificate\_ID | 
+| [DeletePolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html) | acm\-pca:DeletePolicy | arn:aws:acm\-pca:AWS\_Region:AWS\_Account:certificate\-authority/certificate\_ID | 
 |  [DescribeCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthority.html)  |  `acm-pca:DescribeCertificateAuthority`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [DescribeCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthorityAuditReport.html)  |  `acm-pca:DescribeCertificateAuthorityAuditReport`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html)  |  `acm-pca:GetCertificate`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [GetCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html)  |  `acm-pca:GetCertificateAuthorityCertificate`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [GetCertificateAuthorityCsr](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCsr.html)  |  `acm-pca:GetCertificateAuthorityCsr`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
+| [GetPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html) | acm\-pca:GetPolicy | arn:aws:acm\-pca:AWS\_Region:AWS\_Account:certificate\-authority/certificate\_ID | 
 |  [ImportCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html)  |  `acm-pca:ImportCertificateAuthorityCertificate`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)  |  `acm-pca:IssueCertificate`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html)  |  `acm-pca:ListCertificateAuthorities`  |  N/A  | 
 | [ListPermissions](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html) | acm\-pca:ListPermissions | arn:aws:acm\-pca:AWS\_Region:AWS\_Account:certificate\-authority/certificate\_ID | 
 |  [ListTags](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListTags.html)  |  `acm-pca:ListTags`  |  N/A  | 
+| [PutPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html) | acm\-pca:PutPolicy | arn:aws:acm\-pca:AWS\_Region:AWS\_Account:certificate\-authority/certificate\_ID | 
 |  [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html)  |  `acm-pca:RevokeCertificate`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [TagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html)  |  `acm-pca:TagCertificateAuthority`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
 |  [UntagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html)  |  `acm-pca:UntagCertificateAuthority`  |  `arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/certificate_ID`  | 
@@ -74,16 +77,185 @@ When you set up access control and writing permissions policies that you can att
 You can use IAM to create policies that apply permissions to IAM users, groups, and roles\. These are called *identity\-based policies*\. IAM offers the following types of identity\-based policies: 
 + [AWS Managed Policies](#auth-AwsManagedPolicies) are policies available by default with ACM Private CA\. These policies cover basic user roles\.
 + [Customer Managed Policies](#auth-CustManagedPolicies) are policies that you create and manage in your AWS account and which you can attach to multiple users, groups, and roles\. You have more precise control when using customer managed policies than you have when using AWS managed policies\.
-+  [Inline Policies](#auth-InlinePolicies) are policies that you create and manage and which you embed directly into a single user, group, or role\.
++ [Inline Policies](#auth-InlinePolicies) are policies that you create and manage and which you embed directly into a single user, group, or role\.
++ [Resource\-Based Policies](pca-resource-sharing.md#pca-rbp) are used by ACM Private CA to enable cross\-account access to private CAs\.
 
 ### AWS Managed Policies<a name="auth-AwsManagedPolicies"></a>
 
 ACM Private CA includes a set of predefined AWS managed policies for administrators, users, and auditors\. Understanding these policies can help you implement [Customer Managed Policies](#auth-CustManagedPolicies)\.
-+ **FullAccess \(Administrator\)** – Unrestricted control\.
++ **FullAccess** – Unrestricted administrative control\.
+
+  ```
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "acm-pca:*"
+              ],
+              "Resource": "*"
+          }
+      ]
+  }
+  ```
 + **ReadOnly** – Access limited to read\-only API operations\.
+
+  ```
+  {
+      "Version": "2012-10-17",
+      "Statement": {
+          "Effect": "Allow",
+          "Action": [
+              "acm-pca:DescribeCertificateAuthority",
+              "acm-pca:DescribeCertificateAuthorityAuditReport",
+              "acm-pca:ListCertificateAuthorities",
+              "acm-pca:GetCertificateAuthorityCsr",
+              "acm-pca:GetCertificateAuthorityCertificate",
+              "acm-pca:GetCertificate",
+              "acm-pca:ListPermissions",
+              "acm-pca:ListTags"
+          ],
+          "Resource": "*"
+      }
+  }
+  ```
 + **PrivilegedUser** – Ability to issue and revoke CA certificates\. This policy has no other administrative capabilities and no ability to issue end\-entity certificates\. Permissions are mutually exclusive with the **User** policy\. 
+
+  ```
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "acm-pca:IssueCertificate"
+              ],
+              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*",
+              "Condition": {
+                  "StringLike": {
+                      "acm-pca:TemplateArn": [
+                          "arn:aws:acm-pca:::template/*CACertificate*/V*"
+                      ]
+                  }
+              }
+          },
+          {
+              "Effect": "Deny",
+              "Action": [
+                  "acm-pca:IssueCertificate"
+              ],
+              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*",
+              "Condition": {
+                  "StringNotLike": {
+                      "acm-pca:TemplateArn": [
+                          "arn:aws:acm-pca:::template/*CACertificate*/V*"
+                      ]
+                  }
+              }
+          },
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "acm-pca:RevokeCertificate",
+                  "acm-pca:GetCertificate",
+                  "acm-pca:ListPermissions"
+              ],
+              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*"
+          },
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "acm-pca:ListCertificateAuthorities"
+              ],
+              "Resource": "*"
+          }
+      ]
+  }
+  ```
 + **User** – Ability to issue and revoke end\-entity certificates\. This policy has no administrative capabilities and no ability to issue CA certificates\. Permissions are mutually exclusive with the **PrivilegedUser** policy\.
+
+  ```
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "acm-pca:IssueCertificate"
+              ],
+              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*",
+              "Condition": {
+                  "StringLike": {
+                      "acm-pca:TemplateArn": [
+                          "arn:aws:acm-pca:::template/EndEntityCertificate/V*"
+                      ]
+                  }
+              }
+          },
+          {
+              "Effect": "Deny",
+              "Action": [
+                  "acm-pca:IssueCertificate"
+              ],
+              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*",
+              "Condition": {
+                  "StringNotLike": {
+                      "acm-pca:TemplateArn": [
+                          "arn:aws:acm-pca:::template/EndEntityCertificate/V*"
+                      ]
+                  }
+              }
+          },
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "acm-pca:RevokeCertificate",
+                  "acm-pca:GetCertificate",
+                  "acm-pca:ListPermissions"
+              ],
+              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*"
+          },
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "acm-pca:ListCertificateAuthorities"
+              ],
+              "Resource": "*"
+          }
+      ]
+  }
+  ```
 + **Auditor** – Access to read\-only API operations and permission to generate a CA audit report\. 
+
+  ```
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "acm-pca:CreateCertificateAuthorityAuditReport",
+                  "acm-pca:DescribeCertificateAuthority",
+                  "acm-pca:DescribeCertificateAuthorityAuditReport",
+                  "acm-pca:GetCertificateAuthorityCsr",
+                  "acm-pca:GetCertificateAuthorityCertificate",
+                  "acm-pca:GetCertificate",
+                  "acm-pca:ListPermissions",
+                  "acm-pca:ListTags"
+              ],
+              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*"
+          },
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "acm-pca:ListCertificateAuthorities"
+              ],
+              "Resource": "*"
+          }
+      ]
+  }
+  ```
 
 ### Customer Managed Policies<a name="auth-CustManagedPolicies"></a>
 
@@ -91,7 +263,7 @@ As a best practice, don't use your AWS account root user to interact with AWS, i
 
 Another best practice is to create a customer managed IAM policy that you can assign to users\. Customer managed policies are standalone identity\-based policies that you create and which you can attach to multiple users, groups, or roles in your AWS account\. Such a policy restricts users to performing only the ACM Private CA actions that you specify\. 
 
-The following sample [customer\-managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#create-managed-policy-console) allows a user to create a CA audit report\. This is a sample only\. You can choose any ACM Private CA operations you want\. For more examples, see [Inline Policies](#auth-InlinePolicies)\. 
+The following example [customer\-managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#create-managed-policy-console) allows a user to create a CA audit report\. This is an example only\. You can choose any ACM Private CA operations that you want\. For more examples, see [Inline Policies](#auth-InlinePolicies)\. 
 
 **To create a customer managed policy**
 
@@ -205,7 +377,7 @@ The following policy allows a user to delete a specific private CA\.
 
 ### Read\-Only Access to ACM Private CA<a name="policy-pca-read-only"></a>
 
- The following policy allows a user to describe and list private certificate authorities and to retrieve the private CA Certificate and certificate chain\. 
+ The following policy allows a user to describe and list private certificate authorities and to retrieve the private CA certificate and certificate chain\. 
 
 ```
 {

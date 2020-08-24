@@ -16,15 +16,22 @@ AWS recommends documenting all of your policies and practices for operating your
 
 You can capture this information in two documents, known as Certification Policy \(CP\) and Certification Practices Statement \(CPS\)\. Refer to [RFC 3647](https://www.ietf.org/rfc/rfc3647.txt) for a framework for capturing important information about your CA operations\.
 
-## Minimize Use of the Root CA<a name="minimize-root-use"></a>
+## Minimize Use of the Root CA if Possible<a name="minimize-root-use"></a>
 
-Issuing end\-entity certificates from a root CA 
+A root CA should in general only be used to issue certificates for intermediate CAs\. This allows the root CA to be stored out of harm's way while the intermediate CAs perform the daily task of issuing end\-entity certificates\.
 
-Issuing end\-entity certificates directly from a root CA is **not****recommended, except in exceptional circumstances\. **ACM Private CA makes it possible to issue end\-entity certificates from your root CA\. AWS recommends creating a subordinate issuing CA from which to issue end\-entity certificates\. The only exception to this rule is if you are replacing a software\-based root issuing CA with a simple, cost\-effective ACM Private CA root issuing CA, and you are willing to accept the limitations of this configuration\. This configuration imposes limitations that may result in operational challenges later\. For example, if the root CA is compromised or lost, you must create a new root CA and distribute it to the clients in your environment\. During this time and until you create and distribute a new root CA, you will not be able to issue new certificates\. Issuing certificates directly from a Root CA also prevents you from restricting access and limiting the number of certificates issued from your root, which are both considered best practices for managing a root CA\. If your current process is to create a software\-based root CA with a private key in memory or stored on a disk, and you issue end\-entity certificates directly from this root CA, then using ACM Private CA to create a root CA and issuing end\-entity certificates from the root would be advantageous\. For example, if you have a software\-based CA that you created in OpenSSL, with the root CA private key stored on disk, ACM Private CA provides better security and operational controls\. To issue end\-entity certificates from your root CA, you must also have an IAM permissions policy that permits you to use the end\-entity certificate template with your root CA \[Link to IAM policy section\]
+However, if your organization's current practice is to issue end\-entity certificates directly from a root CA, ACM Private CA can support this workflow while improving security and operational controls\. Issuing end\-entity certificates in this scenario requires an IAM permissions policy that permits your root CA to use an end\-entity certificate template\. For information about IAM policies, see [Identity and Access Management for AWS Certificate Manager Private Certificate Authority](security-iam.md)\.
+
+**Note**  
+This configuration imposes limitations that may result in operational challenges\. For example, if your root CA is compromised or lost, you must create a new root CA and distribute it to all of the clients in your environment\. Until this recovery process is complete, you will not be able to issue new certificates\. Issuing certificates directly from a root CA also prevents you from restricting access and limiting the number of certificates issued from your root, which are both considered best practices for managing a root CA\. 
 
 ## Give the Root CA its own AWS Account<a name="isolate-root-account"></a>
 
 Creating a root CA and subordinate CA in two different AWS accounts is a recommended best practice\. Doing so can provide you with additional protection and access controls for your root CA\. You can do so by exporting the CSR from the subordinate CA in one account, and signing it with a root CA in a different account\. The benefit of this approach is that you can separate control of your CAs by account\. The disadvantage is that you cannot use the AWS management console wizard to simplify the process of signing the CA certificate of a subordinate CA from your Root CA\.
+
+## Separate Administrator and Issuer Roles<a name="role-separation"></a>
+
+The CA administrator role should be separate from users who need only to issue end\-entity certificates\. If your CA administrator and certificate issuer reside in the same AWS account, you can limit issuer permissions by creating an IAM user specifically for that purpose\. 
 
 ## Turn on AWS CloudTrail<a name="use-cloudtrail"></a>
 
@@ -37,3 +44,6 @@ It is a best practice to periodically update the private key for your private CA
 ## Delete an Unused CA<a name="delete-unused-ca"></a>
 
 You can permanently delete a private CA\. You might want to do so if you no longer need the CA or if you want to replace it with a CA that has a newer private key\. To safely delete a CA, we recommend that you follow the process outlined in [Deleting Your Private CA](PCADeleteCA.md)\.
+
+**Note**  
+AWS bills you for a CA until it has been deleted\.

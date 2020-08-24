@@ -11,7 +11,8 @@ This documentation helps you understand how to apply the shared responsibility m
 **Topics**
 + [Data Protection in AWS Certificate Manager Private Certificate Authority](data-protection.md)
 + [Identity and Access Management for AWS Certificate Manager Private Certificate Authority](security-iam.md)
++ [Cross\-Account Access to Private CAs](pca-resource-sharing.md)
 + [Logging and Monitoring for AWS Certificate Manager Private Certificate Authority](security-logging-and-monitoring.md)
 + [Compliance Validation for AWS Certificate Manager Private Certificate Authority](security-compliance-validation.md)
-+ [Resilience in AWS Certificate Manager Private Certificate Authority](disaster-recovery-resilience.md)
 + [Infrastructure Security in AWS Certificate Manager Private Certificate Authority](infrastructure-security.md)
++ [ACM Private CA Best Practices](ca-best-practices.md)

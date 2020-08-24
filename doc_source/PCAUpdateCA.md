@@ -10,11 +10,11 @@ ACM Private CA can report the following status values:
 + **`CREATING`** – ACM Private CA is creating your private certificate authority\.
 + **`PENDING_CERTIFICATE`** – The CA has been created and now needs a certificate to be operational\. You must use your ACM Private CA\-hosted or on\-premises root or subordinate CA to sign your private CA CSR and then import it into ACM Private CA\. For more information, see [Creating and Installing the Certificate for a Private CA](PCACertInstall.md)\.
 + **`ACTIVE`** – Your private CA is active and can be used to sign and issue certificates\.
-+ **`DISABLED`** – Your private CA has been disabled\.
++ **`DISABLED`** – A disabled CA cannot issue new certificates\. While disabled, the CA supports revocation for certificates issued previously, and it continues to generate certificate revocation lists \(CRLs\)\.
 + **`EXPIRED`** – If the CA certificate for your private CA expires, ACM Private CA sets the status to `EXPIRED`\.
 
   Considerations:
-  + CA certificates are not automatically renewed by default\. For information about automating renewal through AWS Certificate Manager, see [Assigning Certificate Renewal Permissions to ACM](PcaPermissions.md)\. 
+  + CA certificates are not automatically renewed by default\. For information about automating renewal through AWS Certificate Manager, see [Assign Certificate Renewal Permissions to ACM](granting-ca-access.md#PcaPermissions)\. 
   + An expired CA no longer generates CRLs\.
   + Audit reports continue to work for an expired CA\.
   + Your account continues to be billed for an expired CA\.
@@ -24,7 +24,7 @@ ACM Private CA can report the following status values:
   + `The ListCertificate Authorities` and `DescribeCertificateAuthority` APIs return a status of `EXPIRED` if the CA certificate is expired, regardless of whether the CA status is set to `ACTIVE` or `DISABLED`\. However, if the expired CA has been set to `DELETED`, the status returned is `DELETED`\.
   + The `UpdateCertificateAuthority` API cannot update the status of an expired CA\.
   + The `RevokeCertificate` API can be used to revoke any expired certificate, including a CA certificate\.
-+ **`FAILED`** – The `CreateCertificateAuthority` action failed\. This can occur because of a network outage, backend AWS failure, or other errors\. 
++ **`FAILED`** – The `CreateCertificateAuthority` action failed\. This can occur because of a network outage, back\-end AWS failure, or other errors\. 
 
   Considerations:
   + A failed CA cannot be recovered\. Delete the CA and create a new one\.

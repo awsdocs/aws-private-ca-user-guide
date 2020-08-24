@@ -4,6 +4,7 @@ The following table describes significant changes to this documentation since Ja
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Cross\-account private CA access supported](#dochistory) | AWS Certificate Manager users can be authorized to issue certificates using private CAs that they do not own\. For more information, see [Cross\-Account Access to Private CAs](https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-resource-sharing.html)\. | August 17, 2020 | 
 | [VPC endpoints \(PrivateLink\) support](#dochistory) | Added support for use of VPC endpoints \(AWSPrivateLink\) for enhanced network security\. For more information, see [ACM Private CA VPC Endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/acm-pca/latest/userguide/vpc-endpoints.html)\. | March 26, 2020 | 
 | [Dedicated security section added](#dochistory) | Security documentation for AWS has been consolidated into a dedicated security section\. For information about security, see [Security in AWS Certificate Manager Private Certificate Authority](https://docs.aws.amazon.com/acm-pca/latest/userguide/security.html)\. | March 26, 2020 | 
 | [Template ARN added to audit reports\.](#dochistory) | For more information, see [Creating an Audit Report for Your Private CA](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuditReport.html)\. | March 6, 2020 | 
