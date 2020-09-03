@@ -1,10 +1,10 @@
-# CreatePermission<a name="JavaApi-CreatePermission"></a>
+# DeletePolicy<a name="JavaApi-DeletePolicy"></a>
 
-The following Java sample shows how to use the [CreatePermission](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html) operation\.
+The following Java sample shows how to use the [DeletePolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html) operation\.
 
-The operation assigns access permissions from a private CA to a designated AWS service principal\. Services can be given permission to create and retrieve certificates from a private CA, as well as list the active permissions that the private CA has granted\. In order to automatically renew certificates through ACM, you must assign all possible permissions \(`IssueCertificate, GetCertificate, and ListPermissions`\) from the CA to the ACM service principal \(`acm.amazonaws.com`\)\. You can find a CA's ARN by calling the [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html) function\.
+The operation delete the resource\-based policy attached to a private CA\. A resource\-based policy is used to enable cross\-account CA sharing\. You can find the ARN of a private CA by calling the [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html) action\.
 
-Once a permission is created, you can inspect it with the [ListPermissions](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html) function or delete it with the [DeletePermission](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html) function\.
+Related API actions include [PutPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html) and [GetPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html)\.
 
 ```
 package com.amazonaws.samples;

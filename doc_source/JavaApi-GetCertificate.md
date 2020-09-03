@@ -26,6 +26,13 @@ import com.amazonaws.services.acmpca.model.ResourceNotFoundException;
 import com.amazonaws.services.acmpca.model.InvalidArnException;
 import com.amazonaws.services.acmpca.model.InvalidStateException;
 
+import com.amazonaws.waiters.Waiter;
+import com.amazonaws.waiters.WaiterParameters;
+import com.amazonaws.waiters.WaiterTimedOutException;
+import com.amazonaws.waiters.WaiterUnrecoverableException;
+
+import com.amazonaws.services.acmpca.model.AWSACMPCAException;
+
 public class GetCertificate {
 
    public static void main(String[] args) throws Exception{
@@ -40,8 +47,8 @@ public class GetCertificate {
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
             new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
@@ -67,13 +74,13 @@ public class GetCertificate {
       Waiter<GetCertificateRequest> waiter = client.waiters().certificateIssued();
       try {
          waiter.run(new WaiterParameters<>(req));
-      } catch(WaiterUnrecoverableException e) {
-      //Explicit short circuit when the recourse transitions into
-      //an undesired state.
-      } catch(WaiterTimedOutException e) {
-      //Failed to transition into desired state even after polling.
-      } catch(AWSACMPCAException e) {
-      //Unexpected service exception.
+      } catch (WaiterUnrecoverableException e) {
+          //Explicit short circuit when the recourse transitions into
+          //an undesired state.
+      } catch (WaiterTimedOutException e) {
+          //Failed to transition into desired state even after polling.
+      } catch (AWSACMPCAException e) {
+          //Unexpected service exception.
       }
 
       // Retrieve the certificate and certificate chain.

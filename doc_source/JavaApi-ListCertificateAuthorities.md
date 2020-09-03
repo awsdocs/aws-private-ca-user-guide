@@ -28,24 +28,23 @@ public class ListCertificateAuthorities {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from file.", e);
+      try {
+          credentials = new ProfileCredentialsProvider("default").getCredentials();
+      } catch (Exception e) {
+          throw new AmazonClientException("Cannot load your credentials from file.", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+          new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
       // Create a client that you can use to make requests.
       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
-         .withEndpointConfiguration(endpoint)
-         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-         .build();
+          .withEndpointConfiguration(endpoint)
+          .withCredentials(new AWSStaticCredentialsProvider(credentials))
+          .build();
 
       // Create the request object.
       ListCertificateAuthoritiesRequest req = new ListCertificateAuthoritiesRequest();
@@ -53,11 +52,10 @@ public class ListCertificateAuthorities {
 
       // Retrieve a list of your CAs.
       ListCertificateAuthoritiesResult result= null;
-      try{
-         result = client.listCertificateAuthorities(req);
-      }
-      catch (InvalidNextTokenException ex){
-         throw ex;
+      try {
+          result = client.listCertificateAuthorities(req);
+      } catch (InvalidNextTokenException ex) {
+          throw ex;
       }
 
       // Display the CA list.

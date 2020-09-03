@@ -26,7 +26,7 @@ You can access AWS as any of the following types of identities:
 
 ## Understanding Resources, Ownership, and Permissions Policies<a name="understand-resource-ownership"></a>
 
-In ACM Private CA, the primary resource that you work with is a *private certificate authority \(PCA\)*\. Every private CA that you own or control is identified by an Amazon Resource Name \(ARN\), which has the following form\. 
+In ACM Private CA, the primary resource that you work with is a *certificate authority \(CA\)*\. Every private CA that you own or control is identified by an Amazon Resource Name \(ARN\), which has the following form\. 
 
 ```
 arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/12345678-abcd-1234-abcd-1234567890ab
@@ -78,7 +78,7 @@ You can use IAM to create policies that apply permissions to IAM users, groups, 
 + [AWS Managed Policies](#auth-AwsManagedPolicies) are policies available by default with ACM Private CA\. These policies cover basic user roles\.
 + [Customer Managed Policies](#auth-CustManagedPolicies) are policies that you create and manage in your AWS account and which you can attach to multiple users, groups, and roles\. You have more precise control when using customer managed policies than you have when using AWS managed policies\.
 + [Inline Policies](#auth-InlinePolicies) are policies that you create and manage and which you embed directly into a single user, group, or role\.
-+ [Resource\-Based Policies](pca-resource-sharing.md#pca-rbp) are used by ACM Private CA to enable cross\-account access to private CAs\.
++ [Resource\-Based Policies](pca-rbp.md) are used by ACM Private CA to enable cross\-account access to private CAs\.
 
 ### AWS Managed Policies<a name="auth-AwsManagedPolicies"></a>
 

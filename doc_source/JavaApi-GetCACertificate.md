@@ -2,7 +2,7 @@
 
 The following Java sample shows how to use the [GetCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html) operation\.
 
-This operation retrieves the certificate and certificate chain for your private certificate authority \(CA\)\. Both the certificate and the chain are base64 PEM\-encoded\. The chain does not include the CA certificate\. Each certificate in the chain signs the one before it\.
+This operation retrieves the certificate and certificate chain for your private certificate authority \(CA\)\. Both the certificate and the chain are base64\-encoded strings in PEM format\. The chain does not include the CA certificate\. Each certificate in the chain signs the one before it\.
 
 ```
 package com.amazonaws.samples;
@@ -31,16 +31,15 @@ public class GetCertificateAuthorityCertificate {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
+      try {
          credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
             new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
@@ -50,27 +49,23 @@ public class GetCertificateAuthorityCertificate {
          .withCredentials(new AWSStaticCredentialsProvider(credentials))
             .build();
 
-      // Create a request object and set the certificate authority ARN,
+      // Create a request object
       GetCertificateAuthorityCertificateRequest req =
             new GetCertificateAuthorityCertificateRequest();
+
+      // Set the certificate authority ARN,
       req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
             "certificate-authority/12345678-1234-1234-1234-123456789012");
 
       // Create a result object.
       GetCertificateAuthorityCertificateResult result = null;
-      try{
+      try {
          result = client.getCertificateAuthorityCertificate(req);
-      }
-      catch(ResourceNotFoundException ex)
-      {
+      } catch (ResourceNotFoundException ex) {
          throw ex;
-      }
-      catch(InvalidStateException ex)
-      {
+      } catch (InvalidStateException ex) {
          throw ex;
-      }
-      catch(InvalidArnException ex)
-      {
+      } catch (InvalidArnException ex) {
          throw ex;
       }
 

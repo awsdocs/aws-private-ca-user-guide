@@ -4,6 +4,9 @@ The following Java sample shows how to use the [IssueCertificate](https://docs.a
 
 This operation uses your private certificate authority \(CA\) to issue an end\-entity certificate\. This operation returns the Amazon Resource Name \(ARN\) of the certificate\. You can retrieve the certificate by calling the [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) and specifying the ARN\.
 
+**Note**  
+The [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation requires you to specify a certificate template\. This example uses the `EndEntityCertificate/V1` template\. For information about all of the available templates, see [Understanding Certificate Templates](UsingTemplates.md)\.
+
 ```
 package com.amazonaws.samples;
 
@@ -47,24 +50,23 @@ public class IssueCertificate {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from disk", e);
+      try {
+          credentials = new ProfileCredentialsProvider("default").getCredentials();
+      } catch (Exception e) {
+          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+          new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
       // Create a client that you can use to make requests.
       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
-         .withEndpointConfiguration(endpoint)
-         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-         .build();
+          .withEndpointConfiguration(endpoint)
+          .withCredentials(new AWSStaticCredentialsProvider(credentials))
+          .build();
 
       // Create a certificate request:
       IssueCertificateRequest req = new IssueCertificateRequest();
@@ -75,18 +77,21 @@ public class IssueCertificate {
 
       // Specify the certificate signing request (CSR) for the certificate to be signed and issued.
       String strCSR =
-      "-----BEGIN CERTIFICATE REQUEST-----" +
-      "    base64-encoded certificate     " +
-      "------END CERTIFICATE REQUEST------";
+      "-----BEGIN CERTIFICATE REQUEST-----\n" +
+      "base64-encoded certificate\n" +
+      "-----END CERTIFICATE REQUEST-----\n";
       ByteBuffer csrByteBuffer = stringToByteBuffer(strCSR);
       req.setCsr(csrByteBuffer);
+
+      // Specify the template for the issued certificate.
+      req.withTemplateArn("arn:aws:acm-pca:::template/EndEntityCertificate/V1");
 
       // Set the signing algorithm.
       req.withSigningAlgorithm(SigningAlgorithm.SHA256WITHRSA);
 
       // Set the validity period for the certificate to be issued.
       Validity validity = new Validity();
-      validity.withValue(3650L);
+      validity.withValue(<<3650L>>);
       validity.withType("DAYS");
       req.withValidity(validity);
 
@@ -95,31 +100,19 @@ public class IssueCertificate {
 
       // Issue the certificate.
       IssueCertificateResult result = null;
-      try{
+      try {
          result = client.issueCertificate(req);
-      }
-      catch(LimitExceededException ex)
-      {
+      } catch (LimitExceededException ex) {
          throw ex;
-      }
-      catch(ResourceNotFoundException ex)
-      {
+      } catch (ResourceNotFoundException ex) {
          throw ex;
-      }
-      catch(InvalidStateException ex)
-      {
+      } catch (InvalidStateException ex) {
          throw ex;
-      }
-      catch (InvalidArnException ex)
-      {
+      } catch (InvalidArnException ex) {
          throw ex;
-      }
-      catch (InvalidArgsException ex)
-      {
+      } catch (InvalidArgsException ex) {
          throw ex;
-      }
-      catch (MalformedCSRException ex)
-      {
+      } catch (MalformedCSRException ex) {
          throw ex;
       }
 

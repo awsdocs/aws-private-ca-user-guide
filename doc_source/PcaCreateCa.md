@@ -132,7 +132,7 @@ The CRL will only be deposited in Amazon S3 once a certificate has been issued t
 Your private CA may fail to create a CRL bucket if Amazon S3 **block public access** settings are enforced on your account\. Check your Amazon S3 settings if this occurs\. For more information, see [Using Amazon S3 Block Public Access](Amazon Simple Storage Service Developer Guideaccess-control-block-public-access.html)\.
 
    1. Expand **Advanced** for additional configuration options\.
-      + Add a **Custom CRL Name** to create an alias for your Amazon S3 bucket\. This name is contained in certificates issued by the CA in the “CRL Distribution Points” extension that is defined by RFC 5280\.
+      + Add a **Custom CRL Name** to create an alias for your Amazon S3 bucket\. This name is contained in certificates issued by the CA in the “CRL Distribution Points" extension that is defined by RFC 5280\.
       + Type the number of days your CRL will remain valid\. The default value is 7 days\. For online CRLs, a validity period of two to seven days is common\. ACM Private CA tries to regenerate the CRL at the midpoint of the specified period\. 
 
    Choose **Next**\.

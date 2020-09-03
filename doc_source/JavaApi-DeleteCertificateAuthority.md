@@ -33,16 +33,15 @@ public class DeleteCertificateAuthority {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
+      try {
          credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
             new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
@@ -55,31 +54,23 @@ public class DeleteCertificateAuthority {
       // Create a requrest object and set the ARN of the private CA to delete.
       DeleteCertificateAuthorityRequest req = new DeleteCertificateAuthorityRequest();
 
-      // Set the certificate ARN.
+      // Set the certificate authority ARN.
       req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
             "certificate-authority/11111111-2222-3333-4444-555555555555");
             
-			// Set the recovery period.
+      // Set the recovery period.
       req.withPermanentDeletionTimeInDays(12);            
 
       // Delete the CA.
       try {
          client.deleteCertificateAuthority(req);
-      }
-      catch(ResourceNotFoundException ex)
-      {
+      } catch (ResourceNotFoundException ex) {
          throw ex;
-      }
-      catch(InvalidArnException ex)
-      {
+      } catch (InvalidArnException ex) {
          throw ex;
-      }
-      catch(InvalidStateException ex)
-      {
+      } catch (InvalidStateException ex) {
          throw ex;
-      }
-      catch(RequestFailedException ex)
-      {
+      } catch (RequestFailedException ex) {
          throw ex;
       }
    }

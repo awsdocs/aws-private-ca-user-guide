@@ -24,6 +24,12 @@ import com.amazonaws.services.acmpca.model.DescribeCertificateAuthorityAuditRepo
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.services.acmpca.model.InvalidArgsException;
 import com.amazonaws.services.acmpca.model.ResourceNotFoundException;
+import com.amazonaws.services.acmpca.model.AWSACMPCAException;
+
+import com.amazonaws.waiters.Waiter;
+import com.amazonaws.waiters.WaiterParameters;
+import com.amazonaws.waiters.WaiterTimedOutException;
+import com.amazonaws.waiters.WaiterUnrecoverableException;
 
 public class DescribeCertificateAuthorityAuditReport {
 
@@ -32,15 +38,15 @@ public class DescribeCertificateAuthorityAuditReport {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
+      try {
          credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }  catch (Exception e) {
+      } catch (Exception e) {
          throw new AmazonClientException("Cannot load your credentials from file.", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
             new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
@@ -61,26 +67,26 @@ public class DescribeCertificateAuthorityAuditReport {
       // Set the audit report ID.
       req.withAuditReportId("11111111-2222-3333-4444-555555555555");
       
-      // Create waiter to wait on successful creation of the audit repor filet.
+      // Create waiter to wait on successful creation of the audit report file.
       Waiter<DescribeCertificateAuthorityAuditReportRequest> waiter = client.waiters().auditReportCreated();
       try {
          waiter.run(new WaiterParameters<>(req));
-      } catch(WaiterUnrecoverableException e) {
-      //Explicit short circuit when the recourse transitions into
-      //an undesired state.
-      } catch(WaiterTimedOutException e) {
-      //Failed to transition into desired state even after polling.
-      } catch(AWSACMPCAException e) {
-      //Unexpected service exception.
+      } catch (WaiterUnrecoverableException e) {
+          //Explicit short circuit when the recourse transitions into
+          //an undesired state.
+      } catch (WaiterTimedOutException e) {
+          //Failed to transition into desired state even after polling.
+      } catch (AWSACMPCAException e) {
+          //Unexpected service exception.
       }
 
       // Create a result object.
       DescribeCertificateAuthorityAuditReportResult result = null;
       try {
          result = client.describeCertificateAuthorityAuditReport(req);
-      } catch(ResourceNotFoundException  ex) {
+      } catch (ResourceNotFoundException ex) {
          throw ex;
-      } catch(InvalidArgsException ex) {
+      } catch (InvalidArgsException ex) {
          throw ex;
       }
 
@@ -93,7 +99,6 @@ public class DescribeCertificateAuthorityAuditReport {
       System.out.println(S3Bucket);
       System.out.println(S3Key);
       System.out.println(createdAt);
-
    }
 }
 ```

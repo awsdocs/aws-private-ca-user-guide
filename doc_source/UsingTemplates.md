@@ -3,7 +3,7 @@
 ACM Private CA uses templates to create both CA certificates and end\-entity certificates that identify users, hosts, resources, and devices\. When you create a certificate in the console, a template is applied automatically\. Template options are based on the type of certificate that you have chosen and the path\-length that you specify\. If you use the CLI or API to create a certificate, you manually provide the ARN of the template that you want to apply\. \(The `EndEntityCertificate/V1` template is applied if you provide no ARN\.\)
 
 **Note**  
-Cross\-account certificate issuers are constrained by a [resource\-based policy](pca-resource-sharing.md#pca-rbp) and have access only to the `EndEntityCertificate/V1` template\.
+Cross\-account certificate issuers are constrained by a [resource\-based policy](pca-rbp.md) and have access only to the `EndEntityCertificate/V1` template\.
 
 The following links provide information about creating a certificate with ACM Private CA\. 
 + Using the command line: [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html)\.

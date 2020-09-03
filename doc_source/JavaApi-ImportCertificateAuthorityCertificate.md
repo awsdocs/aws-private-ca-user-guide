@@ -46,18 +46,17 @@ public class ImportCertificateAuthorityCertificate {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from disk", e);
+      try {
+          credentials = new ProfileCredentialsProvider("default").getCredentials();
+      } catch (Exception e) {
+          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+          new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
       // Create a client that you can use to make requests.
       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
@@ -71,54 +70,40 @@ public class ImportCertificateAuthorityCertificate {
 
       // Set the signed certificate.
       String strCertificate =
-            "-----BEGIN CERTIFICATE-----" +
-            "base64-encoded certificate" +
-            "-----END CERTIFICATE-----";
+            "-----BEGIN CERTIFICATE-----\n" +
+            "base64-encoded certificate\n" +
+            "-----END CERTIFICATE-----\n";
       ByteBuffer certByteBuffer = stringToByteBuffer(strCertificate);
       req.setCertificate(certByteBuffer);
 
       // Set the certificate chain.
       String strCertificateChain =
-            "-----BEGIN CERTIFICATE-----" +
-            "base64-encoded certificate" +
-            "-----END CERTIFICATE-----";
+            "-----BEGIN CERTIFICATE-----\n" +
+            "base64-encoded certificate\n" +
+            "-----END CERTIFICATE-----\n";
       ByteBuffer chainByteBuffer = stringToByteBuffer(strCertificateChain);
       req.setCertificateChain(chainByteBuffer);
 
-      // Set the certificate ARN.
+      // Set the certificate authority ARN.
       req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account: " +
           "certificate-authority/12345678-1234-1234-1234-123456789012");
 
       // Import the certificate.
       try {
          client.importCertificateAuthorityCertificate(req);
-      }
-      catch(CertificateMismatchException ex)
-      {
+      } catch (CertificateMismatchException ex) {
          throw ex;
-      }
-      catch(MalformedCertificateException ex)
-      {
+      } catch (MalformedCertificateException ex) {
          throw ex;
-      }
-      catch(InvalidArnException ex)
-      {
+      } catch (InvalidArnException ex) {
          throw ex;
-      }
-      catch(ResourceNotFoundException ex)
-      {
+      } catch (ResourceNotFoundException ex) {
          throw ex;
-      }
-      catch(RequestInProgressException ex)
-      {
+      } catch (RequestInProgressException ex) {
          throw ex;
-      }
-      catch(ConcurrentModificationException ex)
-      {
+      } catch (ConcurrentModificationException ex) {
          throw ex;
-      }
-      catch(RequestFailedException ex)
-      {
+      } catch (RequestFailedException ex) {
          throw ex;
       }
    }

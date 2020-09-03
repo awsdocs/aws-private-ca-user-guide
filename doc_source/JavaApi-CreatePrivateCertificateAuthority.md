@@ -51,108 +51,101 @@ import com.amazonaws.services.acmpca.model.RevocationConfiguration;
 
 public class CreateCertificateAuthority {
 
-   public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
-      // Retrieve your credentials from the C:\Users\name\.aws\credentials file
-      // in Windows or the .aws/credentials file in Linux.
-	   AWSCredentials credentials = null;
-       try {
-           credentials = new ProfileCredentialsProvider("default").getCredentials();
-       } catch (Exception e) {
-           throw new AmazonClientException(
+        // Retrieve your credentials from the C:\Users\name\.aws\credentials file
+        // in Windows or the .aws/credentials file in Linux.
+        AWSCredentials credentials = null;
+        try {
+            credentials = new ProfileCredentialsProvider("default").getCredentials();
+        } catch (Exception e) {
+            throw new AmazonClientException(
                    "Cannot load the credentials from the credential profiles file. " +
                    "Please make sure that your credentials file is at the correct " +
                    "location (C:\\Users\\joneps\\.aws\\credentials), and is in valid format.",
                    e);
-       }
+        }
        
-    // Define the endpoint for your sample.
-       String endpointProtocol = "acm-pca.us-west-2.amazonaws.com";
-       String endpointRegion = "us-west-2";
-       EndpointConfiguration endpoint =
-             new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+        // Define the endpoint for your sample.
+        String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+        String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
+        EndpointConfiguration endpoint =
+            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
        
-    // Create a client that you can use to make requests.
-       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
-          .withEndpointConfiguration(endpoint)
-          .withCredentials(new AWSStaticCredentialsProvider(credentials))
-          .build();
+        // Create a client that you can use to make requests.
+        AWSACMPCA client = AWSACMPCAClientBuilder.standard()
+            .withEndpointConfiguration(endpoint)
+            .withCredentials(new AWSStaticCredentialsProvider(credentials))
+            .build();
     
-    // Define a CA subject.
-      ASN1Subject subject = new ASN1Subject();
-      subject.setOrganization("Amazon");
-      subject.setOrganizationalUnit("AWS");
-      subject.setCountry("US");
-      subject.setState("Washington");
-      subject.setLocality("Seattle");
-      subject.setCommonName("www.amazon.com");
+        // Define a CA subject.
+        ASN1Subject subject = new ASN1Subject();
+        subject.setOrganization("Example Organization");
+        subject.setOrganizationalUnit("Example");
+        subject.setCountry("US");
+        subject.setState("Virginia");
+        subject.setLocality("Arlington");
+        subject.setCommonName("www.example.com");
 
-      // Define the CA configuration.
-      CertificateAuthorityConfiguration configCA = new CertificateAuthorityConfiguration();
-      configCA.withKeyAlgorithm(KeyAlgorithm.RSA_2048);
-      configCA.withSigningAlgorithm(SigningAlgorithm.SHA256WITHRSA);
-      configCA.withSubject(subject);
+        // Define the CA configuration.
+        CertificateAuthorityConfiguration configCA = new CertificateAuthorityConfiguration();
+        configCA.withKeyAlgorithm(KeyAlgorithm.RSA_2048);
+        configCA.withSigningAlgorithm(SigningAlgorithm.SHA256WITHRSA);
+        configCA.withSubject(subject);
 
-      // Define a certificate revocation list configuration.
-      CrlConfiguration crlConfigure = new CrlConfiguration();
-      crlConfigure.withEnabled(true);
-      crlConfigure.withExpirationInDays(365);
-      crlConfigure.withCustomCname(null);
-      crlConfigure.withS3BucketName("your-bucket-name");
+        // Define a certificate revocation list configuration.
+        CrlConfiguration crlConfigure = new CrlConfiguration();
+        crlConfigure.withEnabled(true);
+        crlConfigure.withExpirationInDays(365);
+        crlConfigure.withCustomCname(null);
+        crlConfigure.withS3BucketName("your-bucket-name");
 
-      RevocationConfiguration revokeConfig = new RevocationConfiguration();
-      revokeConfig.setCrlConfiguration(crlConfigure);
+        RevocationConfiguration revokeConfig = new RevocationConfiguration();
+        revokeConfig.setCrlConfiguration(crlConfigure);
       
-      // Define a certificate authority type
-      CertificateAuthorityType CAtype = CertificateAuthorityType.SUBORDINATE;
+        // Define a certificate authority type: ROOT or SUBORDINATE
+        CertificateAuthorityType CAtype = CertificateAuthorityType.<<SUBORDINATE>>;
       
-      // Create a tag - method 1
-      Tag tag1 = new Tag();
-      tag1.withKey("PrivateCA");
-      tag1.withValue("Sample");
+        // Create a tag - method 1
+        Tag tag1 = new Tag();
+        tag1.withKey("PrivateCA");
+        tag1.withValue("Sample");
       
-      // Create a tag - method 2
-      Tag tag2 = new Tag()
-    		  .withKey("Purpose")
-    		  .withValue("WebServices");
+        // Create a tag - method 2
+        Tag tag2 = new Tag()
+            .withKey("Purpose")
+            .withValue("WebServices");
       
-      // Add the tags to a collection.
-      ArrayList<Tag> tags = new ArrayList<Tag>();
-      tags.add(tag1);
-      tags.add(tag2);
+        // Add the tags to a collection.
+        ArrayList<Tag> tags = new ArrayList<Tag>();
+        tags.add(tag1);
+        tags.add(tag2);
       
-      // Create the request object.
-      CreateCertificateAuthorityRequest req = new CreateCertificateAuthorityRequest();
-      req.withCertificateAuthorityConfiguration(configCA);
-      req.withRevocationConfiguration(revokeConfig);
-      req.withIdempotencyToken("123987");
-      req.withCertificateAuthorityType(CAtype);
-      req.withTags(tags);
+        // Create the request object.
+        CreateCertificateAuthorityRequest req = new CreateCertificateAuthorityRequest();
+        req.withCertificateAuthorityConfiguration(configCA);
+        req.withRevocationConfiguration(revokeConfig);
+        req.withIdempotencyToken("123987");
+        req.withCertificateAuthorityType(CAtype);
+        req.withTags(tags);
       
 
-      // Create the private CA.
-      CreateCertificateAuthorityResult result = null;
-      try {
-         result = client.createCertificateAuthority(req);
-      }
-      catch (InvalidArgsException ex)
-      {
-         throw ex;
-      }
-      catch (InvalidPolicyException ex)
-      {
-         throw ex;
-      }
-      catch (LimitExceededException ex)
-      {
-         throw ex;
-      }
+        // Create the private CA.
+        CreateCertificateAuthorityResult result = null;
+        try {
+            result = client.createCertificateAuthority(req);
+        } catch (InvalidArgsException ex) {
+            throw ex;
+        } catch (InvalidPolicyException ex) {
+            throw ex;
+        } catch (LimitExceededException ex) {
+            throw ex;
+        }
 
-      // Retrieve the ARN of the private CA.
-      String arn = result.getCertificateAuthorityArn();
-      System.out.println(arn);
-
-   }
+        // Retrieve the ARN of the private CA.
+        String arn = result.getCertificateAuthorityArn();
+        System.out.println(arn);
+    }
 }
 ```
 

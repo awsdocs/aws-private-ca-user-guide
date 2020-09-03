@@ -28,47 +28,40 @@ public class RestoreCertificateAuthority {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from file.", e);
+      try {
+          credentials = new ProfileCredentialsProvider("default").getCredentials();
+      } catch (Exception e) {
+          throw new AmazonClientException("Cannot load your credentials from file.", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+          new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
       // Create a client that you can use to make requests.
-      AWSPrivateCA client = AWSPrivateCAClientBuilder.standard()
-         .withEndpointConfiguration(endpoint)
-         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-         .build();
+      AWSACMPCA client = AWSACMPCAClientBuilder.standard()
+          .withEndpointConfiguration(endpoint)
+          .withCredentials(new AWSStaticCredentialsProvider(credentials))
+          .build();
 
       // Create the request object.
       RestoreCertificateAuthorityRequest req = new RestoreCertificateAuthorityRequest();
 
-      // Set the certificate ARN.
+      // Set the certificate authority ARN.
       req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
             "certificate-authority/12345678-1234-1234-1234-123456789012");
 
       // Restore the CA.
       try {
-         client.restoreCertificateAuthority(req);
-      }
-      catch(InvalidArnException ex)
-      {
-         throw ex;
-      }
-      catch(InvalidStateException ex)
-      {
-         throw ex;
-      }
-      catch(ResourceNotFoundException ex)
-      {
-         throw ex;
+          client.restoreCertificateAuthority(req);
+      } catch (InvalidArnException ex) {
+          throw ex;
+      } catch (InvalidStateException ex) {
+          throw ex;
+      } catch (ResourceNotFoundException ex) {
+          throw ex;
       }
    }
 }

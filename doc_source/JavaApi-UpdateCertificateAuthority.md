@@ -36,24 +36,23 @@ public class UpdateCertificateAuthority {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from file.", e);
+      try {
+          credentials = new ProfileCredentialsProvider("default").getCredentials();
+      } catch (Exception e) {
+          throw new AmazonClientException("Cannot load your credentials from file.", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+          new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
       // Create a client that you can use to make requests.
       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
-         .withEndpointConfiguration(endpoint)
-         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-         .build();
+          .withEndpointConfiguration(endpoint)
+          .withCredentials(new AWSStaticCredentialsProvider(credentials))
+          .build();
 
       // Create the request object.
       UpdateCertificateAuthorityRequest req = new UpdateCertificateAuthorityRequest();
@@ -79,35 +78,23 @@ public class UpdateCertificateAuthority {
       req.setRevocationConfiguration(revokeConfig);
 
       // Set the status.
-      req.withStatus(CertificateAuthorityStatus.ACTIVE);
+      req.withStatus(CertificateAuthorityStatus.<<ACTIVE>>);
 
       // Create the result object.
       try {
-         client.updateCertificateAuthority(req);
-      }
-      catch(ConcurrentModificationException ex)
-      {
-         throw ex;
-      }
-      catch(ResourceNotFoundException ex)
-      {
-         throw ex;
-      }
-      catch(InvalidArgsException ex)
-      {
-         throw ex;
-      }
-      catch(InvalidArnException ex)
-      {
-         throw ex;
-      }
-      catch(InvalidStateException ex)
-      {
-         throw ex;
-      }
-      catch(InvalidPolicyException ex)
-      {
-         throw ex;
+          client.updateCertificateAuthority(req);
+      } catch (ConcurrentModificationException ex) {
+          throw ex;
+      } catch (ResourceNotFoundException ex) {
+          throw ex;
+      } catch (InvalidArgsException ex) {
+          throw ex;
+      } catch (InvalidArnException ex) {
+          throw ex;
+      } catch (InvalidStateException ex) {
+          throw ex;
+      } catch (InvalidPolicyException ex) {
+          throw ex;
       }
    }
 }

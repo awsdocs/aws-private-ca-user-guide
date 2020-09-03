@@ -18,10 +18,10 @@ When ACM Private CA creates a certificate, it follows a template that specifies 
 While ACM certificates are designed around public trust, ACM Private CA serves the needs of your private PKI\. Consequently, you can configure certificates using the ACM Private CA API and CLI in ways not permitted by ACM\. These include the following:
 + Creating a certificate with any subject name\.
 + Using any of the [supported private key algorithms and key lengths](https://docs.aws.amazon.com/acm-pca/latest/userguide/supported-algorithms.html)\.
-+ Using any of the [supported signing algorithms ](https://docs.aws.amazon.com/acm-pca/latest/userguide/supported-algorithms.html)\.
++ Using any of the [supported signing algorithms](https://docs.aws.amazon.com/acm-pca/latest/userguide/supported-algorithms.html)\.
 + Specifying any validity period for your private [CA](PcaCreateCa.html) and private [certificates](PcaIssueCert.html)\.
 
-After creating a private certificate using ACM Private CA, you can[import](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html) it into ACM and use it with a supported AWS service\.
+After creating a private certificate using ACM Private CA, you can [import](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html) it into ACM and use it with a supported AWS service\.
 
 ## Issuing a Certificate \(AWS CLI\)<a name="IssueCertCli"></a>
 
@@ -35,7 +35,7 @@ The following command specifies no template, so an end\-entity certificate is is
 aws acm-pca issue-certificate \
 --certificate-authority-arn arn:aws:acm-pca:region:account:\
 certificate-authority/12345678-1234-1234-1234-123456789012 \
---csr file://C:\cert_1.csr \
+--csr fileb://C:\cert_1.csr \
 --signing-algorithm "SHA256WITHRSA" \
 --validity Value=365,Type="DAYS" \
 --idempotency-token 1234

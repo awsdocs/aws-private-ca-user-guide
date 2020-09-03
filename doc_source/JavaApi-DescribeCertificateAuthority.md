@@ -38,16 +38,15 @@ public class DescribeCertificateAuthority {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
+      try {
          credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
             new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
@@ -57,8 +56,10 @@ public class DescribeCertificateAuthority {
          .withCredentials(new AWSStaticCredentialsProvider(credentials))
          .build();
 
-      // Create a request object and set the certificate authority ARN.
+      // Create a request object
       DescribeCertificateAuthorityRequest req = new DescribeCertificateAuthorityRequest();
+
+      // Set the certificate authority ARN.
       req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:"+
           "certificate-authority/12345678-1234-1234-1234-123456789012");
 
@@ -66,13 +67,9 @@ public class DescribeCertificateAuthority {
       DescribeCertificateAuthorityResult result = null;
       try {
          result = client.describeCertificateAuthority(req);
-      }
-      catch(ResourceNotFoundException ex)
-      {
+      } catch (ResourceNotFoundException ex) {
          throw ex;
-      }
-      catch(InvalidArnException ex)
-      {
+      } catch (InvalidArnException ex) {
          throw ex;
       }
 
@@ -80,7 +77,6 @@ public class DescribeCertificateAuthority {
       CertificateAuthority PCA = result.getCertificateAuthority();
       String strPCA = PCA.toString();
       System.out.println(strPCA);
-
    }
 }
 ```

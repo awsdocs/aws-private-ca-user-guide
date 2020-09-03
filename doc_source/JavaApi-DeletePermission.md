@@ -17,8 +17,8 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.services.acmpca.AWSACMPCA;
 import com.amazonaws.services.acmpca.AWSACMPCAClientBuilder;
 
-import com.amazonaws.services.acmpca.model.CreatePermissionRequest;
-import com.amazonaws.services.acmpca.model.CreatePermissionResult;
+import com.amazonaws.services.acmpca.model.DeletePermissionRequest;
+import com.amazonaws.services.acmpca.model.DeletePermissionResult;
 
 import com.amazonaws.services.acmpca.model.InvalidArnException;
 import com.amazonaws.services.acmpca.model.InvalidStateException;
@@ -32,16 +32,15 @@ public class DeletePermission {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
+      try {
          credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
          throw new AmazonClientException("Cannot load your credentials from file.", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
             new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
@@ -63,27 +62,18 @@ public class DeletePermission {
       req.setPrincipal("acm.amazonaws.com");
 
       // Create a result object.
-      DeletePermissionsResult result = null;
+      DeletePermissionResult result = null;
       try {
-         result = client.createPermission(req);
-      } 
-      catch(InvalidArnException  ex)
-      {
+         result = client.deletePermission(req);
+      } catch (InvalidArnException ex) {
+         throw ex;
+      } catch (InvalidStateException ex) {
+         throw ex;
+      } catch (RequestFailedException ex) {
+         throw ex;
+      } catch (ResourceNotFoundException ex) {
          throw ex;
       }
-      catch(InvalidStateException ex)
-      {
-         throw ex;
-      }
-      catch(RequestFailedException ex)
-      {
-         throw ex;
-      }
-      catch(ResourceNotFoundException ex)
-      {
-         throw ex;
-      }
-      
    }
 }
 ```

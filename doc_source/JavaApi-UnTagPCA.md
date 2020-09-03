@@ -33,24 +33,23 @@ public class UntagCertificateAuthority {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from disk", e);
+      try {
+          credentials = new ProfileCredentialsProvider("default").getCredentials();
+      } catch (Exception e) {
+          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+          new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
       // Create a client that you can use to make requests.
       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
-         .withEndpointConfiguration(endpoint)
-         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-         .build();
+          .withEndpointConfiguration(endpoint)
+          .withCredentials(new AWSStaticCredentialsProvider(credentials))
+          .build();
 
       // Create a Tag object with the tag to delete.
       Tag tag = new Tag();
@@ -60,29 +59,22 @@ public class UntagCertificateAuthority {
       // Add the tags to a collection.
       ArrayList<Tag> tags = new ArrayList<Tag>();
       tags.add(tag);
-      tags.add(tag);
 
-      // Create a request object and specify the ARN of the certificate.
+      // Create a request object and specify the certificate authority ARN.
       UntagCertificateAuthorityRequest req = new UntagCertificateAuthorityRequest();
       req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
             "certificate-authority/12345678-1234-1234-1234-123456789012");
       req.withTags(tags);
 
       // Delete the tag
-      try{
-         client.untagCertificateAuthority(req);
-      }
-      catch (InvalidArnException ex)
-      {
-         throw ex;
-      }
-      catch(ResourceNotFoundException ex)
-      {
-         throw ex;
-      }
-      catch (InvalidTagException ex)
-      {
-         throw ex;
+      try {
+          client.untagCertificateAuthority(req);
+      } catch (InvalidArnException ex) {
+          throw ex;
+      } catch (ResourceNotFoundException ex) {
+          throw ex;
+      } catch (InvalidTagException ex) {
+          throw ex;
       }
    }
 }

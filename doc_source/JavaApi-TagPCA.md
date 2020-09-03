@@ -34,24 +34,23 @@ public class TagCertificateAuthorities {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from disk", e);
+      try {
+          credentials = new ProfileCredentialsProvider("default").getCredentials();
+      } catch (Exception e) {
+          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+          new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
       // Create a client that you can use to make requests.
       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
-         .withEndpointConfiguration(endpoint)
-         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-         .build();
+          .withEndpointConfiguration(endpoint)
+          .withCredentials(new AWSStaticCredentialsProvider(credentials))
+          .build();
 
       // Create a tag - method 1
       Tag tag1 = new Tag();
@@ -60,39 +59,31 @@ public class TagCertificateAuthorities {
 
       // Create a tag - method 2
       Tag tag2 = new Tag()
-         .withKey("Purpose")
-         .withValue("WebServices");
+          .withKey("Purpose")
+          .withValue("WebServices");
 
       // Add the tags to a collection.
       ArrayList<Tag> tags = new ArrayList<Tag>();
       tags.add(tag1);
       tags.add(tag2);
 
-      // Create a request object and specify the ARN of the certificate.
+      // Create a request object and specify the certificate authority ARN.
       TagCertificateAuthorityRequest req = new TagCertificateAuthorityRequest();
       req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
           "certificate-authority/12345678-1234-1234-1234-123456789012");
       req.setTags(tags);
 
       // Add a tag
-      try{
-         client.tagCertificateAuthority(req);
-      }
-      catch (InvalidArnException ex)
-      {
-         throw ex;
-      }
-      catch(ResourceNotFoundException ex)
-      {
-         throw ex;
-      }
-      catch (InvalidTagException ex)
-      {
-         throw ex;
-      }
-      catch (TooManyTagsException ex)
-      {
-         throw ex;
+      try {
+          client.tagCertificateAuthority(req);
+      } catch (InvalidArnException ex) {
+          throw ex;
+      } catch (ResourceNotFoundException ex) {
+          throw ex;
+      } catch (InvalidTagException ex) {
+          throw ex;
+      } catch (TooManyTagsException ex) {
+          throw ex;
       }
    }
 }

@@ -34,24 +34,23 @@ public class RevokeCertificate {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from disk", e);
+      try {
+          credentials = new ProfileCredentialsProvider("default").getCredentials();
+      } catch (Exception e) {
+          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+          new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
       // Create a client that you can use to make requests.
       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
-         .withEndpointConfiguration(endpoint)
-         .withCredentials(new AWSStaticCredentialsProvider(credentials))
-         .build();
+          .withEndpointConfiguration(endpoint)
+          .withCredentials(new AWSStaticCredentialsProvider(credentials))
+          .build();
 
       // Create a request object.
       RevokeCertificateRequest req = new RevokeCertificateRequest();
@@ -64,35 +63,23 @@ public class RevokeCertificate {
       req.setCertificateSerial("79:3f:0d:5b:6a:04:12:5e:2c:9c:fb:52:37:35:98:fe");
 
       // Set the RevocationReason.
-      req.withRevocationReason(RevocationReason.KEY_COMPROMISE);
+      req.withRevocationReason(RevocationReason.<<KEY_COMPROMISE>>);
 
       // Revoke the certificate.
-      try{
-         client.revokeCertificate(req);
-      }
-      catch (InvalidArnException ex)
-      {
-         throw ex;
-      }
-      catch(InvalidStateException ex)
-      {
-         throw ex;
-      }
-      catch(ResourceNotFoundException ex)
-      {
-         throw ex;
-      }
-      catch (RequestAlreadyProcessedException ex)
-      {
-         throw ex;
-      }
-      catch (RequestInProgressException ex)
-      {
-         throw ex;
-      }
-      catch (RequestFailedException ex)
-      {
-         throw ex;
+      try {
+          client.revokeCertificate(req);
+      } catch (InvalidArnException ex) {
+          throw ex;
+      } catch (InvalidStateException ex) {
+          throw ex;
+      } catch (ResourceNotFoundException ex) {
+          throw ex;
+      } catch (RequestAlreadyProcessedException ex) {
+          throw ex;
+      } catch (RequestInProgressException ex) {
+          throw ex;
+      } catch (RequestFailedException ex) {
+          throw ex;
       }
    }
 }

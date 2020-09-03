@@ -34,16 +34,15 @@ public class CreateCertificateAuthorityAuditReport {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
+      try {
          credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
          throw new AmazonClientException("Cannot load your credentials from file.", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
             new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
@@ -57,6 +56,7 @@ public class CreateCertificateAuthorityAuditReport {
       CreateCertificateAuthorityAuditReportRequest req =
           new CreateCertificateAuthorityAuditReportRequest();
 
+      // Set the certificate authority ARN.
       req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
             "certificate-authority/12345678-1234-1234-1234-123456789012");
 
@@ -70,29 +70,17 @@ public class CreateCertificateAuthorityAuditReport {
       CreateCertificateAuthorityAuditReportResult result = null;
       try {
          result = client.createCertificateAuthorityAuditReport(req);
-      }
-      catch(RequestInProgressException  ex)
-      {
+      } catch (RequestInProgressException ex) {
          throw ex;
-      }
-      catch(RequestFailedException ex)
-      {
+      } catch (RequestFailedException ex) {
          throw ex;
-      }
-      catch(ResourceNotFoundException  ex)
-      {
+      } catch (ResourceNotFoundException ex) {
          throw ex;
-      }
-      catch(InvalidArnException  ex)
-      {
+      } catch (InvalidArnException ex) {
          throw ex;
-      }
-      catch(InvalidArgsException ex)
-      {
+      } catch (InvalidArgsException ex) {
          throw ex;
-      }
-      catch(InvalidStateException ex)
-      {
+      } catch (InvalidStateException ex) {
          throw ex;
       }
 

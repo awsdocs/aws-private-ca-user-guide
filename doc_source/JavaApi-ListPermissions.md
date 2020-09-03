@@ -33,18 +33,17 @@ public class ListPermissions {
       // Retrieve your credentials from the C:\Users\name\.aws\credentials file
       // in Windows or the .aws/credentials file in Linux.
       AWSCredentials credentials = null;
-      try{
-         credentials = new ProfileCredentialsProvider("default").getCredentials();
-      }
-      catch (Exception e) {
-         throw new AmazonClientException("Cannot load your credentials from disk", e);
+      try {
+          credentials = new ProfileCredentialsProvider("default").getCredentials();
+      } catch (Exception e) {
+          throw new AmazonClientException("Cannot load your credentials from disk", e);
       }
 
       // Define the endpoint for your sample.
-      String endpointProtocol = "https://acm-pca.region.amazonaws.com/";
-      String endpointRegion = "region";
+      String endpointRegion = "region";  // Substitute your region here, e.g. "us-west-2"
+      String endpointProtocol = "https://acm-pca." + endpointRegion + ".amazonaws.com/";
       EndpointConfiguration endpoint =
-            new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
+          new AwsClientBuilder.EndpointConfiguration(endpointProtocol, endpointRegion);
 
       // Create a client that you can use to make requests.
       AWSACMPCA client = AWSACMPCAClientBuilder.standard()
@@ -52,7 +51,7 @@ public class ListPermissions {
          .withCredentials(new AWSStaticCredentialsProvider(credentials))
          .build();
 
-      // Create a request object.
+      // Create a request object and set the CA ARN.
       ListPermissionsRequest req = new ListPermissionsRequest();
       req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
           "certificate-authority/12345678-1234-1234-1234-123456789012");
@@ -61,21 +60,13 @@ public class ListPermissions {
       ListPermissionsResult result = null;
       try {
          result = client.listPermissions(req);
-      }
-      catch (InvalidArnException ex)
-      {
+      } catch (InvalidArnException ex) {
          throw ex;
-      }
-      catch (InvalidStateException ex)
-      {
+      } catch (InvalidStateException ex) {
          throw ex;
-      }
-      catch(RequestFailedException ex)
-      {
+      } catch(RequestFailedException ex) {
          throw ex;
-      }
-      catch (ResourceNotFoundException ex)
-      {
+      } catch (ResourceNotFoundException ex) {
          throw ex;
       }
 
@@ -97,6 +88,6 @@ If the designated private CA has assigned permissions to a service principal, yo
             GET_CERTIFICATE,
             DELETE,CERTIFICATE
        },
-       SourceAccount: 012345678901
+       SourceAccount: account
 }]
 ```
