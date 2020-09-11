@@ -18,7 +18,7 @@ certificate-authority/12345678-1234-1234-1234-123456789012 \
 
 ## Revoked Certificates in a CRL<a name="PcaRevokeCrl"></a>
 
-The following example shows a revoked certificate in a certificate revocation list \(CRL\)\. A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason the CRL update fails, ACM PCA attempts makes further attempts every 15 minutes\. With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [Creating a Private CA ](PcaCreateCa.md)\. 
+The following example shows a revoked certificate in a certificate revocation list \(CRL\)\. A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason the CRL update fails, ACM PCA attempts makes further attempts every 15 minutes\. With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [Creating a Private CA and CRL](PcaCreateCa.md)\. 
 
 ```
 Certificate Revocation List (CRL):
@@ -59,7 +59,7 @@ Revoked Certificates:
 
 ## Revoked Certificates in an Audit Report<a name="PcaRevokeAuditReport"></a>
 
-All certificates, including revoked certificates, are included in the audit report for a private CA\. The following example shows an audit report with one issued and one revoked certificate\. For more information, see [Creating an Audit Report for Your Private CA](PcaAuditReport.md)\. 
+All certificates, including revoked certificates, are included in the audit report for a private CA\. The following example shows an audit report with one issued and one revoked certificate\. For more information, see [Using Audit Reports with Your Private CA](PcaAuditReport.md)\. 
 
 ```
 [{

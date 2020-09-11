@@ -7,6 +7,8 @@ In addition to the HTTP API, you can use the AWS SDKs and command line tools to 
 The [GetCertificateAuthorityCsr](JavaApi-GetCertificateAuthorityCsr.md), [GetCertificate](JavaApi-GetCertificate.md), and [DescribeCertificateAuthorityAuditReport](JavaApi-DescribeCertificateAuthorityAuditReport.md) operations support waiters\. You can use waiters to control the progression of your code based on the presence or state of certain resources\. For more information, see the following topics, as well as [Waiters in the AWS SDK for Java](https://aws.amazon.com/blogs/developer/waiters-in-the-aws-sdk-for-java/) in the [AWS Developer Blog](https://aws.amazon.com/blogs/developer/)\.
 
 **Topics**
++ [Create and Activate a Root CA Programmatically](JavaApi-ActivateRootCA.md)
++ [Create and Activate a Subordinate CA Programmatically](JavaApi-ActivateSubordinateCA.md)
 + [CreateCertificateAuthority](JavaApi-CreatePrivateCertificateAuthority.md)
 + [CreateCertificateAuthorityAuditReport](JavaApi-CreateCertificateAuthorityAuditReport.md)
 + [CreatePermission](JavaApi-CreatePermission.md)

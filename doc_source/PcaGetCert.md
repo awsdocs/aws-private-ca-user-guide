@@ -5,7 +5,7 @@ You can use the ACM Private CA API and AWS CLI to issue a private certificate\. 
 Use the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command to retrieve a private certificate\. You can also use the [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) operation\. Use the `--output text` option to output the certificate without <CR><LF> pairs\. 
 
 **Note**  
-If you want to revoke a certificate, you can use the get\-certificate command to retrieve the serial number in hexadecimal format\. You can also create an audit report to retrieve the hex serial number\. For more information, see [Creating an Audit Report for Your Private CA](PcaAuditReport.md)\. 
+If you want to revoke a certificate, you can use the get\-certificate command to retrieve the serial number in hexadecimal format\. You can also create an audit report to retrieve the hex serial number\. For more information, see [Using Audit Reports with Your Private CA](PcaAuditReport.md)\. 
 
 ```
 aws acm-pca get-certificate \

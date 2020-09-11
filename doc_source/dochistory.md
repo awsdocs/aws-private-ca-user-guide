@@ -4,6 +4,7 @@ The following table describes significant changes to this documentation since Ja
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [New and updated Java implementation examples](#dochistory) | See [Using the ACM Private CA API \(Java Examples\)](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaApiIntro.html)\. | September 9, 2020 | 
 | [New region support](#dochistory) | Endpoints added for Africa \(Cape Town\) and Europe \(Milan\)\. For a complete list of ACM PCA endpoints, see [AWS Certificate Manager Private Certificate Authority Endpoints and Quotas](https://docs.aws.amazon.com/general/latest/gr/acm-pca.html)\. | August 27, 2020 | 
 | [Cross\-account private CA access supported](#dochistory) | AWS Certificate Manager users can be authorized to issue certificates using private CAs that they do not own\. For more information, see [Cross\-Account Access to Private CAs](https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-resource-sharing.html)\. | August 17, 2020 | 
 | [VPC endpoints \(PrivateLink\) support](#dochistory) | Added support for use of VPC endpoints \(AWSPrivateLink\) for enhanced network security\. For more information, see [ACM Private CA VPC Endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/acm-pca/latest/userguide/vpc-endpoints.html)\. | March 26, 2020 | 

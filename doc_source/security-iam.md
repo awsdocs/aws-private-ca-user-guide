@@ -87,173 +87,173 @@ ACM Private CA includes a set of predefined AWS managed policies for administrat
 
   ```
   {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "acm-pca:*"
-              ],
-              "Resource": "*"
-          }
-      ]
+     "Version":"2012-10-17",
+     "Statement":[
+        {
+           "Effect":"Allow",
+           "Action":[
+              "acm-pca:*"
+           ],
+           "Resource":"*"
+        }
+     ]
   }
   ```
 + **ReadOnly** – Access limited to read\-only API operations\.
 
   ```
   {
-      "Version": "2012-10-17",
-      "Statement": {
-          "Effect": "Allow",
-          "Action": [
-              "acm-pca:DescribeCertificateAuthority",
-              "acm-pca:DescribeCertificateAuthorityAuditReport",
-              "acm-pca:ListCertificateAuthorities",
-              "acm-pca:GetCertificateAuthorityCsr",
-              "acm-pca:GetCertificateAuthorityCertificate",
-              "acm-pca:GetCertificate",
-              "acm-pca:ListPermissions",
-              "acm-pca:ListTags"
-          ],
-          "Resource": "*"
-      }
+     "Version":"2012-10-17",
+     "Statement":{
+        "Effect":"Allow",
+        "Action":[
+           "acm-pca:DescribeCertificateAuthority",
+           "acm-pca:DescribeCertificateAuthorityAuditReport",
+           "acm-pca:ListCertificateAuthorities",
+           "acm-pca:GetCertificateAuthorityCsr",
+           "acm-pca:GetCertificateAuthorityCertificate",
+           "acm-pca:GetCertificate",
+           "acm-pca:ListPermissions",
+           "acm-pca:ListTags"
+        ],
+        "Resource":"*"
+     }
   }
   ```
 + **PrivilegedUser** – Ability to issue and revoke CA certificates\. This policy has no other administrative capabilities and no ability to issue end\-entity certificates\. Permissions are mutually exclusive with the **User** policy\. 
 
   ```
   {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "acm-pca:IssueCertificate"
-              ],
-              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*",
-              "Condition": {
-                  "StringLike": {
-                      "acm-pca:TemplateArn": [
-                          "arn:aws:acm-pca:::template/*CACertificate*/V*"
-                      ]
-                  }
+     "Version":"2012-10-17",
+     "Statement":[
+        {
+           "Effect":"Allow",
+           "Action":[
+              "acm-pca:IssueCertificate"
+           ],
+           "Resource":"arn:aws:acm-pca:*:*:certificate-authority/*",
+           "Condition":{
+              "StringLike":{
+                 "acm-pca:TemplateArn":[
+                    "arn:aws:acm-pca:::template/*CACertificate*/V*"
+                 ]
               }
-          },
-          {
-              "Effect": "Deny",
-              "Action": [
-                  "acm-pca:IssueCertificate"
-              ],
-              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*",
-              "Condition": {
-                  "StringNotLike": {
-                      "acm-pca:TemplateArn": [
-                          "arn:aws:acm-pca:::template/*CACertificate*/V*"
-                      ]
-                  }
+           }
+        },
+        {
+           "Effect":"Deny",
+           "Action":[
+              "acm-pca:IssueCertificate"
+           ],
+           "Resource":"arn:aws:acm-pca:*:*:certificate-authority/*",
+           "Condition":{
+              "StringNotLike":{
+                 "acm-pca:TemplateArn":[
+                    "arn:aws:acm-pca:::template/*CACertificate*/V*"
+                 ]
               }
-          },
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "acm-pca:RevokeCertificate",
-                  "acm-pca:GetCertificate",
-                  "acm-pca:ListPermissions"
-              ],
-              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*"
-          },
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "acm-pca:ListCertificateAuthorities"
-              ],
-              "Resource": "*"
-          }
-      ]
+           }
+        },
+        {
+           "Effect":"Allow",
+           "Action":[
+              "acm-pca:RevokeCertificate",
+              "acm-pca:GetCertificate",
+              "acm-pca:ListPermissions"
+           ],
+           "Resource":"arn:aws:acm-pca:*:*:certificate-authority/*"
+        },
+        {
+           "Effect":"Allow",
+           "Action":[
+              "acm-pca:ListCertificateAuthorities"
+           ],
+           "Resource":"*"
+        }
+     ]
   }
   ```
 + **User** – Ability to issue and revoke end\-entity certificates\. This policy has no administrative capabilities and no ability to issue CA certificates\. Permissions are mutually exclusive with the **PrivilegedUser** policy\.
 
   ```
   {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "acm-pca:IssueCertificate"
-              ],
-              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*",
-              "Condition": {
-                  "StringLike": {
-                      "acm-pca:TemplateArn": [
-                          "arn:aws:acm-pca:::template/EndEntityCertificate/V*"
-                      ]
-                  }
+     "Version":"2012-10-17",
+     "Statement":[
+        {
+           "Effect":"Allow",
+           "Action":[
+              "acm-pca:IssueCertificate"
+           ],
+           "Resource":"arn:aws:acm-pca:*:*:certificate-authority/*",
+           "Condition":{
+              "StringLike":{
+                 "acm-pca:TemplateArn":[
+                    "arn:aws:acm-pca:::template/EndEntityCertificate/V*"
+                 ]
               }
-          },
-          {
-              "Effect": "Deny",
-              "Action": [
-                  "acm-pca:IssueCertificate"
-              ],
-              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*",
-              "Condition": {
-                  "StringNotLike": {
-                      "acm-pca:TemplateArn": [
-                          "arn:aws:acm-pca:::template/EndEntityCertificate/V*"
-                      ]
-                  }
+           }
+        },
+        {
+           "Effect":"Deny",
+           "Action":[
+              "acm-pca:IssueCertificate"
+           ],
+           "Resource":"arn:aws:acm-pca:*:*:certificate-authority/*",
+           "Condition":{
+              "StringNotLike":{
+                 "acm-pca:TemplateArn":[
+                    "arn:aws:acm-pca:::template/EndEntityCertificate/V*"
+                 ]
               }
-          },
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "acm-pca:RevokeCertificate",
-                  "acm-pca:GetCertificate",
-                  "acm-pca:ListPermissions"
-              ],
-              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*"
-          },
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "acm-pca:ListCertificateAuthorities"
-              ],
-              "Resource": "*"
-          }
-      ]
+           }
+        },
+        {
+           "Effect":"Allow",
+           "Action":[
+              "acm-pca:RevokeCertificate",
+              "acm-pca:GetCertificate",
+              "acm-pca:ListPermissions"
+           ],
+           "Resource":"arn:aws:acm-pca:*:*:certificate-authority/*"
+        },
+        {
+           "Effect":"Allow",
+           "Action":[
+              "acm-pca:ListCertificateAuthorities"
+           ],
+           "Resource":"*"
+        }
+     ]
   }
   ```
 + **Auditor** – Access to read\-only API operations and permission to generate a CA audit report\. 
 
   ```
   {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "acm-pca:CreateCertificateAuthorityAuditReport",
-                  "acm-pca:DescribeCertificateAuthority",
-                  "acm-pca:DescribeCertificateAuthorityAuditReport",
-                  "acm-pca:GetCertificateAuthorityCsr",
-                  "acm-pca:GetCertificateAuthorityCertificate",
-                  "acm-pca:GetCertificate",
-                  "acm-pca:ListPermissions",
-                  "acm-pca:ListTags"
-              ],
-              "Resource": "arn:aws:acm-pca:*:*:certificate-authority/*"
-          },
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "acm-pca:ListCertificateAuthorities"
-              ],
-              "Resource": "*"
-          }
-      ]
+     "Version":"2012-10-17",
+     "Statement":[
+        {
+           "Effect":"Allow",
+           "Action":[
+              "acm-pca:CreateCertificateAuthorityAuditReport",
+              "acm-pca:DescribeCertificateAuthority",
+              "acm-pca:DescribeCertificateAuthorityAuditReport",
+              "acm-pca:GetCertificateAuthorityCsr",
+              "acm-pca:GetCertificateAuthorityCertificate",
+              "acm-pca:GetCertificate",
+              "acm-pca:ListPermissions",
+              "acm-pca:ListTags"
+           ],
+           "Resource":"arn:aws:acm-pca:*:*:certificate-authority/*"
+        },
+        {
+           "Effect":"Allow",
+           "Action":[
+              "acm-pca:ListCertificateAuthorities"
+           ],
+           "Resource":"*"
+        }
+     ]
   }
   ```
 
@@ -279,15 +279,15 @@ The following example [customer\-managed policy](https://docs.aws.amazon.com/IAM
 
    ```
    {
-          "Version":"2012-10-17",
-          "Statement":[
-             {
-                "Effect":"Allow",
-                "Action":"acm-pca:CreateCertificateAuthorityAuditReport",
-                "Resource":"*"
-             }
-          ]
-       }
+      "Version":"2012-10-17",
+      "Statement":[
+         {
+            "Effect":"Allow",
+            "Action":"acm-pca:CreateCertificateAuthorityAuditReport",
+            "Resource":"*"
+         }
+      ]
+   }
    ```
 
 1. Choose **Review policy**\.
@@ -319,15 +319,15 @@ Inline policies are policies that you create and manage and embed directly into 
 
 ```
 {
-       "Version":"2012-10-17",
-       "Statement":[
-          {
-             "Effect":"Allow",
-             "Action":"acm-pca:ListCertificateAuthorities",
-             "Resource":"*"
-          }
-       ]
-    }
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Effect":"Allow",
+         "Action":"acm-pca:ListCertificateAuthorities",
+         "Resource":"*"
+      }
+   ]
+}
 ```
 
 ### Retrieving a Private CA Certificate<a name="policy-retrieve-pca"></a>
@@ -336,13 +336,13 @@ Inline policies are policies that you create and manage and embed directly into 
 
 ```
 {
-       "Version":"2012-10-17",
-       "Statement":{
-          "Effect":"Allow",
-          "Action":"acm-pca:GetCertificateAuthorityCertificate",
-          "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/12345678-1234-1234-1234-123456789012"
-       }
-    }
+   "Version":"2012-10-17",
+   "Statement":{
+      "Effect":"Allow",
+      "Action":"acm-pca:GetCertificateAuthorityCertificate",
+      "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate-authority/12345678-1234-1234-1234-123456789012"
+   }
+}
 ```
 
 ### Importing a Private CA Certificate<a name="policy-import-pca-cert"></a>
@@ -351,13 +351,13 @@ The following policy allows a user to import a private CA certificate\.
 
 ```
 {
-       "Version":"2012-10-17",
-       "Statement":{
-          "Effect":"Allow",
-          "Action":"acm-pca:ImportCertificateAuthorityCertificate",
-          "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate/12345678-1234-1234-1234-123456789012"
-       }
-    }
+   "Version":"2012-10-17",
+   "Statement":{
+      "Effect":"Allow",
+      "Action":"acm-pca:ImportCertificateAuthorityCertificate",
+      "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate/12345678-1234-1234-1234-123456789012"
+   }
+}
 ```
 
 ### Deleting a Private CA<a name="policy-delete-pca"></a>
@@ -366,13 +366,13 @@ The following policy allows a user to delete a specific private CA\.
 
 ```
 {
-       "Version":"2012-10-17",
-       "Statement":{
-          "Effect":"Allow",
-          "Action":"acm-pca:DeleteCertificateAuthority",
-          "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate/12345678-1234-1234-1234-123456789012"
-       }
-    }
+   "Version":"2012-10-17",
+   "Statement":{
+      "Effect":"Allow",
+      "Action":"acm-pca:DeleteCertificateAuthority",
+      "Resource":"arn:aws:acm-pca:AWS_Region:AWS_Account:certificate/12345678-1234-1234-1234-123456789012"
+   }
+}
 ```
 
 ### Read\-Only Access to ACM Private CA<a name="policy-pca-read-only"></a>
@@ -381,21 +381,21 @@ The following policy allows a user to delete a specific private CA\.
 
 ```
 {
-       "Version":"2012-10-17",
-       "Statement":{
-          "Effect":"Allow",
-          "Action":[
-             "acm-pca:DescribeCertificateAuthority",
-             "acm-pca:DescribeCertificateAuthorityAuditReport",
-             "acm-pca:ListCertificateAuthorities",
-             "acm-pca:ListTags",
-             "acm-pca:GetCertificateAuthorityCertificate",
-             "acm-pca:GetCertificateAuthorityCsr",
-             "acm-pca:GetCertificate"
-          ],
-          "Resource":"*"
-       }
-    }
+   "Version":"2012-10-17",
+   "Statement":{
+      "Effect":"Allow",
+      "Action":[
+         "acm-pca:DescribeCertificateAuthority",
+         "acm-pca:DescribeCertificateAuthorityAuditReport",
+         "acm-pca:ListCertificateAuthorities",
+         "acm-pca:ListTags",
+         "acm-pca:GetCertificateAuthorityCertificate",
+         "acm-pca:GetCertificateAuthorityCsr",
+         "acm-pca:GetCertificate"
+      ],
+      "Resource":"*"
+   }
+}
 ```
 
 ### Full Access to ACM Private CA<a name="policy-pca-full-access"></a>
@@ -404,17 +404,17 @@ The following policy allows a user to delete a specific private CA\.
 
 ```
 {
-       "Version":"2012-10-17",
-       "Statement":[
-          {
-             "Effect":"Allow",
-             "Action":[
-                "acm-pca:*"
-             ],
-             "Resource":"*"
-          }
-       ]
-    }
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Effect":"Allow",
+         "Action":[
+            "acm-pca:*"
+         ],
+         "Resource":"*"
+      }
+   ]
+}
 ```
 
 ### Administrator Access to All AWS Resources<a name="policy-aws-administrator"></a>
@@ -423,13 +423,13 @@ The following policy allows a user to delete a specific private CA\.
 
 ```
 {
-       "Version":"2012-10-17",
-       "Statement":[
-          {
-             "Effect":"Allow",
-             "Action":"*",
-             "Resource":"*"
-          }
-       ]
-    }
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Effect":"Allow",
+         "Action":"*",
+         "Resource":"*"
+      }
+   ]
+}
 ```
