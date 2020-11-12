@@ -48,6 +48,9 @@ The following example shows a JSON\-formatted report\.
 ]
 ```
 
+**Note**  
+When a certificate automatically renews, the audit report populates the `requestedByServicePrincipal` field with `acm.amazonaws.com`\. This is because ACM Private CA issues the certificate on behalf of the AWS Certificate Manager service principal, which calls the `RenewCertificate` API action\. 
+
 ## Preparing an Amazon S3 Bucket for Audit Reports<a name="s3-access"></a>
 
 To store your audit reports, you need to prepare an Amazon S3 bucket\. For more information, see [How Do I Create an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) 

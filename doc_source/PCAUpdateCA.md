@@ -14,7 +14,7 @@ ACM Private CA can report the following status values:
 + **`EXPIRED`** – If the CA certificate for your private CA expires, ACM Private CA sets the status to `EXPIRED`\.
 
   Considerations:
-  + CA certificates are not automatically renewed by default\. For information about automating renewal through AWS Certificate Manager, see [Assign Certificate Renewal Permissions to ACM](granting-ca-access.md#PcaPermissions)\. 
+  + CA certificates are not automatically renewed by default\. For information about automating renewal through AWS Certificate Manager, see [Assign Certificate Renewal Permissions to ACM](assign-permissions.md#PcaPermissions)\. 
   + An expired CA no longer generates CRLs\.
   + Audit reports continue to work for an expired CA\.
   + Your account continues to be billed for an expired CA\.

@@ -5,13 +5,14 @@ With a private CA in place, you can request private end\-entity certificates fro
 
 ****  
 
-| Capability | ACM | ACM Private CA | 
+|  Capability  |  ACM  |  ACM Private CA  | 
 | --- | --- | --- | 
-| Issue end\-entity certificates | ✓ \(using [RequestCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_RequestCertificate.html) \+ [GetCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_GetCertificate.html) or the console\) | ✓ \(using [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)\) | 
-| Association with internet\-facing AWS services | ✓ | Not supported | 
-| Console support | ✓ | Not supported | 
-| API support | ✓ | ✓ | 
-| CLI support | ✓ | ✓ | 
+|  Issue end\-entity certificates  |  ✓ \(using `[RequestCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_RequestCertificate.html)` \+ `[GetCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_GetCertificate.html)` or the console\)  |  ✓ \(using `[IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)`\)  | 
+|  Association with internet\-facing AWS services  |  ✓  |  Not supported  | 
+| Managed certificate renewal | ✓ | Indirectly [supported](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html) though ACM | 
+|  Console support  |  ✓  |  Not supported  | 
+|  API support  |  ✓  |  ✓  | 
+|  CLI support  |  ✓  |  ✓  | 
 
 When ACM Private CA creates a certificate, it follows a template that specifies the certificate type and path length\. If no template ARN is supplied to the API or CLI statement creating the certificate, the [EndEntityCertificate/V1](UsingTemplates.md#EndEntityCertificate-V1) template is applied by default\. For more information about available certificate templates, see [Understanding Certificate Templates](UsingTemplates.md)\.
 

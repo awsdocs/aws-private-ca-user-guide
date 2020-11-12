@@ -11,7 +11,7 @@ You can access ACM Private CA using the AWS Management Console, the AWS CLI, and
 + [Setting Up ACM Private CA](PcaGettingStarted.md)
 + [Creating a Private CA and CRL](PcaCreateCa.md)
 + [Creating and Installing the Certificate for a Private CA](PCACertInstall.md)
-+ [Enabling Access to a Private CA](granting-ca-access.md)
++ [Controlling Access to a Private CA](granting-ca-access.md)
 + [Updating Your Private CA](PCAUpdateCA.md)
 + [Deleting Your Private CA](PCADeleteCA.md)
 + [Restoring Your Private CA](PCARestoreCA.md)

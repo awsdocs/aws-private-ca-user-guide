@@ -2,10 +2,7 @@
 
 After you [create](PcaCreateCa.md) your private CA, [retrieve](PcaGetCsr.md) the certificate signing request \(CSR\), and [sign](PcaSignCert.md) the CA certificate, you must import the certificate into ACM Private CA\. After signing and importing the certificate, you can use your private CA to issue and revoke trusted private SSL/TLS certificates\. These enable trusted communication between users, applications, computers, and other devices internal to your organization\. The certificates cannot be publicly trusted\. 
 
-You must also retrieve the certificate chain that contains the certificate of the intermediate or root CA used to sign your private CA certificate and any preceding certificates\. To create the chain, concatenate your root certificate, if available, and any subordinate certificates that you might have into a single file\. You can use the `cat` command \(Linux\) to do so\. Each certificate must directly certify the one preceding\. The following example contains three certificates, but your PKI infrastructure might have more or fewer\. 
-
-**Note**  
-Your chain must be PEM formatted\.
+You must also retrieve the certificate chain that contains the certificate of the intermediate or root CA used to sign your private CA certificate and any preceding certificates\. To create the chain, concatenate your root certificate, if available, and any subordinate certificates that you might have into a single file\. You can use the `cat` command \(Linux\) to do so\. Each certificate must directly certify the one preceding, and the entire chain must be PEM\-formatted\. The following example contains three certificates, but your PKI infrastructure might have more or fewer\.
 
 ```
     -----BEGIN CERTIFICATE-----
@@ -18,6 +15,9 @@ Your chain must be PEM formatted\.
     Base64-encoded root or intermediate CA certificate
     -----END CERTIFICATE-----
 ```
+
+**Note**  
+ACM Private CA securely generates and stores your certificate's private key\. You never import an externally generated secret key\. 
 
 ## Importing the Private CA Certificate \(Console\)<a name="ImportConsole"></a>
 

@@ -6,7 +6,7 @@ You can use the AWS CLI or ACM Private CA API to revoke a certificate\. The cert
 Cross\-account certificate issuers cannot revoke the certificates that they issue\. The CA owner must perform revocation\. 
 
 **To revoke a certificate**  
-Use the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) API action or [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) command to revoke a private PKI certificate\. The serial number must be in hexadecimal format\. You can retrieve the serial number by calling the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command\. The `revoke-certificate` command does not return a response\. 
+Use the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) API action or [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) command to revoke a private PKI certificate\. The serial number must be in hexadecimal format\. You can retrieve the serial number by calling the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command\. The `revoke-certificate` command does not return a response\. 
 
 ```
 aws acm-pca revoke-certificate \

@@ -5,7 +5,7 @@ After you [create](PcaCreateCa.md) your private CA using ACM Private CA and [ret
 **Important**  
 Details of your X\.509 infrastructure and the CA hierarchy within it are beyond the scope of this guide\. For more information, see [Creating and Signing a Private CA Certificate](PcaTsSignCsr.md)\. 
 The validity period of a private CA is determined by the validity period you specify when you create the private CA certificate\. Set the **Not Before** and **Not After** fields\. Aside from enforcing the defined period, ACM Private CA does not restrict the lifetime of a CA\. 
-If you must create a CA certificate that does not effectively expire, set the special value `99991231235959Z` in the **Not After** field\. We do not recommend this as a general practice\. 
+If you must create a CA certificate that effectively never expires, set the special value `99991231235959Z` in the **Not After** field\. We do not recommend this as a general practice\. 
 
 The signed certificate is typically returned to you as a base64\-encoded PEM file or string\. This is shown by the following example\. If the certificate is encoded in a different format, you must convert it to PEM\. Various OpenSSL commands are available to perform format conversion\. 
 

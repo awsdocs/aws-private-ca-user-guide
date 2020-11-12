@@ -86,23 +86,17 @@ The expiration date of the subordinate CA certificate cannot be later than the e
 
 ## If You Are Installing a Subordinate CA Certificate Signed by an External Parent CA<a name="InstallSubordinateExternal"></a>
 
-**To create and install a subordinate CA certificate signed by an external parent CA**
+After you create a subordinate private CA as described in [Procedures for Creating a CA](PcaCreateCa.md#CA-procedures), you have the option of activating it by installing a CA certificate signed by an external signing authority\. Signing your subordinate CA certificate with an external CA requires that you first set up the external signing authority, or arrange for the use of one\. 
 
-1. If you previously created a subordinate CA and chose **Get started** from the **Success\!** window, you were sent directly to the **Install subordinate CA certificate** console\. If you chose to postpone certificate installation, you can open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home) and begin installation by selecting a subordinate CA with status **Pending Certificate**, choosing **Actions**, and finally choosing **Install CA Certificate**\. This opens the **Install subordinate CA certificate** console\.
+**Note**  
+Procedures for creating or obtaining an external CA are outside the scope of this guide\.
 
-1. On the **Install subordinate CA certificate** page, select the following option:
-   + **External private CA** — This installs a certificate signed by an external private CA that you own\.
+Once you have the subordinate CA and the external parent CA, you need to complete the following tasks:
 
-   Choose **Next**\.
+1. Obtain a certificate signing request \(CSR\) from ACM Private CA\.
 
-1. On the **Export a certificate signing request \(CSR\)** page, ACM Private CA generates and displays certificate information and a CSR\. You have to option of exporting the CSR to a file\.
+1. Submit the CSR to your external signing authority and obtain a signed CA certificate along with any chain certificates\.
 
-   When you have exported the CSR to a file and had the file signed by your external parent CA, choose **Next**\.
+1. Import the CA certificate and chain into ACM Private CA to activate your subordinate CA\.
 
-1. On the **Import a signed certificate authority \(CA\) certificate** page, import your signed CA certificate and your certificate chain \(containing intermediate certificates\)\. 
-
-   Choose **Next**\.
-
-1. On the **Review and install** page, confirm that your configuration is correct and choose **Confirm and install**\. 
-
-   You should be returned to the **Private CAs** list page, displaying the status of the installation \(success or failure\) at the top\. If the installation was successful, the newly completed root CA displays a status of **Active** in the list\.
+For detailed procedures, see [Signing Private CA Certificates with an External CA](PcaExternalRoot.md)\.

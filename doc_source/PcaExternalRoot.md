@@ -10,9 +10,7 @@ Using an external parent CA with ACM Private CA also allows you to enforce CA na
 ACM Private CA cannot directly issue CA certificates with name constraints\. However, you can issue CA certificates that include name constraints from an external parent CA\. ACM Private CA will enforce these constraints when issuing subordinate CA and end\-entity certificates\. For more information, see [Enforcing Name Constraints on a Private CA](name_constraints.md)\.
 
 **Topics**
-+ [Get a Certificate Signing Request \(CSR\)](PcaGetCsr.md)
++ [Get a Certificate Signing Request \(CSR\) from ACM Private CA](PcaGetCsr.md)
 + [Sign Your Private CA Certificate](PcaSignCert.md)
 + [Import Your Private CA Certificate into ACM Private CA](PcaImportCaCert.md)
-+ [Retrieve a Private Certificate Created by ACM Private CA](PcaGetCert.md)
-+ [Retrieve a Certificate Authority \(CA\) Certificate](PcaGetCACert.md)
 + [Enforcing Name Constraints on a Private CA](name_constraints.md)

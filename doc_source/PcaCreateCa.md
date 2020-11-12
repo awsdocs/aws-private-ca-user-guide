@@ -146,6 +146,9 @@ You can create a CA using the AWS console, the ACM Private CA portion of the AWS
 1. <a name="PcaCreateCaType"></a>On the **Select the certificate authority \(CA\) type** page, select the type of the private certificate authority that you want to create\. 
    + Choosing **Root CA** establishes a new CA hierarchy\. This CA is backed by a self\-signed certificate\. It serves as the ultimate signing authority for other CAs and end\-entity certificates in the hierarchy\.
    + Choosing **Subordinate CA** creates a CA that must be signed by a parent CA above it in the hierarchy\. Subordinate CAs are typically be used to create other subordinate CAs or to issue end\-entity certificates to users, computers, and applications\. 
+**Note**  
+ACM Private CA provides an automated signing process when your subordinate CA's parent CA is also hosted by ACM Private CA\. All you do is select the parent CA to use\.  
+If your subordinate CA is to be signed by an external signing authority, ACM Private CA provides you with a certificate signing request \(CSR\) that you must download and use to obtain a signed CA certificate\. For more information, see [If You Are Installing a Subordinate CA Certificate Signed by an External Parent CA](PCACertInstall.md#InstallSubordinateExternal)\.
 
    After selecting a CA type, choose **Next**\.
 
