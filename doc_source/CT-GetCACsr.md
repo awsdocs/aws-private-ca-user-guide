@@ -10,20 +10,20 @@ The following CloudTrail example shows the results of a call to the [GetCertific
       "principalId":"account",
       "arn":"arn:aws:iam::account:user/name",
       "accountId":"account",
-      "accessKeyId":"Key_ID"
+      "accessKeyId":"key_ID"
    },
    "eventTime":"2018-01-26T21:40:33Z",
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"GetCertificateAuthorityCsr",
-   "awsRegion":"us-east-1",
+   "awsRegion":"region",
    "sourceIPAddress":"xx.xx.xx.xx",
-   "userAgent":"aws-cli/1.14.28 Python/2.7.9 Windows/8 botocore/1.8.32",
+   "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/ac5a7c2e-19c8-4258-b74e-351c2b791fe1"
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
    },
    "responseElements":null,
-   "requestID":"7ce9f3bc-b459-436b-bac1-61e75fca3c6e",
-   "eventID":"93115f0b-d528-447a-9b22-87f868dbfd8e",
+   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
+   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

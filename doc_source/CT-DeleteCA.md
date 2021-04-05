@@ -10,22 +10,22 @@ The following CloudTrail example shows the results of a call to the [DeleteCerti
       "principalId":"account",
       "arn":"arn:aws:iam::account:user/name",
       "accountId":"account",
-      "accessKeyId":"Key_ID"
+      "accessKeyId":"key_ID"
    },
    "eventTime":"2018-01-26T22:01:11Z",
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"DeleteCertificateAuthority",
-   "awsRegion":"us-east-1",
+   "awsRegion":"region",
    "sourceIPAddress":"xx.xx.xx.xx",
-   "userAgent":"aws-cli/1.14.28 Python/2.7.9 Windows/8 botocore/1.8.32",
+   "userAgent":"agent",
    "errorCode":"InvalidStateException",
    "errorMessage":"The certificate authority is not in a valid state for deletion.",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/09517d62-4f11-4bf8-a2c9-9e863792b675"
+      "certificateAuthorityArn":"arn:aws:acm-pca:rregion:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
    },
    "responseElements":null,
-   "requestID":"dae3e14f-62f6-42f3-acf4-630c47a09ee4",
-   "eventID":"c40abfac-53f7-420a-9b55-c3f2f2139de8",
+   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
+   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

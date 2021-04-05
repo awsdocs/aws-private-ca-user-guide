@@ -1,6 +1,6 @@
 # ACM Private CA VPC Endpoints \(AWS PrivateLink\)<a name="vpc-endpoints"></a>
 
-You can create a private connection between your VPC and ACM Private CA by configuring an interface VPC endpoint\. Interface endpoints are powered by [AWS PrivateLink](https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-privatelink.html), a technology for privately accessing ACM Private CA API operations\. AWS PrivateLink routes all network traffic between your VPC and ACM Private CA through the Amazon network, avoiding exposure on the open internet\. Each VPC endpoint is represented by one or more [Elastic Network Interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) \(ENIs\) with private IP addresses in your VPC subnets\. 
+You can create a private connection between your VPC and ACM Private CA by configuring an interface VPC endpoint\. Interface endpoints are powered by [AWS PrivateLink](https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-privatelink.html), a technology for privately accessing ACM Private CA API operations\. AWS PrivateLink routes all network traffic between your VPC and ACM Private CA through the Amazon network, avoiding exposure on the open internet\. Each VPC endpoint is represented by one or more [elastic network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) with private IP addresses in your VPC subnets\. 
 
 The interface VPC endpoint connects your VPC directly to ACM Private CA without an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection\. The instances in your VPC don't need public IP addresses to communicate with the ACM Private CA API\. 
 
@@ -11,9 +11,9 @@ ACM Private CA does not require the use of AWS PrivateLink, but we recommend it 
 ## Considerations for ACM Private CA VPC Endpoints<a name="vpc-endpoint-considerations"></a>
 
 Before you set up interface VPC endpoints for ACM Private CA, be aware of the following considerations:
-+ ACM Private CA may not support VPC endpoints in some Availability Zones\. When you create a VPC endpoint, first check support in the management console\. Unsupported Availability Zones are marked "Service not supported in this Availability Zone\."
++ ACM Private CA might not support VPC endpoints in some Availability Zones\. When you create a VPC endpoint, first check support in the management console\. Unsupported Availability Zones are marked "Service not supported in this Availability Zone\."
 + VPC endpoints do not support cross\-Region requests\. Ensure that you create your endpoint in the same Region where you plan to issue your API calls to ACM Private CA\.
-+ VPC endpoints only support Amazon\-provided DNS through Amazon Route 53\. If you want to use your own DNS, you can use conditional DNS forwarding\. For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the *Amazon VPC User Guide*\.
++ VPC endpoints only support Amazon provided DNS through Amazon Route 53\. If you want to use your own DNS, you can use conditional DNS forwarding\. For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the *Amazon VPC User Guide*\.
 + The security group attached to the VPC endpoint must allow incoming connections on port 443 from the private subnet of the VPC\.
 + AWS Certificate Manager does not support VPC endpoints\.
 + FIPS endpoints \(and their Regions\) do not support VPC endpoints\.
@@ -38,9 +38,9 @@ For more information, see [Interface VPC Endpoints \(AWS PrivateLink\)](https://
 ## Create a VPC Endpoint Policy for ACM Private CA<a name="api-private-link-policy"></a>
 
 You can create a policy for Amazon VPC endpoints for ACM Private CA to specify the following: 
-+ The principal that can perform actions\.
-+ The actions that can be performed\.
-+ The resources on which actions can be performed\.
++ The principal that can perform actions
++ The actions that can be performed
++ The resources on which actions can be performed
 
 For more information, see [Controlling Access to Services with VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\. 
 
@@ -57,7 +57,7 @@ When attached to an endpoint, the following policy grants access for all princip
             "acm-pca:IssueCertificate"
          ],
          "Resource":[
-            "arn:aws:acm-pca:us-east-1:555555555555:certificate-authority/12345678-1234567890-1234"
+            "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
          ],
          "Condition":{
             "StringEquals":{
@@ -76,7 +76,7 @@ When attached to an endpoint, the following policy grants access for all princip
             "acm-pca:ListTags"
          ],
          "Resource":[
-            "arn:aws:acm-pca:us-east-1:555555555555:certificate-authority/12345678-1234567890-1234"
+            "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
          ]
       }
    ]

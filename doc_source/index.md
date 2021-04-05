@@ -1,7 +1,7 @@
 # AWS Certificate Manager Private Certificate Authority User Guide
 
 -----
-*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -30,6 +30,9 @@ Amazon's trademarks and trade dress may not be used in
       + [Supported CloudWatch Metrics](PcaCloudWatch.md)
       + [Using CloudWatch Events](CloudWatchEvents.md)
       + [Using CloudTrail](PcaCtIntro.md)
+         + [Creating a Policy](PutPolicy.md)
+         + [Retrieving a Policy](GetPolicy.md)
+         + [Deleting a Policy](DeletePolicy.md)
          + [Creating a Certificate Authority](CT-CreateCA.md)
          + [Creating an Audit Report](CT-CreateAuditReport.md)
          + [Deleting a Certificate Authority](CT-DeleteCA.md)
@@ -49,15 +52,17 @@ Amazon's trademarks and trade dress may not be used in
    + [Compliance Validation for AWS Certificate Manager Private Certificate Authority](security-compliance-validation.md)
       + [Using Audit Reports with Your Private CA](PcaAuditReport.md)
    + [Infrastructure Security in AWS Certificate Manager Private Certificate Authority](infrastructure-security.md)
+      + [Certificate Revocation List (CRL) Reference](crl-ref.md)
+      + [Customizing Online Certificate Status Protocol (OCSP)](ocsp-customize.md)
       + [ACM Private CA VPC Endpoints (AWS PrivateLink)](vpc-endpoints.md)
-   + [ACM Private CA Best Practices](ca-best-practices.md)
+      + [ACM Private CA Best Practices](ca-best-practices.md)
 + [Planning Your ACM Private CA Deployment](PcaPlanning.md)
    + [Designing a CA Hierarchy](ca-hierarchy.md)
    + [Managing the Private CA Lifecycle](ca-lifecycle.md)
    + [Resilience in AWS Certificate Manager Private Certificate Authority](disaster-recovery-resilience.md)
 + [Creating and Managing a Private CA](PcaCreatingManagingCA.md)
    + [Setting Up ACM Private CA](PcaGettingStarted.md)
-   + [Creating a Private CA and CRL](PcaCreateCa.md)
+   + [Creating a Private CA and Revocation](PcaCreateCa.md)
    + [Creating and Installing the Certificate for a Private CA](PCACertInstall.md)
    + [Controlling Access to a Private CA](granting-ca-access.md)
       + [Create Single-Account Permissions for an IAM User](assign-permissions.md)

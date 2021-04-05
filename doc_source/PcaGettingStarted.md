@@ -23,4 +23,4 @@ If you do not have an AWS account, complete the following steps to create one\.
 
 ## Install the AWS Command Line Interface \(Optional\)<a name="PcaInstallCLI"></a>
 
-If you have not installed the AWS CLI but want to use it, follow the directions at [AWS Command Line Interface](https://aws.amazon.com/cli/)\. In this guide, we assume you have [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) your endpoint, region, and authentication details, and we omit these parameters from the sample commands\.
+If you have not installed the AWS CLI but want to use it, follow the directions at [AWS Command Line Interface](https://aws.amazon.com/cli/)\. In this guide, we assume that you have [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) your endpoint, Region, and authentication details, and we omit these parameters from the sample commands\.

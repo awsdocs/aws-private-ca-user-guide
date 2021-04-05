@@ -10,16 +10,16 @@ The following CloudTrail example shows the results of a call to the [UpdateCerti
       "principalId":"account",
       "arn":"arn:aws:iam::account:user/name",
       "accountId":"account",
-      "accessKeyId":"Key_ID"
+      "accessKeyId":"key_ID"
    },
    "eventTime":"2018-01-26T22:08:59Z",
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"UpdateCertificateAuthority",
-   "awsRegion":"us-east-1",
+   "awsRegion":"region",
    "sourceIPAddress":"xx.xx.xx.xx",
-   "userAgent":"aws-cli/1.14.28 Python/2.7.9 Windows/8 botocore/1.8.32",
+   "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/09517d62-4f11-4bf8-a2c9-9e863792b675",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
       "revocationConfiguration":{
          "crlConfiguration":{
             "enabled":true,
@@ -31,8 +31,8 @@ The following CloudTrail example shows the results of a call to the [UpdateCerti
       "status":"DISABLED"
    },
    "responseElements":null,
-   "requestID":"24f849f9-9966-4f13-8ff6-3e2e84b327fc",
-   "eventID":"16c78ea0-e3d7-4817-9bb0-0b997789678f",
+   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
+   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

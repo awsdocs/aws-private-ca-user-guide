@@ -3,6 +3,9 @@
 You can use [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) to record API calls that are made by AWS Certificate Manager Private Certificate Authority\. For more information, see the following topics\.
 
 **Topics**
++ [Creating a Policy](PutPolicy.md)
++ [Retrieving a Policy](GetPolicy.md)
++ [Deleting a Policy](DeletePolicy.md)
 + [Creating a Certificate Authority](CT-CreateCA.md)
 + [Creating an Audit Report](CT-CreateAuditReport.md)
 + [Deleting a Certificate Authority](CT-DeleteCA.md)

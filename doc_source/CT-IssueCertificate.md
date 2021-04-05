@@ -10,16 +10,16 @@ The following CloudTrail example shows the results of a call to the [IssueCertif
       "principalId":"account",
       "arn":"arn:aws:iam::account:user/name",
       "accountId":"account",
-      "accessKeyId":"Key_ID"
+      "accessKeyId":"key_ID"
    },
    "eventTime":"2018-01-26T22:18:43Z",
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"IssueCertificate",
-   "awsRegion":"us-east-1",
+   "awsRegion":"region",
    "sourceIPAddress":"xx.xx.xx.xx",
-   "userAgent":"aws-cli/1.14.28 Python/2.7.9 Windows/8 botocore/1.8.32",
+   "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/ac5a7c2e-19c8-4258-b74e-351c2b791fe1",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
       "csr":{
          "hb":[
             45,
@@ -44,10 +44,10 @@ The following CloudTrail example shows the results of a call to the [IssueCertif
       "idempotencyToken":"1234"
    },
    "responseElements":{
-      "certificateArn":"arn:aws:acm-pca:region:account:certificate-authority/ac5a7c2e-19c8-4258-b74e-351c2b791fe1/certificate/6707447683a9b7f4055627ffd55cebcc"
+      "certificateArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/6707447683a9b7f4055627ffd55cebcc"
    },
-   "requestID":"0a5808dd-fc92-46f8-ba07-090ef8e9bcb4",
-   "eventID":"2816c6f0-184c-4d8b-b4ca-e54ab8dd6f2c",
+   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
+   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

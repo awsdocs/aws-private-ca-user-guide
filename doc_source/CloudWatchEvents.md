@@ -17,11 +17,11 @@ On success, the operation returns the ARN of the new CA\.
    "id":"93c0a8a5-3879-ee03-597f-5e2example18",
    "detail-type":"ACM Private CA Creation",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-04T19:14:56Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-west-2:111111111111:certificate-authority/d543408e-0f41-4a3f-a0e0-84dEXAMPL51"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
    ],
    "detail":{
       "result":"success"
@@ -35,14 +35,14 @@ On failure, the operation returns an ARN for the CA\. Using the ARN, you can cal
 ```
 {
    "version":"0",
-   "id":"93c0a8a5-3879-ee03-597f-5e2example18",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA Creation",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-04T19:14:56Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-west-2:111111111111:certificate-authority/d543408e-0f41-4a3f-a0e0-84dEXAMPL51"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
    ],
    "detail":{
       "result":"failure"
@@ -60,15 +60,15 @@ On success, the operation returns the ARNs of the CA and of the new certificate\
 ```
 {
    "version":"0",
-   "id":"dba9ac68-e917-adb7-b5fa-071examplea7",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA Certificate Issuance",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-04T19:57:46Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-west-2:111111111111:certificate-authority/d543408e-0f41-4a3f-a0e0-84dEXAMPL51",
-      "arn:aws:acm-pca:us-west-2:111111111111:certificate-authority/d543408e-0f41-4a3f-a0e0-84dEXAMPL51/certificate/b845c374b495cbexamplec4c81cc4043"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/b845c374b495cbexamplec4c81cc4043"
    ],
    "detail":{
       "result":"success"
@@ -82,15 +82,15 @@ On failure, the operation returns a certificate ARN and the ARN of the CA\. With
 ```
 {
    "version":"0",
-   "id":"dba9ac68-e917-adb7-b5fa-071examplea7",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA Certificate Issuance",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-04T19:57:46Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-west-2:111111111111:certificate-authority/d543408e-0f41-4a3f-a0e0-84dEXAMPL51",
-      "arn:aws:acm-pca:us-west-2:111111111111:certificate-authority/d543408e-0f41-4a3f-a0e0-84dEXAMPL51/certificate/b845c374b495cb67dac7ac4c81cc4043"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/b845c374b495cb67dac7ac4c81cc4043"
    ],
    "detail":{
       "result":"failure"
@@ -110,15 +110,15 @@ On success, the operation returns the ARNs of the CA and of the revoked certific
 ```
 {
    "version":"0",
-   "id":"247b9dcb-1f62-b23a-2195-790example7b",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA Certificate Revocation",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-05T20:25:19Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-east-1:111111111111:certificate-authority/d87e9a0a-75cb-44ba-bf83-44cEXAMPLE92",
-      "arn:aws:acm-pca:us-east-1:111111111111:certificate-authority/d87e9a0a-75cb-44ba-bf83-44cEXAMPLE92/certificate/d2196bfeef09b5b2088b205EXAMPLEd4"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/d2196bfeef09b5b2088b205EXAMPLEd4"
    ],
    "detail":{
       "result":"success"
@@ -136,14 +136,14 @@ On success, the operation returns the ARN of the CA associated with the CRL\.
 ```
 {
    "version":"0",
-   "id":"fefaffcc-9579-8e7b-0565-f11examplead",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA CRL Generation",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-04T21:07:08Z",
-   "region":"us-east-1",
+   "region":"region1",
    "resources":[
-      "arn:aws:acm-pca:ap-southeast-1:111111111111:certificate-authority/b58e1229-f656-453e-bd11-109EXAMPLE1a"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
    ],
    "detail":{
       "result":"success"
@@ -157,14 +157,14 @@ Check your Amazon S3 bucket permissions if this error occurs\.
 ```
 {
    "version":"0",
-   "id":"071f4cb1-2a7b-e70c-ab6d-f56example34",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA CRL Generation",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-07T23:01:25Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-east-1:111111111111:certificate-authority/f0192f90-5988-4e90-accc-99dEXAMPLE49"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
    ],
    "detail":{
       "result":"failure",
@@ -179,14 +179,14 @@ Retry the operation if this error occurs\.
 ```
 {
    "version":"0",
-   "id":"071f4cb1-2a7b-e70c-ab6d-f56example34",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA CRL Generation",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-07T23:01:25Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-east-1:111111111111:certificate-authority/f0192f90-5988-4e90-accc-99dEXAMPLE49"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
    ],
    "detail":{
       "result":"failure",
@@ -201,14 +201,14 @@ To troubleshoot this error, check your [CloudWatch metrics](https://docs.aws.ama
 ```
 {
    "version":"0",
-   "id":"071f4cb1-2a7b-e70c-ab6d-f56example34",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA CRL Generation",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"1account",
    "time":"2019-11-07T23:01:25Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-east-1:111111111111:certificate-authority/f0192f90-5988-4e90-accc-99dEXAMPLE49"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
    ],
    "detail":{
       "result":"failure",
@@ -227,15 +227,15 @@ On success, the operation returns the ARN of the CA and the ID of the audit repo
 ```
 {
    "version":"0",
-   "id":"f4f561f4-c045-e0a3-cb06-bf7exampled8",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA Audit Report Generation",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-04T21:54:20Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-west-2:111111111111:certificate-authority/d543408e-0f41-4a3f-a0e0-84dEXAMPLE51",
-      "5903194d-0df7-4733-a8a0-cefexampleb9"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+      "01234567-89ab-cdef-0123-456789abcdef"
    ],
    "detail":{
       "result":"success"
@@ -244,20 +244,20 @@ On success, the operation returns the ARN of the CA and the ID of the audit repo
 ```
 
 **Failure**  
-An audit report can fail when ACM PCA lacks PUT permissions on your Amazon S3 bucket, when encryption is enabled on the bucket, or for other reasons\.
+An audit report can fail when ACM PCA lacks `PUT` permissions on your Amazon S3 bucket, when encryption is enabled on the bucket, or for other reasons\.
 
 ```
 {
    "version":"0",
-   "id":"f4f561f4-c045-e0a3-cb06-bf7exampled8",
+   "id":"01234567-89ab-cdef-0123-456789abcdef",
    "detail-type":"ACM Private CA Audit Report Generation",
    "source":"aws.acm-pca",
-   "account":"111111111111",
+   "account":"account",
    "time":"2019-11-04T21:54:20Z",
-   "region":"us-east-1",
+   "region":"region",
    "resources":[
-      "arn:aws:acm-pca:us-west-2:111111111111:certificate-authority/d543408e-0f41-4a3f-a0e0-84dEXAMPLE51",
-      "5903194d-0df7-4733-a8a0-cefexampleb9"
+      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+      "01234567-89ab-cdef-0123-456789abcdef"
    ],
    "detail":{
       "result":"failure"

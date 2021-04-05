@@ -25,7 +25,7 @@ You can use the AWS Management Console to restore a private CA\.
 
 1. In the dialog box, choose **Restore** again\.
 
-1. If successful, the status of the private CA is set to its pre\-deletion state\. Choose **Enable** on the **Actions** menu to change its status to `ACTIVE`\. If the private CA was in the `PENDING_CERTIFICATE` state at the time of deletion, you must import a CA certificate into the private CA before you can activate it\.
+1. If successful, the status of the private CA is set to its predeletion state\. Choose **Enable** on the **Actions** menu to change its status to `ACTIVE`\. If the private CA was in the `PENDING_CERTIFICATE` state at the time of deletion, you must import a CA certificate into the private CA before you can activate it\.
 
 ## Restoring a Private CA \(AWS CLI\)<a name="RestoreCli"></a>
 

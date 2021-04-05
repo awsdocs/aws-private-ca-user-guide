@@ -15,4 +15,3 @@ This documentation helps you understand how to apply the shared responsibility m
 + [Logging and Monitoring for AWS Certificate Manager Private Certificate Authority](security-logging-and-monitoring.md)
 + [Compliance Validation for AWS Certificate Manager Private Certificate Authority](security-compliance-validation.md)
 + [Infrastructure Security in AWS Certificate Manager Private Certificate Authority](infrastructure-security.md)
-+ [ACM Private CA Best Practices](ca-best-practices.md)

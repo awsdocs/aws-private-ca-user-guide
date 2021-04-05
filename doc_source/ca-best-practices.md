@@ -25,9 +25,9 @@ However, if your organization's current practice is to issue end\-entity certifi
 **Note**  
 This configuration imposes limitations that may result in operational challenges\. For example, if your root CA is compromised or lost, you must create a new root CA and distribute it to all of the clients in your environment\. Until this recovery process is complete, you will not be able to issue new certificates\. Issuing certificates directly from a root CA also prevents you from restricting access and limiting the number of certificates issued from your root, which are both considered best practices for managing a root CA\. 
 
-## Give the Root CA its own AWS Account<a name="isolate-root-account"></a>
+## Give the Root CA its Own AWS Account<a name="isolate-root-account"></a>
 
-Creating a root CA and subordinate CA in two different AWS accounts is a recommended best practice\. Doing so can provide you with additional protection and access controls for your root CA\. You can do so by exporting the CSR from the subordinate CA in one account, and signing it with a root CA in a different account\. The benefit of this approach is that you can separate control of your CAs by account\. The disadvantage is that you cannot use the AWS management console wizard to simplify the process of signing the CA certificate of a subordinate CA from your Root CA\.
+Creating a root CA and subordinate CA in two different AWS accounts is a recommended best practice\. Doing so can provide you with additional protection and access controls for your root CA\. You can do so by exporting the CSR from the subordinate CA in one account, and signing it with a root CA in a different account\. The benefit of this approach is that you can separate control of your CAs by account\. The disadvantage is that you cannot use the AWS Management Console wizard to simplify the process of signing the CA certificate of a subordinate CA from your root CA\.
 
 ## Separate Administrator and Issuer Roles<a name="role-separation"></a>
 

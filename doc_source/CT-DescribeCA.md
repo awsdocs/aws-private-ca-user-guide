@@ -9,21 +9,21 @@ The following CloudTrail example shows the results of a call to the [DescribeCer
       "type":"IAMUser",
       "principalId":"account",
       "arn":"arn:aws:iam::account:user/name",
-      "accountId":"account>",
-      "accessKeyId":"Key_ID"
+      "accountId":"account",
+      "accessKeyId":"key_ID"
    },
    "eventTime":"2018-01-26T21:58:18Z",
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"DescribeCertificateAuthority",
-   "awsRegion":"us-east-1",
+   "awsRegion":"region",
    "sourceIPAddress":"xx.xx.xx.xx",
-   "userAgent":"aws-cli/1.14.28 Python/2.7.9 Windows/8 botocore/1.8.32",
+   "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region1:account:certificate-authority/ac5a7c2e-19c8-4258-b74e-351c2b791fe1"
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
    },
    "responseElements":null,
-   "requestID":"289d6bd9-cdca-43d1-a446-62e64a7006a4",
-   "eventID":"ff5f55b7-06de-4cb4-8fa1-5d29d3948f7b",
+   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
+   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

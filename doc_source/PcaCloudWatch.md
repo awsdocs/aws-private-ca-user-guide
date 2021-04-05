@@ -9,7 +9,7 @@ Amazon CloudWatch is a monitoring service for AWS resources\. You can use CloudW
 | --- | --- | 
 | CRLGenerated | A certificate revocation list \(CRL\) was generated\. This metric applies only to a private CA\. | 
 | MisconfiguredCRLBucket | The S3 bucket specified for the CRL is not correctly configured\. Check the bucket policy\. This metric applies only to a private CA\. | 
-| Time | This metric specifies the time at which the certificate was issued\. This metric applies only to the IssueCertificate operation\.  | 
+| Time | The elapsed time in milliseconds for a certificate to be issued\. This metric applies only to the IssueCertificate operation\.  | 
 | Success | A certificate was successfully issued\. This metric applies only to the IssueCertificate operation\. | 
 | Failure | An operation failed\. This metric applies only to the IssueCertificate operation\. | 
 

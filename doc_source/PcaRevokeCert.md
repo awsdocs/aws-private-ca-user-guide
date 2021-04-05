@@ -18,7 +18,7 @@ certificate-authority/12345678-1234-1234-1234-123456789012 \
 
 ## Revoked Certificates in a CRL<a name="PcaRevokeCrl"></a>
 
-The following example shows a revoked certificate in a certificate revocation list \(CRL\)\. A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason the CRL update fails, ACM PCA attempts makes further attempts every 15 minutes\. With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [Creating a Private CA and CRL](PcaCreateCa.md)\. 
+The following example shows a revoked certificate in a certificate revocation list \(CRL\)\. A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason the CRL update fails, ACM PCA attempts makes further attempts every 15 minutes\. With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [Creating a Private CA and Revocation](PcaCreateCa.md)\. 
 
 ```
 Certificate Revocation List (CRL):
@@ -28,7 +28,7 @@ Certificate Revocation List (CRL):
         Last Update: Jan 10 19:28:47 2018 GMT
         Next Update: Jan  8 20:28:47 2028 GMT
         CRL extensions:
-            X509v3 Authority Key Identifier:
+            X509v3 Authority key identifier:
                 keyid:3B:F0:04:6B:51:54:1F:C9:AE:4A:C0:2F:11:E6:13:85:D8:84:74:67
 
             X509v3 CRL Number:
@@ -66,7 +66,7 @@ All certificates, including revoked certificates, are included in the audit repo
   "awsAccountId": "123456789012",
   "certificateArn": "arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/e8cbd2bedb122329f97706bcfec990f8",
   "serial": "e8:cb:d2:be:db:12:23:29:f9:77:06:bc:fe:c9:90:f8",
-  "subject": "1.2.840.113549.1.9.1=#161173616c6573406578616d706c652e636f6d,CN=www.example1.com,OU=Sales,O=Example Company,L=Seattle,ST=Washington,C=US",
+  "Subject": "1.2.840.113549.1.9.1=#161173616c6573406578616d706c652e636f6d,CN=www.example1.com,OU=Sales,O=Example Company,L=Seattle,ST=Washington,C=US",
   "notBefore": "2018-02-26T18:39:57+0000",
   "notAfter": "2019-02-26T19:39:57+0000",
   "issuedAt": "2018-02-26T19:39:58+0000",
@@ -77,7 +77,7 @@ All certificates, including revoked certificates, are included in the audit repo
   "awsAccountId": "123456789012",
   "certificateArn": "arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/2bae9a75d71b42b4e41e36f8b4b488fc",
   "serial": "2b:ae:9a:75:d7:1b:42:b4:e4:1e:36:f8:b4:b4:88:fc",
-  "subject": "1.2.840.113549.1.9.1=#161970726f64407777772e70616c6f75736573616c65732e636f6d,CN=www.example3.com.com,OU=Sales,O=Example Company,L=Seattle,ST=Washington,C=US",
+  "Subject": "1.2.840.113549.1.9.1=#161970726f64407777772e70616c6f75736573616c65732e636f6d,CN=www.example3.com.com,OU=Sales,O=Example Company,L=Seattle,ST=Washington,C=US",
   "notBefore": "2018-01-22T20:10:49+0000",
   "notAfter": "2019-01-17T21:10:49+0000",
   "issuedAt": "2018-01-22T21:10:49+0000"

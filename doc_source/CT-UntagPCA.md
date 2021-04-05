@@ -8,18 +8,18 @@ The following CloudTrail example shows the results of a call to the [UntagCertif
    "userIdentity":{
       "type":"IAMUser",
       "principalId":"account",
-      "arn":"arn:aws:iam::account:user/namee",
+      "arn":"arn:aws:iam::account:user/name",
       "accountId":"account",
-      "accessKeyId":"Key_ID"
+      "accessKeyId":"key_ID"
    },
    "eventTime":"2018-02-02T00:21:50Z",
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"UntagCertificateAuthority",
-   "awsRegion":"us-east-1",
+   "awsRegion":"region",
    "sourceIPAddress":"xx.xx.xx.xx",
-   "userAgent":"aws-cli/1.14.28 Python/2.7.9 Windows/8 botocore/1.8.32",
+   "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:us-east-1:account:certificate-authority/ac5a7c2e-19c8-4258-b74e-351c2b791fe1",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
       "tags":[
          {
             "key":"Admin",
@@ -28,8 +28,8 @@ The following CloudTrail example shows the results of a call to the [UntagCertif
       ]
    },
    "responseElements":null,
-   "requestID":"b9b385b4-a721-4018-be15-d679ce5c2d6e",
-   "eventID":"e32c054d-bc19-40a7-bef9-194ed6848a3b",
+   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
+   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

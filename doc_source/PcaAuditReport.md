@@ -152,7 +152,7 @@ You can create an audit report from either the console or the AWS CLI\.
    ```
    $ aws acm-pca create-certificate-authority-audit-report \
    --certificate-authority-arn arn:aws:acm-pca:region:account:\
-   certificate-authority/12345678-1234-1234-1234-123456789012 \
+   certificate-authority/01234567-89ab-cdef-0123-456789abcdef \
    --s3-bucket-name bucket-name \
    --audit-report-response-format JSON
    ```
@@ -161,7 +161,7 @@ You can create an audit report from either the console or the AWS CLI\.
 
 You can optionally configure encryption on the Amazon S3 bucket containing your audit reports\. ACM Private CA supports two encryption modes for assets in S3:
 + Automatic server\-side encryption with Amazon S3\-managed AES\-256 keys\.
-+ Customer\-managed encryption using AWS Key Management Service and customer master keys \(CMKs\) configured to your specifications\.
++ Customer managed encryption using AWS Key Management Service and customer master keys \(CMKs\) configured to your specifications\.
 
 **Note**  
 ACM Private CA does not support using default CMKs generated automatically by S3\.
@@ -182,6 +182,8 @@ Complete the following steps to enable S3 server\-side encryption\.
 1. Choose **AES\-256**\.
 
 1. Optionally view the bucket permissions policy, then choose **Save**\.
+
+
 
 **To configure custom encryption**  
 Complete the following steps to enable encryption using a custom CMK\.
@@ -209,7 +211,7 @@ Complete the following steps to enable encryption using a custom CMK\.
    }
    ```
 
-1. Using the following steps, you give the ACM Private CA service principal permission to use the CMK\. By default, all AWS KMS CMKs are private; only the resource owner can use a CMK to encrypt and decrypt data\. However, the resource owner can grant permissions to access the CMK to other users and resources\. The service principal must be in the same region as where the CMK is stored\.
+1. Using the following steps, you give the ACM Private CA service principal permission to use the CMK\. By default, all AWS KMS CMKs are private; only the resource owner can use a CMK to encrypt and decrypt data\. However, the resource owner can grant permissions to access the CMK to other users and resources\. The service principal must be in the same Region as where the CMK is stored\.
 
    1. First, save the default policy for your CMK as `policy.json` using the following [get\-key\-policy](https://docs.aws.amazon.com/cli/latest/reference/kms/get-key-policy.html) command:
 

@@ -10,16 +10,16 @@ The following CloudTrail example shows the results of a call to the [TagCertific
       "principalId":"account",
       "arn":"arn:aws:iam::account:user/name",
       "accountId":"account",
-      "accessKeyId":"Key_ID"
+      "accessKeyId":"key_ID"
    },
    "eventTime":"2018-02-02T00:18:48Z",
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"TagCertificateAuthority",
-   "awsRegion":"us-east-1",
+   "awsRegion":"region",
    "sourceIPAddress":"xx.xx.xx.xx",
-   "userAgent":"aws-cli/1.14.28 Python/2.7.9 Windows/8 botocore/1.8.32",
+   "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:us-east-1:account:certificate-authority/ac5a7c2e-19c8-4258-b74e-351c2b791fe1",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
       "tags":[
          {
             "key":"Admin",
@@ -28,8 +28,8 @@ The following CloudTrail example shows the results of a call to the [TagCertific
       ]
    },
    "responseElements":null,
-   "requestID":"816df59d-5022-47af-aa58-173e5c73c20a",
-   "eventID":"8c99648b-3d77-483f-b56b-5aaa85cb6cde",
+   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
+   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

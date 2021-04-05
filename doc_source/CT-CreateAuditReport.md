@@ -10,25 +10,25 @@ The following CloudTrail example shows the results of a call to the [CreateCerti
       "principalId":"account",
       "arn":"arn:aws:iam::account:user/name",
       "accountId":"account",
-      "accessKeyId":"Key_ID"
+      "accessKeyId":"key_ID"
    },
    "eventTime":"2018-01-26T21:56:00Z",
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"CreateCertificateAuthorityAuditReport",
-   "awsRegion":"us-east-1",
+   "awsRegion":"region",
    "sourceIPAddress":"xx.xx.xx.xx",
-   "userAgent":"aws-cli/1.14.28 Python/2.7.9 Windows/8 botocore/1.8.32",
+   "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/ac5a7c2e-19c8-4258-b74e-351c2b791fe1",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
       s3BucketName:"your-bucket-name",
       "auditReportResponseFormat":"JSON"
    },
    "responseElements":{
-      "auditReportId":"2a7d28e7-a835-40a6-b19f-371186c62346",
-      s3Key:"audit-report/ac5a7c2e-19c8-4258-b74e-351c2b791fe1/2a7d28e7-a835-40a6-b19f-371186c62346.json"
+      "auditReportId":"01234567-89ab-cdef-0123-456789abcdef",
+      s3Key:"audit-report/01234567-89ab-cdef-0123-456789abcdef/01234567-89ab-cdef-0123-456789abcdef.json"
    },
-   "requestID":"3b56d220-1660-4941-8160-b54dcc70592d",
-   "eventID":"ea95f673-e7be-411d-bb54-ca1ab844baaf",
+   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
+   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

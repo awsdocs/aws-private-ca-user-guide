@@ -64,11 +64,13 @@ Use this procedure if you followed the steps to [create a private CA](PcaCreateC
 
 **To retrieve a CSR \(console\): Method 1**
 
-1. Immediately after ACM Private CA has successfully created your private CA, choose **Get started**\. The ACM Private CA console returns the CSR\. You can return to this step later\. 
+1. Immediately after ACM Private CA has successfully created your private CA, in the **Success** window, choose **Get started**\. 
 
-1. Choose **Export CSR to a file** and save it locally\.
+1. Choose **External private CA** and **Next**\. 
 
-1. If you cannot immediately perform the offline steps to obtain a signed certificate from your external signing authority, chose **Cancel**\. Once you possess a signed certificate and a certificate chain, you can use the [How to Retrieve a CSR \(Console\): Method 2](#getCsrConsole2) procedure to import them into ACM Private CA\.
+1. The console returns the CSR\. Choose **Export CSR to a file** and save it locally\.
+
+1. If you cannot immediately perform the offline steps to obtain a signed certificate from your external signing authority, choose **Cancel**\. Once you possess a signed certificate and a certificate chain, you can use the [How to Retrieve a CSR \(Console\): Method 2](#getCsrConsole2) procedure to import them into ACM Private CA\.
 
    Otherwise, if you are ready, choose **Next**\.
 
@@ -82,11 +84,13 @@ Use this procedure if you followed the steps to [create a private CA](PcaCreateC
 
 1. When you are ready to continue, open the AWS Certificate Manager console and choose **Private CAs** in the left navigation pane\. 
 
-1. Select your private CA from the list\.
+1. Choose your private CA from the list\.
 
-1. From the **Actions** menu, choose **Import CA certificate**\. The ACM Private CA console returns the CSR\. 
+1. From the **Actions** menu, choose **Install CA certificate**\. 
 
-1. Choose **Export CSR to a file** and save it locally\.
+1. Choose **External private CA** and **Next**\. 
+
+1. The ACM Private CA console returns the CSR\. Choose **Export CSR to a file** and save it locally\.
 
 1. Choose **Next**\.
 
