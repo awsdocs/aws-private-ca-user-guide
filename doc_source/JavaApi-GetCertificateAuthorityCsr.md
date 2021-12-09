@@ -58,8 +58,7 @@ public class GetCertificateAuthorityCsr {
          
       // Create the request object and set the CA ARN.
       GetCertificateAuthorityCsrRequest req = new GetCertificateAuthorityCsrRequest();
-      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account: " +
-        "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
       // Create waiter to wait on successful creation of the CSR file.
       Waiter<GetCertificateAuthorityCsrRequest> waiter = client.waiters().certificateAuthorityCSRCreated();

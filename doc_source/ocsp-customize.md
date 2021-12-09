@@ -1,26 +1,51 @@
-# Customizing Online Certificate Status Protocol \(OCSP\)<a name="ocsp-customize"></a>
-
-Typically, after you set up Online Certificate Status Protocol \(OCSP\) validation of your ACM Private CA certificates, each new certificate issued contains the URL for the AWS OCSP responder\. This allows clients requesting a TLS connection to send validation OCSP queries directly to AWS\. However, in some cases it may be preferable to state a different URL in your certificates while still ultimately submitting OCSP queries to AWS\. This topic describes how to configure such a scenario\.
+# Configuring a Custom URL for ACM Private CA OCSP<a name="ocsp-customize"></a>
 
 **Note**  
-OCSP is not currently supported in the ACM Private CA console\. Beta OCSP users can find AWS CLI examples at [Using the AWS CLI to Create a CA](PcaCreateCa.md#Create-CA-CLI) and [Updating a CA \(AWS CLI\)](PCAUpdateCA.md#ca-update-cli)
+This topic is for customers who want to customize the public URL of the OCSP responder endpoint for branding or other purposes\. If you plan to use the default configuration of ACM Private CA managed OCSP, you can skip this topic and follow the configuration instructions in [Configure revocation](Create-CA-console.md#PcaCreateRevocation)\.
 
-Three elements are involved in configuring a custom OCSP reponder URL\.
-+ **CA configuration** – Specify a custom OCSP URL in the `RevocationConfiguration` for your CA as described in [Example 4: Create a CA with OCSP and a custom CNAME enabled](PcaCreateCa.md#Create-CA-OSCP-custom-CNAME) in [Using the AWS CLI to Create a CA](PcaCreateCa.md#Create-CA-CLI)\.
-+ **DNS** – Add a CNAME record to your domain configuration to map the URL appearing in the certificates to a proxy server URL\. For more information, see [Example 4: Create a CA with OCSP and a custom CNAME enabled](PcaCreateCa.md#Create-CA-OSCP-custom-CNAME) in [Using the AWS CLI to Create a CA](PcaCreateCa.md#Create-CA-CLI)
-+ **Forwarding proxy server** – Set up a proxy server that can transparently forward OCSP traffic it receives to the AWS OCSP responder\.
+By default, when you enable OCSP for ACM Private CA, each certificate that you issue contains the URL for the AWS OCSP responder\. This allows clients requesting a cryptographically secure connection to send OCSP validation queries directly to AWS\. However, in some cases it might be preferable to state a different URL in your certificates while still ultimately submitting OCSP queries to AWS\.
+
+**Note**  
+For information about using a certificate revocation list \(CRL\) as an alternative or a supplement to OCSP, see [Configure revocation](Create-CA-console.md#PcaCreateRevocation) and [Planning a certificate revocation list \(CRL\)](crl-planning.md)\.
+
+Three elements are involved in configuring a custom URL for OCSP\.
++ **CA configuration** – Specify a custom OCSP URL in the `RevocationConfiguration` for your CA as described in [Example 2: Create a CA with OCSP and a custom CNAME enabled](Create-CA-CLI.md#Create-CA-OSCP-custom-CNAME) in [Procedure for creating a CA \(CLI\) ](Create-CA-CLI.md)\.
++ **DNS** – Add a CNAME record to your domain configuration to map the URL appearing in the certificates to a proxy server URL\. For more information, see [Example 2: Create a CA with OCSP and a custom CNAME enabled](Create-CA-CLI.md#Create-CA-OSCP-custom-CNAME) in [Procedure for creating a CA \(CLI\) ](Create-CA-CLI.md)\.
++ **Forwarding proxy server** – Set up a proxy server that can transparently forward OCSP traffic that it receives to the AWS OCSP responder\.
 
 The following diagram illustrates how these elements work together\.
 
 ![\[Custom OCSP topology\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/ocsp.png)
 
-First the client connects to a target server that has TLS support\. This requires querying DNS for the target domain and opening a connection using the returned IP address \(1\-3\)\. The target responds by offering a TLS server certificate \(4\)\. The client reads the embedded OCSP URL and queries DNS again \(5\)\. This time, a CNAME record for the embedded domain returns the IP address of the proxy server \(6\)\. When the client sends an OCSP query to the proxy address, the proxy forwards the request to the AWS OCSP responder \(7\-8\)\. The responder in turn sends an OCSP status message to the client via the proxy \(9\)\. Assuming that the status is valid, the client then resumes the TLS handshake with the target server \(10\)\.
+As shown in the diagram, the customized OCSP validation process involves the following steps:
+
+1. Client queries DNS for the target domain\.
+
+1. Client receives the target IP\.
+
+1. Client opens a TCP connection with target\.
+
+1. Client receives target TLS certificate\.
+
+1. Client queries DNS for the OCSP domain listed in the certificate\.
+
+1. Client receives proxy IP\.
+
+1. Client sends OCSP query to proxy\.
+
+1. Proxy forwards query to the OCSP responder\.
+
+1. Responder returns certificate status to the proxy\.
+
+1. Proxy forwards certificate status to the client\.
+
+1. If certificate is valid, client begins TLS handshake\.
 
 **Tip**  
-This example can be implemented using Amazon CloudFront and Amazon Route 53 after you have configured a CA as described\.  
+This example can be implemented using [Amazon CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/) and [Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/) after you have configured a CA as described above\.  
 In CloudFront, create a distribution and configure it as follows:  
 Create an alternate name that matches your custom CNAME\.
 Bind your certificate to it\.
-Set ocsp\.*<region>*\.amazonaws\.com as the origin\.
+Set ocsp\.acm\-pca\.*<region>*\.amazonaws\.com as the origin\.
 Apply the `Managed-CachingDisabled` policy\.
 In Route 53, create a DNS record that maps your custom CNAME to the URL of the CloudFront distribution\.

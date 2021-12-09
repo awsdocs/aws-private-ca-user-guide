@@ -1,4 +1,4 @@
-# Deleting a Policy<a name="DeletePolicy"></a>
+# Deleting a policy<a name="DeletePolicy"></a>
 
 The following CloudTrail example shows the results of a call to the [DeletePolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html) operation\.
 
@@ -32,14 +32,14 @@ The following CloudTrail example shows the results of a call to the [DeletePolic
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"DeletePolicy",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "requestParameters":{
-      "resourceArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "resourceArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    },
    "responseElements":null,
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "readOnly":false,
    "eventType":"AwsApiCall",
    "managementEvent":true,

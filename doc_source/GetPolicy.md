@@ -1,4 +1,4 @@
-# Retrieving a Policy<a name="GetPolicy"></a>
+# Retrieving a policy<a name="GetPolicy"></a>
 
 The following CloudTrail example shows the results of a call to the [GetPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html) operation\.
 
@@ -32,16 +32,16 @@ The following CloudTrail example shows the results of a call to the [GetPolicy](
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"GetPolicy",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "errorCode":"ResourceNotFoundException",
-   "errorMessage":"Could not find policy for resource arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef.",
+   "errorMessage":"Could not find policy for resource arn:aws:acm-pca:region:account:certificate-authority/CA_ID.",
    "requestParameters":{
-      "resourceArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "resourceArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    },
    "responseElements":null,
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "readOnly":true,
    "eventType":"AwsApiCall",
    "managementEvent":true,

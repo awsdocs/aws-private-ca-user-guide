@@ -1,4 +1,4 @@
-# Removing Tags from a Private Certificate Authority<a name="CT-UntagPCA"></a>
+# Removing tags from a private certificate authority<a name="CT-UntagPCA"></a>
 
 The following CloudTrail example shows the results of a call to the [UntagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html) operation\.
 
@@ -16,10 +16,10 @@ The following CloudTrail example shows the results of a call to the [UntagCertif
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"UntagCertificateAuthority",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
       "tags":[
          {
             "key":"Admin",
@@ -28,8 +28,8 @@ The following CloudTrail example shows the results of a call to the [UntagCertif
       ]
    },
    "responseElements":null,
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

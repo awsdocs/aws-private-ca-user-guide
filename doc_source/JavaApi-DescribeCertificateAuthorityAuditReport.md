@@ -61,8 +61,7 @@ public class DescribeCertificateAuthorityAuditReport {
             new DescribeCertificateAuthorityAuditReportRequest();
 
       // Set the certificate authority ARN.
-      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-          "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
       // Set the audit report ID.
       req.withAuditReportId("11111111-2222-3333-4444-555555555555");

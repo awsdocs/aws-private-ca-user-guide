@@ -1,4 +1,4 @@
-# Updating a Certificate Authority<a name="CT-UpdateCA"></a>
+# Updating a certificate authority<a name="CT-UpdateCA"></a>
 
 The following CloudTrail example shows the results of a call to the [UpdateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html) operation\.
 
@@ -16,10 +16,11 @@ The following CloudTrail example shows the results of a call to the [UpdateCerti
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"UpdateCertificateAuthority",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+
       "revocationConfiguration":{
          "crlConfiguration":{
             "enabled":true,
@@ -31,8 +32,8 @@ The following CloudTrail example shows the results of a call to the [UpdateCerti
       "status":"DISABLED"
    },
    "responseElements":null,
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

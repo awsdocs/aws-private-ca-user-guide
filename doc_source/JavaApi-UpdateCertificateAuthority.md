@@ -58,8 +58,7 @@ public class UpdateCertificateAuthority {
       UpdateCertificateAuthorityRequest req = new UpdateCertificateAuthorityRequest();
 
       // Set the ARN of the private CA that you want to update.
-      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-            "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
       // Define the certificate revocation list configuration. If you do not want to
       // update the CRL configuration, leave the CrlConfiguration structure alone and

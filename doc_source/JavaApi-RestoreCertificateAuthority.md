@@ -1,6 +1,6 @@
 # RestoreCertificateAuthority<a name="JavaApi-RestoreCertificateAuthority"></a>
 
-The following Java sample shows how to use the [RestoreCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RestoreCertificateAuthority.html) operation\. A private CA can be restored at any time during its restoration period\. Currently, this period can last 7 to 30 days from the date of deletion and can be defined when you delete the CA\. For more information, see [Restore a CA](PCARestoreCA.md)\. See also the [DeleteCertificateAuthority](JavaApi-DeleteCertificateAuthority.md) Java example\. 
+The following Java sample shows how to use the [RestoreCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RestoreCertificateAuthority.html) operation\. A private CA can be restored at any time during its restoration period\. Currently, this period can last 7 to 30 days from the date of deletion and can be defined when you delete the CA\. For more information, see [Restoring](PCARestoreCA.md)\. See also the [DeleteCertificateAuthority](JavaApi-DeleteCertificateAuthority.md) Java example\. 
 
 ```
 package com.amazonaws.samples;
@@ -50,8 +50,7 @@ public class RestoreCertificateAuthority {
       RestoreCertificateAuthorityRequest req = new RestoreCertificateAuthorityRequest();
 
       // Set the certificate authority ARN.
-      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-            "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
       // Restore the CA.
       try {

@@ -1,4 +1,4 @@
-# Creating and Installing the Certificate for a Private CA<a name="PCACertInstall"></a>
+# Creating and installing the CA certificate<a name="PCACertInstall"></a>
 
 Complete the following procedures to create and install your private CA certificate\. Your CA will then be ready to use\.
 
@@ -9,38 +9,38 @@ ACM Private CA supports three scenarios for installing a CA certificate:
 
  The following sections describe procedures for each scenario\. The console procedures begin on the console page **Private CAs**\.
 
-## Installing a Root CA Certificate<a name="InstallRoot"></a>
+## If you are installing a root CA certificate<a name="InstallRoot"></a>
 
 You can install a root CA certificate from the AWS Management Console or the AWS CLI\.
 
 **To create and install a certificate for your private root CA \(console\)**
 
-1. Do one of the following:
-   + If you previously created a root CA and chose **Get started** from the **Success** window, you were sent directly to the **Install root CA certificate** wizard\.
-   + If you chose to postpone certificate installation, you can open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\. Choose a root CA with status **Pending Certificate** or **Active**\. Then choose **Actions**, **Install CA Certificate** to open the **Install root CA certificate** wizard\.
+1. Begin as required by the following conditions:
+   + If you previously created a root CA and chose **Install CA certificate** from the **Success\!** window, you were sent directly to the **Install root CA certificate** wizard\.
+   + If you postponed certificate installation, open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\. On the **List certificate authorities** page, choose a root CA with status **Pending Certificate** or **Active**\. Then choose **Actions**, **Install CA Certificate** to open the **Install root CA certificate** wizard\.
 
 1. In the section **Specify the root CA certificate parameters**, specify the following certificate parameters:
-   + **Validity** — Specifies when the CA will expire in years, months, or days\. The ACM Private CA default validity period for a root CA certificate is 10 years\.
+   + **Validity value** and **Validity type** — Specifies the time until the CA certificate expires\. The value is an integer; the type is **Years**, **Months**, or **Days**\. The ACM Private CA default validity period for a root CA certificate is 10 years\.
    + **Signature algorithm** — Specifies the signing algorithm to use when the root CA issues new certificates\.
 
    Choose **Next**\.
 
-1. On the **Review, generate, and install root CA certificate** page, confirm that the configuration is correct and choose **Confirm and install**\. ACM Private CA exports a CSR for your CA and issues a self\-signed root CA certificate using your CA and a root CA template\. ACM Private CA then imports the self\-signed root CA certificate\.
+1. On the **Review, generate, and install root CA certificate** page, confirm that the configuration is correct and choose **Confirm and install**\. ACM Private CA exports a CSR for your CA and issues a self\-signed root CA certificate using your CA and a root CA [template](UsingTemplates.md)\. ACM Private CA then imports the self\-signed root CA certificate\.
 
-   The **Private CAs** list page displays the status of the installation \(success or failure\) at the top\. If the installation was successful, the newly completed root CA displays a status of **Active** in the list\.
+   The **List certificate authorities** page displays the status of the installation \(success or failure\) at the top\. If the installation was successful, the newly completed root CA displays a status of **Active** in the list\.
 
 **To create and install a certificate for your private root CA \(AWS CLI\)**
 
 1. Generate a certificate signing request \(CSR\)\.
 
    ```
-   aws acm-pca get-certificate-authority-csr \
-   	--certificate-authority-arn arn:aws:acm-pca:<region>:<account>:certificate-authority/01234567-89ab-cdef-0123-456789abcdef \
-   	--output text \
-   	--endpoint https://acm-pca.amazonaws.com --region <region> > ca.csr
+   $ aws acm-pca get-certificate-authority-csr \
+        --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
+        --output text \
+        --endpoint https://acm-pca.amazonaws.com --region region > ca.csr
    ```
 
-   The resulting file `ca.csr`, a PEM file encoded in base64 format, has the following appearance:
+   The resulting file `ca.csr`, a PEM file encoded in base64 format, has the following appearance\.
 
    ```
    -----BEGIN CERTIFICATE REQUEST-----
@@ -63,13 +63,13 @@ You can install a root CA certificate from the AWS Management Console or the AWS
    -----END CERTIFICATE REQUEST-----
    ```
 
-   You can use [OpenSSL](https://www.openssl.org/) to view and verify the contents of the CSR:
+   You can use [OpenSSL](https://www.openssl.org/) to view and verify the contents of the CSR\.
 
    ```
    openssl req -text -noout -verify -in ca.csr
    ```
 
-   This yields output similar to the following:
+   This yields output similar to the following\.
 
    ```
    verify OK
@@ -127,32 +127,24 @@ You can install a root CA certificate from the AWS Management Console or the AWS
 If you are using AWS CLI version 1\.6\.3 or later, use the prefix `fileb://` when specifying the required input file\. This ensures that ACM Private CA parses the Base64\-encoded data correctly\.
 
    ```
-   aws acm-pca issue-certificate \
-   	--certificate-authority-arn arn:aws:acm-pca:<region>:<account>:certificate-authority/01234567-89ab-cdef-0123-456789abcdef \
-   	--csr fileb://ca.csr \
-   	--signing-algorithm SHA256WITHRSA \
-   	--template-arn arn:aws:acm-pca:::template/RootCACertificate/V1 \
-   	--validity Value=365,Type=DAYS
-   ```
-
-   This returns the certificate ARN if successful:
-
-   ```
-   {
-       "CertificateArn": "arn:aws:acm-pca:<region>:<account>:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/0123456789abcdef0123456789abcdef"
-   }
+   $ aws acm-pca issue-certificate \
+        --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
+        --csr file://ca.csr \
+        --signing-algorithm SHA256WITHRSA \
+        --template-arn arn:aws:acm-pca:::template/RootCACertificate/V1 \
+        --validity Value=365,Type=DAYS
    ```
 
 1. Retrieve the root certificate\.
 
    ```
-   aws acm-pca get-certificate \
-   	--certificate-authority-arn arn:aws:acm-pca:<region>:<account>:certificate-authority/01234567-89ab-cdef-0123-456789abcdef \
-   	--certificate-arn arn:aws:acm-pca:<region>:<account>:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/0123456789abcdef0123456789abcdef \
+   $ aws acm-pca get-certificate \
+   	--certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
+   	--certificate-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID \
    	--output text > cert.pem
    ```
 
-   The resulting file `cert.pem`, a PEM file encoded in base64 format, has the following appearance:
+   The resulting file `cert.pem`, a PEM file encoded in base64 format, has the following appearance\.
 
    ```
    -----BEGIN CERTIFICATE-----
@@ -179,13 +171,13 @@ If you are using AWS CLI version 1\.6\.3 or later, use the prefix `fileb://` whe
    -----END CERTIFICATE-----
    ```
 
-   You can use OpenSSL to view and verify the contents of the certificate:
+   You can use OpenSSL to view and verify the contents of the certificate\.
 
    ```
    openssl x509 -in cert.pem -text -noout
    ```
 
-   This yields output similar to the following:
+   This yields output similar to the following\.
 
    ```
    Certificate:
@@ -247,34 +239,34 @@ If you are using AWS CLI version 1\.6\.3 or later, use the prefix `fileb://` whe
             d3:69:5c:38
    ```
 
-1. Import the root CA certificate to install it on the CA:
+1. Import the root CA certificate to install it on the CA\.
 **Note**  
 If you are using AWS CLI version 1\.6\.3 or later, use the prefix `fileb://` when specifying the required input file\. This ensures that ACM Private CA parses the Base64\-encoded data correctly\.
 
    ```
-   aws acm-pca import-certificate-authority-certificate \
-   	--certificate-authority-arn arn:aws:acm-pca:<region>:<account>:certificate-authority/01234567-89ab-cdef-0123-456789abcdef \
-   	--certificate fileb://cert.pem
+   $ aws acm-pca import-certificate-authority-certificate \
+        --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
+        --certificate file://cert.pem
    ```
 
-Inspect the new status of the CA:
+Inspect the new status of the CA\.
 
 ```
-aws acm-pca describe-certificate-authority \
-	--certificate-authority-arn arn:aws:acm-pca:<region>:<account>:certificate-authority/01234567-89ab-cdef-0123-456789abcdef \
+$ aws acm-pca describe-certificate-authority \
+	--certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
 	--output json
 ```
 
-The status now appears as ACTIVE:
+The status now appears as ACTIVE\.
 
 ```
 {
     "CertificateAuthority": {
-        "Arn": "arn:aws:acm-pca:<region>:<account>:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+        "Arn": "arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
         "CreatedAt": "2021-03-05T14:24:12.867000-08:00",
         "LastStateChangeAt": "2021-03-08T12:37:14.235000-08:00",
         "Type": "ROOT",
-        "Serial": "173039654744616464971164424001052828114",
+        "Serial": "serial_number",
         "Status": "ACTIVE",
         "NotBefore": "2021-03-08T07:46:27-08:00",
         "NotAfter": "2022-03-08T08:46:27-08:00",
@@ -295,7 +287,7 @@ The status now appears as ACTIVE:
                 "Enabled": true,
                 "ExpirationInDays": 7,
                 "CustomCname": "alternative.example.com",
-                "S3BucketName": "my-bucket"
+                "S3BucketName": "DOC-EXAMPLE-BUCKET1"
             },
             "OcspConfiguration": {
                 "Enabled": false
@@ -305,41 +297,40 @@ The status now appears as ACTIVE:
 }
 ```
 
-## Installing a Subordinate CA Certificate Hosted by ACM Private CA<a name="InstallSubordinateInternal"></a>
+## If you are installing a subordinate CA certificate hosted by ACM Private CA<a name="InstallSubordinateInternal"></a>
 
 You can use the AWS Management Console to create and install a certificate for your ACM Private CA hosted subordinate CA\.
 
 **To create and install a certificate for your ACM Private CA hosted subordinate CA**
 
-1. Do one of the following:
-   + If you previously created a subordinate CA and chose **Get started** from the **Success\!** window, you were sent directly to the **Install subordinate CA certificate** console\.
-   + If you chose to postpone certificate installation, you can open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home) and begin installation by choosing a subordinate CA with status **Pending Certificate** or **Active**\. Choose **Actions**, **Install CA Certificate** to open the **Install subordinate CA certificate** wizard\.
-   + If a CA on the **Private CAs** page has a status of **Pending Certificate**, choose it to see the **Action required** box\. Then choose **Import a CA certificate**\.
+1. Begin as required by the following conditions:
+   + If you previously created a subordinate CA and chose **Install CA certificate** from the **Success\!** window, you were sent directly to the **Install subordinate CA certificate** wizard\.
+   + If you postponed certificate installation, open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\. On the **List certificate authorities** page, choose a subordinate CA with status **Pending Certificate** or **Active**\. Then choose **Actions**, **Install CA Certificate** to open the **Install subordinate CA certificate** wizard\.
 
 1. On the **Install subordinate CA certificate** page, choose **ACM Private CA** to install a certificate that is managed by ACM Private CA\. Then choose **Next**\.
 
-1. Under **Select parent ACM Private CA**, choose an available CA from the **Parent private CA** list\.
+1. On the **Configure CA certificate** page, under **Select parent ACM Private CA**, choose a CA from the **Parent private CA** list\.
 
 1. Under **Specify the subordinate CA certificate parameters**, specify the following certificate parameters:
-   + **Validity** — The years, months, or days when the subordinate CA certificate will expire\. 
+   + **Validity value** and **Validity type** — Specifies the time until the CA certificate expires\. The value is an integer; the type is **Years**, **Months**, or **Days**\. The ACM Private CA default validity period for a root CA certificate is 10 years\.
 **Note**  
 The expiration date of the subordinate CA certificate cannot be later than the expiration date of the parent CA certificate\.
-   + **Signature algorithm** — The signing algorithm to use when the subordinate CA issues new certificates\.
-   + **Path length** — The number of trust layers that the subordinate CA can add when signing new certificates\. A path length of zero \(the default\) means that only end\-entity certificates and not CA certificates can be created\. A path length of one or more means that the subordinate CA may issue certificates to create additional CAs subordinate to it\.
-   + **Template ARN** — The ARN of the configuration template for this CA certificate\. The template changes if you change the specified **Path length**\. If you create a certificate using the CLI [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) command or API [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) action, you must specify the ARN manually\. For information about available CA certificate templates, see [Understanding Certificate Templates](UsingTemplates.md)\.
+   + **Signature algorithm** — This specifies the signing algorithm to use when the subordinate CA issues new certificates\. Only algorithms compatible with the parent CA certificate are offered as options\.
+   + **Path length** — The number of trust layers that the subordinate CA can add when signing new certificates\. A path length of zero \(the default\) means that only end\-entity certificates, and not CA certificates, can be created\. A path length of one or more means that the subordinate CA may issue certificates to create additional CAs subordinate to it\.
+   + **Template ARN** — The ARN of the configuration template for this CA certificate\. The template changes if you change the specified **Path length**\. If you create a certificate using the CLI [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) command or API [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) action, you must specify the ARN manually\. For information about available CA certificate templates, see [Understanding certificate templates](UsingTemplates.md)\.
 
    Choose **Next**\.
 
-1. On the **Review and generate** page, confirm that your configuration is correct and choose **Generate**\. ACM Private CA exports a CSR for your CA, issues a CA certificate from the parent CA and template you selected, and imports the CA certificate\. 
+1. On the **Review and generate** page, confirm that your configuration is correct and choose **Confirm and install**\. ACM Private CA exports a CSR for your subordinate CA, issues a CA certificate from the parent CA and template you selected, and imports the CA certificate\. 
 
-## Installing a Subordinate CA Certificate Signed by an External Parent CA<a name="InstallSubordinateExternal"></a>
+## Installing a subordinate CA certificate signed by an external parent CA<a name="InstallSubordinateExternal"></a>
 
-After you create a subordinate private CA as described in [Creating a CA \(Console\)](PcaCreateCa.md#CA-procedures), you have the option of activating it by installing a CA certificate signed by an external signing authority\. Signing your subordinate CA certificate with an external CA requires that you first set up the external signing authority, or arrange for the use of one\. 
+After you create a subordinate private CA as described in [Procedure for creating a CA \(console\)](Create-CA-console.md) or [Procedure for creating a CA \(CLI\) ](Create-CA-CLI.md), you have the option of activating it by installing a CA certificate signed by an external signing authority\. Signing your subordinate CA certificate with an external CA requires that you first set up the external signing authority, or arrange for the use of one\. 
 
 **Note**  
 Procedures for creating or obtaining an external CA are outside the scope of this guide\.
 
-Once you have the subordinate CA and the external parent CA, you need to complete the following tasks:
+When you have the subordinate CA and the external parent CA, you need to complete the following tasks:
 
 1. Obtain a certificate signing request \(CSR\) from ACM Private CA\.
 
@@ -347,4 +338,4 @@ Once you have the subordinate CA and the external parent CA, you need to complet
 
 1. Import the CA certificate and chain into ACM Private CA to activate your subordinate CA\.
 
-For detailed procedures, see [Signing Private CA Certificates with an External CA](PcaExternalRoot.md)\.
+For detailed procedures, see [Signing private CA certificates with an external CA](PcaExternalRoot.md)\.

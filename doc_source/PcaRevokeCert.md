@@ -1,24 +1,37 @@
-# Revoking a Private Certificate<a name="PcaRevokeCert"></a>
+# Revoking a private certificate<a name="PcaRevokeCert"></a>
 
-You can use the AWS CLI or ACM Private CA API to revoke a certificate\. The certificate will be included in the certificate revocation list \(CRL\), if it exists, of the issuing private CA\. Revoked certificates are always recorded in the audit report\. 
+You can revoke an ACM Private CA certificate using the [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) AWS CLI command or the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) API action\. A certificate may need to be revoked prior to its scheduled expiration if, for example, its secret key is compromised or its associated domain becomes invalid\. For revocation to be effective, the client using the certificate needs a way to check revocation status whenever it attempts to build a secure network connection\.
+
+ACM Private CA provides two fully managed mechanisms to support revocation status checking: Online Certificate Status Protocol \(OCSP\) and certificate revocation lists \(CRLs\)\. With OCSP, the client queries an authoritative revocation database that returns a status in real\-time\. With a CRL, the client checks the certificate against a list of revoked certificates that it periodically downloads and stores\. Clients refuse to accept certificates that have been revoked\. 
+
+Both OCSP and CRLs depend on validation information embedded in certificates\. For this reason, an issuing CA must be configured to support either or both of these mechanisms prior to issuance\. For information about selecting and implementing managed revocation through ACM Private CA, see [Setting up a certificate revocation method](revocation-setup.md)
+
+Revoked certificates are always recorded in ACM Private CA audit reports\. 
 
 **Note**  
-Cross\-account certificate issuers cannot revoke the certificates that they issue\. The CA owner must perform revocation\. 
+[Cross\-account](pca-resource-sharing.md) certificate issuers cannot revoke the certificates that they issue\. The CA owner must perform revocation\. 
 
 **To revoke a certificate**  
 Use the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) API action or [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) command to revoke a private PKI certificate\. The serial number must be in hexadecimal format\. You can retrieve the serial number by calling the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command\. The `revoke-certificate` command does not return a response\. 
 
 ```
-aws acm-pca revoke-certificate \
---certificate-authority-arn arn:aws:acm-pca:region:account:\
-certificate-authority/12345678-1234-1234-1234-123456789012 \ 
---certificate-serial 67:07:44:76:83:a9:b7:f4:05:56:27:ff:d5:5c:eb:cc \ 
---revocation-reason "KEY_COMPROMISE"
+$ aws acm-pca revoke-certificate \
+     --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \ 
+     --certificate-serial serial_number \ 
+     --revocation-reason "KEY_COMPROMISE"
 ```
 
-## Revoked Certificates in a CRL<a name="PcaRevokeCrl"></a>
+## Revoked certificates and OCSP<a name="PcaRevokeOcsp"></a>
 
-The following example shows a revoked certificate in a certificate revocation list \(CRL\)\. A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason the CRL update fails, ACM PCA attempts makes further attempts every 15 minutes\. With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [Creating a Private CA and Revocation](PcaCreateCa.md)\. 
+OCSP responses may take up to 60 minutes to reflect the new status when you revoke a certificate\. In general, OCSP tends to support faster distribution of revocation information because, unlike CRLs which can be cached by clients for days, OCSP responses are typically not cached by clients\.
+
+## Revoked certificates in a CRL<a name="PcaRevokeCrl"></a>
+
+A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason a CRL update fails, ACM Private CA makes further attempts every 15 minutes\.
+
+With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [Planning a certificate revocation list \(CRL\)](crl-planning.md)\. 
+
+The following example shows a revoked certificate in a certificate revocation list \(CRL\)\.
 
 ```
 Certificate Revocation List (CRL):
@@ -57,29 +70,31 @@ Revoked Certificates:
          0e:81:b2:76
 ```
 
-## Revoked Certificates in an Audit Report<a name="PcaRevokeAuditReport"></a>
+## Revoked certificates in an audit report<a name="PcaRevokeAuditReport"></a>
 
-All certificates, including revoked certificates, are included in the audit report for a private CA\. The following example shows an audit report with one issued and one revoked certificate\. For more information, see [Using Audit Reports with Your Private CA](PcaAuditReport.md)\. 
+All certificates, including revoked certificates, are included in the audit report for a private CA\. The following example shows an audit report with one issued and one revoked certificate\. For more information, see [Using audit reports with your private CA](PcaAuditReport.md)\. 
 
 ```
-[{
-  "awsAccountId": "123456789012",
-  "certificateArn": "arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/e8cbd2bedb122329f97706bcfec990f8",
-  "serial": "e8:cb:d2:be:db:12:23:29:f9:77:06:bc:fe:c9:90:f8",
-  "Subject": "1.2.840.113549.1.9.1=#161173616c6573406578616d706c652e636f6d,CN=www.example1.com,OU=Sales,O=Example Company,L=Seattle,ST=Washington,C=US",
-  "notBefore": "2018-02-26T18:39:57+0000",
-  "notAfter": "2019-02-26T19:39:57+0000",
-  "issuedAt": "2018-02-26T19:39:58+0000",
-  "revokedAt": "2018-02-26T20:00:36+0000",
-  "revocationReason": "KEY_COMPROMISE"
-},
-{
-  "awsAccountId": "123456789012",
-  "certificateArn": "arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/2bae9a75d71b42b4e41e36f8b4b488fc",
-  "serial": "2b:ae:9a:75:d7:1b:42:b4:e4:1e:36:f8:b4:b4:88:fc",
-  "Subject": "1.2.840.113549.1.9.1=#161970726f64407777772e70616c6f75736573616c65732e636f6d,CN=www.example3.com.com,OU=Sales,O=Example Company,L=Seattle,ST=Washington,C=US",
-  "notBefore": "2018-01-22T20:10:49+0000",
-  "notAfter": "2019-01-17T21:10:49+0000",
-  "issuedAt": "2018-01-22T21:10:49+0000"
-}]
+[
+   {
+      "awsAccountId":"account",
+      "certificateArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID",
+      "serial":"serial_number",
+      "Subject":"1.2.840.113549.1.9.1=#161173616c6573406578616d706c652e636f6d,CN=www.example1.com,OU=Sales,O=Example Company,L=Seattle,ST=Washington,C=US",
+      "notBefore":"2018-02-26T18:39:57+0000",
+      "notAfter":"2019-02-26T19:39:57+0000",
+      "issuedAt":"2018-02-26T19:39:58+0000",
+      "revokedAt":"2018-02-26T20:00:36+0000",
+      "revocationReason":"KEY_COMPROMISE"
+   },
+   {
+      "awsAccountId":"account",
+      "certificateArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID",
+      "serial":"serial_number",
+      "Subject":"1.2.840.113549.1.9.1=#161970726f64407777772e70616c6f75736573616c65732e636f6d,CN=www.example3.com.com,OU=Sales,O=Example Company,L=Seattle,ST=Washington,C=US",
+      "notBefore":"2018-01-22T20:10:49+0000",
+      "notAfter":"2019-01-17T21:10:49+0000",
+      "issuedAt":"2018-01-22T21:10:49+0000"
+   }
+]
 ```

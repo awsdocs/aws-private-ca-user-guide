@@ -1,4 +1,4 @@
-# Issuing a Certificate<a name="CT-IssueCertificate"></a>
+# Issuing a certificate<a name="CT-IssueCertificate"></a>
 
 The following CloudTrail example shows the results of a call to the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\.
 
@@ -16,10 +16,10 @@ The following CloudTrail example shows the results of a call to the [IssueCertif
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"IssueCertificate",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"xIP_address",
    "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
       "csr":{
          "hb":[
             45,
@@ -44,10 +44,10 @@ The following CloudTrail example shows the results of a call to the [IssueCertif
       "idempotencyToken":"1234"
    },
    "responseElements":{
-      "certificateArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/6707447683a9b7f4055627ffd55cebcc"
+      "certificateArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID"
    },
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

@@ -4,7 +4,7 @@ You can use [Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWa
 
 CloudWatch Events are turned into actions using Amazon EventBridge\. With EventBridge, you can use events to trigger targets including AWS Lambda functions, AWS Batch jobs, Amazon SNS topics, and many others\. For more information, see [What Is Amazon EventBridge?](https://docs.aws.amazon.com/eventbridge/latest/userguide/what-is-amazon-eventbridge.html)
 
-## Success or Failure when Creating a Private CA<a name="cwe-issue-CA"></a>
+## Success or failure when creating a private CA<a name="cwe-issue-CA"></a>
 
 These events are triggered by the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
 
@@ -14,14 +14,14 @@ On success, the operation returns the ARN of the new CA\.
 ```
 {
    "version":"0",
-   "id":"93c0a8a5-3879-ee03-597f-5e2example18",
+   "id":"event_ID",
    "detail-type":"ACM Private CA Creation",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-04T19:14:56Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    ],
    "detail":{
       "result":"success"
@@ -35,14 +35,14 @@ On failure, the operation returns an ARN for the CA\. Using the ARN, you can cal
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA Creation",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-04T19:14:56Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    ],
    "detail":{
       "result":"failure"
@@ -50,7 +50,7 @@ On failure, the operation returns an ARN for the CA\. Using the ARN, you can cal
 }
 ```
 
-## Success or Failure When Issuing a Certificate<a name="cwe-issue-cert"></a>
+## Success or failure when issuing a certificate<a name="cwe-issue-cert"></a>
 
 These events are triggered by the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\.
 
@@ -60,15 +60,15 @@ On success, the operation returns the ARNs of the CA and of the new certificate\
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA Certificate Issuance",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-04T19:57:46Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/b845c374b495cbexamplec4c81cc4043"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID"
    ],
    "detail":{
       "result":"success"
@@ -82,15 +82,15 @@ On failure, the operation returns a certificate ARN and the ARN of the CA\. With
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA Certificate Issuance",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-04T19:57:46Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/b845c374b495cb67dac7ac4c81cc4043"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID"
    ],
    "detail":{
       "result":"failure"
@@ -98,7 +98,7 @@ On failure, the operation returns a certificate ARN and the ARN of the CA\. With
 }
 ```
 
-## Success When Revoking a Certificate<a name="cwe-revocation"></a>
+## Success when revoking a certificate<a name="cwe-revocation"></a>
 
 This event is triggered by the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) operation\.
 
@@ -110,15 +110,15 @@ On success, the operation returns the ARNs of the CA and of the revoked certific
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA Certificate Revocation",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-05T20:25:19Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/d2196bfeef09b5b2088b205EXAMPLEd4"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID"
    ],
    "detail":{
       "result":"success"
@@ -126,7 +126,7 @@ On success, the operation returns the ARNs of the CA and of the revoked certific
 }
 ```
 
-## Success or Failure When Generating a CRL<a name="cwe-CRL"></a>
+## Success or failure when generating a CRL<a name="cwe-CRL"></a>
 
 These events are triggered by the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) operation, which should result in the creation of a certificate revocation list \(CRL\)\.
 
@@ -136,14 +136,14 @@ On success, the operation returns the ARN of the CA associated with the CRL\.
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA CRL Generation",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-04T21:07:08Z",
    "region":"region1",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    ],
    "detail":{
       "result":"success"
@@ -157,14 +157,14 @@ Check your Amazon S3 bucket permissions if this error occurs\.
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA CRL Generation",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-07T23:01:25Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    ],
    "detail":{
       "result":"failure",
@@ -179,14 +179,14 @@ Retry the operation if this error occurs\.
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA CRL Generation",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-07T23:01:25Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    ],
    "detail":{
       "result":"failure",
@@ -201,14 +201,14 @@ To troubleshoot this error, check your [CloudWatch metrics](https://docs.aws.ama
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA CRL Generation",
    "source":"aws.acm-pca",
    "account":"1account",
    "time":"2019-11-07T23:01:25Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    ],
    "detail":{
       "result":"failure",
@@ -217,7 +217,7 @@ To troubleshoot this error, check your [CloudWatch metrics](https://docs.aws.ama
 }
 ```
 
-## Success or Failure When Creating a CA Audit Report<a name="cwe-audit"></a>
+## Success or failure when creating a CA audit report<a name="cwe-audit"></a>
 
 These events are triggered by the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
 
@@ -227,15 +227,15 @@ On success, the operation returns the ARN of the CA and the ID of the audit repo
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA Audit Report Generation",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-04T21:54:20Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
-      "01234567-89ab-cdef-0123-456789abcdef"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+      "audit_report_ID"
    ],
    "detail":{
       "result":"success"
@@ -249,15 +249,15 @@ An audit report can fail when ACM PCA lacks `PUT` permissions on your Amazon S3 
 ```
 {
    "version":"0",
-   "id":"01234567-89ab-cdef-0123-456789abcdef",
+   "id":"event_ID",
    "detail-type":"ACM Private CA Audit Report Generation",
    "source":"aws.acm-pca",
    "account":"account",
    "time":"2019-11-04T21:54:20Z",
    "region":"region",
    "resources":[
-      "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
-      "01234567-89ab-cdef-0123-456789abcdef"
+      "arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+      "audit_report_ID"
    ],
    "detail":{
       "result":"failure"

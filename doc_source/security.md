@@ -9,9 +9,9 @@ Security is a shared responsibility between AWS and you\. The [shared responsibi
 This documentation helps you understand how to apply the shared responsibility model when using ACM Private CA\. The following topics show you how to configure ACM Private CA to meet your security and compliance objectives\. You also learn how to use other AWS services that help you to monitor and secure your ACM Private CA resources\. 
 
 **Topics**
-+ [Data Protection in AWS Certificate Manager Private Certificate Authority](data-protection.md)
++ [Data protection in AWS Certificate Manager Private Certificate Authority](data-protection.md)
 + [Identity and Access Management for AWS Certificate Manager Private Certificate Authority](security-iam.md)
-+ [Cross\-Account Access to Private CAs](pca-resource-sharing.md)
-+ [Logging and Monitoring for AWS Certificate Manager Private Certificate Authority](security-logging-and-monitoring.md)
-+ [Compliance Validation for AWS Certificate Manager Private Certificate Authority](security-compliance-validation.md)
-+ [Infrastructure Security in AWS Certificate Manager Private Certificate Authority](infrastructure-security.md)
++ [Cross\-account access to private CAs](pca-resource-sharing.md)
++ [Logging and monitoring for AWS Certificate Manager Private Certificate Authority](security-logging-and-monitoring.md)
++ [Compliance validation for AWS Certificate Manager Private Certificate Authority](security-compliance-validation.md)
++ [Infrastructure security in AWS Certificate Manager Private Certificate Authority](infrastructure-security.md)

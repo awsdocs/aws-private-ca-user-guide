@@ -1,4 +1,4 @@
-# What Is ACM Private CA?<a name="PcaWelcome"></a>
+# What is ACM Private CA?<a name="PcaWelcome"></a>
 
 ACM Private CA enables creation of private certificate authority \(CA\) hierarchies, including root and subordinate CAs, without the investment and maintenance costs of operating an on\-premises CA\. Your private CAs can issue end\-entity X\.509 certificates useful in scenarios including:
 + Creating encrypted TLS communication channels 
@@ -8,7 +8,7 @@ ACM Private CA enables creation of private certificate authority \(CA\) hierarch
 
 ACM Private CA operations can be accessed from the AWS Management Console, using the ACM Private CA API, or using the AWS CLI\.
 
-## What is the Best Certificate Service for my Needs?<a name="service-options"></a>
+## What is the best certificate service for my needs?<a name="service-options"></a>
 
 There are two AWS services for issuing and deploying X\.509 certificates\. Choose the one that best fits your needs\. Considerations include whether you need public\- or private\-facing certificates, customized certificates, certificates you want to deploy into other AWS services, or automated certificate management and renewal\.
 
@@ -33,10 +33,10 @@ There are two AWS services for issuing and deploying X\.509 certificates\. Choos
 
 [Regions](PcaRegions.md)
 
-[Integrated Services](PcaIntegratedServices.md)
+[Integrated services](PcaIntegratedServices.md)
 
 [Quotas](PcaLimits.md)
 
-[RFC Compliance](RFC-compliance.md)
+[RFC compliance](RFC-compliance.md)
 
 [Pricing](PcaPricing.md)

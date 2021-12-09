@@ -56,7 +56,7 @@ public class GetPolicy {
         GetPolicyRequest req = new GetPolicyRequest();
 
         // Set the resource ARN.
-        req.withResourceArn("arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012");
+        req.withResourceArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
         // Retrieve a list of your CAs.
         GetPolicyResult result= null;

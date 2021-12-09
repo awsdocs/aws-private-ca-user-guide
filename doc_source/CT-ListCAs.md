@@ -1,4 +1,4 @@
-# Listing Certificate Authorities<a name="CT-ListCAs"></a>
+# Listing certificate authorities<a name="CT-ListCAs"></a>
 
 The following CloudTrail example shows the results of a call to the [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html) operation\.
 
@@ -16,14 +16,14 @@ The following CloudTrail example shows the results of a call to the [ListCertifi
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"ListCertificateAuthorities",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "requestParameters":{
       "maxResults":10
    },
    "responseElements":null,
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

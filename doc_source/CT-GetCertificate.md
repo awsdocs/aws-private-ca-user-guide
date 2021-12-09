@@ -1,4 +1,4 @@
-# Retrieving a Certificate<a name="CT-GetCertificate"></a>
+# Retrieving a certificate<a name="CT-GetCertificate"></a>
 
 The following CloudTrail example shows the results of a call to the [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) operation\.
 
@@ -16,15 +16,15 @@ The following CloudTrail example shows the results of a call to the [GetCertific
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"GetCertificate",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
-      "certificateArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef/certificate/6707447683a9b7f4055627ffd55cebcc"
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+      "certificateArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID"
    },
    "responseElements":null,
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

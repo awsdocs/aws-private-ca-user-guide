@@ -1,4 +1,4 @@
-# Create and Activate a Subordinate CA Programmatically<a name="JavaApi-ActivateSubordinateCA"></a>
+# Create and activate a subordinate CA programmatically<a name="JavaApi-ActivateSubordinateCA"></a>
 
 This Java sample shows how to activate a subordinate CA using the following ACM Private CA API actions:
 + [GetCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html)
@@ -73,7 +73,7 @@ public class SubordinateCAActivation {
 
     public static void main(String[] args) throws Exception {
         // Place your own Root CA ARN here.
-        String rootCAArn = "arn:aws:acm-pca:region:123456789012:certificate-authority/12345678-1234-1234-1234-123456789012";
+        String rootCAArn = "arn:aws:acm-pca:region:account:certificate-authority/CA_ID";
 
         // Define the endpoint region for your sample.
         String endpointRegion = "region"; // Substitute your region here, e.g. "us-west-2"

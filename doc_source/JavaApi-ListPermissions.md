@@ -53,8 +53,7 @@ public class ListPermissions {
 
       // Create a request object and set the CA ARN.
       ListPermissionsRequest req = new ListPermissionsRequest();
-      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-          "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
       // List the tags.
       ListPermissionsResult result = null;

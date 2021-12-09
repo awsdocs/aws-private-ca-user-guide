@@ -1,4 +1,4 @@
-# Importing a Certificate Authority Certificate<a name="CT-ImportCACertificate"></a>
+# Importing a certificate authority certificate<a name="CT-ImportCACertificate"></a>
 
 The following CloudTrail example shows the results of a call to the [ImportCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html) operation\.
 
@@ -16,10 +16,10 @@ The following CloudTrail example shows the results of a call to the [ImportCerti
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"ImportCertificateAuthorityCertificate",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
       "certificate":{
          "hb":[
             45,
@@ -54,8 +54,8 @@ The following CloudTrail example shows the results of a call to the [ImportCerti
       }
    },
    "responseElements":null,
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

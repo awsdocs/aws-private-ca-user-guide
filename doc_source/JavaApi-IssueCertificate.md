@@ -5,7 +5,7 @@ The following Java sample shows how to use the [IssueCertificate](https://docs.a
 This operation uses your private certificate authority \(CA\) to issue an end\-entity certificate\. This operation returns the Amazon Resource Name \(ARN\) of the certificate\. You can retrieve the certificate by calling the [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) and specifying the ARN\.
 
 **Note**  
-The [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation requires you to specify a certificate template\. This example uses the `EndEntityCertificate/V1` template\. For information about all of the available templates, see [Understanding Certificate Templates](UsingTemplates.md)\.
+The [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation requires you to specify a certificate template\. This example uses the `EndEntityCertificate/V1` template\. For information about all of the available templates, see [Understanding certificate templates](UsingTemplates.md)\.
 
 ```
 package com.amazonaws.samples;
@@ -72,8 +72,7 @@ public class IssueCertificate {
       IssueCertificateRequest req = new IssueCertificateRequest();
 
       // Set the CA ARN.
-      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-            "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
       // Specify the certificate signing request (CSR) for the certificate to be signed and issued.
       String strCSR =
@@ -126,5 +125,5 @@ public class IssueCertificate {
 Your output should be similar to the following:
 
 ```
-arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/2669d5cacb539c0830998c23babab8dc
+arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID
 ```

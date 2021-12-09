@@ -69,8 +69,7 @@ public class TagCertificateAuthorities {
 
       // Create a request object and specify the certificate authority ARN.
       TagCertificateAuthorityRequest req = new TagCertificateAuthorityRequest();
-      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-          "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
       req.setTags(tags);
 
       // Add a tag

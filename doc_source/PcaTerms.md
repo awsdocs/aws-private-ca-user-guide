@@ -229,7 +229,7 @@ In order for a web browser to trust the identity of a website, the browser must 
 
 X\.500 distinguished names \(DN\) are used to identify users, computers, applications, services, servers, and other devices in the X\.509 public key certificates that ACM Private CA creates\. This includes private certificates and private CA certificates\. Common fields include the following: 
 + **organizationName \(O\)** – Name of the organization that issued or is the subject of a certificate
-+ **organiztionUnit \(OU\)** – Department or division within an organization
++ **organizationUnit \(OU\)** – Department or division within an organization
 + **country \(C\)** – Two letter country code
 + **stateName \(S\)** – Name of a state or province such as Kansas
 + **localityName \(L\)** – Locality name such as Seattle

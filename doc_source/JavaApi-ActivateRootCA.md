@@ -1,4 +1,4 @@
-# Create and Activate a Root CA Programmatically<a name="JavaApi-ActivateRootCA"></a>
+# Create and activate a root CA programmatically<a name="JavaApi-ActivateRootCA"></a>
 
 This Java sample shows how to activate a root CA using the following ACM Private CA API actions:
 + [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)

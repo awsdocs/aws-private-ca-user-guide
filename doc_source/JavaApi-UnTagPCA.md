@@ -62,8 +62,7 @@ public class UntagCertificateAuthority {
 
       // Create a request object and specify the certificate authority ARN.
       UntagCertificateAuthorityRequest req = new UntagCertificateAuthorityRequest();
-      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-            "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
       req.withTags(tags);
 
       // Delete the tag

@@ -1,4 +1,4 @@
-# Deleting a Certificate Authority<a name="CT-DeleteCA"></a>
+# Deleting a certificate authority<a name="CT-DeleteCA"></a>
 
 The following CloudTrail example shows the results of a call to the [DeleteCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthority.html) operation\. In this example, the certificate authority cannot be deleted because it is in the `ACTIVE` state\. 
 
@@ -16,16 +16,16 @@ The following CloudTrail example shows the results of a call to the [DeleteCerti
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"DeleteCertificateAuthority",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "errorCode":"InvalidStateException",
    "errorMessage":"The certificate authority is not in a valid state for deletion.",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:rregion:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    },
    "responseElements":null,
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

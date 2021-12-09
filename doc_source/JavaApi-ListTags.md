@@ -50,8 +50,7 @@ public class ListTags {
 
       // Create a request object and set the CA ARN.
       ListTagsRequest req = new ListTagsRequest();
-      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-          "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
       // List the tags
       ListTagsResult result = null;

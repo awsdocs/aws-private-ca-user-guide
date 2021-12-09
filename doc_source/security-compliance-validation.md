@@ -1,4 +1,4 @@
-# Compliance Validation for AWS Certificate Manager Private Certificate Authority<a name="security-compliance-validation"></a>
+# Compliance validation for AWS Certificate Manager Private Certificate Authority<a name="security-compliance-validation"></a>
 
 Third\-party auditors assess the security and compliance of AWS Certificate Manager Private Certificate Authority as part of multiple AWS compliance programs\. These include SOC, PCI, FedRAMP, HIPAA, and others\.
 

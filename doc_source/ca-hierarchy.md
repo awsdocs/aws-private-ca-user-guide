@@ -1,4 +1,4 @@
-# Designing a CA Hierarchy<a name="ca-hierarchy"></a>
+# Designing a CA hierarchy<a name="ca-hierarchy"></a>
 
 With ACM Private CA, you can create a hierarchy of certificate authorities with up to five levels\. The root CA, at the top of a hierarchy tree, can have any number of branches\. The root CA can have as many as four levels of subordinate CAs on each branch\. You can also create multiple hierarchies, each with its own root\. 
 
@@ -24,11 +24,11 @@ When a certificate revocation list \(CRL\) or Online Certificate Status Protocol
 Root and other high\-level CAs require highly secure operational processes and access\-control protocols\.
 
 **Topics**
-+ [Validating End\-Entity Certificates](#end-entity-validation)
-+ [Planning the Structure of a CA Hierarchy](#ca-layers)
-+ [Setting Length Constraints on the Certification Path](#length-constraints)
++ [Validating end\-entity certificates](#end-entity-validation)
++ [Planning the structure of a CA hierarchy](#ca-layers)
++ [Setting length constraints on the certification path](#length-constraints)
 
-## Validating End\-Entity Certificates<a name="end-entity-validation"></a>
+## Validating end\-entity certificates<a name="end-entity-validation"></a>
 
 End\-entity certificates derive their trust from a certification path leading back through the subordinate CAs to a root CA\. When a web browser or other client is presented with an end\-entity certificate, it attempts to construct a chain of trust\. For example, it may check to see that the certificate's *issuer distinguished name* and *subject distinguished name* match with the corresponding fields of the issuing CA certificate\. Matching would continue at each successive level up the hierarchy until the client reaches a trusted root that is contained in its trust store\. 
 
@@ -42,7 +42,7 @@ The browser inspects the end\-entity certificate\. The browser finds that the ce
 
 Typically, the browser also checks each certificate against a certificate revocation list \(CRL\)\. An expired, revoked, or misconfigured certificate is rejected and validation fails\.
 
-## Planning the Structure of a CA Hierarchy<a name="ca-layers"></a>
+## Planning the structure of a CA hierarchy<a name="ca-layers"></a>
 
 In general, your CA hierarchy should reflect the structure of your organization\. Aim for a *depth* \(that is, number of CA levels\) no greater than necessary to delegate administrative and security roles\. Adding a CA to the hierarchy means increasing the number of certificates in the certification path, which increases validation time\. Keeping the depth to a minimum also reduces the number of certificates sent from the server to the client when establishing trust\. A smaller depth also decreases the amount of work that a client performs to validate an end\-entity certificate\.
 
@@ -71,7 +71,7 @@ Less common CA structures include the following:
 
   However, if you are already issuing certificates directly from a root CA, you can migrate to ACM Private CA\. Doing so provides security and control advantages over using a root CA managed with OpenSSL or other software\.
 
-### Example of a Private PKI for a Manufacturer<a name="sample-hierarchy"></a>
+### Example of a private PKI for a manufacturer<a name="sample-hierarchy"></a>
 
 In this example, a hypothetical technology company manufactures two Internet of Things \(IoT\) products, a smart light bulb and a smart toaster\. During production, each device is issued an end\-entity certificate so it can communicate securely over the internet with the manufacturer\. The company's PKI also secures its computer infrastructure, including the internal website and various self\-hosted computer services that run finance and business operations\. 
 
@@ -85,7 +85,7 @@ The use of separated root CAs and additional depth on the External Operations si
 
 On the internal side, corporate web and internal computer operations complete a two\-level hierarchy\. These levels allow web administrators and operations engineers to manage certificate issuance independently for their own work domains\. The compartmentalization of PKI into distinct functional domains is a security best practice and protects each from a compromise that might affect the other\. Web administrators issue end\-entity certificates for use by web browsers throughout the company, authenticating and encrypting communications on the internal website\. Operations engineers issue end\-entity certificates that authenticate data center hosts and computer services to one another\. This system helps keep sensitive data secure by encrypting it on the LAN\.
 
-## Setting Length Constraints on the Certification Path<a name="length-constraints"></a>
+## Setting length constraints on the certification path<a name="length-constraints"></a>
 
 The structure of a CA hierarchy is defined and enforced by the *basics constraints extension* that each certificate contains\. The extension defines two constraints:
 + `cA` – Whether the certificate defines a CA\. If this value is *false* \(the default\), then the certificate is an end\-entity certificate\.
@@ -104,7 +104,7 @@ The following diagram illustrates this propagation of limited authority down the
 
 In this four\-level hierarchy, the root is unconstrained \(as always\)\. But the first subordinate CA has a `pathLenConstraint` value of 2, which limits its child CAs from going more than two levels deeper\. Consequently, for a valid certification path, the constraint value must decrement to zero in the next two levels\. If a web browser encounters an end\-entity certificate from this branch that has a path length greater than four, validation fails\. Such a certificate could be the result of an accidentally created CA, a misconfigured CA, or a unauthorized issuance\.
 
-### Managing Depth with Templates<a name="template-depth"></a>
+### Managing depth with templates<a name="template-depth"></a>
 
 ACM Private CA provides templates for issuing root, subordinate, and end\-entity certificates\. These templates encapsulate best practices for the basic constraints values, including path length\. The templates include the following:
 + RootCACertificate/V1
@@ -116,8 +116,8 @@ ACM Private CA provides templates for issuing root, subordinate, and end\-entity
 
 The `IssueCertificate` API will return an error if you attempt to create a CA with a path length greater than or equal to the path length of its issuing CA certificate\.
 
-For more information about certificate templates, see [Understanding Certificate Templates](UsingTemplates.md)\.
+For more information about certificate templates, see [Understanding certificate templates](UsingTemplates.md)\.
 
-### Automating CA Hierarchy Setup with AWS CloudFormation<a name="using-cloudformation"></a>
+### Automating CA hierarchy setup with AWS CloudFormation<a name="using-cloudformation"></a>
 
-Once you have settled on a design for your CA hierarchy, you can test it and put it into production using a AWS CloudFormation template\. For an example of such a template, see [Declaring a Private CA Hierarchy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-acmpca-certificateauthority.html#aws-resource-acmpca-certificateauthority--examples) in the *AWS CloudFormation User Guide*\.
+When you have settled on a design for your CA hierarchy, you can test it and put it into production using a AWS CloudFormation template\. For an example of such a template, see [Declaring a Private CA Hierarchy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-acmpca-certificateauthority.html#aws-resource-acmpca-certificateauthority--examples) in the *AWS CloudFormation User Guide*\.

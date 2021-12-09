@@ -1,4 +1,4 @@
-# Listing Tags<a name="CT-ListTags"></a>
+# Listing tags<a name="CT-ListTags"></a>
 
 The following CloudTrail example shows the results of a call to the [ListTags](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListTags.html) operation\.
 
@@ -16,10 +16,10 @@ The following CloudTrail example shows the results of a call to the [ListTags](h
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"ListTags",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    },
    "responseElements":{
       "tags":[
@@ -33,8 +33,8 @@ The following CloudTrail example shows the results of a call to the [ListTags](h
          }
       ]
    },
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

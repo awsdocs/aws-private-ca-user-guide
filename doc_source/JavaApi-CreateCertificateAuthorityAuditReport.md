@@ -57,8 +57,7 @@ public class CreateCertificateAuthorityAuditReport {
           new CreateCertificateAuthorityAuditReportRequest();
 
       // Set the certificate authority ARN.
-      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-            "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
       // Specify the S3 bucket name for your report.
       req.setS3BucketName("your-bucket-name");

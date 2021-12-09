@@ -61,8 +61,7 @@ public class CreatePermission {
           new CreatePermissionRequest();
           
       //  Set the certificate authority ARN.
-      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-            "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
             
       // Set the permissions to give the user.
       ArrayList<String> permissions = new ArrayList<>();

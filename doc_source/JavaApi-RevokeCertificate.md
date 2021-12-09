@@ -56,8 +56,7 @@ public class RevokeCertificate {
       RevokeCertificateRequest req = new RevokeCertificateRequest();
 
       // Set the certificate authority ARN.
-      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-            "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.setCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
       // Set the certificate serial number.
       req.setCertificateSerial("79:3f:0d:5b:6a:04:12:5e:2c:9c:fb:52:37:35:98:fe");

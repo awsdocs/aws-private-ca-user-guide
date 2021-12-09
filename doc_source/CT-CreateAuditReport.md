@@ -1,4 +1,4 @@
-# Creating an Audit Report<a name="CT-CreateAuditReport"></a>
+# Creating an audit report<a name="CT-CreateAuditReport"></a>
 
 The following CloudTrail example shows the results of a call to the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
 
@@ -16,19 +16,19 @@ The following CloudTrail example shows the results of a call to the [CreateCerti
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"CreateCertificateAuthorityAuditReport",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"IP_address",
    "userAgent":"agent",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef",
-      s3BucketName:"your-bucket-name",
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+      s3BucketName:"bucket_name",
       "auditReportResponseFormat":"JSON"
    },
    "responseElements":{
-      "auditReportId":"01234567-89ab-cdef-0123-456789abcdef",
-      s3Key:"audit-report/01234567-89ab-cdef-0123-456789abcdef/01234567-89ab-cdef-0123-456789abcdef.json"
+      "auditReportId":"report_ID",
+      s3Key:"audit-report/CA_ID/audit_report_ID.json"
    },
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

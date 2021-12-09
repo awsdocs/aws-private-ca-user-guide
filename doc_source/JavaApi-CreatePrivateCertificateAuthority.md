@@ -152,5 +152,5 @@ public class CreateCertificateAuthority {
 Your output should be similar to the following:
 
 ```
-arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+arn:aws:acm-pca:region:account:certificate-authority/CA_ID
 ```

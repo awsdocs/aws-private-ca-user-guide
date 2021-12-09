@@ -63,7 +63,7 @@ public class PutPolicy {
         PutPolicyRequest req = new PutPolicyRequest();
 
         // Set the resource ARN.
-        req.withResourceArn("arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012");
+        req.withResourceArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
 
         // Import and set the policy.
         // Note: This code assumes the file "ShareResourceWithAccountPolicy.json" is in a folder titled policy.

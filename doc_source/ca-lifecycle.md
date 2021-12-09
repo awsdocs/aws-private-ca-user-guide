@@ -1,8 +1,8 @@
-# Managing the Private CA Lifecycle<a name="ca-lifecycle"></a>
+# Managing the private CA lifecycle<a name="ca-lifecycle"></a>
 
 CA certificates have a fixed lifetime, or validity period\. When a CA certificate expires, all of the certificates issued directly or indirectly by subordinate CAs below it in the CA hierarchy become invalid\. You can avoid CA certificate expiration by planning in advance\. 
 
-## Choosing Validity Periods<a name="ca-validity-period"></a>
+## Choosing validity periods<a name="ca-validity-period"></a>
 
 The validity period of an X\.509 certificate is a required basic certificate field\. It determines the time\-range during which the issuing CA certifies that the certificate can be trusted, barring revocation\. \(A root certificate, being self\-signed, certifies its own validity period\.\) 
 
@@ -29,15 +29,15 @@ Subordinate CA certificates should have significantly longer validity periods th
 **Root Certificates**  
 Changes to a root CA certificate affect the entire PKI \(public key infrastructure\) and require you to update all the dependent client operating system and browser trust stores\. To minimize operational impact, you should choose a long validity period for the root certificate\. The ACM Private CA default for root certificates is ten years\.
 
-## Managing CA Succession<a name="ca-succession"></a>
+## Managing CA succession<a name="ca-succession"></a>
 
 You have two ways to manage CA succession: Replace the old CA, or reissue the CA with a new validity period\.
 
-### Replacing an Old CA<a name="replace-ca-cert"></a>
+### Replacing an old CA<a name="replace-ca-cert"></a>
 
 To replace an old CA, you create a new CA and chain it to the same parent CA\. Afterward, you issue certificates from the new CA\. 
 
-Certificates issued from the new CA have a new CA chain\. Once the new CA is established, you can disable the old CA to prevent it from issuing new certificates\. While disabled, the old CA supports revocation for old certificates issued from the CA, and it continues to generate certificate revocation lists \(CRLs\)\. When the last certificate issued from the old CA expires, you can delete the old CA\. You can generate an audit report for all of the certificates issued from the CA to confirm that all of the certificates issued have expired\. If the old CA has subordinate CAs, you must also replace them, because subordinate CAs expire at the same time or before their parent CA\. Start by replacing the highest CA in the hierarchy that needs to be replaced\. Then create new replacement subordinate CAs at each subsequent lower level\. 
+Certificates issued from the new CA have a new CA chain\. Once the new CA is established, you can disable the old CA to prevent it from issuing new certificates\. While disabled, the old CA supports revocation for old certificates issued from the CA, and, if configured to do so, it continues to validate certificates by means of OCSP and/or certificate revocation lists \(CRLs\)\. When the last certificate issued from the old CA expires, you can delete the old CA\. You can generate an audit report for all of the certificates issued from the CA to confirm that all of the certificates issued have expired\. If the old CA has subordinate CAs, you must also replace them, because subordinate CAs expire at the same time or before their parent CA\. Start by replacing the highest CA in the hierarchy that needs to be replaced\. Then create new replacement subordinate CAs at each subsequent lower level\. 
 
 AWS recommends that you include a CA generation identifier in the names of CAs as needed\. For example, assume that you name the first generation CA “Corporate Root CA\." When you create the second generation CA, name it “Corporate Root CA G2\." This simple naming convention can help avoid confusion when both CAs are unexpired\.
 
@@ -48,4 +48,4 @@ Private certificates issued through ACM cannot be renewed if you replace the CA\
 
 ## Revoking a CA<a name="ca-revoke"></a>
 
-When you revoke a CA certificate, you effectively revoke all of the certificates issued by the CA\. Revocation information is distributed to clients via the CRL\. Clients will stop trusting certificates issued by the CA as soon as they receive the updated CRL\. You should revoke a CA certificate only if you want to effectively revoke all of the end\-entity and CA certificates\.
+You revoke a CA by revoking its underlying certificate\. This also effectively revokes all of the certificates issued by the CA\. Revocation information is distributed to clients by means of [OCSP or a CRL](revocation-setup.md)\. You should revoke a CA certificate only if you want to revoke all of its issued end\-entity and subordinate CA certificates\.

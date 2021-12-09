@@ -1,4 +1,4 @@
-# Restoring a Certificate Authority<a name="CT-RestoreCA"></a>
+# Restoring a certificate authority<a name="CT-RestoreCA"></a>
 
 The following CloudTrail example shows the results of a call to the [RestoreCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RestoreCertificateAuthority.html) operation\. In this example, the certificate authority cannot be restored because it is not in the `DELETED` state\. 
 
@@ -16,16 +16,16 @@ The following CloudTrail example shows the results of a call to the [RestoreCert
    "eventSource":"acm-pca.amazonaws.com",
    "eventName":"RestoreCertificateAuthority",
    "awsRegion":"region",
-   "sourceIPAddress":"xx.xx.xx.xx",
+   "sourceIPAddress":"xIP_address",
    "userAgent":"agent",
    "errorCode":"InvalidStateException",
    "errorMessage":"The certificate authority is not in a valid state for restoration.",
    "requestParameters":{
-      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+      "certificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
    },
    "responseElements":null,
-   "requestID":"01234567-89ab-cdef-0123-456789abcdef",
-   "eventID":"01234567-89ab-cdef-0123-456789abcdef",
+   "requestID":"request_ID",
+   "eventID":"event_ID",
    "eventType":"AwsApiCall",
    "recipientAccountId":"account"
 }

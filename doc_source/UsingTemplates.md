@@ -1,18 +1,23 @@
-# Understanding Certificate Templates<a name="UsingTemplates"></a>
+# Understanding certificate templates<a name="UsingTemplates"></a>
 
 ACM Private CA uses configuration templates to issue both CA certificates and end\-entity certificates\. When you issue a CA certificate from the PCA console, the appropriate root or subordinate CA certificate template is applied automatically\. 
 
 If you use the CLI or API to issue a certificate, you can supply a template ARN as a parameter to the `IssueCertificate` action\. If you provide no ARN, then the `EndEntityCertificate/V1` template is applied by default\. For more information, see the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) API and [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) command documentation\.
 
 **Note**  
-Cross\-account certificate issuers are constrained by a [resource\-based policy](pca-rbp.md) and have access only to the `EndEntityCertificate/V1` template\.
+AWS Certificate Manager \(ACM\) users with cross\-account shared access to a private CA can issue managed certificates that are signed by the CA\. Cross\-account issuers are constrained by a resource\-based policy and have access only to the following end\-entity certificate templates:  
+[EndEntityCertificate/V1](#EndEntityCertificate-V1)
+[EndEntityClientAuthCertificate/V1](#EndEntityClientAuthCertificate-V1)
+[EndEntityServerAuthCertificate/V1](#EndEntityServerAuthCertificate-V1)
+[BlankEndEntityCertificate\_APICSRPassthrough](#BlankEndEntityCertificate_APICSRPassthrough)
+For more information, see [Resource\-based policies](pca-rbp.md)\.
 
 **Topics**
-+ [Template Varieties](#template-varieties)
-+ [Template Order of Operations](#template-order-of-operations)
-+ [Template Definitions](#template-definitions)
++ [Template varieties](#template-varieties)
++ [Template order of operations](#template-order-of-operations)
++ [Template definitions](#template-definitions)
 
-## Template Varieties<a name="template-varieties"></a>
+## Template varieties<a name="template-varieties"></a>
 
 ACM Private CA supports four varieties of template\.
 + **Base templates**
@@ -20,15 +25,15 @@ ACM Private CA supports four varieties of template\.
   Pre\-defined templates in which no passthrough parameters are allowed\.
 + **CSRPassthrough templates**
 
-  Templates that extend their corresponding base template versions by allowing CSR passthrough\. Extensions in the CSR that is used to issue the certificate are copied over to the issued certificate\. In cases where the CSR contains extension values that conflict with the template definition, the template definition will always have the higher priority\. For more details about priority, see [Template Order of Operations](#template-order-of-operations)\.
+  Templates that extend their corresponding base template versions by allowing CSR passthrough\. Extensions in the CSR that is used to issue the certificate are copied over to the issued certificate\. In cases where the CSR contains extension values that conflict with the template definition, the template definition will always have the higher priority\. For more details about priority, see [Template order of operations](#template-order-of-operations)\.
 + **APIPassthrough templates**
 
   Templates that extend their corresponding base template versions by allowing API passthrough\. Dynamic values that are known to the administrator or other intermediate systems may not be known by the entity requesting the certificate, may be impossible to define in a template, and may not be available in the CSR\. The CA administrator, however, can retrieve additional information from another data source, such as an Active Directory, to complete the request\. For example, if a machine doesn't know what organization unit it belongs to, the administrator can look up the information in Active Directory and add it to the certificate request by including the information in a JSON structure\.
 
-  Values in the `ApiPassthrough` parameter of the `IssueCertificate` action ``are copied over to the issued certificate\. In cases where the `ApiPassthrough` parameter contains information that conflicts with the template definition, the template definition will always have the higher priority\. For more details about priority, see [Template Order of Operations](#template-order-of-operations)\. 
+  Values in the `ApiPassthrough` parameter of the `IssueCertificate` action ``are copied over to the issued certificate\. In cases where the `ApiPassthrough` parameter contains information that conflicts with the template definition, the template definition will always have the higher priority\. For more details about priority, see [Template order of operations](#template-order-of-operations)\. 
 + **APICSRPassthrough templates**
 
-  Templates that extend their corresponding base template versions by allowing both API and CSR passthrough\. Extensions in the CSR used to issue the certificate are copied over to the issued certificate, and values in the `ApiPassthrough` parameter of the `IssueCertificate` action are also copied over \. In cases where the template definition, API passthrough values, and CSR passthrough extensions exhibit a conflict, the template definition has highest priority, followed by the API passthrough values, followed by the CSR passthrough extensions\. For more details about priority, see [Template Order of Operations](#template-order-of-operations)\.
+  Templates that extend their corresponding base template versions by allowing both API and CSR passthrough\. Extensions in the CSR used to issue the certificate are copied over to the issued certificate, and values in the `ApiPassthrough` parameter of the `IssueCertificate` action are also copied over \. In cases where the template definition, API passthrough values, and CSR passthrough extensions exhibit a conflict, the template definition has highest priority, followed by the API passthrough values, followed by the CSR passthrough extensions\. For more details about priority, see [Template order of operations](#template-order-of-operations)\.
 
 The tables below list all of the template types supported by ACM Private CA with links to their definitions\.
 
@@ -36,7 +41,7 @@ The tables below list all of the template types supported by ACM Private CA with
 For information about template ARNs in GovCloud regions, see [AWS Certificate Manager Private Certificate Authority](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/using-govcloud-arns.html#using-govcloud-arn-syntax-acmpca) in the *AWS GovCloud \(US\) User Guide*\.
 
 
-**Base Templates**  
+**Base templates**  
 
 |  Template Name  |  Template ARN  |  Certificate Type  | 
 | --- | --- | --- | 
@@ -52,7 +57,7 @@ For information about template ARNs in GovCloud regions, see [AWS Certificate Ma
 |  [SubordinateCACertificate\_PathLen3/V1](#SubordinateCACertificate_PathLen3-V1)  |  `arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1`  |  CA  | 
 
 
-**CSRPassthrough Templates**  
+**CSRPassthrough templates**  
 
 |  Template Name  |  Template ARN  |  Certificate Type  | 
 | --- | --- | --- | 
@@ -73,7 +78,7 @@ For information about template ARNs in GovCloud regions, see [AWS Certificate Ma
 |  [BlankSubordinateCACertificate\_PathLen3\_CSRPassthrough](#BlankSubordinateCACertificate_PathLen3_CSRPassthrough)  |  `arn:aws:acm-pca:::template/BlankSubordinateCACertificate_PathLen3_CSRPassthrough/V1`  |  CA  | 
 
 
-**APIPassthrough Templates**  
+**APIPassthrough templates**  
 
 |  Template Name  |  Template ARN  |  Certificate Type  | 
 | --- | --- | --- | 
@@ -94,7 +99,7 @@ For information about template ARNs in GovCloud regions, see [AWS Certificate Ma
 |  [BlankSubordinateCACertificate\_PathLen3\_APIPassthrough](#BlankSubordinateCACertificate_PathLen3_APIPassthrough)  |  `arn:aws:acm-pca:::template/BlankSubordinateCACertificate_PathLen3_APIPassthrough/V1`  |  CA  | 
 
 
-**APICSRPassthrough Templates**  
+**APICSRPassthrough templates**  
 
 |  Template Name  |  Template ARN  |  Certificate Type  | 
 | --- | --- | --- | 
@@ -113,7 +118,7 @@ For information about template ARNs in GovCloud regions, see [AWS Certificate Ma
 |  [SubordinateCACertificate\_PathLen3\_APICSRPassthrough](#SubordinateCACertificate_PathLen3_APICSRPassthrough)  |  `arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3_APICSRPassthrough/V1`  |  CA  | 
 |  [BlankSubordinateCACertificate\_PathLen3\_APICSRPassthrough](#BlankSubordinateCACertificate_PathLen3_APICSRPassthrough)  |  `arn:aws:acm-pca:::template/BlankSubordinateCACertificate_PathLen3_APICSRPassthrough/V1`  |  CA  | 
 
-## Template Order of Operations<a name="template-order-of-operations"></a>
+## Template order of operations<a name="template-order-of-operations"></a>
 
 Information contained in an issued certificate can come from four sources: the template definition, API passthrough, CSR passthrough, and the CA configuration\.
 
@@ -127,11 +132,11 @@ The template definition nonetheless copies over other values from the CSR, such 
 
 1. The template definition for [EndEntityClientAuthCertificate\_APICSRPassthrough](#EndEntityClientAuthCertificate_APICSRPassthrough) defines the Subject Alternative Name \(SAN\) extension as being copied from the API or CSR\. If the SAN extension is defined in the CSR and provided in the `IssueCertificate`` ApiPassthrough` parameter, the API passthrough value will take priority because API passthrough values take priority over CSR passthrough values\.
 
-## Template Definitions<a name="template-definitions"></a>
+## Template definitions<a name="template-definitions"></a>
 
 The following sections provide configuration details about supported ACM Private CA certificate templates\. 
 
-### BlankEndEntityCertificate\_APIPassthrough/V1 Definition<a name="BlankEndEntityCertificate_APIPassthrough"></a>
+### BlankEndEntityCertificate\_APIPassthrough/V1 definition<a name="BlankEndEntityCertificate_APIPassthrough"></a>
 
 With blank end\-entity certificate templates, you can issue end\-entity certificates with only X\.509 Basic constraints present\. This is the simplest end\-entity certificate that ACM Private CA can issue, but it can be customized using the API structure\. The Basic constraints extension defines whether or not the certificate is a CA certificate\. A blank end\-entity certificate template enforces a value of FALSE for Basic constraints to ensure that an end\-entity certificate is issued and not a CA certificate\.
 
@@ -151,9 +156,9 @@ Blank passthrough templates are useful for issuing smart card certificates that 
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankEndEntityCertificate\_CSRPassthrough/V1 Definition<a name="BlankEndEntityCertificate_CSRPassthrough"></a>
+### BlankEndEntityCertificate\_CSRPassthrough/V1 definition<a name="BlankEndEntityCertificate_CSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankEndEntityCertificate\_CSRPassthrough/V1**  
@@ -169,9 +174,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankEndEntityCertificate\_APICSRPassthrough/V1 Definition<a name="BlankEndEntityCertificate_APICSRPassthrough"></a>
+### BlankEndEntityCertificate\_APICSRPassthrough/V1 definition<a name="BlankEndEntityCertificate_APICSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankEndEntityCertificate\_APICSRPassthrough/V1**  
@@ -187,9 +192,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen0\_CSRPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen0_CSRPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen0\_CSRPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen0_CSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen0\_CSRPassthrough/V1**  
@@ -205,9 +210,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen0\_APICSRPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen0_APICSRPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen0\_APICSRPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen0_APICSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen0\_APICSRPassthrough/V1**  
@@ -223,9 +228,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen0\_APIPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen0_APIPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen0\_APIPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen0_APIPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen0\_APIPassthrough/V1**  
@@ -239,9 +244,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 |  Subject key identifier  |  \[Derived from CSR\]  | 
 |  CRL distribution points\*  |  \[Passthrough from CA configuration\]  | 
 
-### BlankSubordinateCACertificate\_PathLen1\_APIPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen1_APIPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen1\_APIPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen1_APIPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen1\_APIPassthrough/V1**  
@@ -257,9 +262,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen1\_CSRPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen1_CSRPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen1\_CSRPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen1_CSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen1\_CSRPassthrough/V1**  
@@ -275,9 +280,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen1\_APICSRPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen1_APICSRPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen1\_APICSRPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen1_APICSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen1\_APICSRPassthrough/V1**  
@@ -293,9 +298,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen2\_APIPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen2_APIPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen2\_APIPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen2_APIPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen2\_APIPassthrough/V1**  
@@ -311,9 +316,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen2\_CSRPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen2_CSRPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen2\_CSRPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen2_CSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen2\_CSRPassthrough/V1**  
@@ -329,9 +334,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen2\_APICSRPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen2_APICSRPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen2\_APICSRPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen2_APICSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen2\_APICSRPassthrough/V1**  
@@ -347,9 +352,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen3\_APIPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen3_APIPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen3\_APIPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen3_APIPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen3\_APIPassthrough/V1**  
@@ -365,9 +370,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen3\_CSRPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen3_CSRPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen3\_CSRPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen3_CSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen3\_CSRPassthrough/V1**  
@@ -383,9 +388,9 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### BlankSubordinateCACertificate\_PathLen3\_APICSRPassthrough/V1 Definition<a name="BlankSubordinateCACertificate_PathLen3_APICSRPassthrough"></a>
+### BlankSubordinateCACertificate\_PathLen3\_APICSRPassthrough/V1 definition<a name="BlankSubordinateCACertificate_PathLen3_APICSRPassthrough"></a>
 
-For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 Definition](#BlankEndEntityCertificate_APIPassthrough)\.
+For general information about blank templates, see [BlankEndEntityCertificate\_APIPassthrough/V1 definition](#BlankEndEntityCertificate_APIPassthrough)\.
 
 
 **BlankSubordinateCACertificate\_PathLen3\_APICSRPassthrough**  
@@ -401,7 +406,7 @@ For general information about blank templates, see [BlankEndEntityCertificate\_A
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### CodeSigningCertificate/V1 Definition<a name="CodeSigningCertificate-V1"></a>
+### CodeSigningCertificate/V1 definition<a name="CodeSigningCertificate-V1"></a>
 
 This template is used to create certificates for code signing\. You can use code\-signing certificates from ACM Private CA with any code\-signing solution that is based on a private CA infrastructure\. For example, customers using Code Signing for AWS IoT can generate a code\-signing certificate with ACM Private CA and import it to AWS Certificate Manager\. For more information, see [What Is Code Signing for AWS IoT?](https://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html) and [Obtain and Import a Code Signing Certificate](https://docs.aws.amazon.com/signer/latest/developerguide/gs-cs-cert.html)\.
 
@@ -421,7 +426,7 @@ This template is used to create certificates for code signing\. You can use code
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### CodeSigningCertificate\_APICSRPassthrough/V1 Definition<a name="CodeSigningCertificate_APICSRPassthrough"></a>
+### CodeSigningCertificate\_APICSRPassthrough/V1 definition<a name="CodeSigningCertificate_APICSRPassthrough"></a>
 
 This template extends CodeSigningCertificate/V1 to support API and CSR passthrough values\.
 
@@ -441,7 +446,7 @@ This template extends CodeSigningCertificate/V1 to support API and CSR passthrou
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### CodeSigningCertificate\_APIPassthrough/V1 Definition<a name="CodeSigningCertificate_APIPassthrough"></a>
+### CodeSigningCertificate\_APIPassthrough/V1 definition<a name="CodeSigningCertificate_APIPassthrough"></a>
 
 This template is identical to the `CodeSigningCertificate` template with one difference: In this template, ACM Private CA passes additional extensions through the API to the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the API\.
 
@@ -461,7 +466,7 @@ This template is identical to the `CodeSigningCertificate` template with one dif
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### CodeSigningCertificate\_CSRPassthrough/V1 Definition<a name="CodeSigningCertificate_CSRPassthrough-V1"></a>
+### CodeSigningCertificate\_CSRPassthrough/V1 definition<a name="CodeSigningCertificate_CSRPassthrough-V1"></a>
 
 This template is identical to the `CodeSigningCertificate` template with one difference: In this template, ACM Private CA passes additional extensions from the certificate signing request \(CSR\) into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the CSR\.
 
@@ -481,7 +486,7 @@ This template is identical to the `CodeSigningCertificate` template with one dif
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityCertificate/V1 Definition<a name="EndEntityCertificate-V1"></a>
+### EndEntityCertificate/V1 definition<a name="EndEntityCertificate-V1"></a>
 
 This template is used to create certificates for end entities such as operating systems or web servers\. 
 
@@ -501,7 +506,7 @@ This template is used to create certificates for end entities such as operating 
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityCertificate\_APICSRPassthrough/V1 Definition<a name="EndEntityCertificate_APICSRPassthrough"></a>
+### EndEntityCertificate\_APICSRPassthrough/V1 definition<a name="EndEntityCertificate_APICSRPassthrough"></a>
 
 This template extends EndEntityCertificate/V1 to support API and CSR passthrough values\.
 
@@ -521,7 +526,7 @@ This template extends EndEntityCertificate/V1 to support API and CSR passthrough
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityCertificate\_APIPassthrough/V1 Definition<a name="EndEntityCertificate_APIPassthrough"></a>
+### EndEntityCertificate\_APIPassthrough/V1 definition<a name="EndEntityCertificate_APIPassthrough"></a>
 
 This template is identical to the `EndEntityCertificate` template with one difference: In this template, ACM Private CA passes additional extensions through the API to the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the API\.
 
@@ -541,7 +546,7 @@ This template is identical to the `EndEntityCertificate` template with one diffe
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityCertificate\_CSRPassthrough/V1 Definition<a name="EndEntityCertificate_CSRPassthrough-V1"></a>
+### EndEntityCertificate\_CSRPassthrough/V1 definition<a name="EndEntityCertificate_CSRPassthrough-V1"></a>
 
 This template is identical to the `EndEntityCertificate` template with one difference: In this template, ACM Private CA passes additional extensions from the certificate signing request \(CSR\) into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the CSR\.
 
@@ -561,7 +566,7 @@ This template is identical to the `EndEntityCertificate` template with one diffe
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityClientAuthCertificate/V1 Definition<a name="EndEntityClientAuthCertificate-V1"></a>
+### EndEntityClientAuthCertificate/V1 definition<a name="EndEntityClientAuthCertificate-V1"></a>
 
 This template differs from the `EndEntityCertificate` only in the Extended key usage value, which restricts it to TLS web client authentication\.
 
@@ -581,7 +586,7 @@ This template differs from the `EndEntityCertificate` only in the Extended key u
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityClientAuthCertificate\_APICSRPassthrough/V1 Definition<a name="EndEntityClientAuthCertificate_APICSRPassthrough"></a>
+### EndEntityClientAuthCertificate\_APICSRPassthrough/V1 definition<a name="EndEntityClientAuthCertificate_APICSRPassthrough"></a>
 
 This template extends EndEntityClientAuthCertificate/V1 to support API and CSR passthrough values\.
 
@@ -601,7 +606,7 @@ This template extends EndEntityClientAuthCertificate/V1 to support API and CSR p
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityClientAuthCertificate\_APIPassthrough/V1 Definition<a name="EndEntityClientAuthCertificate_APIPassthrough"></a>
+### EndEntityClientAuthCertificate\_APIPassthrough/V1 definition<a name="EndEntityClientAuthCertificate_APIPassthrough"></a>
 
 This template is identical to the `EndEntityClientAuthCertificate` template with one difference\. In this template, ACM Private CA passes additional extensions through the API into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the API\.
 
@@ -621,7 +626,7 @@ This template is identical to the `EndEntityClientAuthCertificate` template with
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityClientAuthCertificate\_CSRPassthrough/V1 Definition<a name="EndEntityClientAuthCertificate_CSRPassthrough-V1"></a>
+### EndEntityClientAuthCertificate\_CSRPassthrough/V1 definition<a name="EndEntityClientAuthCertificate_CSRPassthrough-V1"></a>
 
 This template is identical to the `EndEntityClientAuthCertificate` template with one difference\. In this template, ACM Private CA passes additional extensions from the certificate signing request \(CSR\) into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the CSR\.
 
@@ -641,7 +646,7 @@ This template is identical to the `EndEntityClientAuthCertificate` template with
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityServerAuthCertificate/V1 Definition<a name="EndEntityServerAuthCertificate-V1"></a>
+### EndEntityServerAuthCertificate/V1 definition<a name="EndEntityServerAuthCertificate-V1"></a>
 
 This template differs from the `EndEntityCertificate` only in the Extended key usage value, which restricts it to TLS web server authentication\.
 
@@ -661,7 +666,7 @@ This template differs from the `EndEntityCertificate` only in the Extended key u
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityServerAuthCertificate\_APICSRPassthrough/V1 Definition<a name="EndEntityServerAuthCertificate_APICSRPassthrough"></a>
+### EndEntityServerAuthCertificate\_APICSRPassthrough/V1 definition<a name="EndEntityServerAuthCertificate_APICSRPassthrough"></a>
 
 This template extends EndEntityServerAuthCertificate/V1 to support API and CSR passthrough values\.
 
@@ -681,7 +686,7 @@ This template extends EndEntityServerAuthCertificate/V1 to support API and CSR p
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityServerAuthCertificate\_APIPassthrough/V1 Definition<a name="EndEntityServerAuthCertificate_APIPassthrough"></a>
+### EndEntityServerAuthCertificate\_APIPassthrough/V1 definition<a name="EndEntityServerAuthCertificate_APIPassthrough"></a>
 
 This template is identical to the `EndEntityServerAuthCertificate` template with one difference\. In this template, ACM Private CA passes additional extensions through the API into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the API\.
 
@@ -701,7 +706,7 @@ This template is identical to the `EndEntityServerAuthCertificate` template with
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### EndEntityServerAuthCertificate\_CSRPassthrough/V1 Definition<a name="EndEntityServerAuthCertificate_CSRPassthrough-V1"></a>
+### EndEntityServerAuthCertificate\_CSRPassthrough/V1 definition<a name="EndEntityServerAuthCertificate_CSRPassthrough-V1"></a>
 
 This template is identical to the `EndEntityServerAuthCertificate` template with one difference\. In this template, ACM Private CA passes additional extensions from the certificate signing request \(CSR\) into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the CSR\.
 
@@ -721,7 +726,7 @@ This template is identical to the `EndEntityServerAuthCertificate` template with
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### OCSPSigningCertificate/V1 Definition<a name="OCSPSigningCertificate-V1"></a>
+### OCSPSigningCertificate/V1 definition<a name="OCSPSigningCertificate-V1"></a>
 
 This template is used to create certificates for signing OCSP responses\. The template is identical to the `CodeSigningCertificate` template, except that the Extended key usage value specifies OCSP signing instead of code signing\.
 
@@ -741,7 +746,7 @@ This template is used to create certificates for signing OCSP responses\. The te
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### OCSPSigningCertificate\_APICSRPassthrough/V1 Definition<a name="OCSPSigningCertificate_APICSRPassthrough"></a>
+### OCSPSigningCertificate\_APICSRPassthrough/V1 definition<a name="OCSPSigningCertificate_APICSRPassthrough"></a>
 
 This template extends the OCSPSigningCertificate/V1 to support API and CSR passthrough values\.
 
@@ -761,7 +766,7 @@ This template extends the OCSPSigningCertificate/V1 to support API and CSR passt
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### OCSPSigningCertificate\_APIPassthrough/V1 Definition<a name="OCSPSigningCertificate_APIPassthrough"></a>
+### OCSPSigningCertificate\_APIPassthrough/V1 definition<a name="OCSPSigningCertificate_APIPassthrough"></a>
 
 This template is identical to the `OCSPSigningCertificate` template with one difference\. In this template, ACM Private CA passes additional extensions through the API into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the API\.
 
@@ -781,7 +786,7 @@ This template is identical to the `OCSPSigningCertificate` template with one dif
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### OCSPSigningCertificate\_CSRPassthrough/V1 Definition<a name="OCSPSigningCertificate_CSRPassthrough-V1"></a>
+### OCSPSigningCertificate\_CSRPassthrough/V1 definition<a name="OCSPSigningCertificate_CSRPassthrough-V1"></a>
 
 This template is identical to the `OCSPSigningCertificate` template with one difference\. In this template, ACM Private CA passes additional extensions from the certificate signing request \(CSR\) into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the CSR\.
 
@@ -801,7 +806,7 @@ This template is identical to the `OCSPSigningCertificate` template with one dif
 
 \*CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### RootCACertificate/V1 Definition<a name="RootCACertificate-V1"></a>
+### RootCACertificate/V1 definition<a name="RootCACertificate-V1"></a>
 
 This template is used to issue self\-signed root CA certificates\. CA certificates include a critical Basic constraints extension with the CA field set to `TRUE` to designate that the certificate can be used to issue CA certificates\. This template does not specify a path length because the path length constrains the maximum length of the CA chain \(CA certification depth\)\. A constrained chain length could inhibit future expansion of the hierarchy\. Extended key usage is excluded to prevent use of the CA certificate as a TLS client or server certificate\. No CRL information is specified because a self\-signed certificate cannot be revoked\.
 
@@ -818,7 +823,7 @@ This template is used to issue self\-signed root CA certificates\. CA certificat
 |  Key usage  |  Critical, digital signature, keyCertSign, CRL sign  | 
 |  CRL distribution points  |  N/A  | 
 
-### RootCACertificate\_APIPassthrough/V1 Definition<a name="RootCACertificate_APIPassthrough"></a>
+### RootCACertificate\_APIPassthrough/V1 definition<a name="RootCACertificate_APIPassthrough"></a>
 
 This template extends RootCACertificate/V1 to support API passthrough values\.
 
@@ -835,7 +840,7 @@ This template extends RootCACertificate/V1 to support API passthrough values\.
 |  Key usage  |  Critical, digital signature, keyCertSign, CRL sign  | 
 |  CRL distribution points\*  |  N/A  | 
 
-### SubordinateCACertificate\_PathLen0/V1 Definition<a name="SubordinateCACertificate_PathLen0-V1"></a>
+### SubordinateCACertificate\_PathLen0/V1 definition<a name="SubordinateCACertificate_PathLen0-V1"></a>
 
 This template is used to issue subordinate CA certificates with a path length of 0\. CA certificates include a critical Basic constraints extension with the CA field set to `TRUE` to designate that the certificate can be used to issue CA certificates\. Extended key usage is not included, which prevents the CA certificate from being used as a TLS client or server certificate\.
 
@@ -856,7 +861,7 @@ For more information about certification paths, see [Setting Length Constraints 
 
 \*CRL distribution points are included in certificates issued with this template only if the CA is configured with CRL generation enabled\.
 
-### SubordinateCACertificate\_PathLen0\_APICSRPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen0_APICSRPassthrough"></a>
+### SubordinateCACertificate\_PathLen0\_APICSRPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen0_APICSRPassthrough"></a>
 
 This template extends SubordinateCACertificate\_PathLen0/V1 to support API and CSR passthrough values\.
 
@@ -875,7 +880,7 @@ This template extends SubordinateCACertificate\_PathLen0/V1 to support API and C
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### SubordinateCACertificate\_PathLen0\_APIPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen0_APIPassthrough"></a>
+### SubordinateCACertificate\_PathLen0\_APIPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen0_APIPassthrough"></a>
 
 This template extends SubordinateCACertificate\_PathLen0/V1 to support API passthrough values\.
 
@@ -894,7 +899,7 @@ This template extends SubordinateCACertificate\_PathLen0/V1 to support API passt
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### SubordinateCACertificate\_PathLen0\_CSRPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen0_CSRPassthrough-V1"></a>
+### SubordinateCACertificate\_PathLen0\_CSRPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen0_CSRPassthrough-V1"></a>
 
 This template is identical to the `SubordinateCACertificate_PathLen0` template with one difference: In this template, ACM Private CA passes additional extensions from the certificate signing request \(CSR\) into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the CSR\.
 
@@ -916,7 +921,7 @@ A CSR that contains custom additional extensions must be created outside of ACM 
 
 \*CRL distribution points are included in certificates issued with this template only if the CA is configured with CRL generation enabled\.
 
-### SubordinateCACertificate\_PathLen1/V1 Definition<a name="SubordinateCACertificate_PathLen1-V1"></a>
+### SubordinateCACertificate\_PathLen1/V1 definition<a name="SubordinateCACertificate_PathLen1-V1"></a>
 
 This template is used to issue subordinate CA certificates with a path length of 0\. CA certificates include a critical Basic constraints extension with the CA field set to `TRUE` to designate that the certificate can be used to issue CA certificates\. Extended key usage is not included, which prevents the CA certificate from being used as a TLS client or server certificate\.
 
@@ -937,7 +942,7 @@ For more information about certification paths, see [Setting Length Constraints 
 
 \*CRL distribution points are included in certificates issued with this template only if the CA is configured with CRL generation enabled\.
 
-### SubordinateCACertificate\_PathLen1\_APICSRPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen1_APICSRPassthrough"></a>
+### SubordinateCACertificate\_PathLen1\_APICSRPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen1_APICSRPassthrough"></a>
 
 This template extends SubordinateCACertificate\_PathLen1/V1 to support API and CSR passthrough values\.
 
@@ -956,7 +961,7 @@ This template extends SubordinateCACertificate\_PathLen1/V1 to support API and C
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### SubordinateCACertificate\_PathLen1\_APIPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen1_APIPassthrough"></a>
+### SubordinateCACertificate\_PathLen1\_APIPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen1_APIPassthrough"></a>
 
 This template extends SubordinateCACertificate\_PathLen0/V1 to support API passthrough values\.
 
@@ -975,7 +980,7 @@ This template extends SubordinateCACertificate\_PathLen0/V1 to support API passt
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### SubordinateCACertificate\_PathLen1\_CSRPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen1_CSRPassthrough-V1"></a>
+### SubordinateCACertificate\_PathLen1\_CSRPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen1_CSRPassthrough-V1"></a>
 
 This template is identical to the `SubordinateCACertificate_PathLen1` template with one difference: In this template, ACM Private CA passes additional extensions from the certificate signing request \(CSR\) into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the CSR\.
 
@@ -997,7 +1002,7 @@ A CSR that contains custom additional extensions must be created outside of ACM 
 
 \*CRL distribution points are included in certificates issued with this template only if the CA is configured with CRL generation enabled\.
 
-### SubordinateCACertificate\_PathLen2/V1 Definition<a name="SubordinateCACertificate_PathLen2-V1"></a>
+### SubordinateCACertificate\_PathLen2/V1 definition<a name="SubordinateCACertificate_PathLen2-V1"></a>
 
 This template is used to issue subordinate CA certificates with a path length of 2\. CA certificates include a critical Basic constraints extension with the CA field set to `TRUE` to designate that the certificate can be used to issue CA certificates\. Extended key usage is not included, which prevents the CA certificate from being used as a TLS client or server certificate\.
 
@@ -1018,7 +1023,7 @@ For more information about certification paths, see [Setting Length Constraints 
 
 \*CRL distribution points are included in certificates issued with this template only if the CA is configured with CRL generation enabled\.
 
-### SubordinateCACertificate\_PathLen2\_APICSRPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen2_APICSRPassthrough"></a>
+### SubordinateCACertificate\_PathLen2\_APICSRPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen2_APICSRPassthrough"></a>
 
 This template extends SubordinateCACertificate\_PathLen2/V1 to support API and CSR passthrough values\.
 
@@ -1037,7 +1042,7 @@ This template extends SubordinateCACertificate\_PathLen2/V1 to support API and C
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### SubordinateCACertificate\_PathLen2\_APIPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen2_APIPassthrough"></a>
+### SubordinateCACertificate\_PathLen2\_APIPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen2_APIPassthrough"></a>
 
 This template extends SubordinateCACertificate\_PathLen2/V1 to support API passthrough values\.
 
@@ -1056,7 +1061,7 @@ This template extends SubordinateCACertificate\_PathLen2/V1 to support API passt
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### SubordinateCACertificate\_PathLen2\_CSRPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen2_CSRPassthrough-V1"></a>
+### SubordinateCACertificate\_PathLen2\_CSRPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen2_CSRPassthrough-V1"></a>
 
 This template is identical to the `SubordinateCACertificate_PathLen2` template with one difference: In this template, ACM Private CA passes additional extensions from the certificate signing request \(CSR\) into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the CSR\.
 
@@ -1078,7 +1083,7 @@ A CSR that contains custom additional extensions must be created outside of ACM 
 
 \*CRL distribution points are included in certificates issued with this template only if the CA is configured with CRL generation enabled\.
 
-### SubordinateCACertificate\_PathLen3/V1 Definition<a name="SubordinateCACertificate_PathLen3-V1"></a>
+### SubordinateCACertificate\_PathLen3/V1 definition<a name="SubordinateCACertificate_PathLen3-V1"></a>
 
 This template is used to issue subordinate CA certificates with a path length of 3\. CA certificates include a critical Basic constraints extension with the CA field set to `TRUE` to designate that the certificate can be used to issue CA certificates\. Extended key usage is not included, which prevents the CA certificate from being used as a TLS client or server certificate\.
 
@@ -1099,7 +1104,7 @@ For more information about certification paths, see [Setting Length Constraints 
 
 \*CRL distribution points are included in certificates issued with this template only if the CA is configured with CRL generation enabled\.
 
-### SubordinateCACertificate\_PathLen3\_APICSRPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen3_APICSRPassthrough"></a>
+### SubordinateCACertificate\_PathLen3\_APICSRPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen3_APICSRPassthrough"></a>
 
 This template extends SubordinateCACertificate\_PathLen3/V1 to support API and CSR passthrough values\.
 
@@ -1118,7 +1123,7 @@ This template extends SubordinateCACertificate\_PathLen3/V1 to support API and C
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### SubordinateCACertificate\_PathLen3\_APIPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen3_APIPassthrough"></a>
+### SubordinateCACertificate\_PathLen3\_APIPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen3_APIPassthrough"></a>
 
 This template extends SubordinateCACertificate\_PathLen3/V1 to support API passthrough values\.
 
@@ -1137,7 +1142,7 @@ This template extends SubordinateCACertificate\_PathLen3/V1 to support API passt
 
 \* CRL distribution points are included in the template only if the CA is configured with CRL generation enabled\. 
 
-### SubordinateCACertificate\_PathLen3\_CSRPassthrough/V1 Definition<a name="SubordinateCACertificate_PathLen3_CSRPassthrough-V1"></a>
+### SubordinateCACertificate\_PathLen3\_CSRPassthrough/V1 definition<a name="SubordinateCACertificate_PathLen3_CSRPassthrough-V1"></a>
 
 This template is identical to the `SubordinateCACertificate_PathLen3` template with one difference: In this template, ACM Private CA passes additional extensions from the certificate signing request \(CSR\) into the certificate if the extensions are not specified in the template\. Extensions specified in the template always override extensions in the CSR\.
 

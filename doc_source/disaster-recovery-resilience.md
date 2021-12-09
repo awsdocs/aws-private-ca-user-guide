@@ -1,10 +1,10 @@
-# Resilience in AWS Certificate Manager Private Certificate Authority<a name="disaster-recovery-resilience"></a>
+# Planning for resilience<a name="disaster-recovery-resilience"></a>
 
 The AWS global infrastructure is built around AWS Regions and Availability Zones\. AWS Regions provide multiple physically separated and isolated Availability Zones, which are connected with low\-latency, high\-throughput, and highly redundant networking\. With Availability Zones, you can design and operate applications and databases that automatically fail over between zones without interruption\. Availability Zones are more highly available, fault tolerant, and scalable than traditional single or multiple data center infrastructures\. 
 
 For more information about AWS Regions and Availability Zones, see [AWS Global Infrastructure](http://aws.amazon.com/about-aws/global-infrastructure/)\.
 
-## Redundancy and Disaster Recovery<a name="disaster-recovery"></a>
+## Redundancy and disaster recovery<a name="disaster-recovery"></a>
 
 Consider redundancy and DR when planning your CA hierarchy\. ACM Private CA is available in multiple [Regions](https://docs.aws.amazon.com/general/latest/gr/acm-pca.html), which allows you to create redundant CAs in multiple Regions\. The ACM Private CA service operates with a [service level agreement](https://aws.amazon.com/certificate-manager/private-certificate-authority/sla/) \(SLA\) of 99\.9% availability\. There are at least two approaches that you can consider for redundancy and disaster recovery\. You can configure redundancy at the root CA or at the highest subordinate CA\. Each approach has pros and cons\. 
 

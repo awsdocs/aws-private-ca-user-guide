@@ -1,4 +1,4 @@
-# Infrastructure Security in AWS Certificate Manager Private Certificate Authority<a name="infrastructure-security"></a>
+# Infrastructure security in AWS Certificate Manager Private Certificate Authority<a name="infrastructure-security"></a>
 
 As a managed service, ACM Private CA is protected by the AWS global network security procedures that are described in the [Amazon Web Services: Overview of Security Processes](https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf) whitepaper\.
 
@@ -7,7 +7,4 @@ You use AWS published API calls to access ACM Private CA through the network\. C
 Additionally, requests must be signed by using an access key ID and a secret access key that is associated with an IAM principal\. Or you can use the [AWS Security Token Service](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html) \(AWS STS\) to generate temporary security credentials to sign requests\.
 
 **Topics**
-+ [Certificate Revocation List \(CRL\) Reference](crl-ref.md)
-+ [Customizing Online Certificate Status Protocol \(OCSP\)](ocsp-customize.md)
-+ [ACM Private CA VPC Endpoints \(AWS PrivateLink\)](vpc-endpoints.md)
-+ [ACM Private CA Best Practices](ca-best-practices.md)
++ [ACM Private CA VPC endpoints \(AWS PrivateLink\)](vpc-endpoints.md)

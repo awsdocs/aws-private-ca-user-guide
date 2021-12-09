@@ -1,9 +1,9 @@
-# Sign Your Private CA Certificate<a name="PcaSignCert"></a>
+# Step 2: Signing the private CA certificate<a name="PcaSignCert"></a>
 
-After you [create](PcaCreateCa.md) your private CA using ACM Private CA and [retrieve](PcaGetCsr.md) a certificate signing request \(CSR\), you must take the CSR to your external X\.509 infrastructure\. Use an intermediate or root CA to create your private CA certificate and sign it\. Signing affirms the identity of the private CA within your organization\. When you have completed this process, follow the instructions in [Import Your Private CA Certificate into ACM Private CA](PcaImportCaCert.md)\. 
+After you [create your private CA](create-CA.md) using ACM Private CA and [obtain a certificate signing request \(CSR\)](PcaGetCsr.md), you must take the CSR to your external X\.509 infrastructure\. Use an intermediate or root CA to create your private CA certificate and sign it\. Signing affirms the identity of the private CA within your organization\. When you have completed this process, follow the instructions in [Step 3: Import your private CA certificate into ACM Private CA](PcaImportCaCert.md)\. 
 
 **Important**  
-Details of your X\.509 infrastructure and the CA hierarchy within it are beyond the scope of this guide\. For more information, see [Creating and Signing a Private CA Certificate](PcaTsSignCsr.md)\. 
+Details of your on\-premises X\.509 infrastructure and the CA hierarchy within it are beyond the scope of this guide\. For more information, see [Creating and signing a private CA certificate](PcaTsSignCsr.md)\. 
 The validity period of a private CA is determined by the validity period you specify when you create the private CA certificate\. Set the **Not Before** and **Not After** fields\. Aside from enforcing the defined period, ACM Private CA does not restrict the lifetime of a CA\. 
 If you must create a CA certificate that effectively never expires, set the special value `99991231235959Z` in the **Not After** field\. We do not recommend this as a general practice\. 
 
@@ -22,7 +22,7 @@ You can use the OpenSSL `x509` command to view the contents of your signed PEM f
 openssl x509 -in path_to_certificate_file -text -noout
 ```
 
-This command outputs a certificate similar to the following example\.
+This command returns a certificate similar to the following example\.
 
 ```
 Certificate:

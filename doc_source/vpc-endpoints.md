@@ -1,4 +1,4 @@
-# ACM Private CA VPC Endpoints \(AWS PrivateLink\)<a name="vpc-endpoints"></a>
+# ACM Private CA VPC endpoints \(AWS PrivateLink\)<a name="vpc-endpoints"></a>
 
 You can create a private connection between your VPC and ACM Private CA by configuring an interface VPC endpoint\. Interface endpoints are powered by [AWS PrivateLink](https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-privatelink.html), a technology for privately accessing ACM Private CA API operations\. AWS PrivateLink routes all network traffic between your VPC and ACM Private CA through the Amazon network, avoiding exposure on the open internet\. Each VPC endpoint is represented by one or more [elastic network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) with private IP addresses in your VPC subnets\. 
 
@@ -8,7 +8,7 @@ To use ACM Private CA through your VPC, you must connect from an instance that i
 
 ACM Private CA does not require the use of AWS PrivateLink, but we recommend it as an additional layer of security\. For more information about AWS PrivateLink and VPC endpoints, see [Accessing Services Through AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html#what-is-privatelink)\.
 
-## Considerations for ACM Private CA VPC Endpoints<a name="vpc-endpoint-considerations"></a>
+## Considerations for ACM Private CA VPC endpoints<a name="vpc-endpoint-considerations"></a>
 
 Before you set up interface VPC endpoints for ACM Private CA, be aware of the following considerations:
 + ACM Private CA might not support VPC endpoints in some Availability Zones\. When you create a VPC endpoint, first check support in the management console\. Unsupported Availability Zones are marked "Service not supported in this Availability Zone\."
@@ -18,7 +18,7 @@ Before you set up interface VPC endpoints for ACM Private CA, be aware of the fo
 + AWS Certificate Manager does not support VPC endpoints\.
 + FIPS endpoints \(and their Regions\) do not support VPC endpoints\.
 
-## Creating the VPC Endpoints for ACM Private CA<a name="ecs-setting-up-vpc-create"></a>
+## Creating the VPC endpoints for ACM Private CA<a name="ecs-setting-up-vpc-create"></a>
 
 You can create a VPC endpoint for the ACM Private CA service using either the VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/) or the AWS Command Line Interface\. For more information, see the [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) procedure in the *Amazon VPC User Guide*\. ACM Private CA supports making calls to all of its API operations inside your VPC\.
 
@@ -35,7 +35,7 @@ The value *region* represents the Region identifier for an AWS Region supported 
 
 For more information, see [Interface VPC Endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. 
 
-## Create a VPC Endpoint Policy for ACM Private CA<a name="api-private-link-policy"></a>
+## Create a VPC endpoint policy for ACM Private CA<a name="api-private-link-policy"></a>
 
 You can create a policy for Amazon VPC endpoints for ACM Private CA to specify the following: 
 + The principal that can perform actions
@@ -57,7 +57,7 @@ When attached to an endpoint, the following policy grants access for all princip
             "acm-pca:IssueCertificate"
          ],
          "Resource":[
-            "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+            "arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
          ],
          "Condition":{
             "StringEquals":{
@@ -76,7 +76,7 @@ When attached to an endpoint, the following policy grants access for all princip
             "acm-pca:ListTags"
          ],
          "Resource":[
-            "arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-456789abcdef"
+            "arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
          ]
       }
    ]

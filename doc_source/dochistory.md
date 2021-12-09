@@ -4,6 +4,8 @@ The following table describes significant changes to this documentation since Ja
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for Managed OCSP](#dochistory) | See [Setting up a certificate revocation method](https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html) for revocation options including OCSP\. | August 18, 2021 | 
+| [Support for S3 Block Public Access feature for CRLs](#dochistory) | See [Enabling the S3 Block Public Access feature](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa)\. | May 27, 2021 | 
 | [New and updated Java implementation examples](#dochistory) | See [Using the ACM Private CA API \(Java Examples\)](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaApiIntro.html)\. | September 9, 2020 | 
 | [New region support](#dochistory) | Endpoints added for Africa \(Cape Town\) and Europe \(Milan\)\. For a complete list of ACM PCA endpoints, see [AWS Certificate Manager Private Certificate Authority Endpoints and Quotas](https://docs.aws.amazon.com/general/latest/gr/acm-pca.html)\. | August 27, 2020 | 
 | [Cross\-account private CA access supported](#dochistory) | AWS Certificate Manager users can be authorized to issue certificates using private CAs that they do not own\. For more information, see [Cross\-Account Access to Private CAs](https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-resource-sharing.html)\. | August 17, 2020 | 

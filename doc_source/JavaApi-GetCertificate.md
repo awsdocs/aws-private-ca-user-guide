@@ -62,13 +62,10 @@ public class GetCertificate {
       GetCertificateRequest req = new GetCertificateRequest();
 
       // Set the certificate ARN.
-      req.withCertificateArn("arn:aws:acm-pca:region:account:" +
-            "certificate-authority/12345678-1234-1234-1234-123456789012" +
-            "/certificate/793f0d5b6a04125e2c9cfb52373598fe");
+      req.withCertificateArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID");
 
       // Set the certificate authority ARN.
-      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:" +
-            "certificate-authority/12345678-1234-1234-1234-123456789012");
+      req.withCertificateAuthorityArn("arn:aws:acm-pca:region:account:certificate-authority/CA_ID");
             
       // Create waiter to wait on successful creation of the certificate file.
       Waiter<GetCertificateRequest> waiter = client.waiters().certificateIssued();
