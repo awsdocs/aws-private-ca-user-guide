@@ -29,7 +29,7 @@ Certificates created with the procedure below, using the issue\-certificate comm
 
 ## Issuing a certificate \(AWS CLI\)<a name="IssueCertCli"></a>
 
-You can use the ACM Private CA CLI command [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) or the API action [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) to request an end\-entity certificate\. This command requires the Amazon Resource Name \(ARN\) of the private CA that you want to use to issue the certificate\.
+You can use the ACM Private CA CLI command [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) or the API action [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) to request an end\-entity certificate\. This command requires the Amazon Resource Name \(ARN\) of the private CA that you want to use to issue the certificate\. You must also generate a certificate signing request \(CSR\) using a program such as [OpenSSL](https://www.openssl.org/)\.
 
 If you use the ACM Private CA API or AWS CLI to issue a private certificate, the certificate is unmanaged, meaning that you cannot use the ACM console, ACM CLI, or ACM API to view or export it, and the certificate is not automatically renewed\. However, you can use the PCA [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command to retrieve the certificate details, and if you own the CA, you can create an [audit report](PcaAuditReport.md)\.
 
@@ -55,3 +55,6 @@ The ARN of the issued certificate is returned:
    "CertificateArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID"
 }
 ```
+
+**Note**  
+ACM Private CA immediately returns an ARN with a serial number when it receives the issue\-certificate command\. However, certificate processing happens asynchronously and can still fail\. If this happens, a get\-certificate command using the new ARN will also fail\.

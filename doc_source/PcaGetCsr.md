@@ -1,6 +1,62 @@
 # Step 1: Getting a certificate signing request \(CSR\) from ACM Private CA<a name="PcaGetCsr"></a>
 
-If you have created a private subordinate CA that you want to sign with an external CA, you must retrieve a certificate signing request \(CSR\)\. Then save it to a file\. You can do this using the AWS Management Console or the AWS CLI as discussed in the procedures that follow\. If you want to inspect the CSR, use the following OpenSSL command: 
+If you have created a private subordinate CA that you want to sign with an external CA, you must retrieve a certificate signing request \(CSR\)\. Then save it to a file\. You can do this using the AWS Management Console or the AWS CLI as discussed in the procedures that follow\. 
+
+## How to obtain a CSR \(console\): Case 1<a name="getCsrConsole1"></a>
+
+Use this procedure if you followed the steps to [create a private CA](create-CA.md) in ACM Private CA and left the **Success** dialog box open\. These procedures assume that while creating the CA, you specified that it was a subordinate CA\.
+
+**To obtain a CSR \(console\): Case 1**
+
+1. Immediately after ACM Private CA has successfully created your private CA, in the **Success\!** window, choose **Install CA certificate**\. 
+
+1. Choose **External private CA** and **Next**\. 
+
+1. On the **Export CSR** page, the console returns the CSR\. Choose **Export CSR to a file** and save it locally\.
+
+1. If you cannot immediately perform the offline steps to obtain a signed certificate from your external signing authority, choose **Cancel**\. Once you possess a signed certificate and a certificate chain, you can use the [How to obtain a CSR \(console\): Case 2](#getCsrConsole2) procedure to import them into ACM Private CA\.
+
+   Otherwise, if you are ready, choose **Next**\.
+
+1. Follow the instructions in [Step 2: Signing the private CA certificate](PcaSignCert.md)\.
+
+## How to obtain a CSR \(console\): Case 2<a name="getCsrConsole2"></a>
+
+Use this procedure if you followed the steps to [create a private CA](create-CA.md) in ACM Private CA and closed the **Success\!** window by choosing **Cancel**\. 
+
+**To obtain a CSR \(console\): Case 2**
+
+1. Sign in to your AWS account and open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\.
+
+1. On the **Private certificate authories page**, choose your private CA from the list\.
+
+1. Choose **Actions**, **Install CA certificate**\.
+
+1. On the **Install subordinate CA certificate** page, choose **External private CA** and **Next**\. 
+
+1. The ACM Private CA console returns the CSR\. Choose **Export CSR to a file** and save it locally\.
+
+1. Choose **Next**\.
+
+1. Follow the instructions in [Step 2: Signing the private CA certificate](PcaSignCert.md)\.
+
+## Retrieving a CSR \(AWS CLI\)<a name="getCsrCli"></a>
+
+Use this procedure to retrieve a CSR using the AWS Command Line Interface\.
+
+**To retrieve a CSR \(AWS CLI\)**
+
+1. Use the [get\-certificate\-authority\-csr](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate-authority-csr.html) command to retrieve the certificate signing request \(CSR\) for your private CA\. If you want to send the CSR to your display, use the `--output text` option to eliminate CR/LF characters from the end of each line\. To send the CSR to a file, use the redirect option \(>\) followed by a file name\. 
+
+   ```
+   $ aws acm-pca get-certificate-authority-csr \
+        --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
+        --output text
+   ```
+
+1. Follow the instructions in [Step 2: Signing the private CA certificate](PcaSignCert.md)\.
+
+After saving a CSR as a local file, you can inspect it by using the following [OpenSSL](https://www.openssl.org/) command: 
 
 ```
 openssl req -in path_to_CSR_file -text -noout
@@ -57,57 +113,3 @@ Certificate Request:
          4c:ca:a9:3c:37:6d:ba:58:38:11:9c:30:08:93:a5:62:00:18:
          d1:83:66:40
 ```
-
-## How to obtain a CSR \(console\): Case 1<a name="getCsrConsole1"></a>
-
-Use this procedure if you followed the steps to [create a private CA](create-CA.md) in ACM Private CA and left the **Success** dialog box open\. These procedures assume that while creating the CA, you specified that it was a subordinate CA\.
-
-**To obtain a CSR \(console\): Case 1**
-
-1. Immediately after ACM Private CA has successfully created your private CA, in the **Success\!** window, choose **Install CA certificate**\. 
-
-1. Choose **External private CA** and **Next**\. 
-
-1. On the **Export CSR** page, the console returns the CSR\. Choose **Export CSR to a file** and save it locally\.
-
-1. If you cannot immediately perform the offline steps to obtain a signed certificate from your external signing authority, choose **Cancel**\. Once you possess a signed certificate and a certificate chain, you can use the [How to obtain a CSR \(console\): Case 2](#getCsrConsole2) procedure to import them into ACM Private CA\.
-
-   Otherwise, if you are ready, choose **Next**\.
-
-1. Follow the instructions in [Step 2: Signing the private CA certificate](PcaSignCert.md)\.
-
-## How to obtain a CSR \(console\): Case 2<a name="getCsrConsole2"></a>
-
-Use this procedure if you followed the steps to [create a private CA](create-CA.md) in ACM Private CA and closed the **Success\!** window by choosing **Cancel**\. 
-
-**To obtain a CSR \(console\): Case 2**
-
-1. Sign in to your AWS account and open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\.
-
-1. On the **Private certificate authories page**, choose your private CA from the list\.
-
-1. Choose **Actions**, **Install CA certificate**\.
-
-1. On the **Install subordinate CA certificate** page, choose **External private CA** and **Next**\. 
-
-1. The ACM Private CA console returns the CSR\. Choose **Export CSR to a file** and save it locally\.
-
-1. Choose **Next**\.
-
-1. Follow the instructions in [Step 2: Signing the private CA certificate](PcaSignCert.md)\.
-
-## Retrieving a CSR \(AWS CLI\)<a name="getCsrCli"></a>
-
-Use this procedure to retrieve a CSR using the AWS Command Line Interface\.
-
-**To retrieve a CSR \(AWS CLI\)**
-
-1. Use the [get\-certificate\-authority\-csr](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate-authority-csr.html) command to retrieve the certificate signing request \(CSR\) for your private CA\. If you want to send the CSR to your display, use the `--output text` option to eliminate CR/LF characters from the end of each line\. To send the CSR to a file, use the redirect option \(>\) followed by a file name\. 
-
-   ```
-   $ aws acm-pca get-certificate-authority-csr \
-        --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
-        --output text
-   ```
-
-1. Follow the instructions in [Step 2: Signing the private CA certificate](PcaSignCert.md)\.

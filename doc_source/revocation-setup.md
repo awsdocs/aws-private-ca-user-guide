@@ -14,7 +14,7 @@ If you create your CA without configuring revocation, you can always configure i
 **Note**  
 [APIPassthrough and CSRPassthrough](https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-varieties) certificate templates will not work with the AIA extension if the OCSP responder is enabled\.
 
-  The ACM Private CA OCSP responder is compliant with [RFC 5019](https://tools.ietf.org/html/rfc5019)\.
+  The ACM Private CA OCSP responder is compliant with [RFC 5019](https://datatracker.ietf.org/doc/html/rfc5019)\.
 
   The endpoint of the managed OCSP service is accessible on the public internet\. Customers who want OCSP but prefer not to have a public endpoint will need to operate their own OCSP infrastructure\.
 + **Certificate Revocation Lists \(CRLs\)**

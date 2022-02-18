@@ -16,7 +16,7 @@ MIIDRzCCA..................
 ------END CERTIFICATE------
 ```
 
-You can use the OpenSSL `x509` command to view the contents of your signed PEM format certificate\. 
+You can use the [OpenSSL](https://www.openssl.org/) `x509` command to view the contents of your signed PEM format certificate\. 
 
 ```
 openssl x509 -in path_to_certificate_file -text -noout

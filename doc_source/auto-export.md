@@ -1,0 +1,5 @@
+# Automating export of a renewed certificate<a name="auto-export"></a>
+
+When you use ACM Private CA to create a CA, you can import that CA into AWS Certificate Manager and let ACM manage certificate issuance and renewal\. If a certificate being renewed is associated with an [integrated service](https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html), the service seamlessly applies the new certificate\. However, if the certificate was originally [exported](https://docs.aws.amazon.com/acm/latest/userguide/export-private.html) for use elsewhere in your PKI environment \(for example, in an on\-premises server or appliance\), you need to be export it again after renewal\. 
+
+For a sample solution that automates the ACM export process using Amazon EventBridge and AWS Lambda, see [Automating export of renewed certificates](https://docs.aws.amazon.com/acm/latest/userguide/renew-private-cert.html#automating-export)\.

@@ -15,7 +15,7 @@ On the **Select the certificate authority \(CA\) type** page, choose the type of
 + Choosing **Subordinate CA** creates a CA that must be signed by a parent CA above it in the hierarchy\. Subordinate CAs are typically be used to create other subordinate CAs or to issue end\-entity certificates to users, computers, and applications\. 
 **Note**  
 ACM Private CA provides an automated signing process when your subordinate CA's parent CA is also hosted by ACM Private CA\. All you do is choose the parent CA to use\.  
-Your subordinate CA might need to be signed by an external signing authority\. If so, ACM Private CA provides you with a certificate signing request \(CSR\) that you must download and use to obtain a signed CA certificate\. For more information, see [Installing a subordinate CA certificate signed by an external parent CA](PCACertInstall.md#InstallSubordinateExternal)\.
+Your subordinate CA might need to be signed by an external trust services provider\. If so, ACM Private CAprovides you with a certificate signing request \(CSR\) that you must download and use to obtain a signed CA certificate\. For more information, see [Installing a subordinate CA certificate signed by an external parent CA](PCACertInstall.md#InstallSubordinateExternal)\.
 
 After choosing a CA type, choose **Next**\.
 
@@ -29,7 +29,7 @@ Under **Subject distinguished name options**, configure the subject name of your
 + **Locality name**
 + **Common Name \(CN\)**
 
-Because the backing certificate is self\-signed, the subject information that you provide for a private CA is probably more sparse than what a public CA would contain\. For more information about each of the values that make up a subject distinguished name, see [X\.500 Distinguished Name](PcaTerms.md#terms-x500dn)\.
+Because the backing certificate is self\-signed, the subject information that you provide for a private CA is probably more sparse than what a public CA would contain\. For more information about each of the values that make up a subject distinguished name, see [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.4)\.
 
  When done, choose **Next**\.
 

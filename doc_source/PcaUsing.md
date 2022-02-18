@@ -7,4 +7,5 @@ After you have created and activated a private certificate authority \(CA\) and 
 + [Retrieving a private certificate](PcaGetCert.md)
 + [Listing private certificates](PcaListCerts.md)
 + [Revoking a private certificate](PcaRevokeCert.md)
++ [Automating export of a renewed certificate](auto-export.md)
 + [Understanding certificate templates](UsingTemplates.md)

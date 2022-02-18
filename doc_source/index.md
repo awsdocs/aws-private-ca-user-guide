@@ -83,6 +83,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Retrieving a private certificate](PcaGetCert.md)
    + [Listing private certificates](PcaListCerts.md)
    + [Revoking a private certificate](PcaRevokeCert.md)
+   + [Automating export of a renewed certificate](auto-export.md)
    + [Understanding certificate templates](UsingTemplates.md)
 + [Using the ACM Private CA API (Java examples)](PcaApiIntro.md)
    + [Create and activate a root CA programmatically](JavaApi-ActivateRootCA.md)

@@ -808,7 +808,7 @@ This template is identical to the `OCSPSigningCertificate` template with one dif
 
 ### RootCACertificate/V1 definition<a name="RootCACertificate-V1"></a>
 
-This template is used to issue self\-signed root CA certificates\. CA certificates include a critical Basic constraints extension with the CA field set to `TRUE` to designate that the certificate can be used to issue CA certificates\. This template does not specify a path length because the path length constrains the maximum length of the CA chain \(CA certification depth\)\. A constrained chain length could inhibit future expansion of the hierarchy\. Extended key usage is excluded to prevent use of the CA certificate as a TLS client or server certificate\. No CRL information is specified because a self\-signed certificate cannot be revoked\.
+This template is used to issue self\-signed root CA certificates\. CA certificates include a critical basic constraints extension with the CA field set to `TRUE` to designate that the certificate can be used to issue CA certificates\. The template does not specify a path length \([pathLenConstraint](PcaTerms.md#terms-pathlength)\) because this could inhibit future expansion of the hierarchy\. Extended key usage is excluded to prevent use of the CA certificate as a TLS client or server certificate\. No CRL information is specified because a self\-signed certificate cannot be revoked\.
 
 
 **RootCACertificate/V1**  

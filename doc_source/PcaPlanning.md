@@ -4,7 +4,7 @@ ACM Private CA gives you complete, cloud\-based control over your organization's
 
 This section describes how to prepare ACM Private CA for use before you create a private certificate authority \(CA\)\. It also explains the option to add revocation support through Online Certificate Status Protocol \(OCSP\) or a certificate revocation list \(CRL\)\. 
 
-In addition, you should determine whether your organization prefers to host its private root CA credentials on premises rather than with AWS\. In that case, you need to set up and secure a self\-managed private PKI before using ACM Private CA\. In this scenario, you then create a subordinate CA in ACM Private CA backed by a parent CA outside of ACM Private CA\. For more information, see [Using a Root Authority Outside ACM Private CA](https://docs.aws.amazon.com/acm-pca/latest/userguide/PCACertInstall.html#InstallSubordinateExternal)\.
+In addition, you should determine whether your organization prefers to host its private root CA credentials on premises rather than with AWS\. In that case, you need to set up and secure a self\-managed private PKI before using ACM Private CA\. In this scenario, you then create a subordinate CA in ACM Private CA backed by a parent CA outside of ACM Private CA\. For more information, see [Installing a subordinate CA certificate signed by an external parent CA](https://docs.aws.amazon.com/acm-pca/latest/userguide/PCACertInstall.html#InstallSubordinateExternal)\.
 
 **Topics**
 + [Setting up your AWS account and the AWS CLI](setup-aws.md)

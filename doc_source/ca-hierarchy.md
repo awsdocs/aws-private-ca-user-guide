@@ -14,7 +14,7 @@ The following diagram illustrates a simple, three\-level CA hierarchy\.
 
 Each CA in the tree is backed by an X\.509 v3 certificate with signing authority \(symbolized by the pen\-and\-paper icon\)\. This means that as CAs, they can sign other certificates subordinate to them\. When a CA signs a lower\-level CA's certificate, it confers limited, revocable authority on the signed certificate\. The root CA in level 1 signs high\-level subordinate CA certificates in level 2\. These CAs, in turn, sign certificates for CAs in level 3 that are used by PKI \(public key infrastructure\) administrators who manage end\-entity certificates\. 
 
-Security in a CA hierarchy should be configured to be strongest at the top of the tree\. This arrangement protects the root CA certificate and its private key\. The root CA anchors trust for all of the subordinate CAs and the end\-entity certificates below it\. While localized damage can result from the compromise of an end\-entity certificate, compromise of the root destroys trust in the entire PKI\. Root\- and higher\-level subordinate CAs are used only infrequently \(usually to sign other CA certificates\)\. Consequently, they are tightly controlled and audited to ensure a lower risk of compromise\. At the lower levels of the hierarchy, security is less restrictive\. This approach allows the routine administrative tasks of issuing and revoking end\-entity certificates for users, computer hosts, and software services\.
+Security in a CA hierarchy should be configured to be strongest at the top of the tree\. This arrangement protects the root CA certificate and its private key\. The root CA anchors trust for all of the subordinate CAs and the end\-entity certificates below it\. While localized damage can result from the compromise of an end\-entity certificate, compromise of the root destroys trust in the entire PKI\. Root and high\-level subordinate CAs are used only infrequently \(usually to sign other CA certificates\)\. Consequently, they are tightly controlled and audited to ensure a lower risk of compromise\. At the lower levels of the hierarchy, security is less restrictive\. This approach allows the routine administrative tasks of issuing and revoking end\-entity certificates for users, computer hosts, and software services\.
 
 **Note**  
 Using a root CA to sign a subordinate certificate is a rare event that occurs in only a handful of circumstances:  
@@ -44,9 +44,9 @@ Typically, the browser also checks each certificate against a certificate revoca
 
 ## Planning the structure of a CA hierarchy<a name="ca-layers"></a>
 
-In general, your CA hierarchy should reflect the structure of your organization\. Aim for a *depth* \(that is, number of CA levels\) no greater than necessary to delegate administrative and security roles\. Adding a CA to the hierarchy means increasing the number of certificates in the certification path, which increases validation time\. Keeping the depth to a minimum also reduces the number of certificates sent from the server to the client when establishing trust\. A smaller depth also decreases the amount of work that a client performs to validate an end\-entity certificate\.
+In general, your CA hierarchy should reflect the structure of your organization\. Aim for a *path length* \(that is, number of CA levels\) no greater than necessary to delegate administrative and security roles\. Adding a CA to the hierarchy means increasing the number of certificates in the certification path, which increases validation time\. Keeping the path length to a minimum also reduces the number of certificates sent from the server to the client when validating an end\-entity certificate\.
 
-In theory, a root CA, which has no [path\-length parameter](#length-constraints), can authorize any depth of subordinate CAs\. A subordinate CA can have as many child subordinate CAs as are allowed by its internal configuration\. ACM Private CA managed hierarchies support CA certification paths up to five levels deep\.
+In theory, a root CA, which has no \([pathLenConstraint](PcaTerms.md#terms-pathlength) parameter\), can authorize unlimited levels of subordinate CAs\. A subordinate CA can have as many child subordinate CAs as are allowed by its internal configuration\. ACM Private CA managed hierarchies support CA certification paths up to five levels deep\.
 
 Well designed CA structures have several benefits: 
 + Separate administrative controls for different organizational units
@@ -69,7 +69,7 @@ Less common CA structures include the following:
 
   This structure is commonly used for development and testing when a full chain of trust is not required\. Used in production, it is atypical\. Moreover, it violates the best practice of maintaining separate security policies for the root CA and the CAs that issue end\-entity certificates\. 
 
-  However, if you are already issuing certificates directly from a root CA, you can migrate to ACM Private CA\. Doing so provides security and control advantages over using a root CA managed with OpenSSL or other software\.
+  However, if you are already issuing certificates directly from a root CA, you can migrate to ACM Private CA\. Doing so provides security and control advantages over using a root CA managed with [OpenSSL](https://www.openssl.org/) or other software\.
 
 ### Example of a private PKI for a manufacturer<a name="sample-hierarchy"></a>
 
@@ -79,19 +79,19 @@ Consequently, the CA hierarchy closely models these administrative and operation
 
 ![\[Diagram of a more complex CA hierarchy.\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/multilevel-ca-tree.png)
 
-This hierarchy contains three roots, one for Internal Operations and two for External Operations \(one root CA for each product line\)\. It also illustrates multiple certification depths, with two levels of CA for Internal Operations and three levels for External Operations\. 
+This hierarchy contains three roots, one for Internal Operations and two for External Operations \(one root CA for each product line\)\. It also illustrates multiple certification path length, with two levels of CA for Internal Operations and three levels for External Operations\. 
 
-The use of separated root CAs and additional depth on the External Operations side is a design decision serving business and security needs\. With multiple CA trees, the PKI is future\-proofed against corporate reorganizations, divestitures, or acquisitions\. When changes occur, an entire root CA hierarchy can move cleanly with the division it secures\. And with two levels of subordinate CA, the roots CAs have a high level of isolation from the level 3 CAs that are responsible for bulk\-signing the certificates for thousands or millions of manufactured items\. 
+The use of separated root CAs and additional subordinate CA layers on the External Operations side is a design decision serving business and security needs\. With multiple CA trees, the PKI is future\-proofed against corporate reorganizations, divestitures, or acquisitions\. When changes occur, an entire root CA hierarchy can move cleanly with the division it secures\. And with two levels of subordinate CA, the roots CAs have a high level of isolation from the level 3 CAs that are responsible for bulk\-signing the certificates for thousands or millions of manufactured items\. 
 
 On the internal side, corporate web and internal computer operations complete a two\-level hierarchy\. These levels allow web administrators and operations engineers to manage certificate issuance independently for their own work domains\. The compartmentalization of PKI into distinct functional domains is a security best practice and protects each from a compromise that might affect the other\. Web administrators issue end\-entity certificates for use by web browsers throughout the company, authenticating and encrypting communications on the internal website\. Operations engineers issue end\-entity certificates that authenticate data center hosts and computer services to one another\. This system helps keep sensitive data secure by encrypting it on the LAN\.
 
 ## Setting length constraints on the certification path<a name="length-constraints"></a>
 
-The structure of a CA hierarchy is defined and enforced by the *basics constraints extension* that each certificate contains\. The extension defines two constraints:
+The structure of a CA hierarchy is defined and enforced by the *basics constraints* extension that each certificate contains\. The extension defines two constraints:
 + `cA` – Whether the certificate defines a CA\. If this value is *false* \(the default\), then the certificate is an end\-entity certificate\.
-+ `pathLenConstraint` – The maximum *additional* depth of a certification path that includes the certificate\.
++ `pathLenConstraint` – The maximum number of lower\-level subordinate CAs that can exist in a valid chain of trust\. The end\-entity certificate is not counted because it is not a CA certificate\.
 
-A root CA certificate needs maximum flexibility and does not include a path length constraint\. This allows the root to define a certification path of any depth\. 
+A root CA certificate needs maximum flexibility and does not include a path length constraint\. This allows the root to define a certification path of any length\. 
 
 **Note**  
 ACM Private CA limits the certification path to five levels\.
@@ -104,7 +104,7 @@ The following diagram illustrates this propagation of limited authority down the
 
 In this four\-level hierarchy, the root is unconstrained \(as always\)\. But the first subordinate CA has a `pathLenConstraint` value of 2, which limits its child CAs from going more than two levels deeper\. Consequently, for a valid certification path, the constraint value must decrement to zero in the next two levels\. If a web browser encounters an end\-entity certificate from this branch that has a path length greater than four, validation fails\. Such a certificate could be the result of an accidentally created CA, a misconfigured CA, or a unauthorized issuance\.
 
-### Managing depth with templates<a name="template-depth"></a>
+### Managing path length with templates<a name="template-path-length"></a>
 
 ACM Private CA provides templates for issuing root, subordinate, and end\-entity certificates\. These templates encapsulate best practices for the basic constraints values, including path length\. The templates include the following:
 + RootCACertificate/V1

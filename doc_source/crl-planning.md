@@ -12,7 +12,7 @@ For information about using Online Certificate Status Protocol \(OCSP\) as an al
 
 ## CRL structure<a name="crl-structure"></a>
 
-Each CRL is a DER encoded file\. To download the file and use OpenSSL to view it, use a command similar to the following:
+Each CRL is a DER encoded file\. To download the file and use [OpenSSL](https://www.openssl.org/) to view it, use a command similar to the following:
 
 ```
 openssl crl -inform DER -in path-to-crl-file -text -noout
@@ -221,8 +221,6 @@ Complete the following steps to enable encryption using a custom key\.
 
 1. Choose either **Choose from your AWS KMS keys** or **Enter AWS KMS key ARN**\.
 
-1. Set **Bucket Key** to **Disable**\.
-
 1. Choose **Save Changes**\.
 
 1. \(Optional\) If you do not have an KMS key already, create one using the following AWS CLI [create\-key](https://docs.aws.amazon.com/cli/latest/reference/kms/create-key.html) command:
@@ -256,7 +254,31 @@ Complete the following steps to enable encryption using a custom key\.
       $ aws kms get-key-policy --key-id key-id --policy-name default --output text > ./policy.json
       ```
 
-   1. Open the `policy.json` file in a text editor and add the following statement:
+   1. Open the `policy.json` file in a text editor\. Select one of the following policy statements and add it to the existing policy\.
+
+      If your Amazon S3 bucket key is *enabled*, use the following statement:
+
+      ```
+      {
+         "Sid":"Allow ACM-PCA use of the key",
+         "Effect":"Allow",
+         "Principal":{
+            "Service":"acm-pca.amazonaws.com"
+         },
+         "Action":[
+            "kms:GenerateDataKey",
+            "kms:Decrypt"
+         ],
+         "Resource":"*",
+         "Condition":{
+            "StringLike":{
+               "kms:EncryptionContext:aws:s3:arn":"arn:aws:s3:::bucket-name"
+            }
+         }
+      }
+      ```
+
+      If your Amazon S3 bucket key is *disabled*, use the following statement:
 
       ```
       {
@@ -283,7 +305,7 @@ Complete the following steps to enable encryption using a custom key\.
       }
       ```
 
-   1. Finally, add the updated policy using the following [put\-key\-policy](https://docs.aws.amazon.com/cli/latest/reference/kms/put-key-policy.html) command:
+   1. Finally, apply the updated policy using the following [put\-key\-policy](https://docs.aws.amazon.com/cli/latest/reference/kms/put-key-policy.html) command:
 
       ```
       $ aws kms put-key-policy --key-id key_id --policy-name default --policy file://policy.json

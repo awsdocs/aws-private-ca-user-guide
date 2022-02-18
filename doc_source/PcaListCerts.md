@@ -2,7 +2,7 @@
 
 To list your private certificates, generate an audit report, retrieve it from its S3 bucket, and parse the report contents as needed\. For information about creating ACM Private CA audit reports, see [Using audit reports with your private CA](PcaAuditReport.md)\. For information about retrieving an object from an S3 bucket, see [Downloading an object](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/download-objects.html) in the *Amazon Simple Storage Service User Guide*\.
 
-The following examples illustrate approaches to creating audit reports and parsing them for useful data\. Results are formatted in JSON, and data is filtered using [jq](https://stedolan.github.io/jq/), a sed\-like parser for JSON\.
+The following examples illustrate approaches to creating audit reports and parsing them for useful data\. Results are formatted in JSON, and data is filtered using [jq](https://stedolan.github.io/jq/), a sed\-like parser\.
 
 **1\. Create an audit report\.**  
 The following command generates an audit report for a specified CA\. 
@@ -118,7 +118,7 @@ The filtered content is displayed in standard output:
 }
 ```
 
-**5\. Search for certificates following a specificed template\.**  
+**5\. Search for certificates following a specified template\.**  
 The following command filters the report content using a template ARN:
 
 ```

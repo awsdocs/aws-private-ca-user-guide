@@ -37,7 +37,8 @@ You can install a root CA certificate from the AWS Management Console or the AWS
    $ aws acm-pca get-certificate-authority-csr \
         --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
         --output text \
-        --endpoint https://acm-pca.amazonaws.com --region region > ca.csr
+        --endpoint service_endpoint \
+        --region region > ca.csr
    ```
 
    The resulting file `ca.csr`, a PEM file encoded in base64 format, has the following appearance\.
@@ -171,7 +172,7 @@ If you are using AWS CLI version 1\.6\.3 or later, use the prefix `fileb://` whe
    -----END CERTIFICATE-----
    ```
 
-   You can use OpenSSL to view and verify the contents of the certificate\.
+   You can use [OpenSSL](https://www.openssl.org/) to view and verify the contents of the certificate\.
 
    ```
    openssl x509 -in cert.pem -text -noout
@@ -325,16 +326,16 @@ The expiration date of the subordinate CA certificate cannot be later than the e
 
 ## Installing a subordinate CA certificate signed by an external parent CA<a name="InstallSubordinateExternal"></a>
 
-After you create a subordinate private CA as described in [Procedure for creating a CA \(console\)](Create-CA-console.md) or [Procedure for creating a CA \(CLI\) ](Create-CA-CLI.md), you have the option of activating it by installing a CA certificate signed by an external signing authority\. Signing your subordinate CA certificate with an external CA requires that you first set up the external signing authority, or arrange for the use of one\. 
+After you create a subordinate private CA as described in [Procedure for creating a CA \(console\)](Create-CA-console.md) or [Procedure for creating a CA \(CLI\) ](Create-CA-CLI.md), you have the option of activating it by installing a CA certificate signed by an external signing authority\. Signing your subordinate CA certificate with an external CA requires that you first set up an external trust services provider as your signing authority, or arrange for the use of a third\-party provider\. 
 
 **Note**  
-Procedures for creating or obtaining an external CA are outside the scope of this guide\.
+Procedures for creating or obtaining an externally signed CA are outside the scope of this guide\.
 
 When you have the subordinate CA and the external parent CA, you need to complete the following tasks:
 
 1. Obtain a certificate signing request \(CSR\) from ACM Private CA\.
 
-1. Submit the CSR to your external signing authority and obtain a signed CA certificate along with any chain certificates\.
+1. Submit the CSR to your external trust services provider and obtain a signed CA certificate along with any chain certificates\.
 
 1. Import the CA certificate and chain into ACM Private CA to activate your subordinate CA\.
 

@@ -48,4 +48,6 @@ Create an alternate name that matches your custom CNAME\.
 Bind your certificate to it\.
 Set ocsp\.acm\-pca\.*<region>*\.amazonaws\.com as the origin\.
 Apply the `Managed-CachingDisabled` policy\.
+Set **Viewer protocol policy** to **HTTP and HTTPS**\.
+Set **Allowed HTTP methods** to **GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE**\.
 In Route 53, create a DNS record that maps your custom CNAME to the URL of the CloudFront distribution\.
