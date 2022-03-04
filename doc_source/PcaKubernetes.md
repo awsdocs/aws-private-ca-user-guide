@@ -28,7 +28,31 @@ The diagram below shows some of the options available for using TLS with a Kuber
    + Provisioning with Kubernetes\-generated, self\-signed certificates\. This secures communications between pods, but self\-signed certificates do not satisfy HIPAA or FIPS requirements\.
    + Provisioning with certificates signed by a private CA\. As in numbers 2 and 3 above, this requires installing both **cert\-manager** and **aws\-privateca\-issuer**, and provision the cluster with a private CA\. Kubernetes can then install signed TLS certificates on the pods as needed\. 
 
-## Example solution<a name="example-solutions"></a>
+## Cross\-account use of the cert\-manager<a name="kubernetes-cross-account"></a>
 
-The following integration solution shows how to configure access to ACM Private CA on an Amazon EKS cluster\.
+Administrators with cross\-account access to a CA can use cert\-manager to provision a Kubernetes cluster\. For more information, see[Cross\-account access to private CAs](pca-resource-sharing.md)\. 
+
+**Note**  
+Only certain ACM Private CA certificate templates can be used in cross\-account scenarios\. See [Supported certificate templates ](#kubernetes-templates) for a list of available templates\.
+
+## Supported certificate templates<a name="kubernetes-templates"></a>
+
+The following table lists ACM Private CA templates that can be used with cert\-manager to provision a Kubernetes cluster\.
+
+
+****  
+
+| Templates supported for Kubernetes | Support for cross\-account use | 
+| --- | --- | 
+| [BlankEndEntityCertificate\_CSRPassthrough/V1 definition](UsingTemplates.md#BlankEndEntityCertificate_CSRPassthrough) |  | 
+| [CodeSigningCertificate/V1 definition](UsingTemplates.md#CodeSigningCertificate-V1) |  | 
+| [EndEntityCertificate/V1 definition](UsingTemplates.md#EndEntityCertificate-V1) | ✓ | 
+| [EndEntityClientAuthCertificate/V1 definition](UsingTemplates.md#EndEntityClientAuthCertificate-V1) | ✓ | 
+| [EndEntityServerAuthCertificate/V1 definition](UsingTemplates.md#EndEntityServerAuthCertificate-V1) | ✓ | 
+| [](UsingTemplates.md#OCSPSigningCertificate-V1) |  | 
+
+## Example solutions<a name="example-solutions"></a>
+
+The following integration solutions show how to configure access to ACM Private CA on an Amazon EKS cluster\.
 + [TLS\-enabled Kubernetes clusters with ACM Private CA and Amazon EKS](https://go.aws/3ifFNEJ)
++ [Setting up end\-to\-end TLS encryption on Amazon EKS with the new AWS Load Balancer Controller](https://aws.amazon.com/blogs/containers/setting-up-end-to-end-tls-encryption-on-amazon-eks-with-the-new-aws-load-balancer-controller/)

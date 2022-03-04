@@ -107,6 +107,11 @@ Choose **Next**\.
 
 ## 7\. Review and create<a name="PcaCreateReview"></a>
 
-On the **Review and create** page, confirm that your configuration is correct\. You can choose **Edit ** next to each step to return to the step and change its settings\. If you are creating your CA in the ap\-northeast\-3 Region, check the box to acknowledge that the key storage security standard is FIPS 140\-2 Level 2 or higher\. In all cases, check the box to acknowledge pricing information\. Finally, choose **Confirm and create**\.
+On the **Review and create** page, confirm that your configuration is correct\. You can choose **Edit ** next to each step to return to the step and change its settings\. If you are creating your CA in the ap\-northeast\-3 Region, check the box to acknowledge that the key storage security standard is FIPS 140\-2 Level 2 or higher\. In all cases, check the box to acknowledge pricing information\. 
+
+**Note**  
+For the latest ACM Private CA pricing information, see the [ACM Pricing](https://aws.amazon.com/certificate-manager/pricing/) page on the AWS website\. You can also use the [AWS pricing calculator](https://calculator.aws/#/createCalculator/certificateManager) to estimate costs\. 
+
+Finally, choose **Confirm and create**\.
 
 If you want to continue on to creating and installing a CA certificate, choose **Install CA certificate** in the **Success\!** window\. Otherwise choose **Cancel**, which takes you to a list of your **Private CAs**\. You can finish setting up the CA by following the instructions at [Creating and installing the CA certificate](PCACertInstall.md)\. 

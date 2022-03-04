@@ -7,7 +7,9 @@ For information about updating the configuration of a CA that you have already c
 For information about using a CA to sign end\-entity certificates for your users, devices, and applications, see [Issuing a private end\-entity certificate](PcaIssueCert.md)\.
 
 **Note**  
-Your account is charged a monthly price for each private CA starting from the time that you create it\.
+Your account is charged a monthly price for each private CA starting from the time that you create it\.  
+For the latest ACM Private CA pricing information, see the [ACM Pricing](https://aws.amazon.com/certificate-manager/pricing/) page on the AWS website\. You can also use the [AWS pricing calculator](https://calculator.aws/#/createCalculator/certificateManager) to estimate costs\.   
+
 
 **Topics**
 + [Procedure for creating a CA \(console\)](Create-CA-console.md)

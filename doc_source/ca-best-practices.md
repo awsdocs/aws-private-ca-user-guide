@@ -55,3 +55,7 @@ AWS bills you for a CA until it has been deleted\.
 ## Block public access to your CRLs<a name="bpa-crl"></a>
 
 ACM Private CA recommends using the Amazon S3 Block Public Access \(BPA\) feature on buckets that contain CRLs\. This avoids unnecessarily exposing details of your private PKI to potential adversaries\. BPA is an S3 [best practice](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html) and is enabled by default on new buckets\. Additional setup is needed in some cases\. For more information, see [Enabling the S3 Block Public Access \(BPA\) feature](crl-planning.md#s3-bpa)\.
+
+## Amazon EKS application best practices<a name="kubernetes"></a>
+
+When using ACM Private CA to provision Amazon EKS with X\.509 certificates, follow the recommendations for securing multi\-tenant environments in the [Amazon EKS Best Practices Guides](https://aws.github.io/aws-eks-best-practices/security/docs/multitenancy/#kubernetes-as-a-service)\. For general information about integrating ACM Private CA with Kubernetes, see [Securing Kubernetes with ACM Private CA](PcaKubernetes.md)\.
