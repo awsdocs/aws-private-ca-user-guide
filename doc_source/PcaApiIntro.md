@@ -32,3 +32,5 @@ The [GetCertificateAuthorityCsr](JavaApi-GetCertificateAuthorityCsr.md), [GetCer
 + [TagCertificateAuthorities](JavaApi-TagPCA.md)
 + [UntagCertificateAuthority](JavaApi-UnTagPCA.md)
 + [UpdateCertificateAuthority](JavaApi-UpdateCertificateAuthority.md)
++ [Create CAs and certificates with custom subject names](JavaApi-CustomAttributes.md)
++ [Create certificates with custom extensions](JavaApi-CustomExtensions.md)

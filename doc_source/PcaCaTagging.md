@@ -22,7 +22,7 @@ You can tag a private CA from the [ACM Private CA Console](https://console.aws.a
 
 1. Sign in to your AWS account and open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\.
 
-1. On the **Private certificate authories page**, choose your private CA from the list\.
+1. On the **Private certificate authorities page**, choose your private CA from the list\.
 
 1. In the details area below the list, choose the **Tags** tab\. A list of existing tags is displayed\.
 

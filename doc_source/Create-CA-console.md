@@ -15,7 +15,7 @@ On the **Select the certificate authority \(CA\) type** page, choose the type of
 + Choosing **Subordinate CA** creates a CA that must be signed by a parent CA above it in the hierarchy\. Subordinate CAs are typically be used to create other subordinate CAs or to issue end\-entity certificates to users, computers, and applications\. 
 **Note**  
 ACM Private CA provides an automated signing process when your subordinate CA's parent CA is also hosted by ACM Private CA\. All you do is choose the parent CA to use\.  
-Your subordinate CA might need to be signed by an external trust services provider\. If so, ACM Private CAprovides you with a certificate signing request \(CSR\) that you must download and use to obtain a signed CA certificate\. For more information, see [Installing a subordinate CA certificate signed by an external parent CA](PCACertInstall.md#InstallSubordinateExternal)\.
+Your subordinate CA might need to be signed by an external trust services provider\. If so, ACM Private CA provides you with a certificate signing request \(CSR\) that you must download and use to obtain a signed CA certificate\. For more information, see [Installing a subordinate CA certificate signed by an external parent CA](PCACertInstall.md#InstallSubordinateExternal)\.
 
 After choosing a CA type, choose **Next**\.
 

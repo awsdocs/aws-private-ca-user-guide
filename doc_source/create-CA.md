@@ -4,7 +4,7 @@ You can use the procedures in this section to create either root CAs or subordin
 
 For information about updating the configuration of a CA that you have already created, see [Updating your private CA](PCAUpdateCA.md)\.
 
-For information about using a CA to sign end\-entity certificates for your users, devices, and applications, see [Issuing a private end\-entity certificate](PcaIssueCert.md)\.
+For information about using a CA to sign end\-entity certificates for your users, devices, and applications, see [Issuing private end\-entity certificates](PcaIssueCert.md)\.
 
 **Note**  
 Your account is charged a monthly price for each private CA starting from the time that you create it\.  
@@ -14,4 +14,3 @@ For the latest ACM Private CA pricing information, see the [ACM Pricing](https:/
 **Topics**
 + [Procedure for creating a CA \(console\)](Create-CA-console.md)
 + [Procedure for creating a CA \(CLI\)](Create-CA-CLI.md)
-+ [Using AWS CloudFormation to create a CA](Create-CA-CFN.md)

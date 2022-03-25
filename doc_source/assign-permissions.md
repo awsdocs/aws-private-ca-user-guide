@@ -33,7 +33,7 @@ You can manage private CA permissions from the [ACM Private CA Console](https://
 
 1. Sign in to your AWS account and open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\.
 
-1. On the **Private certificate authories page**, choose your private CA from the list\.
+1. On the **Private certificate authorities page**, choose your private CA from the list\.
 
 1. Choose **Actions**, **Configure CA permissions**\.
 

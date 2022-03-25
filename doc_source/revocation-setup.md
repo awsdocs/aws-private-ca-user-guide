@@ -8,15 +8,16 @@ Customers looking for a revocation method can choose Online Certificate Status P
 If you create your CA without configuring revocation, you can always configure it later\. For more information, see [Updating your private CA](PCAUpdateCA.md)\. 
 + **Online Certificate Status Protocol \(OCSP\)**
 
-  ACM Private CA provides a fully managed OCSP solution to notify endpoints that certificates have been revoked without the need for customers to operate infrastructure themselves\. Customers can enable OCSP on new or existing CAs with a single operation using the ACM Private CA console, the API, the CLI, or through AWS CloudFormation\. When OCSP is operating, an endpoint directly queries an OCSP responder for the revocation status of its certificate whenever it attempts a secure connection\. Whereas CRLs are stored and processed on the endpoint and can become stale, OCSP storage and processing requirements are handled synchronously on the responder backend\.
+  ACM Private CA provides a fully managed OCSP solution to notify endpoints that certificates have been revoked without the need for customers to operate infrastructure themselves\. Customers can enable OCSP on new or existing CAs with a single operation using the ACM Private CA console, the API, the CLI, or through AWS CloudFormation\. Whereas CRLs are stored and processed on the endpoint and can become stale, OCSP storage and processing requirements are handled synchronously on the responder backend\.
 
-  When you enable OCSP for a CA, ACM Private CA includes the URL of the OCSP *Authority Information Access* extension in each new certificate issued\. The extension allows clients such as web browsers to query the responder and determine whether an end\-entity or subordinate CA certificate can be trusted\.
-**Note**  
-[APIPassthrough and CSRPassthrough](https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-varieties) certificate templates will not work with the AIA extension if the OCSP responder is enabled\.
+  When you enable OCSP for a CA, ACM Private CA includes the URL of the OCSP responder in the *Authority Information Access* \(AIA\) extension of each new certificate issued\. The extension allows clients such as web browsers to query the responder and determine whether an end\-entity or subordinate CA certificate can be trusted\. The responder returns a status message that is cryptographically signed to assure its authenticity\. 
 
   The ACM Private CA OCSP responder is compliant with [RFC 5019](https://datatracker.ietf.org/doc/html/rfc5019)\.
 
-  The endpoint of the managed OCSP service is accessible on the public internet\. Customers who want OCSP but prefer not to have a public endpoint will need to operate their own OCSP infrastructure\.
+  **OCSP considerations**
+  + OCSP status messages are signed using the same signing algorithm that the issuing CA was configured to use\. CAs created in the ACM Private CA console use the SHA256WITHRSA signature algorithm by default\. Other supported algorithms can be found in the [CertificateAuthorityConfiguration](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CertificateAuthorityConfiguration.html) API documentation\.
+  + [APIPassthrough and CSRPassthrough](https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-varieties) certificate templates will not work with the AIA extension if the OCSP responder is enabled\.
+  + The endpoint of the managed OCSP service is accessible on the public internet\. Customers who want OCSP but prefer not to have a public endpoint will need to operate their own OCSP infrastructure\.
 + **Certificate Revocation Lists \(CRLs\)**
 
   A CRL contains a list of revoked certificates\. When you configure a CA to generate CRLs, ACM Private CA includes the *CRL Distribution Points* extension in each new certificate issued\. This extension provides the URL for the CRL\. The extension allows clients such as web browsers to query the CRL and determine whether an end\-entity or subordinate CA certificate can be trusted\. 

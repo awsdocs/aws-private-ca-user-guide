@@ -6,7 +6,7 @@ After creating a private CA, you can update its status or change its [revocation
 
 The status of a CA that is managed by ACM Private CA results from a user action or, in some cases, from a service action\. For example, a CA status changes when it expires\. The status options available to CA administrators vary depending on the current status of the CA\.
 
-ACM Private CA can report the following status values\. The table shows the CA capabilites available in each state\.
+ACM Private CA can report the following status values\. The table shows the CA capabilities available in each state\.
 
 **Note**  
 For all status values except `DELETED` and `FAILED`, you are billed for the CA\.

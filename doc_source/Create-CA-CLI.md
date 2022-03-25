@@ -308,3 +308,81 @@ This description should contain the following section\.
    }
 }
 ```
+
+## Example 5: Create a CA with a custom subject name<a name="example_4"></a>
+
+In this example, we create a CA with a customized subject name\. The defined name and associated object identifier \(OID\) is declared in the following configuration file\.
+
+**File: ca\_config\.txt**
+
+```
+{
+  "KeyAlgorithm": "RSA_2048",
+  "SigningAlgorithm": "SHA256WITHRSA",
+  "Subject": {
+    "CustomAttributes": [
+      {
+        "ObjectIdentifier": "1.3.6.1.4.1.37244.1.3",
+        "Value": "ABCDABCD12341234"
+      }
+    ]
+  }
+}
+```
+
+**Command**
+
+```
+$ aws acm-pca create-certificate-authority \
+      --certificate-authority-configuration fileb://ca_config.txt \
+      --revocation-configuration file://revoke_config.txt \
+      --certificate-authority-type ROOT
+```
+
+If successful, this command outputs the Amazon Resource Name \(ARN\) of the CA\.
+
+```
+{
+    "CertificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
+}
+```
+
+View the CA, which contains a `CustomAttributes` section\.
+
+```
+$ aws acm-pca describe-certificate-authority --certificate-authority-arn "arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
+```
+
+```
+{
+    "CertificateAuthority": {
+        "Status": "PENDING_CERTIFICATE", 
+        "LastStateChangeAt": 1234567891.234, 
+        "KeyStorageSecurityStandard": "FIPS_140_2_LEVEL_3_OR_HIGHER", 
+        "OwnerAccount": "account", 
+        "Arn": "arn:aws:acm-pca:region:account:certificate-authority/CA_ID", 
+        "CertificateAuthorityConfiguration": {
+            "KeyAlgorithm": "RSA_2048", 
+            "SigningAlgorithm": "SHA256WITHRSA", 
+            "Subject": {
+                "CustomAttributes": [
+                    {
+                        "ObjectIdentifier": "1.3.6.1.4.1.37244.1.3", 
+                        "Value": "ABCDABCD12341234"
+                    }
+                ]
+            }
+        }, 
+        "Type": "ROOT", 
+        "RevocationConfiguration": {
+            "CrlConfiguration": {
+                "Enabled": false
+            }, 
+            "OcspConfiguration": {
+                "Enabled": false
+            }
+        }, 
+        "CreatedAt": 1234567891.234
+    }
+}
+```

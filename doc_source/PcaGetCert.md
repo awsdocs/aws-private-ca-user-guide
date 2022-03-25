@@ -11,9 +11,8 @@ If you want to revoke a certificate, you can use the get\-certificate command to
 ```
 $ aws acm-pca get-certificate \
       --certificate-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID/certificate/certificate_ID \
-      --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
-      --region us-west-2 \
-      | jq -r '.Certificate, .CertificateChain'
+      --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID | \
+      jq -r '.Certificate, .CertificateChain'
 ```
 
 This command outputs the certificate and certificate chain in the following standard format\.

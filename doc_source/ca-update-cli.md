@@ -1,6 +1,6 @@
 # Updating a CA \(CLI\)<a name="ca-update-cli"></a>
 
-The following procedures show how to update the the status and [revocation configuration](revocation-setup.md) of an existing CA using the AWS CLI\.
+The following procedures show how to update the status and [revocation configuration](revocation-setup.md) of an existing CA using the AWS CLI\.
 
 **Note**  
 Changes to the revocation configuration of a CA do not affect certificates that were already issued\. For managed revocation to work, older certificates must be re\-issued\.

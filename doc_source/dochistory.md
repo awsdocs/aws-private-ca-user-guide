@@ -4,6 +4,7 @@ The following table describes significant changes to this documentation since Ja
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for Custom Attributes and Extensions](#dochistory) | Use the [CustomAttribute object](https://docs.aws.amazon.com/acm-pca/latest/userguide/JavaApi-CustomAttributes.html) to configure customized CAs and certificates, and the [CustomExtension object](https://docs.aws.amazon.com/acm-pca/latest/userguide/JavaApi-CustomExtensions.html) to configure customized certificates\. | March 16, 2022 | 
 | [Support for Managed OCSP](#dochistory) | See [Setting up a certificate revocation method](https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html) for revocation options including OCSP\. | August 18, 2021 | 
 | [Support for S3 Block Public Access feature for CRLs](#dochistory) | See [Enabling the S3 Block Public Access feature](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa)\. | May 27, 2021 | 
 | [New and updated Java implementation examples](#dochistory) | See [Using the ACM Private CA API \(Java Examples\)](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaApiIntro.html)\. | September 9, 2020 | 
