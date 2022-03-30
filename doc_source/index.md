@@ -117,7 +117,6 @@ Amazon's trademarks and trade dress may not be used in
    + [Step 1: Getting a certificate signing request (CSR) from ACM Private CA](PcaGetCsr.md)
    + [Step 2: Signing the private CA certificate](PcaSignCert.md)
    + [Step 3: Import your private CA certificate into ACM Private CA](PcaImportCaCert.md)
-   + [(Optional) Enforcing name constraints on an externally signed private CA](name_constraints.md)
 + [Securing Kubernetes with ACM Private CA](PcaKubernetes.md)
 + [ACM Private CA best practices](ca-best-practices.md)
 + [Troubleshooting](PcaTsIntro.md)

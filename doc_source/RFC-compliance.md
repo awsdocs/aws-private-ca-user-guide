@@ -13,7 +13,6 @@ ACM Private CA does not enforce certain constraints defined in [RFC 5280](https:
   Path length \([pathLenConstraint](PcaTerms.md#terms-pathlength)\) determines how many subordinate CAs may exist downstream from the imported CA certificate\. ACM Private CA enforces path length by failing with a validation exception for the following reasons:
   + Importing a CA certificate would violate the path length constraint in the CA certificate or in any CA certificate in the chain\.
   + Issuing a certificate would violate a path length constraint\.
-+ [Name constraints](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10)\. These constraints on a CA govern what subject names are valid for downstream certificates\. For more information, see [\(Optional\) Enforcing name constraints on an externally signed private CA](name_constraints.md)\.
 
 **Not enforced**
 + [Policy constraints](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.11)\. These constraints limit a CA's capacity to issue subordinate CA certificates\.
