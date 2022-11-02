@@ -1,6 +1,6 @@
 # Designing a CA hierarchy<a name="ca-hierarchy"></a>
 
-With ACM Private CA, you can create a hierarchy of certificate authorities with up to five levels\. The root CA, at the top of a hierarchy tree, can have any number of branches\. The root CA can have as many as four levels of subordinate CAs on each branch\. You can also create multiple hierarchies, each with its own root\. 
+With AWS Private CA, you can create a hierarchy of certificate authorities with up to five levels\. The root CA, at the top of a hierarchy tree, can have any number of branches\. The root CA can have as many as four levels of subordinate CAs on each branch\. You can also create multiple hierarchies, each with its own root\. 
 
 A well\-designed CA hierarchy offers the following benefits:
 + Granular security controls appropriate to each CA
@@ -10,7 +10,7 @@ A well\-designed CA hierarchy offers the following benefits:
 
 The following diagram illustrates a simple, three\-level CA hierarchy\. 
 
-![\[Diagram of a simple, three-level CA hierarchy.\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/simple-ca-tree.png)
+![\[Diagram of a simple, three-level CA hierarchy.\]](http://docs.aws.amazon.com/privateca/latest/userguide/images/simple-ca-tree.png)
 
 Each CA in the tree is backed by an X\.509 v3 certificate with signing authority \(symbolized by the pen\-and\-paper icon\)\. This means that as CAs, they can sign other certificates subordinate to them\. When a CA signs a lower\-level CA's certificate, it confers limited, revocable authority on the signed certificate\. The root CA in level 1 signs high\-level subordinate CA certificates in level 2\. These CAs, in turn, sign certificates for CAs in level 3 that are used by PKI \(public key infrastructure\) administrators who manage end\-entity certificates\. 
 
@@ -36,7 +36,7 @@ The trust store is a library of trusted CAs that the browser or operating system
 
 The next diagram shows the validation path that a browser follows when presented with an end\-entity X\.509 certificate\. Note that the end\-entity certificate lacks signing authority and serves only to authenticate the entity that owns it\.
 
-![\[Validation check by a web browser.\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/chain-of-trust.png)
+![\[Validation check by a web browser.\]](http://docs.aws.amazon.com/privateca/latest/userguide/images/chain-of-trust.png)
 
 The browser inspects the end\-entity certificate\. The browser finds that the certificate offers a signature from subordinate CA \(level 3\) as its trust credential\. The certificates for the subordinate CAs must be included in the same PEM file\. Alternatively, they can also be in a separate file that contains the certificates that make up the trust chain\. Upon finding these, the browser checks the certificate of subordinate CA \(level 3\) and finds that it offers a signature from subordinate CA \(level 2\)\. In turn, subordinate CA \(level 2\) offers a signature from root CA \(level 1\) as its trust credential\. If the browser finds a copy of the private root CA certificate preinstalled in its trust store, it validates the end\-entity certificate as trusted\. 
 
@@ -46,7 +46,7 @@ Typically, the browser also checks each certificate against a certificate revoca
 
 In general, your CA hierarchy should reflect the structure of your organization\. Aim for a *path length* \(that is, number of CA levels\) no greater than necessary to delegate administrative and security roles\. Adding a CA to the hierarchy means increasing the number of certificates in the certification path, which increases validation time\. Keeping the path length to a minimum also reduces the number of certificates sent from the server to the client when validating an end\-entity certificate\.
 
-In theory, a root CA, which has no \([pathLenConstraint](PcaTerms.md#terms-pathlength) parameter\), can authorize unlimited levels of subordinate CAs\. A subordinate CA can have as many child subordinate CAs as are allowed by its internal configuration\. ACM Private CA managed hierarchies support CA certification paths up to five levels deep\.
+In theory, a root CA, which has no \([pathLenConstraint](PcaTerms.md#terms-pathlength) parameter\), can authorize unlimited levels of subordinate CAs\. A subordinate CA can have as many child subordinate CAs as are allowed by its internal configuration\. AWS Private CA managed hierarchies support CA certification paths up to five levels deep\.
 
 Well designed CA structures have several benefits: 
 + Separate administrative controls for different organizational units
@@ -69,7 +69,7 @@ Less common CA structures include the following:
 
   This structure is commonly used for development and testing when a full chain of trust is not required\. Used in production, it is atypical\. Moreover, it violates the best practice of maintaining separate security policies for the root CA and the CAs that issue end\-entity certificates\. 
 
-  However, if you are already issuing certificates directly from a root CA, you can migrate to ACM Private CA\. Doing so provides security and control advantages over using a root CA managed with [OpenSSL](https://www.openssl.org/) or other software\.
+  However, if you are already issuing certificates directly from a root CA, you can migrate to AWS Private CA\. Doing so provides security and control advantages over using a root CA managed with [OpenSSL](https://www.openssl.org/) or other software\.
 
 ### Example of a private PKI for a manufacturer<a name="sample-hierarchy"></a>
 
@@ -77,7 +77,7 @@ In this example, a hypothetical technology company manufactures two Internet of 
 
 Consequently, the CA hierarchy closely models these administrative and operational aspects of the business\.
 
-![\[Diagram of a more complex CA hierarchy.\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/multilevel-ca-tree.png)
+![\[Diagram of a more complex CA hierarchy.\]](http://docs.aws.amazon.com/privateca/latest/userguide/images/multilevel-ca-tree.png)
 
 This hierarchy contains three roots, one for Internal Operations and two for External Operations \(one root CA for each product line\)\. It also illustrates multiple certification path length, with two levels of CA for Internal Operations and three levels for External Operations\. 
 
@@ -94,19 +94,19 @@ The structure of a CA hierarchy is defined and enforced by the *basics constrain
 A root CA certificate needs maximum flexibility and does not include a path length constraint\. This allows the root to define a certification path of any length\. 
 
 **Note**  
-ACM Private CA limits the certification path to five levels\.
+AWS Private CA limits the certification path to five levels\.
 
 Subordinate CAs have `pathLenConstraint` values equal to or greater than zero, depending on location in the hierarchy placement and desired features\. For example, in a hierarchy with three CAs, no path constraint is specified for the root CA\. The first subordinate CA has a path length of 1 and can therefore sign child CAs\. Each of these child CAs must necessarily have a `pathLenConstraint` value of zero\. This means that they can sign end\-entity certificates but cannot issue additional CA certificates\. Limiting the power to create new CAs is an important security control\.
 
 The following diagram illustrates this propagation of limited authority down the hierarchy\.
 
-![\[Diagram of a simple, three-level CA hierarchy.\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/path-length.png)
+![\[Diagram of a simple, three-level CA hierarchy.\]](http://docs.aws.amazon.com/privateca/latest/userguide/images/path-length.png)
 
 In this four\-level hierarchy, the root is unconstrained \(as always\)\. But the first subordinate CA has a `pathLenConstraint` value of 2, which limits its child CAs from going more than two levels deeper\. Consequently, for a valid certification path, the constraint value must decrement to zero in the next two levels\. If a web browser encounters an end\-entity certificate from this branch that has a path length greater than four, validation fails\. Such a certificate could be the result of an accidentally created CA, a misconfigured CA, or a unauthorized issuance\.
 
 ### Managing path length with templates<a name="template-path-length"></a>
 
-ACM Private CA provides templates for issuing root, subordinate, and end\-entity certificates\. These templates encapsulate best practices for the basic constraints values, including path length\. The templates include the following:
+AWS Private CA provides templates for issuing root, subordinate, and end\-entity certificates\. These templates encapsulate best practices for the basic constraints values, including path length\. The templates include the following:
 + RootCACertificate/V1
 + SubordinateCACertificate\_PathLen0/V1
 + SubordinateCACertificate\_PathLen1/V1

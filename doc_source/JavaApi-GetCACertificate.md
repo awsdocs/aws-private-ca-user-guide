@@ -1,6 +1,6 @@
 # GetCertificateAuthorityCertificate<a name="JavaApi-GetCACertificate"></a>
 
-The following Java sample shows how to use the [GetCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html) operation\.
+The following Java sample shows how to use the [GetCertificateAuthorityCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificateAuthorityCertificate.html) operation\.
 
 This operation retrieves the certificate and certificate chain for your private certificate authority \(CA\)\. Both the certificate and the chain are base64\-encoded strings in PEM format\. The chain does not include the CA certificate\. Each certificate in the chain signs the one before it\.
 

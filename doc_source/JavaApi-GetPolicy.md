@@ -1,10 +1,10 @@
 # GetPolicy<a name="JavaApi-GetPolicy"></a>
 
-The following Java sample shows how to use the [GetPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html) operation\.
+The following Java sample shows how to use the [GetPolicy](https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetPolicy.html) operation\.
 
-The operation retrieves the resource\-based policy attached to a private CA\. A resource\-based policy is used to enable cross\-account CA sharing\. You can find the ARN of a private CA by calling the [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html) action\.
+The operation retrieves the resource\-based policy attached to a private CA\. A resource\-based policy is used to enable cross\-account CA sharing\. You can find the ARN of a private CA by calling the [ListCertificateAuthorities](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html) action\.
 
-Related API actions include [PutPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html) and [DeletePolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html)\.
+Related API actions include [PutPolicy](https://docs.aws.amazon.com/privateca/latest/APIReference/API_PutPolicy.html) and [DeletePolicy](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePolicy.html)\.
 
 ```
 package com.amazonaws.samples;

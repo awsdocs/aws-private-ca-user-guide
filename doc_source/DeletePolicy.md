@@ -1,6 +1,6 @@
 # Deleting a policy<a name="DeletePolicy"></a>
 
-The following CloudTrail example shows the results of a call to the [DeletePolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html) operation\.
+The following CloudTrail example shows the results of a call to the [DeletePolicy](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePolicy.html) operation\.
 
 ```
 {

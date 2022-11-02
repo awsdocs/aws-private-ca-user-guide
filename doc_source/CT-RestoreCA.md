@@ -1,6 +1,6 @@
 # Restoring a certificate authority<a name="CT-RestoreCA"></a>
 
-The following CloudTrail example shows the results of a call to the [RestoreCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RestoreCertificateAuthority.html) operation\. In this example, the certificate authority cannot be restored because it is not in the `DELETED` state\. 
+The following CloudTrail example shows the results of a call to the [RestoreCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_RestoreCertificateAuthority.html) operation\. In this example, the certificate authority cannot be restored because it is not in the `DELETED` state\. 
 
 ```
 {

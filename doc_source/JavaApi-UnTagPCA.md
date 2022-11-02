@@ -1,8 +1,8 @@
 # UntagCertificateAuthority<a name="JavaApi-UnTagPCA"></a>
 
-The following Java sample shows how to use the [UntagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html) operation\.
+The following Java sample shows how to use the [UntagCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html) operation\.
 
-This operation removes one or more tags from your private CA\. A tag consists of a key\-value pair\. If you do not specify the value portion of the tag when calling this operation, the tag is removed regardless of value\. If you specify a value, the tag is removed only if it is associated with the specified value\. To add tags to a private CA, use the [TagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html) operation\. Call the [ListTags](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListTags.html) operation to see what tags are associated with your CA\. 
+This operation removes one or more tags from your private CA\. A tag consists of a key\-value pair\. If you do not specify the value portion of the tag when calling this operation, the tag is removed regardless of value\. If you specify a value, the tag is removed only if it is associated with the specified value\. To add tags to a private CA, use the [TagCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html) operation\. Call the [ListTags](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListTags.html) operation to see what tags are associated with your CA\. 
 
 ```
 package com.amazonaws.samples;

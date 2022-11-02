@@ -1,10 +1,10 @@
 # PutPolicy<a name="JavaApi-PutPolicy"></a>
 
-The following Java sample shows how to use the [PutPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html) operation\.
+The following Java sample shows how to use the [PutPolicy](https://docs.aws.amazon.com/privateca/latest/APIReference/API_PutPolicy.html) operation\.
 
-The operation attaches a resource\-based policy to a private CA, enabling cross\-account sharing\. When authorized by a policy, a principal residing in another AWS account can issue and renew private end\-entity certificates using a private CA that it does not own\. You can find the ARN of a private CA by calling the [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html) action\. For examples of policies, see the ACM Private CA guidance on [Resource\-Based Policies](https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html)\.
+The operation attaches a resource\-based policy to a private CA, enabling cross\-account sharing\. When authorized by a policy, a principal residing in another AWS account can issue and renew private end\-entity certificates using a private CA that it does not own\. You can find the ARN of a private CA by calling the [ListCertificateAuthorities](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html) action\. For examples of policies, see the AWS Private CA guidance on [Resource\-Based Policies](https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html)\.
 
-Once a policy is attached to a CA, you can inspect it with the [GetPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html) action or delete it with the [DeletePolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html) action\.
+Once a policy is attached to a CA, you can inspect it with the [GetPolicy](https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetPolicy.html) action or delete it with the [DeletePolicy](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePolicy.html) action\.
 
 ```
 package com.amazonaws.samples;

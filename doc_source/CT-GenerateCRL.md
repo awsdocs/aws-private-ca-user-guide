@@ -1,6 +1,6 @@
 # GenerateCRL<a name="CT-GenerateCRL"></a>
 
-The following CloudTrail example shows the record for a [GenerateCRL](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) event\.
+The following CloudTrail example shows the record for a [GenerateCRL](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) event\.
 
 ```
 {

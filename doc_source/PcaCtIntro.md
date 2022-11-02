@@ -1,6 +1,6 @@
 # Using CloudTrail<a name="PcaCtIntro"></a>
 
-You can use [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) to record API calls that are made by AWS Certificate Manager Private Certificate Authority\. For more information, see the following topics\.
+You can use [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) to record API calls that are made by AWS Private Certificate Authority\. For more information, see the following topics\.
 
 **Topics**
 + [Creating a policy](PutPolicy.md)

@@ -1,6 +1,6 @@
 # Terms and Concepts<a name="PcaTerms"></a>
 
-The following terms and concepts can help you as you work with AWS Certificate Manager Private Certificate Authority \(ACM Private CA\)\.
+The following terms and concepts can help you as you work with AWS Private Certificate Authority \(AWS Private CA\)\.
 
 **Topics**
 + [Trust](#terms-trust)
@@ -32,7 +32,7 @@ A digital signature is an encrypted hash over a certificate\. A signature is use
 
 A certificate authority \(CA\) issues and if necessary revokes digital certificates\. The most common type of certificate is based on the ISO X\.509 standard\. An X\.509 certificate affirms the identity of the certificate subject and binds that identity to a public key\. The subject can be a user, an application, a computer, or other device\. The CA signs a certificate by hashing the contents and then encrypting the hash with the private key related to the public key in the certificate\. A client application such as a web browser that needs to affirm the identity of a subject uses the public key to decrypt the certificate signature\. It then hashes the certificate contents and compares the hashed value to the decrypted signature to determine whether they match\. For information about certificate signing, see [Certificate signature](#terms-signing)\. 
 
-You can use ACM Private CA to create a private CA and use the private CA to issue certificates\. Your private CA issues only private SSL/TLS certificates for use within your organization\. For more information, see [Private certificate](#terms-pca-cert)\. Your private CA also requires a certificate before you can use it\. For more information, see [CA certificate](#terms-ca-cert)\. 
+You can use AWS Private CA to create a private CA and use the private CA to issue certificates\. Your private CA issues only private SSL/TLS certificates for use within your organization\. For more information, see [Private certificate](#terms-pca-cert)\. Your private CA also requires a certificate before you can use it\. For more information, see [CA certificate](#terms-ca-cert)\. 
 
 ## Root CA<a name="terms-rootca"></a>
 
@@ -42,9 +42,9 @@ A cryptographic building block and root of trust upon which certificates can be 
 
 A certificate authority \(CA\) certificate affirms the identity of the CA and binds it to the public key that is contained in the certificate\. 
 
-You can use ACM Private CA to create a private root CA or a private subordinate CA, each backed by a CA certificate\. Subordinate CA certificates are signed by another CA certificate higher in a chain of trust\. But in the case of a root CA, the certificate is self\-signed\. You can also establish an external root authority \(hosted on premises, for example\)\. You can then use your root authority to sign a subordinate root CA certificate hosted by ACM Private CA\.
+You can use AWS Private CA to create a private root CA or a private subordinate CA, each backed by a CA certificate\. Subordinate CA certificates are signed by another CA certificate higher in a chain of trust\. But in the case of a root CA, the certificate is self\-signed\. You can also establish an external root authority \(hosted on premises, for example\)\. You can then use your root authority to sign a subordinate root CA certificate hosted by AWS Private CA\.
 
-The following example shows the typical fields contained in an ACM Private CA X\.509 CA certificate\. Note that for a CA certificate, the `CA:` value in the `Basic Constraints` field is set to `TRUE`\. 
+The following example shows the typical fields contained in an AWS Private CA X\.509 CA certificate\. Note that for a CA certificate, the `CA:` value in the `Basic Constraints` field is set to `TRUE`\. 
 
 ```
 Certificate:
@@ -91,7 +91,7 @@ A certificate signed by the issuer instead of a higher CA\. Unlike certificates 
 
 ## Private certificate<a name="terms-pca-cert"></a>
 
-ACM Private CA certificates are private SSL/TLS certificates that you can use within your organization, but are untrusted on the public internet\. Use them to identify resources such as clients, servers, applications, services, devices, and users\. When establishing a secure encrypted communications channel, each resource uses a certificate like the following as well as cryptographic techniques to prove its identity to another resource\. Internal API endpoints, web servers, VPN users, IoT devices, and many other applications use private certificates to establish encrypted communication channels that are necessary for their secure operation\. By default, private certificates are not publicly trusted\. An internal administrator must explicitly configure applications to trust private certificates and distribute the certificates\. 
+AWS Private CA certificates are private SSL/TLS certificates that you can use within your organization, but are untrusted on the public internet\. Use them to identify resources such as clients, servers, applications, services, devices, and users\. When establishing a secure encrypted communications channel, each resource uses a certificate like the following as well as cryptographic techniques to prove its identity to another resource\. Internal API endpoints, web servers, VPN users, IoT devices, and many other applications use private certificates to establish encrypted communication channels that are necessary for their secure operation\. By default, private certificates are not publicly trusted\. An internal administrator must explicitly configure applications to trust private certificates and distribute the certificates\. 
 
 ```
 Certificate:

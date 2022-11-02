@@ -1,6 +1,6 @@
 # Describing a certificate authority<a name="CT-DescribeCA"></a>
 
-The following CloudTrail example shows the results of a call to the [DescribeCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthority.html) operation\.
+The following CloudTrail example shows the results of a call to the [DescribeCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DescribeCertificateAuthority.html) operation\.
 
 ```
 {

@@ -1,6 +1,6 @@
 # CreateCertificateAuthority<a name="JavaApi-CreatePrivateCertificateAuthority"></a>
 
-The following Java sample shows how to use the [CreateCerticateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
+The following Java sample shows how to use the [CreateCerticateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
 
 The operation creates a private subordinate certificate authority \(CA\)\. You must specify the CA configuration, the revocation configuration, the CA type, and an optional idempotency token\.
 

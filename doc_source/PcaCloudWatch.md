@@ -1,6 +1,6 @@
 # Supported CloudWatch metrics<a name="PcaCloudWatch"></a>
 
-Amazon CloudWatch is a monitoring service for AWS resources\. You can use CloudWatch to collect and track metrics, set alarms, and automatically react to changes in your AWS resources\. ACM Private CA supports the following CloudWatch metrics\. 
+Amazon CloudWatch is a monitoring service for AWS resources\. You can use CloudWatch to collect and track metrics, set alarms, and automatically react to changes in your AWS resources\. AWS Private CA supports the following CloudWatch metrics\. 
 
 
 ****  

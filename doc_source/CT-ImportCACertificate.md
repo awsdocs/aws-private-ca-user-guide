@@ -1,6 +1,6 @@
 # Importing a certificate authority certificate<a name="CT-ImportCACertificate"></a>
 
-The following CloudTrail example shows the results of a call to the [ImportCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html) operation\.
+The following CloudTrail example shows the results of a call to the [ImportCertificateAuthorityCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html) operation\.
 
 ```
 {

@@ -1,6 +1,6 @@
 # Retrieving a certificate<a name="CT-GetCertificate"></a>
 
-The following CloudTrail example shows the results of a call to the [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) operation\.
+The following CloudTrail example shows the results of a call to the [GetCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificate.html) operation\.
 
 ```
 {

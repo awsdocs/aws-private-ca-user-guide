@@ -1,6 +1,6 @@
 # Retrieving a policy<a name="GetPolicy"></a>
 
-The following CloudTrail example shows the results of a call to the [GetPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html) operation\.
+The following CloudTrail example shows the results of a call to the [GetPolicy](https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetPolicy.html) operation\.
 
 ```
 {

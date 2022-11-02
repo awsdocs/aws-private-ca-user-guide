@@ -1,6 +1,6 @@
 # Creating a policy<a name="PutPolicy"></a>
 
-The following CloudTrail example shows the results of a call to the [PutPolicy](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html) operation\.
+The following CloudTrail example shows the results of a call to the [PutPolicy](https://docs.aws.amazon.com/privateca/latest/APIReference/API_PutPolicy.html) operation\.
 
 ```
 {

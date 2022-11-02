@@ -1,8 +1,8 @@
 # GetCertificate<a name="JavaApi-GetCertificate"></a>
 
-The following Java sample shows how to use the [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) operation\.
+The following Java sample shows how to use the [GetCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificate.html) operation\.
 
-The operation retrieves a certificate from your private CA\. The ARN of the certificate is returned when you call the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\. You must specify both the ARN of your private CA and the ARN of the issued certificate when calling the `GetCertificate` operation\. You can retrieve the certificate if it is in the `ISSUED` state\. You can call the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation to create a report that contains information about all of the certificates issued and revoked by your private CA\.
+The operation retrieves a certificate from your private CA\. The ARN of the certificate is returned when you call the [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) operation\. You must specify both the ARN of your private CA and the ARN of the issued certificate when calling the `GetCertificate` operation\. You can retrieve the certificate if it is in the `ISSUED` state\. You can call the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation to create a report that contains information about all of the certificates issued and revoked by your private CA\.
 
 ```
 package com.amazonaws.samples;

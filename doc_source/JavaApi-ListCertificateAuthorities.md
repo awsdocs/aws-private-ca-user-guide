@@ -1,8 +1,8 @@
 # ListCertificateAuthorities<a name="JavaApi-ListCertificateAuthorities"></a>
 
-The following Java sample shows how to use the [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html) operation\.
+The following Java sample shows how to use the [ListCertificateAuthorities](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html) operation\.
 
-This operation lists the private certificate authorities \(CAs\) that you created using the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
+This operation lists the private certificate authorities \(CAs\) that you created using the [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
 
 ```
 package com.amazonaws.samples;

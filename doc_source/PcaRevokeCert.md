@@ -1,18 +1,18 @@
 # Revoking a private certificate<a name="PcaRevokeCert"></a>
 
-You can revoke an ACM Private CA certificate using the [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) AWS CLI command or the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) API action\. A certificate may need to be revoked prior to its scheduled expiration if, for example, its secret key is compromised or its associated domain becomes invalid\. For revocation to be effective, the client using the certificate needs a way to check revocation status whenever it attempts to build a secure network connection\.
+You can revoke an AWS Private CA certificate using the [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) AWS CLI command or the [RevokeCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html) API action\. A certificate may need to be revoked before its scheduled expiration if, for example, its secret key is compromised or its associated domain becomes invalid\. For revocation to be effective, the client using the certificate needs a way to check revocation status whenever it attempts to build a secure network connection\.
 
-ACM Private CA provides two fully managed mechanisms to support revocation status checking: Online Certificate Status Protocol \(OCSP\) and certificate revocation lists \(CRLs\)\. With OCSP, the client queries an authoritative revocation database that returns a status in real\-time\. With a CRL, the client checks the certificate against a list of revoked certificates that it periodically downloads and stores\. Clients refuse to accept certificates that have been revoked\. 
+AWS Private CA provides two fully managed mechanisms to support revocation status checking: Online Certificate Status Protocol \(OCSP\) and certificate revocation lists \(CRLs\)\. With OCSP, the client queries an authoritative revocation database that returns a status in real\-time\. With a CRL, the client checks the certificate against a list of revoked certificates that it periodically downloads and stores\. Clients refuse to accept certificates that have been revoked\. 
 
-Both OCSP and CRLs depend on validation information embedded in certificates\. For this reason, an issuing CA must be configured to support either or both of these mechanisms prior to issuance\. For information about selecting and implementing managed revocation through ACM Private CA, see [Setting up a certificate revocation method](revocation-setup.md)
+Both OCSP and CRLs depend on validation information embedded in certificates\. For this reason, an issuing CA must be configured to support either or both of these mechanisms prior to issuance\. For information about selecting and implementing managed revocation through AWS Private CA, see [Setting up a certificate revocation method](revocation-setup.md)\.
 
-Revoked certificates are always recorded in ACM Private CA audit reports\. 
+Revoked certificates are always recorded in AWS Private CA audit reports\. 
 
 **Note**  
 [Cross\-account](pca-resource-sharing.md) certificate issuers cannot revoke the certificates that they issue\. The CA owner must perform revocation\. 
 
 **To revoke a certificate**  
-Use the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) API action or [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) command to revoke a private PKI certificate\. The serial number must be in hexadecimal format\. You can retrieve the serial number by calling the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command\. The `revoke-certificate` command does not return a response\. 
+Use the [RevokeCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html) API action or [revoke\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/revoke-certificate.html) command to revoke a private PKI certificate\. The serial number must be in hexadecimal format\. You can retrieve the serial number by calling the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) command\. The `revoke-certificate` command does not return a response\. 
 
 ```
 $ aws acm-pca revoke-certificate \
@@ -27,9 +27,9 @@ OCSP responses may take up to 60 minutes to reflect the new status when you revo
 
 ## Revoked certificates in a CRL<a name="PcaRevokeCrl"></a>
 
-A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason a CRL update fails, ACM Private CA makes further attempts every 15 minutes\.
+A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason a CRL update fails, AWS Private CA makes further attempts every 15 minutes\.
 
-With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [Planning a certificate revocation list \(CRL\)](crl-planning.md)\. 
+With Amazon CloudWatch, you can create alarms for the metrics `CRLGenerated` and `MisconfiguredCRLBucket`\. For more information, see [Supported CloudWatch Metrics](https://docs.aws.amazon.com/privateca/latest/userguide/PcaCloudWatch.html)\. For more information about creating and configuring CRLs, see [Planning a certificate revocation list \(CRL\)](crl-planning.md)\. 
 
 The following example shows a revoked certificate in a certificate revocation list \(CRL\)\.
 

@@ -49,16 +49,16 @@ The following example shows a JSON\-formatted report\.
 ```
 
 **Note**  
-When AWS Certificate Manager renews a certificate, the private CA audit report populates the `requestedByServicePrincipal` field with `acm.amazonaws.com`\. This indicates that the AWS Certificate Manager service called the `IssueCertificate` action of the ACM Private CA API on behalf of a customer to renew the certificate\.
+When AWS Certificate Manager renews a certificate, the private CA audit report populates the `requestedByServicePrincipal` field with `acm.amazonaws.com`\. This indicates that the AWS Certificate Manager service called the `IssueCertificate` action of the AWS Private CA API on behalf of a customer to renew the certificate\.
 
 ## Preparing an Amazon S3 bucket for audit reports<a name="s3-access"></a>
 
 To store your audit reports, you need to prepare an Amazon S3 bucket\. For more information, see [How Do I Create an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) 
 
-Your S3 bucket must be secured by an attached permissions policy\. Authorized users and service principals require `Put` permission to allow ACM Private CA to place objects in the bucket, and `Get` permission to retrieve them\. We recommend that you apply the policy shown below, which restricts access to both an AWS account and the ARN of a private CA\. For more information, see [Adding a bucket policy using the Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)\.
+Your S3 bucket must be secured by an attached permissions policy\. Authorized users and service principals require `Put` permission to allow AWS Private CA to place objects in the bucket, and `Get` permission to retrieve them\. We recommend that you apply the policy shown below, which restricts access to both an AWS account and the ARN of a private CA\. For more information, see [Adding a bucket policy using the Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)\.
 
 **Note**  
-During the console procedure for creating an audit report, you can choose to let ACM Private CA create a new bucket and apply a default permissions policy\. The default policy applies no `SourceArn` restriction on the CA and is therefore more permissive than the recommended policy\. If you choose the default, you can always [modify](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) it later\.
+During the console procedure for creating an audit report, you can choose to let AWS Private CA create a new bucket and apply a default permissions policy\. The default policy applies no `SourceArn` restriction on the CA and is therefore more permissive than the recommended policy\. If you choose the default, you can always [modify](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) it later\.
 
 ```
 {
@@ -96,7 +96,7 @@ You can create an audit report from either the console or the AWS CLI\.
 
 **To create an audit report \(console\)**
 
-1. Sign in to your AWS account and open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\.
+1. Sign in to your AWS account and open the AWS Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\.
 
 1. On the **Private certificate authories** page, choose your private CA from the list\.
 
@@ -104,7 +104,7 @@ You can create an audit report from either the console or the AWS CLI\.
 
 1. Under **Audit report destination**, for **Create a new S3 bucket?**, choose **Yes** and type a unique bucket name, or choose **No** and choose an existing bucket from the list\. 
 
-   If you choose **Yes**, ACM Private CA creates and attaches the default policy to your bucket\. If you choose **No**, you must attach a policy to your bucket before you can generate an audit report\. Use the policy pattern described in [Preparing an Amazon S3 bucket for audit reports](#s3-access)\. For information about attaching a policy, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)
+   If you choose **Yes**, AWS Private CA creates and attaches the default policy to your bucket\. If you choose **No**, you must attach a policy to your bucket before you can generate an audit report\. Use the policy pattern described in [Preparing an Amazon S3 bucket for audit reports](#s3-access)\. For information about attaching a policy, see [Adding a bucket policy using the Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)
 
 1. Under **Output format**, choose **JSON** for JavaScript Object Notation or **CSV** for comma\-separated values\. 
 
@@ -114,7 +114,7 @@ You can create an audit report from either the console or the AWS CLI\.
 
 1. If you do not already have an S3 bucket to use, [create one](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)\.
 
-1. Attach a policy to your bucket\. Use the policy pattern described in [Preparing an Amazon S3 bucket for audit reports](#s3-access)\. For information about attaching a policy, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)
+1. Attach a policy to your bucket\. Use the policy pattern described in [Preparing an Amazon S3 bucket for audit reports](#s3-access)\. For information about attaching a policy, see [Adding a bucket policy using the Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)
 
 1. Use the `[create\-certificate\-authority\-audit\-report](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/create-certificate-authority-audit-report.html)` command to create the audit report and to place it in the prepared S3 bucket\.
 
@@ -131,12 +131,12 @@ To retrieve an audit report for inspection, use the Amazon S3 console, API, CLI,
 
 ## Encrypting your audit reports<a name="audit-report-encryption"></a>
 
-You can optionally configure encryption on the Amazon S3 bucket containing your audit reports\. ACM Private CA supports two encryption modes for assets in S3:
+You can optionally configure encryption on the Amazon S3 bucket containing your audit reports\. AWS Private CA supports two encryption modes for assets in S3:
 + Automatic server\-side encryption with Amazon S3\-managed AES\-256 keys\.
 + Customer managed encryption using AWS Key Management Service and an AWS KMS key configured to your specifications\.
 
 **Note**  
-ACM Private CA does not support using default KMS keys generated automatically by S3\.
+AWS Private CA does not support using default KMS keys generated automatically by S3\.
 
 The following procedures describe how to set up each of the encryption options\.
 
@@ -146,7 +146,7 @@ Complete the following steps to enable S3 server\-side encryption\.
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. In the **Buckets** table, choose the bucket that will hold your ACM Private CA assets\.
+1. In the **Buckets** table, choose the bucket that will hold your AWS Private CA assets\.
 
 1. On the page for your bucket, choose the **Properties** tab\.
 
@@ -164,7 +164,7 @@ Complete the following steps to enable encryption using a custom key\.
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. In the **Buckets** table, choose the bucket that will hold your ACM Private CA assets\.
+1. In the **Buckets** table, choose the bucket that will hold your AWS Private CA assets\.
 
 1. On the page for your bucket, choose the **Properties** tab\.
 
@@ -201,7 +201,7 @@ Complete the following steps to enable encryption using a custom key\.
    }
    ```
 
-1. Using the following steps, you give the ACM Private CA service principal permission to use the KMS key\. By default, all KMS keys are private; only the resource owner can use a KMS key to encrypt and decrypt data\. However, the resource owner can grant permissions to access the KMS key to other users and resources\. The service principal must be in the same Region as where the KMS key is stored\.
+1. Using the following steps, you give the AWS Private CA service principal permission to use the KMS key\. By default, all KMS keys are private; only the resource owner can use a KMS key to encrypt and decrypt data\. However, the resource owner can grant permissions to access the KMS key to other users and resources\. The service principal must be in the same Region as where the KMS key is stored\.
 
    1. First, save the default policy for your KMS key as `policy.json` using the following [get\-key\-policy](https://docs.aws.amazon.com/cli/latest/reference/kms/get-key-policy.html) command:
 

@@ -6,13 +6,13 @@ CA certificates have a fixed lifetime, or validity period\. When a CA certificat
 
 The validity period of an X\.509 certificate is a required basic certificate field\. It determines the time\-range during which the issuing CA certifies that the certificate can be trusted, barring revocation\. \(A root certificate, being self\-signed, certifies its own validity period\.\) 
 
-ACM Private CA and AWS Certificate Manager assist with the configuration of certificate validity periods subject to the following constraints:
-+ A certificate managed by ACM Private CA must have a validity period shorter than or equal to the validity period of the CA that issued it\. In other words, child CAs and end\-entity certificates cannot outlive their parent certificates\. Attempting to use the `IssueCertificate` API to issue a CA certificate with a validity period greater than or equal to the parent's CA fails\.
-+ Certificates issued and managed by AWS Certificate Manager \(those for which ACM generates the private key\) have a validity period of 13 months \(395 days\)\. ACM manages the renewal process for these certificates\. If you use ACM Private CA to issue certificates directly, you can choose any validity period\.
+AWS Private CA and AWS Certificate Manager assist with the configuration of certificate validity periods subject to the following constraints:
++ A certificate managed by AWS Private CA must have a validity period shorter than or equal to the validity period of the CA that issued it\. In other words, child CAs and end\-entity certificates cannot outlive their parent certificates\. Attempting to use the `IssueCertificate` API to issue a CA certificate with a validity period greater than or equal to the parent's CA fails\.
++ Certificates issued and managed by AWS Certificate Manager \(those for which ACM generates the private key\) have a validity period of 13 months \(395 days\)\. ACM manages the renewal process for these certificates\. If you use AWS Private CA to issue certificates directly, you can choose any validity period\.
 
 The following diagram shows a typical configuration of nested validity periods\. The root certificate is the most long\-lived; end\-entity certificates are relatively short\-lived; and subordinate CAs range between these extremes\. 
 
-![\[Subordinate and validity periods must fall within the validity periods of their parents.\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/validity.png)
+![\[Subordinate and validity periods must fall within the validity periods of their parents.\]](http://docs.aws.amazon.com/privateca/latest/userguide/images/validity.png)
 
 When you plan your CA hierarchy, determine the optimal lifetime for your CA certificates\. Work backwards from the desired lifetime of the end\-entity certificates that you want to issue\. 
 
@@ -21,13 +21,13 @@ End\-entity certificates should have a validity period appropriate to the use ca
 
 The distributed use of end\-entity certificates can also present logistical problems if there is a security breach\. Your planning should account for renewal and distribution certificates, revocation of compromised certificates, and how quickly revocations propagate to clients that rely on the certificates\. 
 
-The default validity period for an end\-entity certificate issued through ACM is 13 months \(395 days\)\. In ACM Private CA, you can use the `IssueCertificate` API to apply any validity period so long as it is less than that of the issuing CA\.
+The default validity period for an end\-entity certificate issued through ACM is 13 months \(395 days\)\. In AWS Private CA, you can use the `IssueCertificate` API to apply any validity period so long as it is less than that of the issuing CA\.
 
 **Subordinate CA Certificates**  
-Subordinate CA certificates should have significantly longer validity periods than the certificates they issue\. A good range for a CA certificate's validity is two to five times the period of any child CA certificate or end\-entity certificate it issues\. For example, assume you have a two\-level CA hierarchy \(root CA and one subordinate CA\)\. If you want to issue end\-entity certificates with a one\-year lifetime, you could configure the subordinate issuing CA lifetime to be three years\. This is the default validity period for a subordinate CA certificate in ACM Private CA\. Subordinate CA certificates can be changed without replacing the root CA certificate\.
+Subordinate CA certificates should have significantly longer validity periods than the certificates they issue\. A good range for a CA certificate's validity is two to five times the period of any child CA certificate or end\-entity certificate it issues\. For example, assume you have a two\-level CA hierarchy \(root CA and one subordinate CA\)\. If you want to issue end\-entity certificates with a one\-year lifetime, you could configure the subordinate issuing CA lifetime to be three years\. This is the default validity period for a subordinate CA certificate in AWS Private CA\. Subordinate CA certificates can be changed without replacing the root CA certificate\.
 
 **Root Certificates**  
-Changes to a root CA certificate affect the entire PKI \(public key infrastructure\) and require you to update all the dependent client operating system and browser trust stores\. To minimize operational impact, you should choose a long validity period for the root certificate\. The ACM Private CA default for root certificates is ten years\.
+Changes to a root CA certificate affect the entire PKI \(public key infrastructure\) and require you to update all the dependent client operating system and browser trust stores\. To minimize operational impact, you should choose a long validity period for the root certificate\. The AWS Private CA default for root certificates is ten years\.
 
 ## Managing CA succession<a name="ca-succession"></a>
 

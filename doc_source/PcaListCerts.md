@@ -1,6 +1,6 @@
 # Listing private certificates<a name="PcaListCerts"></a>
 
-To list your private certificates, generate an audit report, retrieve it from its S3 bucket, and parse the report contents as needed\. For information about creating ACM Private CA audit reports, see [Using audit reports with your private CA](PcaAuditReport.md)\. For information about retrieving an object from an S3 bucket, see [Downloading an object](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/download-objects.html) in the *Amazon Simple Storage Service User Guide*\.
+To list your private certificates, generate an audit report, retrieve it from its S3 bucket, and parse the report contents as needed\. For information about creating AWS Private CA audit reports, see [Using audit reports with your private CA](PcaAuditReport.md)\. For information about retrieving an object from an S3 bucket, see [Downloading an object](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/download-objects.html) in the *Amazon Simple Storage Service User Guide*\.
 
 The following examples illustrate approaches to creating audit reports and parsing them for useful data\. Results are formatted in JSON, and data is filtered using [jq](https://stedolan.github.io/jq/), a sed\-like parser\.
 

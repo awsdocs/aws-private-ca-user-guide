@@ -1,18 +1,18 @@
 # Create single\-account permissions for an IAM user<a name="assign-permissions"></a>
 
-When the CA administrator \(that is, the owner of the CA\) and the certificate issuer reside in a single AWS account, a [best practice](ca-best-practices.md) is to separate the issuer and administrator roles by creating an AWS Identity and Access Management \(IAM\) user with limited permissions\. For information about using IAM with ACM Private CA, along with example permissions, see [Understanding resources, ownership, and permissions policies](security-iam.md#understand-resource-ownership)\.
+When the CA administrator \(that is, the owner of the CA\) and the certificate issuer reside in a single AWS account, a [best practice](ca-best-practices.md) is to separate the issuer and administrator roles by creating an AWS Identity and Access Management \(IAM\) user with limited permissions\. For information about using IAM with AWS Private CA, along with example permissions, see [Identity and Access Management \(IAM\) for AWS Private Certificate Authority](security-iam.md)\.
 
 **Single\-account case 1: Issuing an unmanaged certificate**  
-In this case, the account owner creates a private CA and then creates an IAM user with permission to issue certificates signed by the private CA\. The IAM user issues a certificate by calling the ACM Private CA `IssueCertificate` API\.
+In this case, the account owner creates a private CA and then creates an IAM user with permission to issue certificates signed by the private CA\. The IAM user issues a certificate by calling the AWS Private CA `IssueCertificate` API\.
 
-![\[Issuing an unmanaged certificate\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/ca_access_1_account_pca_api.png)
+![\[Issuing an unmanaged certificate\]](http://docs.aws.amazon.com/privateca/latest/userguide/images/ca_access_1_account_pca_api.png)
 
-Certificates issued in this manner are unmanaged, which means that an administrator must export them and install them on devices where they are intended to be used\. They also must be manually renewed when they expire\. Issuing a certificate using this API requires a certificate signing request \(CSR\) and key pair that is generated outside of ACM Private CA by [OpenSSL](https://www.openssl.org/) or a similar program\. For more information, see the `IssueCertificate` [documentation](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)\.
+Certificates issued in this manner are unmanaged, which means that an administrator must export them and install them on devices where they are intended to be used\. They also must be manually renewed when they expire\. Issuing a certificate using this API requires a certificate signing request \(CSR\) and key pair that is generated outside of AWS Private CA by [OpenSSL](https://www.openssl.org/) or a similar program\. For more information, see the `IssueCertificate` [documentation](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)\.
 
 **Single\-account case 2: Issuing a managed certificate through ACM**  
 This second case involves API operations from both ACM and PCA\. The account owner creates a private CA and IAM user as before\. The account owner then [grants permission](Create-CA-console.md#PcaCreateAcmPerms) to the ACM service principal to renew automatically any certificates that are signed by this CA\. The IAM user again issues the certificate, but this time by calling the ACM `RequestCertificate` API, which handles CSR and key generation\. When the certificate expires, ACM automates the renewal workflow\.
 
-![\[Issuing a managed certificate\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/ca_access_1_account_acm_api.png)
+![\[Issuing a managed certificate\]](http://docs.aws.amazon.com/privateca/latest/userguide/images/ca_access_1_account_acm_api.png)
 
 The account owner has the option of granting renewal permission through the management console during or after CA creation or using the PCA `CreatePermission` API\. The managed certificates created from this workflow are available for use on with AWS services that are integrated with ACM\.
 
@@ -27,21 +27,21 @@ These procedures for assigning renewal permissions apply only when the CA owner 
 
 Renewal permissions can be delegated during [private CA creation](create-CA.md) or altered anytime after as long as the CA is in the `ACTIVE` state\.
 
-You can manage private CA permissions from the [ACM Private CA Console](https://console.aws.amazon.com/acm-pca), the [AWS Command Line Interface \(AWS CLI\)](https://aws.amazon.com/cli/), or the [ACM Private CA API](https://docs.aws.amazon.com/acm-pca/latest/APIReference/):
+You can manage private CA permissions from the [AWS Private CA Console](https://console.aws.amazon.com/acm-pca), the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/reference/), or the [AWS Private CA API](https://docs.aws.amazon.com/privateca/latest/APIReference/):
 
 **To assign private CA permissions to ACM \(console\)**
 
-1. Sign in to your AWS account and open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\.
+1. Sign in to your AWS account and open the AWS Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\.
 
 1. On the **Private certificate authorities page**, choose your private CA from the list\.
 
 1. Choose **Actions**, **Configure CA permissions**\.
 
-1. Select **Authorize ACM access to renew certificates requested by this account\.**\.
+1. Select **Authorize ACM access to renew certificates requested by this account**\.
 
 1. Choose **Save**\.
 
-**To manage ACM permissions in ACM Private CA \(AWS CLI\)**  
+**To manage ACM permissions in AWS Private CA \(AWS CLI\)**  
 Use the [create\-permission](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/create-permission.html) command to assign permissions to ACM\. You must assign the necessary permissions \(`IssueCertificate`, `GetCertificate`, and `ListPermissions`\) in order for ACM to automatically renew your certificates\.
 
 ```

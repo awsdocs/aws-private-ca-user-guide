@@ -1,13 +1,14 @@
 # Troubleshooting<a name="PcaTsIntro"></a>
 
-Consult the following topics if you have problems using AWS Certificate Manager Private Certificate Authority\.
+Consult the following topics if you have problems using AWS Private Certificate Authority\.
 
 **Topics**
 + [Signing a CSR](PcaTsSignCsr.md)
 + [Latency in OCSP responses](#OCSP-latency-troubleshooting)
 + [Amazon S3 blocks CRL bucket](PcaS3CsrBlock.md)
-+ [Deleting a self\-signed CA certificate](PcaRevokeSelfSigned.md)
++ [Revoking a self\-signed CA certificate](PcaRevokeSelfSigned.md)
 + [Handling exceptions](PCATsExceptions.md)
++ [Using the Matter standard](matter.md)
 
 ## Latency in OCSP responses<a name="OCSP-latency-troubleshooting"></a>
 

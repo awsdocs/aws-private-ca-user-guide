@@ -1,6 +1,6 @@
 # Revoking a certificate<a name="CT-RevokeCertificate"></a>
 
-The following CloudTrail example shows the results of a call to the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) operation\.
+The following CloudTrail example shows the results of a call to the [RevokeCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html) operation\.
 
 ```
 {

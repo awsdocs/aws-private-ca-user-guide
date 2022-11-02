@@ -6,7 +6,7 @@ CloudWatch Events are turned into actions using Amazon EventBridge\. With EventB
 
 ## Success or failure when creating a private CA<a name="cwe-issue-CA"></a>
 
-These events are triggered by the [CreateCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
+These events are triggered by the [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) operation\.
 
 **Success**  
 On success, the operation returns the ARN of the new CA\.
@@ -30,7 +30,7 @@ On success, the operation returns the ARN of the new CA\.
 ```
 
 **Failure**  
-On failure, the operation returns an ARN for the CA\. Using the ARN, you can call [DescribeCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthority.html) to determine the status of the CA\.
+On failure, the operation returns an ARN for the CA\. Using the ARN, you can call [DescribeCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DescribeCertificateAuthority.html) to determine the status of the CA\.
 
 ```
 {
@@ -52,7 +52,7 @@ On failure, the operation returns an ARN for the CA\. Using the ARN, you can cal
 
 ## Success or failure when issuing a certificate<a name="cwe-issue-cert"></a>
 
-These events are triggered by the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\.
+These events are triggered by the [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) operation\.
 
 **Success**  
 On success, the operation returns the ARNs of the CA and of the new certificate\.
@@ -100,7 +100,7 @@ On failure, the operation returns a certificate ARN and the ARN of the CA\. With
 
 ## Success when revoking a certificate<a name="cwe-revocation"></a>
 
-This event is triggered by the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) operation\.
+This event is triggered by the [RevokeCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html) operation\.
 
 No event is sent if the revocation fails or if the certificate has already been revoked\.
 
@@ -128,7 +128,7 @@ On success, the operation returns the ARNs of the CA and of the revoked certific
 
 ## Success or failure when generating a CRL<a name="cwe-CRL"></a>
 
-These events are triggered by the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) operation, which should result in the creation of a certificate revocation list \(CRL\)\.
+These events are triggered by the [RevokeCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html) operation, which should result in the creation of a certificate revocation list \(CRL\)\.
 
 **Success**  
 On success, the operation returns the ARN of the CA associated with the CRL\.
@@ -195,8 +195,8 @@ Retry the operation if this error occurs\.
 }
 ```
 
-**Failure 3 – ACM PCA failed to create a CRL**  
-To troubleshoot this error, check your [CloudWatch metrics](https://docs.aws.amazon.com/acm-pca/latest/APIReference/PcaCloudWatch.html)\.
+**Failure 3 – AWS Private CA failed to create a CRL**  
+To troubleshoot this error, check your [CloudWatch metrics](https://docs.aws.amazon.com/privateca/latest/APIReference/PcaCloudWatch.html)\.
 
 ```
 {
@@ -219,7 +219,7 @@ To troubleshoot this error, check your [CloudWatch metrics](https://docs.aws.ama
 
 ## Success or failure when creating a CA audit report<a name="cwe-audit"></a>
 
-These events are triggered by the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
+These events are triggered by the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
 
 **Success**  
 On success, the operation returns the ARN of the CA and the ID of the audit report\.
@@ -244,7 +244,7 @@ On success, the operation returns the ARN of the CA and the ID of the audit repo
 ```
 
 **Failure**  
-An audit report can fail when ACM PCA lacks `PUT` permissions on your Amazon S3 bucket, when encryption is enabled on the bucket, or for other reasons\.
+An audit report can fail when AWS Private CA lacks `PUT` permissions on your Amazon S3 bucket, when encryption is enabled on the bucket, or for other reasons\.
 
 ```
 {

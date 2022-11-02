@@ -8,9 +8,10 @@ For information about using a CA to sign end\-entity certificates for your users
 
 **Note**  
 Your account is charged a monthly price for each private CA starting from the time that you create it\.  
-For the latest ACM Private CA pricing information, see the [ACM Pricing](https://aws.amazon.com/certificate-manager/pricing/) page on the AWS website\. You can also use the [AWS pricing calculator](https://calculator.aws/#/createCalculator/certificateManager) to estimate costs\.   
+For the latest AWS Private CA pricing information, see [AWS Private Certificate Authority Pricing](https://aws.amazon.com/private-ca/pricing/)\. You can also use the [AWS pricing calculator](https://calculator.aws/#/createCalculator/certificateManager) to estimate costs\.   
 
 
 **Topics**
 + [Procedure for creating a CA \(console\)](Create-CA-console.md)
 + [Procedure for creating a CA \(CLI\)](Create-CA-CLI.md)
++ [Using AWS CloudFormation to create a CA](Create-CA-CFN.md)

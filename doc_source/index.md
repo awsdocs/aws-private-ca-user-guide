@@ -1,32 +1,36 @@
-# AWS Certificate Manager Private Certificate Authority User Guide
+# AWS Private Certificate Authority User Guide
 
 -----
 *****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
-Amazon's trademarks and trade dress may not be used in 
-     connection with any product or service that is not Amazon's, 
-     in any manner that is likely to cause confusion among customers, 
-     or in any manner that disparages or discredits Amazon. All other 
-     trademarks not owned by Amazon are the property of their respective
-     owners, who may or may not be affiliated with, connected to, or 
-     sponsored by Amazon.
+Amazon's trademarks and trade dress may not be used in
+connection with any product or service that is not Amazon's,
+in any manner that is likely to cause confusion among customers,
+or in any manner that disparages or discredits Amazon. All other
+trademarks not owned by Amazon are the property of their respective
+owners, who may or may not be affiliated with, connected to, or
+sponsored by Amazon.
 
 -----
 ## Contents
-+ [What is ACM Private CA?](PcaWelcome.md)
++ [What is AWS Private CA?](PcaWelcome.md)
    + [Regions](PcaRegions.md)
-   + [Services integrated with AWS Certificate Manager Private Certificate Authority](PcaIntegratedServices.md)
+   + [Services integrated with AWS Private Certificate Authority](PcaIntegratedServices.md)
    + [Supported cryptographic algorithms](supported-algorithms.md)
    + [Quotas](PcaLimits.md)
    + [RFC compliance](RFC-compliance.md)
    + [Pricing](PcaPricing.md)
-+ [Security in AWS Certificate Manager Private Certificate Authority](security.md)
-   + [Data protection in AWS Certificate Manager Private Certificate Authority](data-protection.md)
-   + [Identity and Access Management for AWS Certificate Manager Private Certificate Authority](security-iam.md)
++ [Security in AWS Private Certificate Authority](security.md)
+   + [Data protection in AWS Private Certificate Authority](data-protection.md)
+   + [Identity and Access Management (IAM) for AWS Private Certificate Authority](security-iam.md)
+      + [AWS Private CA API operations and permissions](api-permissions.md)
+      + [AWS managed policies](auth-AwsManagedPolicies.md)
+      + [Customer managed policies](auth-CustManagedPolicies.md)
+      + [Inline policies](auth-InlinePolicies.md)
    + [Cross-account access to private CAs](pca-resource-sharing.md)
       + [Resource-based policies](pca-rbp.md)
-   + [Logging and monitoring for AWS Certificate Manager Private Certificate Authority](security-logging-and-monitoring.md)
+   + [Logging and monitoring for AWS Private Certificate Authority](security-logging-and-monitoring.md)
       + [Supported CloudWatch metrics](PcaCloudWatch.md)
       + [Using CloudWatch Events](CloudWatchEvents.md)
       + [Using CloudTrail](PcaCtIntro.md)
@@ -51,28 +55,31 @@ Amazon's trademarks and trade dress may not be used in
          + [Tagging private certificate authorities](CT-TagPCA.md)
          + [Removing tags from a private certificate authority](CT-UntagPCA.md)
          + [Updating a certificate authority](CT-UpdateCA.md)
-   + [Compliance validation for AWS Certificate Manager Private Certificate Authority](security-compliance-validation.md)
+   + [Compliance validation for AWS Private Certificate Authority](security-compliance-validation.md)
       + [Using audit reports with your private CA](PcaAuditReport.md)
-   + [Infrastructure security in AWS Certificate Manager Private Certificate Authority](infrastructure-security.md)
-      + [ACM Private CA VPC endpoints (AWS PrivateLink)](vpc-endpoints.md)
-+ [Planning your ACM Private CA deployment](PcaPlanning.md)
+   + [Infrastructure security in AWS Private Certificate Authority](infrastructure-security.md)
+      + [AWS Private CA VPC endpoints (AWS PrivateLink)](vpc-endpoints.md)
++ [Planning your AWS Private CA deployment](PcaPlanning.md)
    + [Setting up your AWS account and the AWS CLI](setup-aws.md)
    + [Designing a CA hierarchy](ca-hierarchy.md)
    + [Managing the private CA lifecycle](ca-lifecycle.md)
    + [Setting up a certificate revocation method](revocation-setup.md)
       + [Planning a certificate revocation list (CRL)](crl-planning.md)
-      + [Configuring a Custom URL for ACM Private CA OCSP](ocsp-customize.md)
+      + [Configuring a Custom URL for AWS Private CA OCSP](ocsp-customize.md)
+   + [Certificate authority modes](short-lived-certificates.md)
    + [Planning for resilience](disaster-recovery-resilience.md)
 + [Private CA administration](creating-managing.md)
    + [Creating a private CA](create-CA.md)
       + [Procedure for creating a CA (console)](Create-CA-console.md)
       + [Procedure for creating a CA (CLI)](Create-CA-CLI.md)
-         + [Using AWS CloudFormation to create a CA](Create-CA-CFN.md)
+      + [Using AWS CloudFormation to create a CA](Create-CA-CFN.md)
    + [Creating and installing the CA certificate](PCACertInstall.md)
    + [Controlling access to a private CA](granting-ca-access.md)
       + [Create single-account permissions for an IAM user](assign-permissions.md)
       + [Attach a policy for cross-account access](pca-ram.md)
-   + [Adding tags to your private CA](PcaCaTagging.md)
+   + [Listing private CAs](list-CAs.md)
+   + [Viewing a private CA](describe-CA.md)
+   + [Managing tags for your private CA](PcaCaTagging.md)
    + [Updating your private CA](PCAUpdateCA.md)
       + [Updating a CA (console)](console-update.md)
       + [Updating a CA (CLI)](ca-update-cli.md)
@@ -85,7 +92,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Revoking a private certificate](PcaRevokeCert.md)
    + [Automating export of a renewed certificate](auto-export.md)
    + [Understanding certificate templates](UsingTemplates.md)
-+ [Using the ACM Private CA API (Java examples)](PcaApiIntro.md)
++ [Using the AWS Private CA API (Java examples)](PcaApiIntro.md)
    + [Create and activate a root CA programmatically](JavaApi-ActivateRootCA.md)
    + [Create and activate a subordinate CA programmatically](JavaApi-ActivateSubordinateCA.md)
    + [CreateCertificateAuthority](JavaApi-CreatePrivateCertificateAuthority.md)
@@ -113,16 +120,21 @@ Amazon's trademarks and trade dress may not be used in
    + [UpdateCertificateAuthority](JavaApi-UpdateCertificateAuthority.md)
    + [Create CAs and certificates with custom subject names](JavaApi-CustomAttributes.md)
    + [Create certificates with custom extensions](JavaApi-CustomExtensions.md)
-+ [Signing private CA certificates with an external CA](PcaExternalRoot.md)
-   + [Step 1: Getting a certificate signing request (CSR) from ACM Private CA](PcaGetCsr.md)
-   + [Step 2: Signing the private CA certificate](PcaSignCert.md)
-   + [Step 3: Import your private CA certificate into ACM Private CA](PcaImportCaCert.md)
-+ [Securing Kubernetes with ACM Private CA](PcaKubernetes.md)
-+ [ACM Private CA best practices](ca-best-practices.md)
++ [Using the AWS Private CA API to implement the Matter standard (Java examples)](API-CBR-intro.md)
+   + [Create a device attestation certificate](JavaApiCBC-DeviceAttestationCertificate.md)
+   + [Activate a Matter-compliant intermediate CA](JavaApiCBC-IntermediateCAActivation.md)
+   + [Create a node operating certificate](JavaApiCBC-NodeOperatingCertificate.md)
+   + [Activate a product attestation authority](JavaApiCBC-ProductAttestationAuthorityActivation.md)
+   + [Activate an intermediate product attestation authority](JavaApiCBC-ProductAttestationIntermediateActivation.md)
+   + [Activate a Matter-compliant root CA](JavaApiCBC-ActivateRootCA.md)
++ [Externally signed private CA certificates](PcaExternalRoot.md)
++ [Securing Kubernetes with AWS Private CA](PcaKubernetes.md)
++ [AWS Private CA best practices](ca-best-practices.md)
 + [Troubleshooting](PcaTsIntro.md)
    + [Creating and signing a private CA certificate](PcaTsSignCsr.md)
    + [Configuring Amazon S3 to allow creation of a CRL bucket](PcaS3CsrBlock.md)
-   + [Deleting a self-signed CA certificate](PcaRevokeSelfSigned.md)
+   + [Revoking a self-signed CA certificate](PcaRevokeSelfSigned.md)
    + [Handling exceptions](PCATsExceptions.md)
+   + [Using the Matter standard](matter.md)
 + [Terms and Concepts](PcaTerms.md)
 + [Document History](dochistory.md)

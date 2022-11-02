@@ -1,6 +1,6 @@
 # CreateCertificateAuthorityAuditReport<a name="JavaApi-CreateCertificateAuthorityAuditReport"></a>
 
-The following Java sample shows how to use the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
+The following Java sample shows how to use the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
 
 The operation creates an audit report that lists every time a certificate is issued or revoked\. The report is saved in the Amazon S3 bucket that you specify on input\. You can generate a new report once every 30 minutes\. 
 

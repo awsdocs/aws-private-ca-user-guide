@@ -1,6 +1,6 @@
 # Deleting a certificate authority<a name="CT-DeleteCA"></a>
 
-The following CloudTrail example shows the results of a call to the [DeleteCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthority.html) operation\. In this example, the certificate authority cannot be deleted because it is in the `ACTIVE` state\. 
+The following CloudTrail example shows the results of a call to the [DeleteCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthority.html) operation\. In this example, the certificate authority cannot be deleted because it is in the `ACTIVE` state\. 
 
 ```
 {

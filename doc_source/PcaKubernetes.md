@@ -1,14 +1,14 @@
-# Securing Kubernetes with ACM Private CA<a name="PcaKubernetes"></a>
+# Securing Kubernetes with AWS Private CA<a name="PcaKubernetes"></a>
 
 Kubernetes containers and applications use digital certificates to provide secure authentication and encryption over TLS\. A widely adopted solution for TLS certificate life\-cycle management in Kubernetes is [cert\-manager](https://cert-manager.io/docs/), an add\-on to Kubernetes that requests certificates, distributes them to Kubernetes containers, and automates certificate renewal\. 
 
-ACM Private CA provides an open\-source plug\-in to cert\-manager, [aws\-privateca\-issuer](https://github.com/cert-manager/aws-privateca-issuer), that allows customers who use cert\-manager to improve security over the default cert\-manager CA, which stores keys in plaintext in server memory\. Customers with regulatory requirements for controlling access to and auditing their CA operations can use this solution to improve auditability and support compliance\. You can use the AWS Private CA Issuer plugin with Amazon Elastic Kubernetes Service \(Amazon EKS\), a self\-managed Kubernetes on AWS, or in on\-premises Kubernetes\. 
+AWS Private CA provides an open\-source plug\-in to cert\-manager, [aws\-privateca\-issuer](https://github.com/cert-manager/aws-privateca-issuer), for cert\-manager users who want to set up a CA without storing private keys in the cluster\. Users with regulatory requirements for controlling access to and auditing their CA operations can use this solution to improve auditability and support compliance\. You can use the AWS Private CA Issuer plugin with Amazon Elastic Kubernetes Service \(Amazon EKS\), a self\-managed Kubernetes on AWS, or in on\-premises Kubernetes\. 
 
-The diagram below shows some of the options available for using TLS with a Kubernetes cluster\. This example cluster, containing various resources, is situated behind a load balancer\. The numbers identify possible end\-points for TLS\-secured communications, including the external load balancer, the ingress controller, an individual pod within a service, and a pair of pods communicating securely with each other\.
+The diagram below shows some of the options available for using TLS in an Amazon EKS cluster\. This example cluster, containing various resources, is situated behind a load balancer\. The numbers identify possible end\-points for TLS\-secured communications, including the external load balancer, the ingress controller, an individual pod within a service, and a pair of pods communicating securely with each other\.
 
 
 
-![\[Simplified Kubernetes topology\]](http://docs.aws.amazon.com/acm-pca/latest/userguide/images/kubernetes-pca.png)
+![\[Simplified Kubernetes topology\]](http://docs.aws.amazon.com/privateca/latest/userguide/images/kubernetes-pca.png)
 
 1. **Termination at the load balancer\.**
 
@@ -20,7 +20,7 @@ The diagram below shows some of the options available for using TLS with a Kuber
 
 1. **Termination at a pod\.**
 
-   Each pod is a group of one or more containers \(for example, Docker containers\) that share storage and network resources\. If you have installed both **cert\-manager** and **aws\-privateca\-issuer**, and provisioned the cluster with a private CA, Kubernetes can install a signed TLS certificates on pods as needed\. A TLS connection terminating at a pod is unavailable by default to other pods in the cluster\.
+   Each pod is a group of one or more containers that shares storage and network resources\. If you have installed both **cert\-manager** and **aws\-privateca\-issuer**, and provisioned the cluster with a private CA, Kubernetes can install a signed TLS certificates on pods as needed\. A TLS connection terminating at a pod is unavailable by default to other pods in the cluster\.
 
 1. **Secure communications between pods\.** 
 
@@ -33,11 +33,11 @@ The diagram below shows some of the options available for using TLS with a Kuber
 Administrators with cross\-account access to a CA can use cert\-manager to provision a Kubernetes cluster\. For more information, see[Cross\-account access to private CAs](pca-resource-sharing.md)\. 
 
 **Note**  
-Only certain ACM Private CA certificate templates can be used in cross\-account scenarios\. See [Supported certificate templates ](#kubernetes-templates) for a list of available templates\.
+Only certain AWS Private CA certificate templates can be used in cross\-account scenarios\. See [Supported certificate templates ](#kubernetes-templates) for a list of available templates\.
 
 ## Supported certificate templates<a name="kubernetes-templates"></a>
 
-The following table lists ACM Private CA templates that can be used with cert\-manager to provision a Kubernetes cluster\.
+The following table lists AWS Private CA templates that can be used with cert\-manager to provision a Kubernetes cluster\.
 
 
 ****  
@@ -49,10 +49,10 @@ The following table lists ACM Private CA templates that can be used with cert\-m
 | [EndEntityCertificate/V1 definition](UsingTemplates.md#EndEntityCertificate-V1) | ✓ | 
 | [EndEntityClientAuthCertificate/V1 definition](UsingTemplates.md#EndEntityClientAuthCertificate-V1) | ✓ | 
 | [EndEntityServerAuthCertificate/V1 definition](UsingTemplates.md#EndEntityServerAuthCertificate-V1) | ✓ | 
-| [](UsingTemplates.md#OCSPSigningCertificate-V1) |  | 
+| [OCSPSigningCertificate/V1 definition](UsingTemplates.md#OCSPSigningCertificate-V1) |  | 
 
 ## Example solutions<a name="example-solutions"></a>
 
-The following integration solutions show how to configure access to ACM Private CA on an Amazon EKS cluster\.
-+ [TLS\-enabled Kubernetes clusters with ACM Private CA and Amazon EKS](https://go.aws/3ifFNEJ)
+The following integration solutions show how to configure access to AWS Private CA on an Amazon EKS cluster\.
++ [TLS\-enabled Kubernetes clusters with AWS Private CA and Amazon EKS](https://go.aws/3ifFNEJ)
 + [Setting up end\-to\-end TLS encryption on Amazon EKS with the new AWS Load Balancer Controller](https://aws.amazon.com/blogs/containers/setting-up-end-to-end-tls-encryption-on-amazon-eks-with-the-new-aws-load-balancer-controller/)

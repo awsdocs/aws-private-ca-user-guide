@@ -1,8 +1,8 @@
 # DeletePermission<a name="JavaApi-DeletePermission"></a>
 
-The following Java sample shows how to use the [DeletePermission](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html) operation\.
+The following Java sample shows how to use the [DeletePermission](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePermission.html) operation\.
 
-The operation deletes permissions that a private CA delegated to an AWS service principal using the [CreatePermissions](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html) operation\. You can find a CA's ARN by calling the [ListCertificateAuthorities](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html) function\. You can inspect the permissions that a CA granted by calling the [ListPermissions](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html) function\.
+The operation deletes permissions that a private CA delegated to an AWS service principal using the [CreatePermissions](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html) operation\. You can find a CA's ARN by calling the [ListCertificateAuthorities](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html) function\. You can inspect the permissions that a CA granted by calling the [ListPermissions](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListPermissions.html) function\.
 
 ```
 package com.amazonaws.samples;

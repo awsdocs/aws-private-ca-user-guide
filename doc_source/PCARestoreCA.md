@@ -1,6 +1,6 @@
 # Restoring a private CA<a name="PCARestoreCA"></a>
 
-You can restore a private CA that has been deleted as long as the CA remains within the restoration period that you specified upon deletion\. The period identifies the number of days, from 7 to 30, that the private CA remains restorable\. At the end of that period, the private CA is permanently deleted\. For more information, see [Deleting your private CA](PCADeleteCA.md)\. You cannot restore a private CA that has been permanently deleted\. 
+You can restore a private CA that has been deleted as long as the CA remains within the restoration period that you specified upon deletion\. The restoration period is from 7\-30 days\. At the end of that period, the private CA is permanently deleted\. For more information, see [Deleting your private CA](PCADeleteCA.md)\. You cannot restore a private CA that has been permanently deleted\. 
 
 **Note**  
 You are not charged for a private CA after it has been deleted\. However, if a deleted CA is restored, you are charged for the time between deletion and restoration\. For more information, see [Pricing](PcaPricing.md)\.
@@ -11,7 +11,7 @@ You can use the AWS Management Console to restore a private CA\.
 
 **To restore a private CA \(console\)**
 
-1. Sign in to your AWS account and open the ACM Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\. 
+1. Sign in to your AWS account and open the AWS Private CA console at [https://console\.aws\.amazon\.com/acm\-pca/home](https://console.aws.amazon.com/acm-pca/home)\. 
 
 1. On the **Private certificate authorities** page, choose your deleted private CA from the list\.
 
@@ -29,7 +29,7 @@ Use the [restore\-certificate\-authority](https://docs.aws.amazon.com/cli/latest
 
 1. Delete the private CA\.
 
-   Run the [delete\-certificate\-authority](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/delete-certificate-authority.html) command to delete the private CA\. If the private CA's status is `DISABLED` or `PENDING_CERTIFICATE`, you can set the `--permanent-deletion-time-in-days` parameter to specify the private CA's restoration period from 7 days to 30\. If you do not specify a restoration period, the default is 30 days\. If successful, this command sets the status of the private CA to `DELETED`\.
+   Run the [delete\-certificate\-authority](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/delete-certificate-authority.html) command to delete the private CA\. If the private CA's status is `DISABLED` or `PENDING_CERTIFICATE`, you can set the `--permanent-deletion-time-in-days` parameter to specify the private CA's restoration period from 7 \-30 days\. If you do not specify a restoration period, the default is 30 days\. If successful, this command sets the status of the private CA to `DELETED`\.
 **Note**  
 To be restorable, the private CA's status at the time of deletion must be `DISABLED` or `PENDING_CERTIFICATE`\.
 

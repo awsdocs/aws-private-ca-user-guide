@@ -1,6 +1,6 @@
 # Retrieving a certificate authority certificate<a name="CT-GetCACertificate"></a>
 
-The following CloudTrail example shows the results of a call to the [GetCertificateAuthorityCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html) operation\.
+The following CloudTrail example shows the results of a call to the [GetCertificateAuthorityCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificateAuthorityCertificate.html) operation\.
 
 ```
 {

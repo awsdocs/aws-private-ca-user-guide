@@ -1,8 +1,8 @@
 # RevokeCertificate<a name="JavaApi-RevokeCertificate"></a>
 
-The following Java sample shows how to use the [RevokeCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html) operation\.
+The following Java sample shows how to use the [RevokeCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html) operation\.
 
-This operation revokes a certificate that you issued by calling the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\. If you enabled a certificate revocation list \(CRL\) when you created or updated your private CA, information about the revoked certificates is included in the CRL\. ACM Private CA writes the CRL to an Amazon S3 bucket that you specify\. For more information, see the [CrlConfiguration](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html) structure\. 
+This operation revokes a certificate that you issued by calling the [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) operation\. If you enabled a certificate revocation list \(CRL\) when you created or updated your private CA, information about the revoked certificates is included in the CRL\. AWS Private CA writes the CRL to an Amazon S3 bucket that you specify\. For more information, see the [CrlConfiguration](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html) structure\. 
 
 ```
 package com.amazonaws.samples;

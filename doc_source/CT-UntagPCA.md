@@ -1,6 +1,6 @@
 # Removing tags from a private certificate authority<a name="CT-UntagPCA"></a>
 
-The following CloudTrail example shows the results of a call to the [UntagCertificateAuthority](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html) operation\.
+The following CloudTrail example shows the results of a call to the [UntagCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html) operation\.
 
 ```
 {

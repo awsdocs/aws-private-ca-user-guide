@@ -1,8 +1,8 @@
 # DescribeCertificateAuthorityAuditReport<a name="JavaApi-DescribeCertificateAuthorityAuditReport"></a>
 
-The following Java sample shows how to use the [DescribeCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DescribeCertificateAuthorityAuditReport.html) operation\.
+The following Java sample shows how to use the [DescribeCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DescribeCertificateAuthorityAuditReport.html) operation\.
 
-The operation lists information about a specific audit report that you created by calling the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\. Audit information is created every time the certificate authority \(CA\) private key is used\. The private key is used when you issue a certificate, sign a CRL, or revoke a certificate\. 
+The operation lists information about a specific audit report that you created by calling the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\. Audit information is created every time the certificate authority \(CA\) private key is used\. The private key is used when you issue a certificate, sign a CRL, or revoke a certificate\. 
 
 ```
 package com.amazonaws.samples;

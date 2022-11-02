@@ -1,11 +1,11 @@
 # IssueCertificate<a name="JavaApi-IssueCertificate"></a>
 
-The following Java sample shows how to use the [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation\.
+The following Java sample shows how to use the [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) operation\.
 
-This operation uses your private certificate authority \(CA\) to issue an end\-entity certificate\. This operation returns the Amazon Resource Name \(ARN\) of the certificate\. You can retrieve the certificate by calling the [GetCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html) and specifying the ARN\.
+This operation uses your private certificate authority \(CA\) to issue an end\-entity certificate\. This operation returns the Amazon Resource Name \(ARN\) of the certificate\. You can retrieve the certificate by calling the [GetCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificate.html) and specifying the ARN\.
 
 **Note**  
-The [IssueCertificate](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html) operation requires you to specify a certificate template\. This example uses the `EndEntityCertificate/V1` template\. For information about all of the available templates, see [Understanding certificate templates](UsingTemplates.md)\.
+The [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) operation requires you to specify a certificate template\. This example uses the `EndEntityCertificate/V1` template\. For information about all of the available templates, see [Understanding certificate templates](UsingTemplates.md)\.
 
 ```
 package com.amazonaws.samples;

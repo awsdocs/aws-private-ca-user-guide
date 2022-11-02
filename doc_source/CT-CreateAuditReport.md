@@ -1,6 +1,6 @@
 # Creating an audit report<a name="CT-CreateAuditReport"></a>
 
-The following CloudTrail example shows the results of a call to the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
+The following CloudTrail example shows the results of a call to the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) operation\.
 
 ```
 {

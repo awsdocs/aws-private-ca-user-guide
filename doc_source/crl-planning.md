@@ -2,7 +2,7 @@
 
 Before you can configure a CRL as part of the [CA creation process](create-CA.md), some prior setup may be necessary\. This section explains the prerequisites and options that you should understand before creating a CA with a CRL attached\. 
 
-For information about using Online Certificate Status Protocol \(OCSP\) as an alternative or a supplement to a CRL, see [4\. Configure revocation](Create-CA-console.md#PcaCreateRevocation) and [Configuring a Custom URL for ACM Private CA OCSP](ocsp-customize.md)\.
+For information about using Online Certificate Status Protocol \(OCSP\) as an alternative or a supplement to a CRL, see [Certificate revocation options](Create-CA-console.md#PcaCreateRevocation) and [Configuring a Custom URL for AWS Private CA OCSP](ocsp-customize.md)\.
 
 **Topics**
 + [CRL structure](#crl-structure)
@@ -67,9 +67,9 @@ The CRL will only be deposited in Amazon S3 after a certificate has been issued 
 
 ## Access policies for CRLs in Amazon S3<a name="s3-policies"></a>
 
-If you plan to create a CRL, you need to prepare an Amazon S3 bucket to store it in\. ACM Private CA automatically deposits the CRL in the Amazon S3 bucket you designate and updates it periodically\. For more information, see [Creating a bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) 
+If you plan to create a CRL, you need to prepare an Amazon S3 bucket to store it in\. AWS Private CA automatically deposits the CRL in the Amazon S3 bucket you designate and updates it periodically\. For more information, see [Creating a bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) 
 
-Your S3 bucket must be secured by an attached permissions policy\. Authorized users and service principals require `Put` permission to allow ACM Private CA to place objects in the bucket, and `Get` permission to retrieve them\. During the console procedure for [creating](Create-CA-console.md) a CA, you can choose to let ACM Private CA create a new bucket and apply a default permissions policy\. 
+Your S3 bucket must be secured by an attached permissions policy\. Authorized users and service principals require `Put` permission to allow AWS Private CA to place objects in the bucket, and `Get` permission to retrieve them\. During the console procedure for [creating](Create-CA-console.md) a CA, you can choose to let AWS Private CA create a new bucket and apply a default permissions policy\. 
 
 The default policy applies no `SourceArn` restriction on the CA\. We recommend that you manually apply the less permissive policy shown below, which restricts access to both a specific AWS account and a specific private CA\. For more information, see [Adding a bucket policy using the Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)\.
 
@@ -176,12 +176,12 @@ If you have older certificates that were issued by this CA, they will be unable 
 
 ## Encrypting Your CRLs<a name="crl-encryption"></a>
 
-You can optionally configure encryption on the Amazon S3 bucket containing your CRLs\. ACM Private CA supports two encryption modes for assets in Amazon S3:
+You can optionally configure encryption on the Amazon S3 bucket containing your CRLs\. AWS Private CA supports two encryption modes for assets in Amazon S3:
 + Automatic server\-side encryption with Amazon S3\-managed AES\-256 keys\.
 + Customer managed encryption using AWS Key Management Service and an AWS KMS key configured to your specifications\.
 
 **Note**  
-ACM Private CA does not support using default KMS keys generated automatically by S3\.
+AWS Private CA does not support using default KMS keys generated automatically by S3\.
 
 The following procedures describe how to set up each of the encryption options\.
 
@@ -191,7 +191,7 @@ Complete the following steps to enable S3 server\-side encryption\.
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. In the **Buckets** table, choose the bucket that will hold your ACM Private CA assets\.
+1. In the **Buckets** table, choose the bucket that will hold your AWS Private CA assets\.
 
 1. On the page for your bucket, choose the **Properties** tab\.
 
@@ -209,7 +209,7 @@ Complete the following steps to enable encryption using a custom key\.
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. In the **Buckets** table, choose the bucket that will hold your ACM Private CA assets\.
+1. In the **Buckets** table, choose the bucket that will hold your AWS Private CA assets\.
 
 1. On the page for your bucket, choose the **Properties** tab\.
 
@@ -246,7 +246,7 @@ Complete the following steps to enable encryption using a custom key\.
    }
    ```
 
-1. Using the following steps, you give the ACM Private CA service principal permission to use the KMS key\. By default, all KMS keys are private; only the resource owner can use a KMS key to encrypt and decrypt data\. However, the resource owner can grant permissions to access the KMS key to other users and resources\. The service principal must be in the same Region as where the KMS key is stored\.
+1. Using the following steps, you give the AWS Private CA service principal permission to use the KMS key\. By default, all KMS keys are private; only the resource owner can use a KMS key to encrypt and decrypt data\. However, the resource owner can grant permissions to access the KMS key to other users and resources\. The service principal must be in the same Region as where the KMS key is stored\.
 
    1. First, save the default policy for your KMS key as `policy.json` using the following [get\-key\-policy](https://docs.aws.amazon.com/cli/latest/reference/kms/get-key-policy.html) command:
 
