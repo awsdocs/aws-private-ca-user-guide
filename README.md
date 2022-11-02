@@ -1,6 +1,6 @@
 ## AWS Certificate Manager Private Certificate Authority User Guide
 
-The open source version of the Amazon Private Certificate Authority docs. You can submit feedback & requests for changes by submitting issues in this repo or by making proposed changes & submitting a pull request.
+This is the open source version of the documentation for AWS Certificate Manager Private Certificate Authority (ACM Private CA). You can submit feedback and requests for changes by submitting issues in this repository or by making proposed changes and submitting a pull request.
 
 ## License Summary
 
