@@ -8,110 +8,104 @@ AWS Certificate Manager \(ACM\) users with cross\-account shared access to a pri
 + [EndEntityCertificate/V1](UsingTemplates.md#EndEntityCertificate-V1)
 + [EndEntityClientAuthCertificate/V1](UsingTemplates.md#EndEntityClientAuthCertificate-V1)
 + [EndEntityServerAuthCertificate/V1](UsingTemplates.md#EndEntityServerAuthCertificate-V1)
-+ [BlankEndEntityCertificate\_APICSRPassthrough](UsingTemplates.md#BlankEndEntityCertificate_APICSRPassthrough)
++ [BlankEndEntityCertificate\_APIPassthrough/V1](UsingTemplates.md#BlankEndEntityCertificate_APIPassthrough)
++ [BlankEndEntityCertificate\_APICSRPassthrough/V1](UsingTemplates.md#BlankEndEntityCertificate_APICSRPassthrough)
 + [SubordinateCACertificate\_PathLen0/V1](UsingTemplates.md#SubordinateCACertificate_PathLen0-V1)
 
-The following examples contain resource\-based policies and the commands to apply them\. In addition to specifying the ARN of a CA, the administrator provides an AWS user account ID or an AWS Organizations ID that will be granted access to the CA\. For readability, the JSON of each policy is provided as a file instead of inline\.
+## Policy examples<a name="rbp-policy-examples"></a>
 
-**Note**  
-The structure of the JSON resource\-based polices shown below must be followed precisely\. Only the ID fields for the principals \(the AWS account number or the AWS Organizations ID\) and the CA ARNs can be configured by customers\.
-
-**Example 1: Sharing access to a CA with a user in a different account**
+This section provides example cross\-account policies for various needs\. In all cases, the following command pattern is used to apply a policy:
 
 ```
 $ aws acm-pca put-policy \
    --region region \
    --resource-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
-   --policy file:///[path]/policy1.json
+   --policy file:///[path]/policyN.json
 ```
 
-The file `policy1.json` has the following content:
+In addition to specifying the ARN of a CA, the administrator provides an AWS user account ID or an AWS Organizations ID that will be granted access to the CA\. The JSON of each of the following polices is formatted as a file for readability, but can also be supplied as an inline CLI arguments\.
 
-```
- {                        
-   "Version":"2012-10-17",
-   "Statement":[
-      {    
-         "Sid":"1",
-         "Effect":"Allow",         
-         "Principal":{                                                                                                                                               
-            "AWS":"account"                                                                                
+**Note**  
+The structure of the JSON resource\-based polices shown below must be followed precisely\. Only the ID fields for the principals \(the AWS account number or the AWS Organizations ID\) and the CA ARNs can be configured by customers\.
+
+1. **File: policy1\.json – Sharing access to a CA with a user in a different account** 
+
+   ```
+    {                        
+      "Version":"2012-10-17",
+      "Statement":[
+         {    
+            "Sid":"1",
+            "Effect":"Allow",         
+            "Principal":{                                                                                                                                               
+               "AWS":"account"                                                                                
+            },
+            "Action":[
+               "acm-pca:DescribeCertificateAuthority",
+               "acm-pca:GetCertificate",
+               "acm-pca:GetCertificateAuthorityCertificate",
+               "acm-pca:ListPermissions",
+               "acm-pca:ListTags"                                                                                   
+            ],                                                                                              
+            "Resource":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
          },
-         "Action":[
-            "acm-pca:DescribeCertificateAuthority",
-            "acm-pca:GetCertificate",
-            "acm-pca:GetCertificateAuthorityCertificate",
-            "acm-pca:ListPermissions",
-            "acm-pca:ListTags"                                                                                   
-         ],                                                                                              
-         "Resource":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
-      },
-      {
-         "Sid":"1",  
-         "Effect":"Allow",
-         "Principal":{
-            "AWS":"account"
+         {
+            "Sid":"1",  
+            "Effect":"Allow",
+            "Principal":{
+               "AWS":"account"
+            },
+            "Action":[
+               "acm-pca:IssueCertificate"
+            ],
+            "Resource":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+            "Condition":{
+               "StringEquals":{
+                  "acm-pca:TemplateArn":"arn:aws:acm-pca:::template/EndEntityCertificate/V1"
+               }
+            }
+         }
+      ]
+   }
+   ```
+
+1. **File: policy2\.json – Sharing access to a CA through AWS Organizations**
+
+   ```
+   {
+      "Version":"2012-10-17",
+      "Statement":[
+         {
+            "Sid":"1",
+            "Effect":"Allow",
+            "Principal":"*",
+            "Action":"acm-pca:IssueCertificate",
+            "Resource":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+            "Condition":{
+               "StringEquals":{
+                  "acm-pca:TemplateArn":"arn:aws:acm-pca:::template/EndEntityCertificate/V1",
+                  "aws:PrincipalOrgID":"o-1b2c3d4z5"
+               }
+            }
          },
-         "Action":[
-            "acm-pca:IssueCertificate"
-         ],
-         "Resource":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
-         "Condition":{
-            "StringEquals":{
-               "acm-pca:TemplateArn":"arn:aws:acm-pca:::template/EndEntityCertificate/V1"
+         {
+            "Sid":"1",
+            "Effect":"Allow",
+            "Principal":"*",
+            "Action":[
+               "acm-pca:DescribeCertificateAuthority",
+               "acm-pca:GetCertificate",
+               "acm-pca:GetCertificateAuthorityCertificate",
+               "acm-pca:ListPermissions",
+               "acm-pca:ListTags"
+            ],
+            "Resource":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
+            "Condition":{
+               "StringEquals":{
+                  "aws:PrincipalOrgID":"o-a1b2c3d4z5"
+               }
             }
          }
-      }
-   ]
-}
-```
-
-**Example 2: Sharing access to a CA through AWS Organizations**
-
-```
-$ aws acm-pca put-policy \
-   --region region \
-   --resource-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID 
-   --policy file:///[path]/policy2.json
-```
-
-The file `policy2.json` has the following content:
-
-```
-{
-   "Version":"2012-10-17",
-   "Statement":[
-      {
-         "Sid":"1",
-         "Effect":"Allow",
-         "Principal":"*",
-         "Action":"acm-pca:IssueCertificate",
-         "Resource":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
-         "Condition":{
-            "StringEquals":{
-               "acm-pca:TemplateArn":"arn:aws:acm-pca:::template/EndEntityCertificate/V1",
-               "aws:PrincipalOrgID":"o-1b2c3d4z5"
-            }
-         }
-      },
-      {
-         "Sid":"1",
-         "Effect":"Allow",
-         "Principal":"*",
-         "Action":[
-            "acm-pca:DescribeCertificateAuthority",
-            "acm-pca:GetCertificate",
-            "acm-pca:GetCertificateAuthorityCertificate",
-            "acm-pca:ListPermissions",
-            "acm-pca:ListTags"
-         ],
-         "Resource":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID",
-         "Condition":{
-            "StringEquals":{
-               "aws:PrincipalOrgID":"o-a1b2c3d4z5"
-            }
-         }
-      }
-   ]
-}
-```
+      ]
+   }
+   ```

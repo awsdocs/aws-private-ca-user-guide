@@ -46,6 +46,13 @@ This method of CA succession is preferred because it rotates the private key of 
 **Note**  
 Private certificates issued through ACM cannot be renewed if you replace the CA\. If you use ACM for issuance and renewal, you must re\-issue the CA certificate to extend the lifetime of the CA\. 
 
+### Reissuing an old CA<a name="reissue-ca-cert"></a>
+
+When a CA nears expiration, an alternative method of extending its life is to reissue the CA certificate with a new expiration date\. Reissuance leaves all of the CA metadata in place and preserves the existing private and public keys\. In this scenario, the existing certificate chain and unexpired end\-entity certificates issued by the CA remain valid until they expire\. New certificate issuance can also continue without interruption\. To update a CA with a reissued certificate, follow the usual installation procedures described in [Creating and installing the CA certificate](PCACertInstall.md)\. 
+
+**Note**  
+We recommend replacing an expiring CA rather than reissuing its certificate because of the security advantages gained by rotating to a new key pair\.
+
 ## Revoking a CA<a name="ca-revoke"></a>
 
 You revoke a CA by revoking its underlying certificate\. This also effectively revokes all of the certificates issued by the CA\. Revocation information is distributed to clients by means of [OCSP or a CRL](revocation-setup.md)\. You should revoke a CA certificate only if you want to revoke all of its issued end\-entity and subordinate CA certificates\.

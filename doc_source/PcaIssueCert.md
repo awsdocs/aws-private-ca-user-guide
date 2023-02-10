@@ -105,25 +105,27 @@ AWS Private CA immediately returns an ARN with a serial number when it receives 
 
 ## Issue a certificate with a custom subject name using an APIPassthrough template<a name="custom-subject-1"></a>
 
-In this example, a certificate is issued containing customized subject name elements\. In addition to supplying a CSR like the one in [Issuing a standard certificate \(AWS CLI\)](#IssueCertCli), you pass two additional arguments to the issue\-certificate command: the ARN of an APIPassthrough template, and a JSON configuration file that specifies the custom attributes and their object identifiers \(OIDs\)\. You cannot use `StandardAttributes` in conjunction with `CustomAttributes`\. however, you can pass standard OIDs as part of `CustomAttributes`\. The default subject name OIDs are listed in the following table:
+In this example, a certificate is issued containing customized subject name elements\. In addition to supplying a CSR like the one in [Issuing a standard certificate \(AWS CLI\)](#IssueCertCli), you pass two additional arguments to the issue\-certificate command: the ARN of an APIPassthrough template, and a JSON configuration file that specifies the custom attributes and their object identifiers \(OIDs\)\. You cannot use `StandardAttributes` in conjunction with `CustomAttributes`\. however, you can pass standard OIDs as part of `CustomAttributes`\. The default subject name OIDs are listed in the following table \(information from [RFC 4519](https://www.rfc-editor.org/rfc/rfc4519) and [Global OID reference database](https://oidref.com)\):
 
 
-| Subject name | Object ID | 
-| --- | --- | 
-|  Country  | 2\.5\.4\.6 | 
-|  CommonName  | 2\.5\.4\.3 | 
-|  DistinguishedNameQualifier  | 2\.5\.4\.46 | 
-|  GenerationQualifier  | 2\.5\.4\.44 | 
-|  GivenName  | 2\.5\.4\.42 | 
-|  Initials  | 2\.5\.4\.43 | 
-|  Locality  | 2\.5\.4\.7 | 
-|  Organization  | 2\.5\.4\.10 | 
-|  OrganizationalUnit  | 2\.5\.4\.11 | 
-|  Pseudonym  | 2\.5\.4\.65 | 
-|  SerialNumber  | 2\.5\.4\.5 | 
-|  State  | 2\.5\.4\.8 | 
-|  Surname  | 2\.5\.4\.4 | 
-|  Title  | 2\.5\.4\.12 | 
+|  Subject name  |  Abbreviation  |  Object ID  | 
+| --- | --- | --- | 
+|  countryName  |  c  | 2\.5\.4\.6 | 
+|  commonName  |  cn  | 2\.5\.4\.3 | 
+|  dnQualifier \[distinguished name qualifier\]  |    | 2\.5\.4\.46 | 
+|  generationQualifier  |    | 2\.5\.4\.44 | 
+|  givenName  |    | 2\.5\.4\.42 | 
+|  initials  |    | 2\.5\.4\.43 | 
+|  locality  |  l  | 2\.5\.4\.7 | 
+|  organizationName  |  o  | 2\.5\.4\.10 | 
+|  organizationalUnitName  |  ou  | 2\.5\.4\.11 | 
+|  pseudonym  |    | 2\.5\.4\.65 | 
+|  serialNumber  |    | 2\.5\.4\.5 | 
+|  st \[state\]  |    | 2\.5\.4\.8 | 
+|  surname  |  sn  | 2\.5\.4\.4 | 
+|  title  |    | 2\.5\.4\.12 | 
+|  domainComponent  |  dc  |  0\.9\.2342\.19200300\.100\.1\.25  | 
+|  userid  |    |  0\.9\.2342\.19200300\.100\.1\.1  | 
 
 The sample configuration file `api_passthrough_config.txt` contains the following code:
 

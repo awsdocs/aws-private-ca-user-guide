@@ -18,4 +18,7 @@ CAs with SHORT\_LIVED\_CERTIFICATE mode cost less than general\-purpose CAs\. Fo
 To create a CA that issues short\-lived certificates, set the `UsageMode` parameter to SHORT\_LIVED\_CERTIFICATE using the [AWS CLI](Create-CA-CLI.md) procedure for creating a CA\. 
 
 **Note**  
-AWS Certificate Manager cannot issue short\-lived certificates\.
+AWS Certificate Manager cannot issue certificates signed by a private CA with short\-lived mode\.
+
+Use of short\-lived certificates is supported by the following AWS services:
++ [Amazon AppStream](https://docs.aws.amazon.com/appstream/latest/developerguide/)

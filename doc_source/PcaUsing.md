@@ -6,6 +6,7 @@ After you have created and activated a private certificate authority \(CA\) and 
 + [Issuing private end\-entity certificates](PcaIssueCert.md)
 + [Retrieving a private certificate](PcaGetCert.md)
 + [Listing private certificates](PcaListCerts.md)
++ [Exporting a private certificate and its secret key](export-in-acm.md)
 + [Revoking a private certificate](PcaRevokeCert.md)
 + [Automating export of a renewed certificate](auto-export.md)
 + [Understanding certificate templates](UsingTemplates.md)

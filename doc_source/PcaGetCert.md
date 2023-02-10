@@ -1,6 +1,6 @@
 # Retrieving a private certificate<a name="PcaGetCert"></a>
 
-You can use the AWS Private CA API and AWS CLI to issue a private certificate\. If you do, you can use the AWS CLI or AWS Private CA API to retrieve that certificate\. If you used ACM to create your private CA and to request certificates, you must use ACM to export the certificate and the encrypted private key\. For more information, see [Exporting a Private Certificate](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html)\. 
+You can use the AWS Private CA API and AWS CLI to issue a private certificate\. If you do, you can use the AWS CLI or AWS Private CA API to retrieve that certificate\. If you used ACM to create your private CA and to request certificates, you must use ACM to export the certificate and the encrypted private key\. For more information, see [Exporting a private certificate](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html)\. 
 
 **To retrieve an end\-entity certificate**  
 Use the [get\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/get-certificate.html) AWS CLI command to retrieve a private end\-entity certificate\. You can also use the [GetCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificate.html) API operation\. We recommend formatting the output with [jq](https://stedolan.github.io/jq/), a sed\-like parser\.

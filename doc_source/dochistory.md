@@ -4,6 +4,7 @@ The following table describes significant changes to this documentation since Ja
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Adding change tracker for AWS managed policies](#dochistory) | Documentation added to track changes to AWS managed IAM policies that specify standard permissions on AWS Private CA\. For more information, see [Updates to AWS managed policies for AWS Private CA](https://docs.aws.amazon.com/privateca/latest/userguide/auth-AwsManagedPolicies.html#managed-policy-updates)\. | November 11, 2022 | 
 | [API and CLI support for CAs that issue short\-lived certificates ](#dochistory) | With the introduction of CA usage modes, a CA can be configured to issue either general\-purpose or exclusively short\-lived certificates\. For more information, see [Certificate authority modes](https://docs.aws.amazon.com/privateca/latest/userguide/short-lived-certificates.html)\. | October 24, 2022 | 
 | [Service rebranding and console update](#dochistory) | The service is renamed to AWS Private Certificate Authority \(AWS Private CA\)\. The AWS Private CA console gets usability improvements including integrated help panels that link to complete documentation\. | September 27, 2022 | 
 | [Matter\-compliant certificate support](#dochistory) | Three new certificate templates add support for Matter\-compliant CA and end\-entity certificates\. For more information, see [Understanding certificate templates](https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html)\. | July 20, 2022 | 

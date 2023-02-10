@@ -26,7 +26,7 @@ You can enable both revocation mechanisms on the same CA by defining both an `Oc
 
 The following examples assume that you have set up your `.aws` configuration directory with a valid default Region, endpoint, and credentials\. For information about configuring your AWS CLI environment, see [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/reference/cli-configure-files.html)\. For readability, we supply the CA configuration and revocation input as JSON files in the example commands\. Modify the example files as needed for your use\. 
 
-All of the examples use the same `ca_config.txt`:
+All of the examples use the following `ca_config.txt` configuration file unless otherwise stated\.
 
 **File: ca\_config\.txt**
 
@@ -63,8 +63,8 @@ In this example, the revocation file enables default OCSP support, which uses th
 
 ```
 $ aws acm-pca create-certificate-authority \
-     --certificate-authority-configuration file://ca_config.json \
-     --revocation-configuration file://revoke_config.json \
+     --certificate-authority-configuration file://ca_config.txt \
+     --revocation-configuration file://revoke_config.txt \
      --certificate-authority-type "ROOT" \
      --idempotency-token 01234567 \
      --tags  Key=Name,Value=MyPCA
@@ -362,4 +362,86 @@ $ aws acm-pca describe-certificate-authority \
 	         }
 	      },
 	...
+```
+
+## Example 6: Create a CA for Active Directory login<a name="example_6"></a>
+
+You can create a private CA suitable for use in the Enterprise NTAuth store of Microsoft Active Directory \(AD\), where it can issue card\-logon or domain\-controller certificates\. For information about importing a CA certificate into AD, see [How to import third\-party certification authority \(CA\) certificates into the Enterprise NTAuth store](https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/import-third-party-ca-to-enterprise-ntauth-store)\. 
+
+The Microsoft [certutil](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/certutil) tool can be used to publish CA certificates in AD by invoking the \-dspublish option\. A certificate published to AD with certutil is trusted across the entire forest\. Using group policy, you can also limit trust to a subset of the entire forest, for example, a single domain or a group of computers in a domain\. For logon to work, the issuing CA must also be published in the NTAuth store\. For more information, see [Distribute Certificates to Client Computers by Using Group Policy](https://learn.microsoft.com/en-us/windows-server/identity/ad-fs/deployment/distribute-certificates-to-client-computers-by-using-group-policy)\.
+
+This example uses the following `ca_config_AD.txt` configuration file\.
+
+**File: ca\_config\_AD\.txt**
+
+```
+{
+   "KeyAlgorithm":"RSA_2048",
+   "SigningAlgorithm":"SHA256WITHRSA",
+   "Subject":{
+      "CustomAttributes":[
+         {
+            "ObjectIdentifier":"2.5.4.3",
+            "Value":"root CA"
+         },
+         {
+            "ObjectIdentifier":"0.9.2342.19200300.100.1.25",
+            "Value":"example"
+         },
+         {
+            "ObjectIdentifier":"0.9.2342.19200300.100.1.25",
+            "Value":"com"
+         }
+      ]
+   }
+}
+```
+
+**Command**
+
+```
+$ aws acm-pca create-certificate-authority \
+	     --certificate-authority-configuration file://ca_config_AD.txt \
+	     --certificate-authority-type "ROOT" \
+	     --tags Key=application,Value=ActiveDirectory
+```
+
+If successful, this command outputs the Amazon Resource Name \(ARN\) of the CA\.
+
+```
+{
+    "CertificateAuthorityArn":"arn:aws:acm-pca:region:account:certificate-authority/CA_ID"
+}
+```
+
+Use the following command to inspect the configuration of your CA\.
+
+```
+$ aws acm-pca describe-certificate-authority \
+      --certificate-authority-arn "arn:aws:acm-pca:region:account:certificate-authority/CA_ID" \
+      --output json
+```
+
+This description should contain the following section\.
+
+```
+...
+
+"Subject":{
+   "CustomAttributes":[
+      {
+         "ObjectIdentifier":"2.5.4.3",
+         "Value":"root CA"
+      },
+      {
+         "ObjectIdentifier":"0.9.2342.19200300.100.1.25",
+         "Value":"example"
+      },
+      {
+         "ObjectIdentifier":"0.9.2342.19200300.100.1.25",
+         "Value":"com"
+      }
+   ]
+}
+...
 ```

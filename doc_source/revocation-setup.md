@@ -29,6 +29,15 @@ Both OCSP and CRLs exhibit some delay between revocation and the availability of
 OCSP responses may take up to 60 minutes to reflect the new status when you revoke a certificate\. In general, OCSP tends to support faster distribution of revocation information because, unlike CRLs which can be cached by clients for days, OCSP responses are typically not cached by clients\.
 A CRL is typically updated approximately 30 minutes after a certificate is revoked\. If for any reason a CRL update fails, AWS Private CA makes further attempts every 15 minutes\.
 
+## General requirements for revocation configurations<a name="revocation-requirements"></a>
+
+The following requirements apply to all revocation configurations\.
++ A configuration disabling CRLs or OCSP must contain only the `Enabled=False` parameter, and will fail if other parameters such as `CustomCname` or `ExpirationInDays` are included\.
++ In a CRL configuration, the `S3BucketName` parameter must conform to [Amazon Simple Storage Service bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)\.
++ A configuration containing a custom Canonical Name \(CNAME\) parameter for CRLs or OCSP must conform to [RFC7230](https://www.ietf.org/rfc/rfc7230.txt) restrictions on the use of special characters in a CNAME\. 
++ In a CRL or OCSP configuration, the value of a CNAME parameter must not include a protocol prefix such as "http://" or "https://"\.
+
 **Topics**
++ [General requirements for revocation configurations](#revocation-requirements)
 + [Planning a certificate revocation list \(CRL\)](crl-planning.md)
 + [Configuring a Custom URL for AWS Private CA OCSP](ocsp-customize.md)

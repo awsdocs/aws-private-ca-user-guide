@@ -9,7 +9,8 @@ AWS Certificate Manager \(ACM\) users with cross\-account shared access to a pri
 [EndEntityCertificate/V1](#EndEntityCertificate-V1)
 [EndEntityClientAuthCertificate/V1](#EndEntityClientAuthCertificate-V1)
 [EndEntityServerAuthCertificate/V1](#EndEntityServerAuthCertificate-V1)
-[BlankEndEntityCertificate\_APICSRPassthrough](#BlankEndEntityCertificate_APICSRPassthrough)
+[BlankEndEntityCertificate\_APIPassthrough/V1](#BlankEndEntityCertificate_APIPassthrough)
+[BlankEndEntityCertificate\_APICSRPassthrough/V1](#BlankEndEntityCertificate_APICSRPassthrough)
 [SubordinateCACertificate\_PathLen0/V1](#SubordinateCACertificate_PathLen0-V1)
 For more information, see [Resource\-based policies](pca-rbp.md)\.
 

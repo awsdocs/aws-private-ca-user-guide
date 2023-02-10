@@ -4,7 +4,7 @@ AWS Private CA assigns quotas to your allowed number of certificates and certifi
 
 AWS Private CA throttles API requests at different rates depending on the API operation\. Throttling means that AWS Private CA rejects an otherwise valid request because the request exceeds the operation's quota for the number of requests per second\. When a request is throttled, AWS Private CA returns a [ThrottlingException](https://docs.aws.amazon.com/privateca/latest/APIReference/CommonErrors.html) error\. AWS Private CA does not guarantee a minimum request rate for APIs\. 
 
-To see what quotas can be adjusted, see the [AWS Private CA quotas table](https://docs.aws.amazon.com/general/latest/gr/pca.html#limits_pca) in the *AWS General Reference Guide*\.
+To see what quotas can be adjusted, see the [AWS Private CA quotas table](https://docs.aws.amazon.com/general/latest/gr/acm-pca.html#limits_pca) in the *AWS General Reference Guide*\.
 
 You can view your current quotas and request quota increases using AWS Service Quotas\.
 

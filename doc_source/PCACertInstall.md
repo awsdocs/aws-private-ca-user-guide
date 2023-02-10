@@ -9,6 +9,25 @@ AWS Private CA supports three scenarios for installing a CA certificate:
 
  The following sections describe procedures for each scenario\. The console procedures begin on the console page **Private CAs**\.
 
+## Compatible signing algorithms<a name="signing_algorithms"></a>
+
+Signing algorithm support for CA certificates depends on the signing algorithm of the parent CA and on the AWS Region\. The following constraints apply to both console and AWS CLI operations\.
++ A parent CA with the RSA signing algorithm can issue certificates with the following algorithms:
+  + SHA256 RSA
+  + SHA384 RSA
+  + SHA512 RSA
++ In a legacy AWS Region, a parent CA with the EDCSA signing algorithm can issue certificates with the following algorithms:
+  + SHA256 ECDSA
+  + SHA384 ECDSA
+  + SHA512 ECDSA
+
+  Legacy AWS Regions include:  
+****    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/privateca/latest/userguide/PCACertInstall.html)
++ In a non\-legacy AWS Region, the following rules apply for EDCSA: 
+  + A parent CA with the EC\_prime256v1 signing algorithm can issue certificates with ECDSA P256\.
+  + A parent CA with the EC\_secp384r1 signing algorithm can issue certificates with ECDSA P384\.
+
 ## Installing a root CA certificate<a name="InstallRoot"></a>
 
 You can install a root CA certificate from the AWS Management Console or the AWS CLI\.
@@ -21,7 +40,7 @@ You can install a root CA certificate from the AWS Management Console or the AWS
 
 1. Under **Specify the root CA certificate parameters**, specify the following certificate parameters:
    + **Validity** — Specifies the expiration date and time for the CA certificate\. The AWS Private CA default validity period for a root CA certificate is 10 years\.
-   + **Signature algorithm** — Specifies the signing algorithm to use when the root CA issues new certificates\. Options are as follows:
+   + **Signature algorithm** — Specifies the signing algorithm to use when the root CA issues new certificates\. Available options vary according to the AWS Region where you are creating the CA\. For more information, see [Compatible signing algorithms](#signing_algorithms), [Supported cryptographic algorithms](supported-algorithms.md), and **SigningAlgorithm** in [CertificateAuthorityConfiguration](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CertificateAuthorityConfiguration.html#API_CertificateAuthorityConfiguration_Contents)\.
      + SHA256 RSA
      + SHA384 RSA
      + SHA512 RSA
@@ -311,7 +330,11 @@ You can use the AWS Management Console to create and install a certificate for y
 
 1. On the **Install subordinate CA certificate** page, under **Select CA type**, choose **AWS Private CA** to install a certificate that is managed by AWS Private CA\.
 
-1. Under **Select parent certificate authority**, choose a CA from the **Parent private CA** list\.
+1. Under **Select parent CA**, choose a CA from the **Parent private CA** list\. The list is filtered to display CAs that meet the following criteria:
+   + You have permission to use the CA\.
+   + The CA would not be signing itself\.
+   + The CA is in state `ACTIVE`\.
+   + The CA mode is `GENERAL_PURPOSE`\.
 
 1. Under **Specify the subordinate CA certificate parameters**, specify the following certificate parameters:
    + **Validity** — Specifies the expiration date and time for the CA certificate\.
@@ -320,7 +343,7 @@ You can use the AWS Management Console to create and install a certificate for y
      + SHA384 RSA
      + SHA512 RSA
    + **Path length** — The number of trust layers that the subordinate CA can add when signing new certificates\. A path length of zero \(the default\) means that only end\-entity certificates, and not CA certificates, can be created\. A path length of one or more means that the subordinate CA may issue certificates to create additional CAs subordinate to it\.
-   + **Template ARN** — The ARN of the configuration template for this CA certificate\. The template changes if you change the specified **Path length**\. If you create a certificate using the CLI [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) command or API [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) action, you must specify the ARN manually\. For information about available CA certificate templates, see [Understanding certificate templates](UsingTemplates.md)\.
+   + **Template ARN** — Displays the ARN of the configuration template for this CA certificate\. The template changes if you change the specified **Path length**\. If you create a certificate using the CLI [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) command or API [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) action, you must specify the ARN manually\. For information about available CA certificate templates, see [Understanding certificate templates](UsingTemplates.md)\.
 
 1. Review your settings for correctness, then choose **Confirm and install**\. AWS Private CA exports a CSR, generates a certificate using a subordinate CA certificate [template](UsingTemplates.md), and signs the certificate it with the selected parent CA\. AWS Private CA then imports the signed subordinate CA certificate\.
 

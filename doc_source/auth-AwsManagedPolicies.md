@@ -2,12 +2,7 @@
 
 AWS Private CA includes a set of predefined AWS managed policies for AWS Private CA administrators, users, and auditors\. Understanding these policies can help you implement [Customer managed policies](auth-CustManagedPolicies.md)\.
 
-**Topics**
-+ [AWSPrivateCAFullAccess](#AWSPrivateCAFullAccess)
-+ [AWSPrivateCAReadOnly](#AWSPrivateCAReadOnly)
-+ [AWSPrivateCAPrivilegedUser](#AWSPrivateCAPrivilegedUser)
-+ [AWSPrivateCAUser](#AWSPrivateCAUser)
-+ [AWSPrivateCAAuditor](#AWSPrivateCAAuditor)
+Choose any of the policies listed below to see details and sample policy code\.
 
 ## AWSPrivateCAFullAccess<a name="AWSPrivateCAFullAccess"></a>
 
@@ -28,7 +23,7 @@ Grants unrestricted administrative control\.
 }
 ```
 
-## AWSPrivateCAReadOnly<a name="AWSPrivateCAReadOnly"></a>
+## AWSPrivateCAReadOnly<a name="AWSPrivateCAFullAccess"></a>
 
 Grants access limited to read\-only API operations\.
 
@@ -52,7 +47,7 @@ Grants access limited to read\-only API operations\.
 }
 ```
 
-## AWSPrivateCAPrivilegedUser<a name="AWSPrivateCAPrivilegedUser"></a>
+## AWSPrivateCAPrivilegedUser<a name="AWSPrivateCAFullAccess"></a>
 
 Grants ability to issue and revoke CA certificates\. This policy has no other administrative capabilities and no ability to issue end\-entity certificates\. Permissions are mutually exclusive with the **User** policy\. 
 
@@ -196,3 +191,15 @@ Grant access to read\-only API operations and permission to generate a CA audit 
    ]
 }
 ```
+
+## Updates to AWS managed policies for AWS Private CA<a name="managed-policy-updates"></a>
+
+In the following table, view details about updates to AWS managed policies for AWS Private CA since the service began tracking these changes\. For automatic alerts about all changes to AWS Private CA, subscribe to the RSS feed on the [Document History](dochistory.md) page\.
+
+
+**Managed policy changes**  
+
+| Change | Description  | Date | 
+| --- | --- | --- | 
+|  `AWSPrivateCAUser` policy added\.  |  Replaces `AWSCertificateManagerPrivateCAUser`\. Functionality is unchanged\.  |  September 27, 2022  | 
+|  `AWSCertificateManagerPrivateCAUser` policy deprecated\.  |  Policy has out\-of\-date service name\.  |  September 27, 2022  | 

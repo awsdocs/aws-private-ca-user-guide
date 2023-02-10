@@ -10,6 +10,7 @@ The [GetCertificateAuthorityCsr](JavaApi-GetCertificateAuthorityCsr.md), [GetCer
 + [Create and activate a root CA programmatically](JavaApi-ActivateRootCA.md)
 + [Create and activate a subordinate CA programmatically](JavaApi-ActivateSubordinateCA.md)
 + [CreateCertificateAuthority](JavaApi-CreatePrivateCertificateAuthority.md)
++ [Using CreateCertificateAuthority to support Active Directory](JavaApi-CreatePrivateCertificateAuthorityAD.md)
 + [CreateCertificateAuthorityAuditReport](JavaApi-CreateCertificateAuthorityAuditReport.md)
 + [CreatePermission](JavaApi-CreatePermission.md)
 + [DeleteCertificateAuthority](JavaApi-DeleteCertificateAuthority.md)

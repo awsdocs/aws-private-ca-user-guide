@@ -5,27 +5,7 @@ The following CloudTrail example shows the results of a call to the [PutPolicy](
 ```
 {
    "eventVersion":"1.08",
-   "userIdentity":{
-      "type":"AssumedRole",
-      "principalId":"account",
-      "arn":"arn:aws:sts::account:assumed-role/role",
-      "accountId":"account",
-      "accessKeyId":"key_ID",
-      "sessionContext":{
-         "sessionIssuer":{
-            "type":"Role",
-            "principalId":"account",
-            "arn":"arn:aws:iam::account:role/role",
-            "accountId":"account",
-            "userName":"name"
-         },
-         "webIdFederationData":{
-            
-         },
-         "attributes":{
-            "mfaAuthenticated":"false",
-            "creationDate":"2021-02-26T21:01:38Z"
-         }
+   "userIdentity":{ 
       },
       "invokedBy":"agent"
    },

@@ -5,7 +5,7 @@ When you set up access control and permissions policies that you plan to attach 
 
 | AWS Private CA API operations | Required permissions | Resources | 
 | --- | --- | --- | 
-|  [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)  |  `acm-pca:CreateCertificateAuthority`  `acm-pca:TagCertificateAuthority` \(Only required when creating a CA with tags\.\)  |  `arn:aws:acm-pca:region:account:certificate-authority/CA_ID`  | 
+|  [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)  |  `acm-pca:CreateCertificateAuthority` `acm-pca:TagCertificateAuthority` \(Only required when creating a CA with tags\.\)  |  `arn:aws:acm-pca:region:account:certificate-authority/CA_ID`  | 
 |  [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)  |  `acm-pca:CreateCertificateAuthorityAuditReport`  |  `arn:aws:acm-pca:region:account:certificate-authority/CA_ID`  | 
 | [CreatePermission](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html) | acm\-pca:CreatePermission | arn:aws:acm\-pca:region:account:certificate\-authority/CA\_ID | 
 |  [DeleteCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthority.html)  |  `acm-pca:DeleteCertificateAuthority`  |  `arn:aws:acm-pca:region:account:certificate-authority/CA_ID`  | 
