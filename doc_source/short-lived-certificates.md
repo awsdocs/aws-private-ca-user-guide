@@ -22,3 +22,4 @@ AWS Certificate Manager cannot issue certificates signed by a private CA with sh
 
 Use of short\-lived certificates is supported by the following AWS services:
 + [Amazon AppStream](https://docs.aws.amazon.com/appstream/latest/developerguide/)
++ [Amazon WorkSpaces](https://docs.aws.amazon.com/workspaces/latest/adminguide/certificate-based-authentication.html)
