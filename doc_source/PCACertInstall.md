@@ -150,7 +150,7 @@ If you are using AWS CLI version 1\.6\.3 or later, use the prefix `fileb://` whe
    ```
    $ aws acm-pca issue-certificate \
         --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
-        --csr file://ca.csr \
+        --csr fileb://ca.csr \
         --signing-algorithm SHA256WITHRSA \
         --template-arn arn:aws:acm-pca:::template/RootCACertificate/V1 \
         --validity Value=365,Type=DAYS
@@ -267,7 +267,7 @@ If you are using AWS CLI version 1\.6\.3 or later, use the prefix `fileb://` whe
    ```
    $ aws acm-pca import-certificate-authority-certificate \
         --certificate-authority-arn arn:aws:acm-pca:region:account:certificate-authority/CA_ID \
-        --certificate file://cert.pem
+        --certificate fileb://cert.pem
    ```
 
 Inspect the new status of the CA\.
