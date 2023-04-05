@@ -67,7 +67,7 @@ The CRL will only be deposited in Amazon S3 after a certificate has been issued 
 
 ## Access policies for CRLs in Amazon S3<a name="s3-policies"></a>
 
-If you plan to create a CRL, you need to prepare an Amazon S3 bucket to store it in\. AWS Private CA automatically deposits the CRL in the Amazon S3 bucket you designate and updates it periodically\. For more information, see [Creating a bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) 
+If you plan to create a CRL, you need to prepare an Amazon S3 bucket to store it in\. AWS Private CA automatically deposits the CRL in the Amazon S3 bucket you designate and updates it periodically\. For more information, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)\. 
 
 Your S3 bucket must be secured by an attached permissions policy\. Authorized users and service principals require `Put` permission to allow AWS Private CA to place objects in the bucket, and `Get` permission to retrieve them\. During the console procedure for [creating](Create-CA-console.md) a CA, you can choose to let AWS Private CA create a new bucket and apply a default permissions policy\. 
 
