@@ -1,9 +1,0 @@
-# Controlling access to a private CA<a name="granting-ca-access"></a>
-
-Any user with the necessary permissions on a private CA from AWS Private CA can use that CA to sign other certificates\. The CA owner can issue certificates or delegate the required permissions for issuing certificates to an AWS Identity and Access Management \(IAM\) user that resides in the same AWS account\. A user that resides in a different AWS account can also issue certificates if authorized by the CA owner through a [resource\-based policy](pca-rbp.md)\.
-
-Authorized users, whether single\-account or cross\-account, can use AWS Private CA or AWS Certificate Manager resources when issuing certificates\. Certificates that are issued from the AWS Private CA [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) API or [issue\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm-pca/issue-certificate.html) CLI command are unmanaged\. Such certificates require manual installation on target devices and manual renewal when they expire\. Certificates issued from the ACM console, the ACM [RequestCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_RequestCertificate.html) API, or the [request\-certificate](https://docs.aws.amazon.com/cli/latest/reference/acm/request-certificate.html) CLI command are managed\. Such certificates can easily be installed in services that are integrated with ACM\. If the CA administrator permits it and the issuer's account has a [service\-linked role](https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html) in place for ACM, managed certificates are renewed automatically when they expire\.
-
-**Topics**
-+ [Create single\-account permissions for an IAM user](assign-permissions.md)
-+ [Attach a policy for cross\-account access](pca-ram.md)

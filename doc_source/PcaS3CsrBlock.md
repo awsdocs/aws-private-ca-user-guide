@@ -1,3 +1,0 @@
-# Configuring Amazon S3 to allow creation of a CRL bucket<a name="PcaS3CsrBlock"></a>
-
-Your private CA may fail to create a CRL bucket if Amazon S3 **Block public access \(bucket settings\)** are enforced on your account\. Check your Amazon S3 settings if this occurs\. For more information, see [Using Amazon S3 Block Public Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)\.
